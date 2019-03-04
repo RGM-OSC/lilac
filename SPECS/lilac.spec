@@ -64,7 +64,7 @@ rm -rf %{buildroot}
 %changelog
 * Mon Mar 04 2019 Michael Aubertin <maubertin@fr.scc.com> - 2.5-1.rgm
 - Initial fork
-- Validate CI
+- Validate CI.
 
 * Thu Jan 19 2017 Jean-Philippe Levy <jeanphilippe.levy@gmail.com> - 2.5-1.eon
 - packaged for EyesOfNetwork appliance 5.1
