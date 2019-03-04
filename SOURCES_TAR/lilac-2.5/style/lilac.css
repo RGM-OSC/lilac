@@ -1,3 +1,14 @@
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('/fonts/HelveticaNeue-ThinCond.woff'); 
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #00ADEF;
+    border-color: #2e6da4;
+}
+
 html, body {
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	background: #fff;
@@ -138,10 +149,10 @@ a.networkadd {
     margin: 15px 0 20px;
     border-bottom: 1px solid #eee;
     font-size: 36px;
-    font-family: inherit;
     font-weight: 500;
     line-height: 1.1;
-    color: black;
+    color: #a7a9ac;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 #navigation {

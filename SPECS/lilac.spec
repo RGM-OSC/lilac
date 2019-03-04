@@ -1,23 +1,23 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version: 2.5
-Release: 1.eon
+Release: 1.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
 
 Source0: %{name}-%{version}.tar.gz
-Source1: %{name}-eon.tar.gz
+Source1: %{name}-rgm.tar.gz
 
 Requires: httpd, mariadb-server, php, php-mysql, php-pear, php-process, php-xml, nagios >= 3.0, nmap
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 # define path
-%define eondir 		/srv/eyesofnetwork
-%define eonconfdir	/srv/eyesofnetworkconf/%{name}
-%define linkdir		%{eondir}/%{name}
-%define datadir 	%{eondir}/%{name}-%{version}
+%define rgmdir 		/srv/rgm
+%define rgmconfdir	/srv/rgmconf/%{name}
+%define linkdir		%{rgmdir}/%{name}
+%define datadir 	%{rgmdir}/%{name}-%{version}
 
 %description
 The Lilac Platform is a collection of tools to enhance existing open source monitoring applications, written by Lilac Networks. 
@@ -32,7 +32,7 @@ Currently the focus is on the Lilac Configurator, a configuration tool written t
 
 %prep
 %setup -n %{name}-%{version} -T -b 0
-%setup -n %{name}-eon -T -b 1
+%setup -n %{name}-rgm -T -b 1
 
 %install
 cd ..
@@ -41,27 +41,30 @@ install -d -m0755 %{buildroot}%{datadir}
 install -d -m0755 %{buildroot}%{_sysconfdir}/httpd/conf.d
 cp -afpvr %{name}-%{version}/* %{buildroot}%{datadir}
 
-# eon - specific
-install -d -m0755 %{buildroot}%{eonconfdir}
-cp -afpvr %{name}-eon/* %{buildroot}%{eonconfdir}
-cp -afpv %{name}-eon/%{name}.conf  %{buildroot}%{_sysconfdir}/httpd/conf.d
-cp -afpv %{name}-eon/%{name}-conf.php  %{buildroot}%{datadir}/includes/
+# rgm - specific
+install -d -m0755 %{buildroot}%{rgmconfdir}
+cp -afpvr %{name}-rgm/* %{buildroot}%{rgmconfdir}
+cp -afpv %{name}-rgm/%{name}.conf  %{buildroot}%{_sysconfdir}/httpd/conf.d
+cp -afpv %{name}-rgm/%{name}-conf.php  %{buildroot}%{datadir}/includes/
 
 %post
 ln -nsf %{datadir} %{linkdir}
-chown -h nagios:eyesofnetwork %{linkdir}
+chown -h nagios:rgm %{linkdir}
 
 %clean
 rm -rf %{buildroot}
 
 %files
-%{eonconfdir}
-%defattr(-, nagios, eyesofnetwork, 0755)
+%{rgmconfdir}
+%defattr(-, nagios, rgm, 0755)
 %{datadir}
 %defattr(-, root, root, 0644)
 %{_sysconfdir}/httpd/conf.d/lilac.conf
 
 %changelog
+* Mon Mar 04 2019 Michael Aubertin <maubertin@fr.scc.com> - 2.5-1.rgm
+- Initial fork
+
 * Thu Jan 19 2017 Jean-Philippe Levy <jeanphilippe.levy@gmail.com> - 2.5-1.eon
 - packaged for EyesOfNetwork appliance 5.1
 
