@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:2.5
-Release: 1.rgm
+Release: 2.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -9,15 +9,18 @@ URL: http://www.lilacplatform.com/
 Source0: %{name}-%{version}.tar.gz
 Source1: %{name}-rgm.tar.gz
 
-Requires: httpd, mariadb-server, php, php-mysql, php-pear, php-process, php-xml, nagios >= 3.0, nmap
+Requires: rgm-base, httpd, mariadb-server, php, php-mysql, php-pear, php-process, php-xml, nagios >= 3.0, nmap
+BuildRequires: rpm-macros-rgm
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 # define path
-%define rgmdir 		/srv/rgm
-%define rgmconfdir	/srv/rgmconf/%{name}
-%define linkdir		%{rgmdir}/%{name}
-%define datadir 	%{rgmdir}/%{name}-%{version}
+%define datadir 	%{rgm_path}/%{name}-%{version}
+%define linkdir		%{rgm_path}/%{name}
+# /var/lib/rgm/rgmweb
+%define rgmlibdir       %{_sharedstatedir}/rgm/%{name}
+# /usr/share/doc/rgm
+%define rgmdocdir       %{_datarootdir}/doc/rgm
 
 %description
 The Lilac Platform is a collection of tools to enhance existing open source monitoring applications, written by Lilac Networks. 
@@ -42,26 +45,48 @@ install -d -m0755 %{buildroot}%{_sysconfdir}/httpd/conf.d
 cp -afpvr %{name}-%{version}/* %{buildroot}%{datadir}
 
 # rgm - specific
-install -d -m0755 %{buildroot}%{rgmconfdir}
-cp -afpvr %{name}-rgm/* %{buildroot}%{rgmconfdir}
+install -d -m0755 %{buildroot}%{rgmlibdir}
+install -d -m0755 %{buildroot}%{rgmdocdir}
+cp -afpvr %{name}-rgm/* %{buildroot}%{rgmlibdir}
 cp -afpv %{name}-rgm/%{name}.conf  %{buildroot}%{_sysconfdir}/httpd/conf.d
 cp -afpv %{name}-rgm/%{name}-conf.php  %{buildroot}%{datadir}/includes/
+
+# patch lilac config file with macro values
+sed -i "s/mysqldbname/%{rgm_db_lilac}/" %{buildroot}%{datadir}/includes/lilac-conf.php
+sed -i "s/mysqlusername/%{rgm_sql_internal_user}/" %{buildroot}%{datadir}/includes/lilac-conf.php
+sed -i "s/mysqlpassword/%{rgm_sql_internal_pwd}/" %{buildroot}%{datadir}/includes/lilac-conf.php
+
+# patch apache conf file with macro values
+sed -i 's|AuthrgmMySQLUsername rgminternal|AuthrgmMySQLUsername %{rgm_sql_internal_user}|' %{buildroot}%{_sysconfdir}/httpd/conf.d/%{name}.conf
+sed -i 's|AuthrgmMySQLPassword 0rd0-c0m1735-b47h0n143|AuthrgmMySQLPassword %{rgm_sql_internal_pwd}|' %{buildroot}%{_sysconfdir}/httpd/conf.d/%{name}.conf
+sed -i 's|AuthrgmMySQLDB rgmweb|AuthrgmMySQLDB %{rgm_db_rgmweb}|' %{buildroot}%{_sysconfdir}/httpd/conf.d/%{name}.conf
+
 
 %post
 ln -nsf %{datadir} %{linkdir}
 chown -h nagios:rgm %{linkdir}
+
+# execute SQL postinstall script
+/usr/share/rgm/manage_sql.sh "%{rgm_db_lilac}" "%{rgmlibdir}/lilac-rgm.sql" "%{rgm_sql_internal_user}" "%{rgm_sql_internal_pwd}"
+
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %{rgmconfdir}
-%defattr(-, nagios, rgm, 0755)
+%defattr(-, nagios, %{rgm_group}, 0755)
+%config %{datadir}/includes/lilac-conf.php
 %{datadir}
 %defattr(-, root, root, 0644)
-%{_sysconfdir}/httpd/conf.d/lilac.conf
+%config %{_sysconfdir}/httpd/conf.d/lilac.conf
 
 %changelog
+* Thu Mar 14 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 2.5-2.rgm
+- SQL schema sanitization (removal of table garbage, update all table charsets to UTF8)
+- adds rgm-base package dependency
+- fix config files variables (sql user, passwd, db, etc) by RGM macros
+
 * Mon Mar 04 2019 Michael Aubertin <maubertin@fr.scc.com> - 2.5-1.rgm
 - Initial fork
 - Validate CI.
