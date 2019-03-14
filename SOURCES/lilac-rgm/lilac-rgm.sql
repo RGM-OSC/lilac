@@ -151,50 +151,6 @@ LOCK TABLES `autodiscovery_log_entry` WRITE;
 /*!40000 ALTER TABLE `autodiscovery_log_entry` ENABLE KEYS */;
 UNLOCK TABLES;
 
-
---
--- Table structure for table `db`
---
-
-DROP TABLE IF EXISTS `db`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `db` (
-  `Host` char(60) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `Db` char(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `User` char(16) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `Select_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Insert_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Update_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Delete_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Create_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Drop_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Grant_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `References_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Index_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Alter_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Create_tmp_table_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Lock_tables_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Create_view_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Show_view_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Create_routine_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Alter_routine_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Execute_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  PRIMARY KEY (`Host`,`Db`,`User`),
-  KEY `User` (`User`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Database privileges';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `db`
---
-
-LOCK TABLES `db` WRITE;
-/*!40000 ALTER TABLE `db` DISABLE KEYS */;
-INSERT INTO `db` VALUES ('%','test','','Y','Y','Y','Y','Y','Y','N','Y','Y','Y','Y','Y','Y','Y','Y','N','N'),('%','test\\_%','','Y','Y','Y','Y','Y','Y','N','Y','Y','Y','Y','Y','Y','Y','Y','N','N'),('localhost','ged','gedadmin','Y','Y','Y','Y','Y','Y','N','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y'),('localhost','cacti','cacti','Y','Y','Y','Y','Y','Y','N','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y'),('localhost','eonweb','eonweb','Y','Y','Y','Y','Y','Y','N','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y'),('localhost','lilac','eonweb','Y','Y','Y','Y','Y','Y','N','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y'),('localhost','ged','eonweb','Y','Y','Y','Y','Y','Y','N','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y'),('localhost','cacti','eonweb','Y','Y','Y','Y','Y','Y','N','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y'),('localhost','lilac','lilac','Y','Y','Y','Y','Y','Y','N','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y');
-/*!40000 ALTER TABLE `db` ENABLE KEYS */;
-UNLOCK TABLES;
-
 --
 -- Table structure for table `export_job`
 --
@@ -215,7 +171,7 @@ CREATE TABLE `export_job` (
   `stats` text NOT NULL,
   `cmd` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Export Job Information';
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Export Job Information';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -224,7 +180,12 @@ CREATE TABLE `export_job` (
 
 LOCK TABLES `export_job` WRITE;
 /*!40000 ALTER TABLE `export_job` DISABLE KEYS */;
-INSERT INTO `export_job` VALUES (1,'nagios','','O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:5:{s:15:\"backup_existing\";b:0;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:70:\"/srv/eyesofnetwork/nagios/bin/nagios -v /tmp/lilac-export-1/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}','2019-02-11 17:50:11','2019-02-11 17:50:17','Complete',4,'2019-02-11 17:50:17','O:11:\"ImportStats\":2:{s:18:\"\0ImportStats\0stats\";a:0:{}s:16:\"\0ImportStats\0job\";N;}','start'),(3,'nagios_incremental','','O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:9:{s:12:\"export_debug\";b:0;s:11:\"export_diff\";b:0;s:10:\"export_dep\";b:0;s:10:\"export_esc\";b:0;s:15:\"backup_existing\";b:0;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:70:\"/srv/eyesofnetwork/nagios/bin/nagios -v /tmp/lilac-export-3/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}','2018-08-27 17:08:29','2018-08-27 17:08:35','Complete',4,'2018-08-27 17:08:35','O:11:\"ImportStats\":2:{s:18:\"\0ImportStats\0stats\";a:0:{}s:16:\"\0ImportStats\0job\";N;}','start');
+INSERT INTO `export_job` VALUES
+  (1,'nagios','',
+  'O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:5:{s:15:\"backup_existing\";b:0;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:70:\"/srv/eyesofnetwork/nagios/bin/nagios -v /tmp/lilac-export-1/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}',
+  NULL,NULL,'Complete',4,NULL,'O:11:\"ImportStats\":2:{s:18:\"\0ImportStats\0stats\";a:0:{}s:16:\"\0ImportStats\0job\";N;}','start'),
+  (2,'nagios_incremental','','O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:9:{s:12:\"export_debug\";b:0;s:11:\"export_diff\";b:0;s:10:\"export_dep\";b:0;s:10:\"export_esc\";b:0;s:15:\"backup_existing\";b:0;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:70:\"/srv/eyesofnetwork/nagios/bin/nagios -v /tmp/lilac-export-3/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}',
+  NULL,NULL,'Complete',4,NULL,'O:11:\"ImportStats\":2:{s:18:\"\0ImportStats\0stats\";a:0:{}s:16:\"\0ImportStats\0job\";N;}','start');
 /*!40000 ALTER TABLE `export_job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -272,141 +233,8 @@ CREATE TABLE `export_log_entry` (
   `type` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `export_log_entry_FI_1` (`job`)
-) ENGINE=MyISAM AUTO_INCREMENT=204883 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Export Job Entry';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Export Job Entry';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `export_log_entry`
---
-
-LOCK TABLES `export_log_entry` WRITE;
-/*!40000 ALTER TABLE `export_log_entry` DISABLE KEYS */;
-INSERT INTO `export_log_entry` VALUES (203838,3,'2018-08-27 17:08:35','Nagios Restarted Successfully.',1),(203835,3,'2018-08-27 17:08:29','NagiosExportEngine Starting...',1),(203836,3,'2018-08-27 17:08:29','NagiosExportEngine beginning export...',1),(203837,3,'2018-08-27 17:08:32','Nagios Sanity Check Passed.',1),(204881,1,'2019-02-11 17:50:16','Nagios Sanity Check Passed.',1),(204882,1,'2019-02-11 17:50:17','Nagios Restarted Successfully.',1),(204880,1,'2019-02-11 17:50:12','NagiosExportEngine beginning export...',1),(204879,1,'2019-02-11 17:50:11','NagiosExportEngine Starting...',1);
-/*!40000 ALTER TABLE `export_log_entry` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `func`
---
-
-DROP TABLE IF EXISTS `func`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `func` (
-  `name` char(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `ret` tinyint(1) NOT NULL DEFAULT '0',
-  `dl` char(128) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `type` enum('function','aggregate') CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User defined functions';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `func`
---
-
-LOCK TABLES `func` WRITE;
-/*!40000 ALTER TABLE `func` DISABLE KEYS */;
-/*!40000 ALTER TABLE `func` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `groupright`
---
-
-DROP TABLE IF EXISTS `groupright`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `groupright` (
-  `group_id` int(11) NOT NULL,
-  `tab_1` enum('0','1') NOT NULL DEFAULT '0',
-  `tab_2` enum('0','1') NOT NULL DEFAULT '0',
-  `tab_3` enum('0','1') NOT NULL DEFAULT '0',
-  `tab_4` enum('0','1') NOT NULL DEFAULT '0',
-  `tab_5` enum('0','1') NOT NULL DEFAULT '0',
-  `tab_6` enum('0','1') NOT NULL DEFAULT '0',
-  `tab_7` enum('0','1') NOT NULL DEFAULT '0',
-  PRIMARY KEY (`group_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `groupright`
---
-
-LOCK TABLES `groupright` WRITE;
-/*!40000 ALTER TABLE `groupright` DISABLE KEYS */;
-INSERT INTO `groupright` VALUES (1,'1','1','1','1','1','1','1'),(2,'1','1','1','1','1','0','1'),(3,'1','1','1','1','1','0','1'),(4,'1','1','1','1','1','0','1'),(5,'1','1','1','1','1','0','1'),(6,'1','1','1','1','1','0','1'),(7,'0','1','1','0','1','0','0');
-/*!40000 ALTER TABLE `groupright` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `groups`
---
-
-DROP TABLE IF EXISTS `groups`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `groups` (
-  `group_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `group_name` varchar(255) NOT NULL,
-  `group_descr` text,
-  PRIMARY KEY (`group_id`,`group_name`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `groups`
---
-
-LOCK TABLES `groups` WRITE;
-/*!40000 ALTER TABLE `groups` DISABLE KEYS */;
-INSERT INTO `groups` VALUES (1,'admins','Administrator group'),(2,'Linux','Groupe des utilisateurs Linux'),(3,'AIX','Groupe des utilisateurs AIX'),(4,'Win','Groupe des utilisateurs Windows'),(5,'SGBD','Groupe des utilisateurs SGBD'),(6,'Exploit','Groupe des utilisateurs Exploit'),(7,'Manager','Groupe des utilisateurs Manager');
-/*!40000 ALTER TABLE `groups` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-
-
---
--- Table structure for table `host`
---
-
-DROP TABLE IF EXISTS `host`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `host` (
-  `Host` char(60) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `Db` char(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `Select_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Insert_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Update_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Delete_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Create_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Drop_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Grant_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `References_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Index_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Alter_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Create_tmp_table_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Lock_tables_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Create_view_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Show_view_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Create_routine_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Alter_routine_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Execute_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  PRIMARY KEY (`Host`,`Db`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Host privileges;  Merged with database privileges';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `host`
---
-
-LOCK TABLES `host` WRITE;
-/*!40000 ALTER TABLE `host` DISABLE KEYS */;
-/*!40000 ALTER TABLE `host` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `import_job`
@@ -495,34 +323,6 @@ LOCK TABLES `lilac_configuration` WRITE;
 /*!40000 ALTER TABLE `lilac_configuration` DISABLE KEYS */;
 INSERT INTO `lilac_configuration` VALUES ('db_build','61');
 /*!40000 ALTER TABLE `lilac_configuration` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `logs`
---
-
-DROP TABLE IF EXISTS `logs`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `logs` (
-  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
-  `date` varchar(255) NOT NULL,
-  `user` varchar(255) NOT NULL,
-  `module` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `source` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=444 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `logs`
---
-
-LOCK TABLES `logs` WRITE;
-/*!40000 ALTER TABLE `logs` DISABLE KEYS */;
-INSERT INTO `logs` VALUES (395,'1299753226','admin','login','User logged in','170.217.199.254'),(398,'1300093409','admin','login','User logged in','170.217.253.201'),(399,'1300093635','admin','logout','User logged out','170.217.253.201'),(400,'1300093643','exploit','login','User logged in','170.217.253.201'),(401,'1300094018','exploit','logout','User logged out','170.217.253.201'),(402,'1300094024','admin','login','User logged in','170.217.253.201'),(403,'1300096513','admin','login','User logged in','170.217.199.90'),(404,'1300112750','admin','logout','User logged out','170.217.253.201'),(405,'1300115163','admin','login','User logged in','170.217.253.201'),(406,'1300118396','admin','login','User logged in','170.217.199.1'),(412,'1300717278','admin','logout','User logged out','170.217.253.201'),(413,'1300724930','admin','login','User logged in','170.217.253.201'),(410,'1300714749','admin','logout','User logged out','170.217.253.201'),(409,'1300714712','admin','login','User logged in','170.217.253.201'),(418,'1300956364','admin','login','User logged in','170.217.253.201'),(416,'1300811041','admin','logout','User logged out','170.217.253.201'),(417,'1300812217','admin','login','User logged in','170.217.253.201'),(414,'1300790798','system','login','User logged in','170.217.253.201'),(415,'1300790843','system','logout','User logged out','170.217.253.201'),(419,'1300956403','system','login','User logged in','170.217.199.1'),(420,'1300958392','admin','login','User logged in','170.217.171.61'),(421,'1300960711','admin','logout','User logged out','170.217.253.201'),(422,'1300960787','admin','login','User logged in','170.217.253.201'),(423,'1300980286','admin','login','User logged in','170.217.199.1'),(424,'1301043965','admin','login','User logged in','170.217.253.201'),(425,'1301044228','admin','logout','User logged out','170.217.253.201'),(426,'1301049500','admin','login','User logged in','170.217.199.254'),(427,'1301050034','admin','login','User logged in','170.217.253.201'),(428,'1301050312','admin','logout','User logged out','170.217.253.201'),(429,'1301057662','admin','login','User logged in','170.217.253.201'),(430,'1301057862','admin','logout','User logged out','170.217.253.201'),(431,'1301060756','admin','logout','User logged out','170.217.199.1'),(432,'1301060766','exploit','login','User logged in','170.217.199.1'),(433,'1301296914','admin','login','User logged in','170.217.199.254'),(434,'1301298120','exploit','logout','User logged out','170.217.199.1'),(435,'1301298133','admin','login','User logged in','170.217.199.1'),(436,'1301298725','admin','login','User logged in','170.217.253.201'),(437,'1301300710','admin','login','User logged in','170.217.171.61'),(438,'1301319077','admin','login','User logged in','170.217.199.254'),(443,'1301391166','admin','logout','User logged out','170.217.253.201'),(397,'1299850610','admin','login','User logged in','170.217.199.254'),(390,'1299502972','admin','login','User logged in','170.217.199.254'),(394,'1299681933','admin','login','User logged in','170.217.199.254'),(393,'1299680887','admin','login','User logged in','170.217.199.1'),(392,'1299677241','admin','login','User logged in','170.217.199.254'),(391,'1299675888','admin','login','User logged in','170.217.199.254'),(396,'1299766675','admin','login','User logged in','170.217.199.1'),(389,'1299486641','admin','login','User logged in','170.217.199.254'),(387,'1299223493','admin','login','User logged in','170.217.199.254'),(386,'1299137551','admin','login','User logged in','170.217.199.254'),(388,'1299227462','admin','login','User logged in','170.217.199.254'),(383,'1298994328','admin','login','User logged in','170.217.199.254'),(384,'1299051016','admin','login','User logged in','170.217.199.254'),(385,'1299055766','admin','login','User logged in','170.217.199.254'),(407,'1300351043','admin','login','User logged in','170.217.253.201'),(408,'1300431096','admin','login','User logged in','170.217.253.201'),(411,'1300717172','admin','login','User logged in','170.217.253.201'),(439,'1301325819','admin','login','User logged in','170.217.199.90'),(440,'1301379559','admin','logout','User logged out','170.217.199.90'),(441,'1301379569','admin','login','User logged in','170.217.199.90'),(442,'1301381577','admin','login','User logged in','170.217.199.254');
-/*!40000 ALTER TABLE `logs` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -628,7 +428,128 @@ CREATE TABLE `nagios_command` (
 
 LOCK TABLES `nagios_command` WRITE;
 /*!40000 ALTER TABLE `nagios_command` DISABLE KEYS */;
-INSERT INTO `nagios_command` VALUES (49,'dns_status','$USER1$/check_dns -H $ARG1$ -s $HOSTADDRESS$ -w $ARG2$ -c $ARG3$','check the response time of a DNS server'),(50,'check_ftp','$USER1$/check_ftp -H $HOSTADDRESS$','check if the ftp port is opened (21)'),(190,'check_wmi_Disk-Queue','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m checkio -s logical -a $ARG1$ -w CurrentDiskQueueLenght=$ARG2$ -c CurrentDiskQueueLenght=$ARG3$ ','Check  Disk Queue Lenght of Windows Server. ARG1=Drive (i.e: C:), ARG2 Warning Queue, ARG3 Critical Queue'),(57,'check_ping','$USER1$/check_ping -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -p 1','check the ICMP availability of a given device'),(58,'check_tcp','$USER1$/check_tcp -H $HOSTADDRESS$ -p $ARG1$','check the openning of a given tcp port'),(59,'check_telnet','$USER1$/check_tcp -H $HOSTADDRESS$ -p 23','check the openning of the telnet port (23)'),(60,'check_udp','$USER1$/check_udp -H $HOSTADDRESS$ -p $ARG1$','check the openning of a given udp port'),(61,'check-host-alive','$USER1$/check_ping -H $HOSTADDRESS$ -w 3000.0,80% -c 5000.0,100% -p 1','check the availability of a host by ping'),(62,'notify-by-email-host','/srv/eyesofnetwork/notifier/bin/notifier.pl -t host -c /srv/eyesofnetwork/notifier/etc/notifier.cfg -r /srv/eyesofnetwork/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -e \"$HOSTSTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$HOSTOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$HOSTNOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','notification mail hosts'),(63,'host-notify-by-epager','/usr/bin/printf \"%b\" \"Host \\\'$HOSTALIAS$\\\' is $HOSTSTATE$\\\\nInfo: $HOSTOUTPUT$\\\\nTime: $LONGDATETIME$\" | /bin/mail -s \"$NOTIFICATIONTYPE$ alert - Host $HOSTNAME$ is $HOSTSTATE$\" $CONTACTPAGER$','be notified about problems by epager'),(64,'notify-by-email-service','/srv/eyesofnetwork/notifier/bin/notifier.pl -t service -c /srv/eyesofnetwork/notifier/etc/notifier.cfg -r /srv/eyesofnetwork/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -s \"$SERVICEDESC$\" -e \"$SERVICESTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$SERVICEOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -B \"$SERVICEGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$SERVICENOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','notification mail services'),(65,'notify-by-epager','/usr/bin/printf \"%b\" \"Service: $SERVICEDESC$\\\\nHost: $HOSTNAME$\\\\nAddress: $HOSTADDRESS$\\\\nState: $SERVICESTATE$\\\\nInfo: $SERVICEOUTPUT$\\\\nDate: $LONGDATETIME$\" | /bin/mail -s \"$NOTIFICATIONTYPE$: $HOSTALIAS$/$SERVICEDESC$ is $SERVICESTATE$\" $CONTACTPAGER$','service notification by epager'),(66,'process-host-perfdata','/usr/bin/printf \"%b\" \"$LASTHOSTCHECK$\\\\t$HOSTNAME$\\\\t$HOSTSTATE$\\\\t$HOSTATTEMPT$\\\\t$HOSTSTATETYPE$\\\\t$HOSTEXECUTIONTIME$\\\\t$HOSTOUTPUT$\\\\t$HOSTPERFDATA$\\\\n\" >> /srv/eyesofnetwork/nagios/var/log/host-perfdata.out','generate host perfdata'),(67,'process-service-perfdata','/usr/bin/printf \"%b\" \"$LASTSERVICECHECK$\\\\t$HOSTNAME$\\\\t$SERVICEDESC$\\\\t$SERVICESTATE$\\\\t$SERVICEATTEMPT$\\\\t$SERVICESTATETYPE$\\\\t$SERVICEEXECUTIONTIME$\\\\t$SERVICELATENCY$\\\\t$SERVICEOUTPUT$\\\\t$SERVICEPERFDATA$\\\\n\" >> /srv/eyesofnetwork/nagios/var/log/service-perfdata.out','generate service perfdata'),(68,'event-browser-service','/srv/eyesofnetwork/ged/scripts/ged-nagios-service \"$HOSTNAME$\" \"$SERVICEDESC$\" \"$SERVICESTATE$\" \"$SERVICEOUTPUT$\" \"$HOSTADDRESS$\" \"$HOSTALIAS$\" \"$HOSTGROUPNAMES$\" \"$SERVICEGROUPNAMES$\"','event browser command for services'),(69,'linux_cpu','$USER1$/check_snmp_load.pl -H $HOSTADDRESS$ -T netsc -C $USER2$ -w $ARG1$ -c $ARG2$ -f','cpu load of a linux host'),(70,'linux_memory','$USER1$/check_snmp_mem.pl -H $HOSTADDRESS$ -f -C $USER2$ -w $ARG1$,$ARG2$ -c $ARG3$,$ARG4$ -b -2','memory load of a linux host'),(180,'check_HyperV','$USER1$/check_hyperv-health.sh $HOSTADDRESS$ $USER2$','check_HyperV'),(181,'nutanix_status','perl $USER1$/check_ssh_nutanix_cluster.pl -H $HOSTADDRESS$ -u $USER8$ -p $USER22$ -T status','nutanix_status'),(73,'mssql_alldb_stat','$USER1$/check_snmp_mssql -H $HOSTADDRESS$ -C $USER2$','statistics on mssql databases'),(74,'mssql_db_stat','$USER1$/check_snmp_mssql -H $HOSTADDRESS$ -d $ARG1$ -C $USER2$','statistics on a mssql database'),(75,'mssql_db_list','$USER1$/check_snmp_mssql -H $HOSTADDRESS$ -i -C $USER2$','list databases on mssql server'),(76,'notes_availability','$USER1$/check_lotus.pl -H $HOSTADDRESS$','availability of a notes server'),(77,'dhcp_status','$USER1$/check_dhcp -s $HOSTADDRESS$','check the response time of a DHCP server'),(80,'check_snmp_interface','perl $USER1$/check_snmp_int.pl -H $HOSTADDRESS$ -C $USER2$ -r -n $ARG1$ -k -w $ARG2$,$ARG3$ -c $ARG4$,$ARG5$','check the bandwith\\\'s state of a given interface'),(167,'process-service-perfdata-file','/bin/mv /srv/eyesofnetwork/graphios/var/spool/service-perfdata /srv/eyesofnetwork/graphios/var/spool/service-perfdata.$TIMET$','process-service-perfdata-file'),(166,'process-host-perfdata-file','/bin/mv /srv/eyesofnetwork/graphios/var/spool/host-perfdata /srv/eyesofnetwork/graphios/var/spool/host-perfdata.$TIMET$','process-host-perfdata-file'),(188,'check_wmi_Processor','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m checkcpu $ARG1$ $ARG2$','Check % Processor Usage of Windows Server ARG1 and ARG2 avail for custom applying'),(187,'check_wmi_PageFileUsage','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m checkpage $ARG1$ $ARG2$','Check Usage Pagefile Usage of Windows Server. ARG1 and ARG2 available for customization.'),(91,'event-browser-host','/srv/eyesofnetwork/ged/scripts/ged-nagios-host \"$HOSTNAME$\" \"PING\" \"$HOSTSTATE$\" \"$HOSTOUTPUT$\" \"$HOSTADDRESS$\" \"$HOSTALIAS$\" \"$HOSTGROUPNAMES$\"','event browser command for hosts'),(94,'process','perl $USER1$/check_snmp_process.pl -H $HOSTADDRESS$ -C $USER2$ -r -n $ARG1$','check the load of a given process - arg1 : process name'),(99,'snmp_cpu','$USER1$/check_snmp_load.pl -H $HOSTADDRESS$ -C $USER2$ -w $ARG1$ -c $ARG2$ -f','cpu average'),(100,'win_snmp_memory','$USER1$/check_snmp_storage.pl -H $HOSTADDRESS$ -C $USER2$ -m \"Mem\" -w $ARG1$ -c $ARG2$ -f','memory load of a windows server'),(101,'PARTITION-FS_SNMP','$USER1$/check_snmp_storage.pl -H $HOSTADDRESS$ -C $USER2$ -m $ARG1$ -w $ARG2$ -c $ARG3$ -t 60 -f','used space on a windows partition or linux file system'),(112,'check_http','$USER1$/check_http -H $HOSTADDRESS$ -p $ARG1$','check a HTTP URL and return the exit code of the web page'),(115,'dhcp_free_address','perl $USER1$/check_dhcp_addfree -H $HOSTADDRESS$ -C $USER2$ -v 2 -s $ARG1$ -c $ARG2$ -w $ARG3$','check the number of free addresses on a dhcp subnet'),(116,'win_services','$USER1$/check_snmp_win.pl -H $HOSTADDRESS$ -C $USER2$ -n $ARG1$','check generique service'),(182,'nutanix_alerts','perl $USER1$/check_ssh_nutanix_cluster.pl -H $HOSTADDRESS$ -u $USER8$ -p $USER22$ -T alerts','nutanix_alerts'),(183,'check_snmp_ups_with_args','$USER1$/check_ups_snmp2.sh -H $HOSTADDRESS$ -C AMETRA -p $SERVICEDESC$ -w $ARG1$ -c $ARG2$','check_snmp_ups_with_args'),(184,'check_wmi_PhysFreeMemory','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m checkmem  -w _MemFree%=$ARG1$: -c _MemFree%=$ARG2$:','Check % Processor Usage of Windows Server. ARG1 = %WarningMinimumFree  ARG2 = %CriticalMinimumFree'),(124,'snmp_int','perl $USER1$/check_snmp_int.pl -H $HOSTADDRESS$ -C $USER2$ -n $ARG1$','inerface state'),(192,'check_wmi_plus_windows_services','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m $ARG1$ -a $ARG2$ -t 300','check_wmi_plus_windows_services'),(193,'check_wmi_plus_windows_network','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m $ARG1$ -a $ARG2$ -t 300','check_wmi_plus_windows_network'),(191,'check_wmi_Network_vmxnet3','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m  checknetwork -a vmxnet3 ','Check Network state of Windows Server.'),(143,'nslookup','$USER1$/check_dns -H $ARG1$ -w $ARG2$ -c $ARG3$','check nslookup'),(144,'linux_swap','$USER1$/check_snmp_storage.pl -H $HOSTADDRESS$ -C $USER2$ -m Swap -w $ARG1$ -c $ARG2$','swap load of a linux server'),(145,'check_mysql','$USER1$/check_mysql -H $HOSTADDRESS$ -u $ARG1$ -p $ARG2$','check mysql availability'),(146,'check_ssh','$USER1$/check_ssh -H $HOSTADDRESS$','check ssh availability'),(147,'uptime_public','$USER1$/check_snmp_uptime.pl -H $HOSTADDRESS$ -C public -w $ARG1$ -c $ARG2$','uptime communautÃ© public'),(148,'uptime','$USER1$/check_snmp_uptime.sh $HOSTADDRESS$ $USER2$ 1 $ARG1$ $ARG2$','uptime snmp'),(186,'check_wmi_Network_outQueue_vmxnet3','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m  checknetwork -a vmxnet3 -w OutputQueueLength=$ARG1$ -c OutputQueueLength=$ARG2$ ','Check Network Out Queue lenght of Windows Server. ARG1warning size,  ARG2 critical'),(185,'check_wmi_Network_PacketError_vmxnet3','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m  checknetwork -a vmxnet3 -w PacketsReceivedErrors=$ARG1$ -c PacketsReceivedErrors=$ARG2$ ','Check Network Packets Received Errors of Windows Server. ARG1warning size,  ARG2 critical'),(152,'dell_status','$USER1$/check_openmanage -H $HOSTADDRESS$ -C $USER2$','dell openmanage state'),(153,'systime','$USER1$/check_systime.pl -H $HOSTADDRESS$ -C $USER2$ -n $ARG1$','systime snmp'),(161,'eon_service_notifier','/srv/eyesofnetwork/notifier/bin/notifier.pl -t service -c /srv/eyesofnetwork/notifier/etc/notifier.cfg -r /srv/eyesofnetwork/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -s \"$SERVICEDESC$\" -e \"$SERVICESTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$SERVICEOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -B \"$SERVICEGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$SERVICENOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','Eon notification broker for service'),(162,'eon_host_notifier','/srv/eyesofnetwork/notifier/bin/notifier.pl -t host -c /srv/eyesofnetwork/notifier/etc/notifier.cfg -r /srv/eyesofnetwork/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -e \"$HOSTSTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$HOSTOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$HOSTNOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','Eon notification broker for host'),(163,'check_int_traffic','$USER1$/check_int_traffic.pl -H $HOSTADDRESS$ -C $USER2$ $ARG1$','check_int_traffic'),(164,'check_disk','$USER1$/check_snmp_storage.pl -H $HOSTADDRESS$ -C $USER2$ -m $ARG1$ -w $ARG2$ -c $ARG3$ -S 0 -q FixedDisk -f','used space on a windows partition or linux file system'),(189,'check_wmi_Processor-Queue','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m checkcpuq $ARG1$ $ARG2$','Check  Processor Queue Lenght of Windows Server ARG1 and ARG2 avail for custom applying'),(168,'notify-by-email-host-old','/usr/bin/printf \"%b\" \"***** Nagios  *****\\\\n\\\\nNotification Type: $NOTIFICATIONTYPE$\\\\nHost: $HOSTNAME$\\\\nState: $HOSTSTATE$\\\\nAddress: $HOSTADDRESS$\\\\nInfo: $HOSTOUTPUT$\\\\n\\\\nDate/Time: $LONGDATETIME$\\\\n\" | /bin/mail -s \"Host $HOSTSTATE$ alert for $HOSTNAME$!\" $CONTACTEMAIL$','notify-by-email-host-old'),(169,'notify-by-email-service-old','/usr/bin/printf \"%b\" \"***** Nagios  *****\\\\n\\\\nNotification Type: $NOTIFICATIONTYPE$\\\\n\\\\nService: $SERVICEDESC$\\\\nHost: $HOSTALIAS$\\\\nAddress: $HOSTADDRESS$\\\\nState: $SERVICESTATE$\\\\n\\\\nDate/Time: $LONGDATETIME$\\\\n\\\\nAdditional Info:\\\\n\\\\n$SERVICEOUTPUT$\" | /bin/mail -s \"Services $SERVICESTATE$ alert for $HOSTNAME$/$SERVICEDESC$!\" $CONTACTEMAIL$','notify-by-email-service-old'),(170,'scc-check-esx-service','$USER1$/check_vmware_esx.pl -D $HOSTALIAS$ -u \'$USER4$\\$USER7$\' -p \'$USER23$\' -H $HOSTADDRESS$ -S $ARG1$ $ARG3$ $ARG4$ --sessionfiledir=$USER1$/esxresult/test --sessionfile=test','apx-check-esx-service'),(171,'scc-check-esx-io','$USER1$/check_vmware_esx.pl -D $HOSTALIAS$ -u \'$USER4$\\$USER7$\' -p \'$USER23$\' -H $HOSTADDRESS$ -S $ARG1$ -s $ARG2$ $ARG3$ $ARG4$ --sessionfiledir=$USER1$/esxresult/test --sessionfile=test',NULL),(172,'scc-check-esx-volume','$USER1$/check_vmware_esx.pl -D $HOSTALIAS$ -u \'$USER4$\\$USER7$\' -p \'$USER23$\' -H $HOSTADDRESS$ -S $ARG1$ $ARG2$ $ARG3$ $ARG4$ --sessionfiledir=$USER1$/esxresult/test --sessionfile=test',NULL),(173,'scc-check-esx','$USER1$/check_vmware_esx.pl -D $HOSTALIAS$ -u \'$USER4$\\$USER7$\' -p \'$USER23$\' -H $HOSTADDRESS$ -S $ARG1$ -s $ARG2$ $ARG3$ $ARG4$ --sessionfiledir=$USER1$/esxresult/test --sessionfile=test',NULL),(174,'hpe_storeonce_service_status','$USER1$/hpe_storeonce/serviceSetHealth.py $HOSTADDRESS$ $USER7$ $USER23$','hpe_storeonce_service_status'),(175,'hpe_storeonce_systemCapacity_status','$USER1$/hpe_storeonce/systemHealthCapacity.py $HOSTADDRESS$ $USER7$ $USER23$','hpe_storeonce_systemCapacity_status'),(176,'hpe_storeonce_hw_status','$USER1$/hpe_storeonce/hardwareCompStatus.py $HOSTADDRESS$ $USER7$ $USER23$','hpe_storeonce_hw_status'),(177,'check_hard_hp_ilo','$USER1$/check_hp -H $HOSTADDRESS$ -C $USER2$ -x cpqFcaHostCntlrStatus','check_hard_hp_ilo'),(179,'check_idrac_7_8','$USER1$/check_dell_idrac7.pl -H $HOSTADDRESS$ -C $USER2$ -T $ARG1$','check_idrac_7_8'),(194,'check_wmi_plus_windows_template','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m $ARG1$ -w $ARG2$ -c $ARG3$ -t 300','check_wmi_plus_windows_template'),(195,'check_wmi_sizedrive','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m checkdrivesize -a $ARG1$ -o 1','check_wmi_sizedrive'),(196,'check_wmi_plus_windows_uptime','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m $ARG1$ -t 300','check_wmi_plus_windows_template'),(197,'check_mssql_srv','$USER1$/check_mssql_health2 --server=$HOSTADDRESS$ --username=$USER19$\\\\$USER20$ --password=$USER21$ --mode $SERVICEDISPLAYNAME$','check mysql database'),(198,'check_mssql-Ag_serv_inst_std','$USER1$/check_snmp_win.pl -H $HOSTADDRESS$ -C $USER2$ -n \"Agent SQL Server \\(MSSQLSERVER\\)\"','Check of SQL Server basic agent'),(199,'check_mssql_db','$USER1$/check_mssql_health2 --server=$HOSTADDRESS$ --username=$USER19$\\\\$USER20$ --password=$USER21$ --mode $SERVICEDISPLAYNAME$ ','check mssql database'),(200,'check_mysql_health','$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $USER3$ --password $USER19$ --mode $SERVICEDESC$','check_mysql_health'),(201,'check_mysql_health_argument','$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $USER3$ --password $USER19$ --mode $ARG1$','check_mysql_health_argument'),(202,'check_oracle','perl $USER1$/check_oracle_health --connect \'(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=$HOSTADDRESS$)(PORT=1521))(LOAD_BALANCE=yes)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=$HOSTALIAS$)))\' --user $USER20$ --password $USER21$ --mode $SERVICEDISPLAYNAME$','Check Oracle'),(203,'check_snmp_synology','$USER1$/check_snmp_synology -v -2 $USER2$ -h $HOSTADDRESS$','check_snmp_synology'),(204,'check_snmp_with_args','$USER1$/./check_snmp -H 10.151.2.41 -C $USER2$ -o','check_snmp_with_args'),(205,'check_netapp_vol_aggr','$USER1$/check_netapp_sam.pl -H $HOSTADDRESS$ -C $USER2$ -T $ARG1$ -v $ARG2$  -w $ARG3$ -c $ARG4$','check_netapp_vol_aggr'),(206,'check_Nettap','perl $USER1$/check_netapp3.pl -H $HOSTADDRESS$ -v $SERVICEDESC$','check_Nettap'),(207,'check_equallogic','$USER1$/check_equallogic.sh -C $USER2$ -H $HOSTADDRESS$ -t $SERVICEDISPLAYNAME$ -w $ARG1$ -c $ARG2$','check_equallogic'),(208,'check_snmp_dell_equallogic','$USER1$/check_snmp_dell_equallogic_eon.sh -C $USER2$ -H $HOSTADDRESS$ -n $ARG1$ -t $SERVICEDISPLAYNAME$ -w $ARG2$ -c $ARG3$','check_snmp_dell_equallogic'),(209,'check_solidfire','$USER1$/checkSolidFire.py $HOSTADDRESS$ $ARG1$ $USER8$ $USER23$ mvip','check_solidfire'),(210,'check_3par','$USER1$/check_3PAR $HOSTADDRESS$ $USER9$ $ARG1$','check_3par'),(211,'emc_check_storage_pool','$USER1$/check_emc_clariion.pl -H $HOSTADDRESS$ -u $USER6$ -p $USER21$ -t storage_pool --storage_pool_id $ARG1$','emc_check_storage_pool'),(212,'emc_check_lun','$USER1$/check_emc_clariion.pl -H $HOSTADDRESS$ -u $USER6$ -p $USER21$ -t lun --lun_id $ARG1$','emc_check_lun'),(213,'emc_check_simple_2','$USER1$/check_emc_clariion_2.pl -H $HOSTADDRESS$ -u $USER6$ -p $USER21$ -t $ARG1$','emc_check_simple_2'),(214,'emc_check_simple','$USER1$/check_emc_clariion.pl -H $HOSTADDRESS$ -u $USER6$ -p $USER21$ -t $ARG1$','emc_check_simple'),(215,'process_vcsa','perl $USER1$/check_snmp_process.pl -H $HOSTADDRESS$ -C $USER2$ -n $ARG1$','check the load of a given process - arg1 : process name'),(216,'check_int_traffic_vcsa','$USER1$/check_snmp_int.pl -H $HOSTADDRESS$ -C $USER2$ -n ','check_int_traffic_vcsa'),(217,'check_disk_vcsa','$USER1$/check_snmp_storage.pl -H $HOSTADDRESS$ -C $USER2$ -m $ARG1$ -w $ARG2$ -c $ARG3$ -S 0 -f','used space on a windows partition or linux file system'),(218,'Compellent_Global_Status','$USER1$/check_snmp -H $HOSTADDRESS$ -o $ARG1$ -w 3 -c 3 -C $USER2$ -u ALL','Compellent_Global_Status'),(219,'Compellent_Disk_Status','$USER1$/check_snmp -H $HOSTADDRESS$ -o $ARG1$ -w 1 -c 1 -C $USER2$ -u UP','Compellent_Disk_Status'),(220,'Compellent_Temperature_Panier','$USER1$/check_snmp -H $HOSTADDRESS$ -o $ARG1$ -w 40 -c 50 -C $USER2$ -u degres','Compellent_Temperature_Panier'),(221,'Compellent_Temperature_Status','$USER1$/check_snmp -H $HOSTADDRESS$ -o $ARG1$ -w 60 -c 70 -C $USER2$ -u degres','Compellent_Temperature_Status'),(222,'check_datadomain','perl $USER1$/check_dd.pl -H $HOSTADDRESS$ -v ALERTS','check_datadomain'),(223,'brocade_status','$USER1$/check_FCBrocade_hardware.sh -H $HOSTADDRESS$ -c $USER2$','brocade status'),(224,'check_nrpe_wrapper','$USER1$/ce/check_nrpe_wrapper $HOSTADDRESS$ $ARG1$','check_nrpe_wrapper'),(225,'check_nrpe_wrapper_1arg','$USER1$/ce/check_nrpe_wrapper_1arg $HOSTADDRESS$ $ARG1$ $ARG2$','check_nrpe_wrapper_1arg'),(226,'check_nrpe_wrapper_3arg','$USER1$/ce/check_nrpe_wrapper_3arg $HOSTADDRESS$ $ARG1$ $ARG2$ $ARG3$ $ARG4$','check_nrpe_wrapper_3arg'),(227,'check_nrpe_wrapper_2arg','$USER1$/ce/check_nrpe_wrapper_2arg $HOSTADDRESS$ $ARG1$ $ARG2$ $ARG3$','check_nrpe_wrapper_2arg'),(228,'check_ntp','$USER1$/ce/check_ntp_wrapper $HOSTADDRESS$','check_ntp for Celerra'),(229,'check_ssh_wrapper','$USER1$/ce/check_ssh_wrapper $HOSTADDRESS$','check_ssh_wrapper for Celerra'),(230,'check_nrpe_availability','$USER1$/ce/check_nrpe_availability $HOSTADDRESS$','check_nrpe_availability for Celerra'),(231,'Arkoon uptime','$USER1$/check_snmp_uptime.sh $HOSTADDRESS$ public 1 $ARG1$ $ARG2$','uptime snmp'),(232,'check_memory-fortinet','$USER1$/check_fortigate_memory -H $HOSTADDRESS$ -C $USER2$ -w $ARG1$ -c $ARG2$','memory load of a fortinet'),(233,'check_mge_power','$USER1$/check_mge_power_status.sh -H $HOSTADDRESS$ -l $ARG1$ -p $ARG2$ -w $ARG3$ -c $ARG4$','Commande de verification de la consommation PDU'),(234,'check_mge_temp','$USER1$/check_temp_mge_sensor.sh -H $HOSTADDRESS$ -l $ARG1$ -p $ARG2$ -w $ARG3$ -c $ARG4$','Commande de verification des sondes de temperature PDU'),(235,'check_es_uptime','python $USER1$/uptime.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$','Uptime from ElasticSearch/MetricBeat'),(236,'check_es_cpu','python $USER1$/cpu.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$','CPU from ElasticSearch/MetricBeat'),(237,'check_es_load','python $USER1$/load.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$','LOAD AVERAGE from ElasticSearch/MetricBeat'),(238,'check_es_memory','python $USER1$/memory.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$','Memory from ElasticSearch/MetricBeat'),(239,'check_es_disk','python $USER1$/disk.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$','DISK from ElasticSearch/MetricBeat'),(240,'check_nwc_health','$USER1$/check_nwc_health --mode $SERVICEDISPLAYNAME$ --hostname $HOSTADDRESS$ --community $USER5$ -t 300','check_nwc_health'),(241,'passive','$USER1$/check_dummy 1 \"Etat de la sonde anormal\"','Commande pour la reception des Alerts RGMA'),(242,'check_nrpe','$USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$','check_nrpe'),(243,'brocade_fc_status','$USER1$/check_snmp_FCports_brocade-v1.3.pl -H $HOSTADDRESS$ -C $USER5$','brocade_fc_status'),(244,'bp_status','$USER1$/check_bp_status.pl -b $SERVICEDESC$','bp_status'),(245,'check_nutanix_snmp','$USER1$/check_nutanix.pl -H $HOSTADDRESS$ -a SHA -u $USER7$ -A $USER17$ -x AES -X $USER17$ -t $ARG1$ -s $SERVICEDESC$ -w $SERVICEDESC$=$ARG2$ -c $SERVICEDESC$=$ARG2$','check_nutanix_snmp');
+INSERT INTO `nagios_command` VALUES (49,'dns_status','$USER1$/check_dns -H $ARG1$ -s $HOSTADDRESS$ -w $ARG2$ -c $ARG3$','check the response time of a DNS server'),
+  (50,'check_ftp','$USER1$/check_ftp -H $HOSTADDRESS$','check if the ftp port is opened (21)'),
+  (190,'check_wmi_Disk-Queue','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m checkio -s logical -a $ARG1$ -w CurrentDiskQueueLenght=$ARG2$ -c CurrentDiskQueueLenght=$ARG3$ ','Check  Disk Queue Lenght of Windows Server. ARG1=Drive (i.e: C:), ARG2 Warning Queue, ARG3 Critical Queue'),
+  (57,'check_ping','$USER1$/check_ping -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -p 1','check the ICMP availability of a given device'),
+  (58,'check_tcp','$USER1$/check_tcp -H $HOSTADDRESS$ -p $ARG1$','check the openning of a given tcp port'),
+  (59,'check_telnet','$USER1$/check_tcp -H $HOSTADDRESS$ -p 23','check the openning of the telnet port (23)'),
+  (60,'check_udp','$USER1$/check_udp -H $HOSTADDRESS$ -p $ARG1$','check the openning of a given udp port'),
+  (61,'check-host-alive','$USER1$/check_ping -H $HOSTADDRESS$ -w 3000.0,80% -c 5000.0,100% -p 1','check the availability of a host by ping'),
+  (62,'notify-by-email-host','/srv/eyesofnetwork/notifier/bin/notifier.pl -t host -c /srv/eyesofnetwork/notifier/etc/notifier.cfg -r /srv/eyesofnetwork/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -e \"$HOSTSTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$HOSTOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$HOSTNOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','notification mail hosts'),
+  (63,'host-notify-by-epager','/usr/bin/printf \"%b\" \"Host \\\'$HOSTALIAS$\\\' is $HOSTSTATE$\\\\nInfo: $HOSTOUTPUT$\\\\nTime: $LONGDATETIME$\" | /bin/mail -s \"$NOTIFICATIONTYPE$ alert - Host $HOSTNAME$ is $HOSTSTATE$\" $CONTACTPAGER$','be notified about problems by epager'),
+  (64,'notify-by-email-service','/srv/eyesofnetwork/notifier/bin/notifier.pl -t service -c /srv/eyesofnetwork/notifier/etc/notifier.cfg -r /srv/eyesofnetwork/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -s \"$SERVICEDESC$\" -e \"$SERVICESTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$SERVICEOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -B \"$SERVICEGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$SERVICENOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','notification mail services'),
+  (65,'notify-by-epager','/usr/bin/printf \"%b\" \"Service: $SERVICEDESC$\\\\nHost: $HOSTNAME$\\\\nAddress: $HOSTADDRESS$\\\\nState: $SERVICESTATE$\\\\nInfo: $SERVICEOUTPUT$\\\\nDate: $LONGDATETIME$\" | /bin/mail -s \"$NOTIFICATIONTYPE$: $HOSTALIAS$/$SERVICEDESC$ is $SERVICESTATE$\" $CONTACTPAGER$','service notification by epager'),
+  (66,'process-host-perfdata','/usr/bin/printf \"%b\" \"$LASTHOSTCHECK$\\\\t$HOSTNAME$\\\\t$HOSTSTATE$\\\\t$HOSTATTEMPT$\\\\t$HOSTSTATETYPE$\\\\t$HOSTEXECUTIONTIME$\\\\t$HOSTOUTPUT$\\\\t$HOSTPERFDATA$\\\\n\" >> /srv/eyesofnetwork/nagios/var/log/host-perfdata.out','generate host perfdata'),
+  (67,'process-service-perfdata','/usr/bin/printf \"%b\" \"$LASTSERVICECHECK$\\\\t$HOSTNAME$\\\\t$SERVICEDESC$\\\\t$SERVICESTATE$\\\\t$SERVICEATTEMPT$\\\\t$SERVICESTATETYPE$\\\\t$SERVICEEXECUTIONTIME$\\\\t$SERVICELATENCY$\\\\t$SERVICEOUTPUT$\\\\t$SERVICEPERFDATA$\\\\n\" >> /srv/eyesofnetwork/nagios/var/log/service-perfdata.out','generate service perfdata'),
+  (68,'event-browser-service','/srv/eyesofnetwork/ged/scripts/ged-nagios-service \"$HOSTNAME$\" \"$SERVICEDESC$\" \"$SERVICESTATE$\" \"$SERVICEOUTPUT$\" \"$HOSTADDRESS$\" \"$HOSTALIAS$\" \"$HOSTGROUPNAMES$\" \"$SERVICEGROUPNAMES$\"','event browser command for services'),
+  (69,'linux_cpu','$USER1$/check_snmp_load.pl -H $HOSTADDRESS$ -T netsc -C $USER2$ -w $ARG1$ -c $ARG2$ -f','cpu load of a linux host'),
+  (70,'linux_memory','$USER1$/check_snmp_mem.pl -H $HOSTADDRESS$ -f -C $USER2$ -w $ARG1$,$ARG2$ -c $ARG3$,$ARG4$ -b -2','memory load of a linux host'),
+  (180,'check_HyperV','$USER1$/check_hyperv-health.sh $HOSTADDRESS$ $USER2$','check_HyperV'),
+  (181,'nutanix_status','perl $USER1$/check_ssh_nutanix_cluster.pl -H $HOSTADDRESS$ -u $USER8$ -p $USER22$ -T status','nutanix_status'),
+  (73,'mssql_alldb_stat','$USER1$/check_snmp_mssql -H $HOSTADDRESS$ -C $USER2$','statistics on mssql databases'),
+  (74,'mssql_db_stat','$USER1$/check_snmp_mssql -H $HOSTADDRESS$ -d $ARG1$ -C $USER2$','statistics on a mssql database'),
+  (75,'mssql_db_list','$USER1$/check_snmp_mssql -H $HOSTADDRESS$ -i -C $USER2$','list databases on mssql server'),
+  (76,'notes_availability','$USER1$/check_lotus.pl -H $HOSTADDRESS$','availability of a notes server'),
+  (77,'dhcp_status','$USER1$/check_dhcp -s $HOSTADDRESS$','check the response time of a DHCP server'),
+  (80,'check_snmp_interface','perl $USER1$/check_snmp_int.pl -H $HOSTADDRESS$ -C $USER2$ -r -n $ARG1$ -k -w $ARG2$,$ARG3$ -c $ARG4$,$ARG5$','check the bandwith\\\'s state of a given interface'),
+  (167,'process-service-perfdata-file','/bin/mv /srv/eyesofnetwork/graphios/var/spool/service-perfdata /srv/eyesofnetwork/graphios/var/spool/service-perfdata.$TIMET$','process-service-perfdata-file'),
+  (166,'process-host-perfdata-file','/bin/mv /srv/eyesofnetwork/graphios/var/spool/host-perfdata /srv/eyesofnetwork/graphios/var/spool/host-perfdata.$TIMET$','process-host-perfdata-file'),
+  (188,'check_wmi_Processor','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m checkcpu $ARG1$ $ARG2$','Check % Processor Usage of Windows Server ARG1 and ARG2 avail for custom applying'),
+  (187,'check_wmi_PageFileUsage','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m checkpage $ARG1$ $ARG2$','Check Usage Pagefile Usage of Windows Server. ARG1 and ARG2 available for customization.'),
+  (91,'event-browser-host','/srv/eyesofnetwork/ged/scripts/ged-nagios-host \"$HOSTNAME$\" \"PING\" \"$HOSTSTATE$\" \"$HOSTOUTPUT$\" \"$HOSTADDRESS$\" \"$HOSTALIAS$\" \"$HOSTGROUPNAMES$\"','event browser command for hosts'),
+  (94,'process','perl $USER1$/check_snmp_process.pl -H $HOSTADDRESS$ -C $USER2$ -r -n $ARG1$','check the load of a given process - arg1 : process name'),
+  (99,'snmp_cpu','$USER1$/check_snmp_load.pl -H $HOSTADDRESS$ -C $USER2$ -w $ARG1$ -c $ARG2$ -f','cpu average'),
+  (100,'win_snmp_memory','$USER1$/check_snmp_storage.pl -H $HOSTADDRESS$ -C $USER2$ -m \"Mem\" -w $ARG1$ -c $ARG2$ -f','memory load of a windows server'),
+  (101,'PARTITION-FS_SNMP','$USER1$/check_snmp_storage.pl -H $HOSTADDRESS$ -C $USER2$ -m $ARG1$ -w $ARG2$ -c $ARG3$ -t 60 -f','used space on a windows partition or linux file system'),
+  (112,'check_http','$USER1$/check_http -H $HOSTADDRESS$ -p $ARG1$','check a HTTP URL and return the exit code of the web page'),
+  (115,'dhcp_free_address','perl $USER1$/check_dhcp_addfree -H $HOSTADDRESS$ -C $USER2$ -v 2 -s $ARG1$ -c $ARG2$ -w $ARG3$','check the number of free addresses on a dhcp subnet'),
+  (116,'win_services','$USER1$/check_snmp_win.pl -H $HOSTADDRESS$ -C $USER2$ -n $ARG1$','check generique service'),
+  (182,'nutanix_alerts','perl $USER1$/check_ssh_nutanix_cluster.pl -H $HOSTADDRESS$ -u $USER8$ -p $USER22$ -T alerts','nutanix_alerts'),
+  (183,'check_snmp_ups_with_args','$USER1$/check_ups_snmp2.sh -H $HOSTADDRESS$ -C AMETRA -p $SERVICEDESC$ -w $ARG1$ -c $ARG2$','check_snmp_ups_with_args'),
+  (184,'check_wmi_PhysFreeMemory','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m checkmem  -w _MemFree%=$ARG1$: -c _MemFree%=$ARG2$:','Check % Processor Usage of Windows Server. ARG1 = %WarningMinimumFree  ARG2 = %CriticalMinimumFree'),
+  (124,'snmp_int','perl $USER1$/check_snmp_int.pl -H $HOSTADDRESS$ -C $USER2$ -n $ARG1$','inerface state'),
+  (192,'check_wmi_plus_windows_services','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m $ARG1$ -a $ARG2$ -t 300','check_wmi_plus_windows_services'),
+  (193,'check_wmi_plus_windows_network','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m $ARG1$ -a $ARG2$ -t 300','check_wmi_plus_windows_network'),
+  (191,'check_wmi_Network_vmxnet3','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m  checknetwork -a vmxnet3 ','Check Network state of Windows Server.'),
+  (143,'nslookup','$USER1$/check_dns -H $ARG1$ -w $ARG2$ -c $ARG3$','check nslookup'),
+  (144,'linux_swap','$USER1$/check_snmp_storage.pl -H $HOSTADDRESS$ -C $USER2$ -m Swap -w $ARG1$ -c $ARG2$','swap load of a linux server'),
+  (145,'check_mysql','$USER1$/check_mysql -H $HOSTADDRESS$ -u $ARG1$ -p $ARG2$','check mysql availability'),
+  (146,'check_ssh','$USER1$/check_ssh -H $HOSTADDRESS$','check ssh availability'),
+  (147,'uptime_public','$USER1$/check_snmp_uptime.pl -H $HOSTADDRESS$ -C public -w $ARG1$ -c $ARG2$','uptime communautÃ© public'),
+  (148,'uptime','$USER1$/check_snmp_uptime.sh $HOSTADDRESS$ $USER2$ 1 $ARG1$ $ARG2$','uptime snmp'),
+  (186,'check_wmi_Network_outQueue_vmxnet3','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m  checknetwork -a vmxnet3 -w OutputQueueLength=$ARG1$ -c OutputQueueLength=$ARG2$ ','Check Network Out Queue lenght of Windows Server. ARG1warning size,  ARG2 critical'),
+  (185,'check_wmi_Network_PacketError_vmxnet3','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m  checknetwork -a vmxnet3 -w PacketsReceivedErrors=$ARG1$ -c PacketsReceivedErrors=$ARG2$ ','Check Network Packets Received Errors of Windows Server. ARG1warning size,  ARG2 critical'),
+  (152,'dell_status','$USER1$/check_openmanage -H $HOSTADDRESS$ -C $USER2$','dell openmanage state'),
+  (153,'systime','$USER1$/check_systime.pl -H $HOSTADDRESS$ -C $USER2$ -n $ARG1$','systime snmp'),
+  (161,'eon_service_notifier','/srv/eyesofnetwork/notifier/bin/notifier.pl -t service -c /srv/eyesofnetwork/notifier/etc/notifier.cfg -r /srv/eyesofnetwork/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -s \"$SERVICEDESC$\" -e \"$SERVICESTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$SERVICEOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -B \"$SERVICEGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$SERVICENOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','Eon notification broker for service'),
+  (162,'eon_host_notifier','/srv/eyesofnetwork/notifier/bin/notifier.pl -t host -c /srv/eyesofnetwork/notifier/etc/notifier.cfg -r /srv/eyesofnetwork/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -e \"$HOSTSTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$HOSTOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$HOSTNOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','Eon notification broker for host'),
+  (163,'check_int_traffic','$USER1$/check_int_traffic.pl -H $HOSTADDRESS$ -C $USER2$ $ARG1$','check_int_traffic'),
+  (164,'check_disk','$USER1$/check_snmp_storage.pl -H $HOSTADDRESS$ -C $USER2$ -m $ARG1$ -w $ARG2$ -c $ARG3$ -S 0 -q FixedDisk -f','used space on a windows partition or linux file system'),
+  (189,'check_wmi_Processor-Queue','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m checkcpuq $ARG1$ $ARG2$','Check  Processor Queue Lenght of Windows Server ARG1 and ARG2 avail for custom applying'),
+  (168,'notify-by-email-host-old','/usr/bin/printf \"%b\" \"***** Nagios  *****\\\\n\\\\nNotification Type: $NOTIFICATIONTYPE$\\\\nHost: $HOSTNAME$\\\\nState: $HOSTSTATE$\\\\nAddress: $HOSTADDRESS$\\\\nInfo: $HOSTOUTPUT$\\\\n\\\\nDate/Time: $LONGDATETIME$\\\\n\" | /bin/mail -s \"Host $HOSTSTATE$ alert for $HOSTNAME$!\" $CONTACTEMAIL$','notify-by-email-host-old'),
+  (169,'notify-by-email-service-old','/usr/bin/printf \"%b\" \"***** Nagios  *****\\\\n\\\\nNotification Type: $NOTIFICATIONTYPE$\\\\n\\\\nService: $SERVICEDESC$\\\\nHost: $HOSTALIAS$\\\\nAddress: $HOSTADDRESS$\\\\nState: $SERVICESTATE$\\\\n\\\\nDate/Time: $LONGDATETIME$\\\\n\\\\nAdditional Info:\\\\n\\\\n$SERVICEOUTPUT$\" | /bin/mail -s \"Services $SERVICESTATE$ alert for $HOSTNAME$/$SERVICEDESC$!\" $CONTACTEMAIL$','notify-by-email-service-old'),
+  (170,'scc-check-esx-service','$USER1$/check_vmware_esx.pl -D $HOSTALIAS$ -u \'$USER4$\\$USER7$\' -p \'$USER23$\' -H $HOSTADDRESS$ -S $ARG1$ $ARG3$ $ARG4$ --sessionfiledir=$USER1$/esxresult/test --sessionfile=test','apx-check-esx-service'),
+  (171,'scc-check-esx-io','$USER1$/check_vmware_esx.pl -D $HOSTALIAS$ -u \'$USER4$\\$USER7$\' -p \'$USER23$\' -H $HOSTADDRESS$ -S $ARG1$ -s $ARG2$ $ARG3$ $ARG4$ --sessionfiledir=$USER1$/esxresult/test --sessionfile=test',NULL),
+  (172,'scc-check-esx-volume','$USER1$/check_vmware_esx.pl -D $HOSTALIAS$ -u \'$USER4$\\$USER7$\' -p \'$USER23$\' -H $HOSTADDRESS$ -S $ARG1$ $ARG2$ $ARG3$ $ARG4$ --sessionfiledir=$USER1$/esxresult/test --sessionfile=test',NULL),
+  (173,'scc-check-esx','$USER1$/check_vmware_esx.pl -D $HOSTALIAS$ -u \'$USER4$\\$USER7$\' -p \'$USER23$\' -H $HOSTADDRESS$ -S $ARG1$ -s $ARG2$ $ARG3$ $ARG4$ --sessionfiledir=$USER1$/esxresult/test --sessionfile=test',NULL),
+  (174,'hpe_storeonce_service_status','$USER1$/hpe_storeonce/serviceSetHealth.py $HOSTADDRESS$ $USER7$ $USER23$','hpe_storeonce_service_status'),
+  (175,'hpe_storeonce_systemCapacity_status','$USER1$/hpe_storeonce/systemHealthCapacity.py $HOSTADDRESS$ $USER7$ $USER23$','hpe_storeonce_systemCapacity_status'),
+  (176,'hpe_storeonce_hw_status','$USER1$/hpe_storeonce/hardwareCompStatus.py $HOSTADDRESS$ $USER7$ $USER23$','hpe_storeonce_hw_status'),
+  (177,'check_hard_hp_ilo','$USER1$/check_hp -H $HOSTADDRESS$ -C $USER2$ -x cpqFcaHostCntlrStatus','check_hard_hp_ilo'),
+  (179,'check_idrac_7_8','$USER1$/check_dell_idrac7.pl -H $HOSTADDRESS$ -C $USER2$ -T $ARG1$','check_idrac_7_8'),
+  (194,'check_wmi_plus_windows_template','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m $ARG1$ -w $ARG2$ -c $ARG3$ -t 300','check_wmi_plus_windows_template'),
+  (195,'check_wmi_sizedrive','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m checkdrivesize -a $ARG1$ -o 1','check_wmi_sizedrive'),
+  (196,'check_wmi_plus_windows_uptime','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m $ARG1$ -t 300','check_wmi_plus_windows_template'),
+  (197,'check_mssql_srv','$USER1$/check_mssql_health2 --server=$HOSTADDRESS$ --username=$USER19$\\\\$USER20$ --password=$USER21$ --mode $SERVICEDISPLAYNAME$','check mysql database'),
+  (198,'check_mssql-Ag_serv_inst_std','$USER1$/check_snmp_win.pl -H $HOSTADDRESS$ -C $USER2$ -n \"Agent SQL Server \\(MSSQLSERVER\\)\"','Check of SQL Server basic agent'),
+  (199,'check_mssql_db','$USER1$/check_mssql_health2 --server=$HOSTADDRESS$ --username=$USER19$\\\\$USER20$ --password=$USER21$ --mode $SERVICEDISPLAYNAME$ ','check mssql database'),
+  (200,'check_mysql_health','$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $USER3$ --password $USER19$ --mode $SERVICEDESC$','check_mysql_health'),
+  (201,'check_mysql_health_argument','$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $USER3$ --password $USER19$ --mode $ARG1$','check_mysql_health_argument'),
+  (202,'check_oracle','perl $USER1$/check_oracle_health --connect \'(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=$HOSTADDRESS$)(PORT=1521))(LOAD_BALANCE=yes)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=$HOSTALIAS$)))\' --user $USER20$ --password $USER21$ --mode $SERVICEDISPLAYNAME$','Check Oracle'),
+  (203,'check_snmp_synology','$USER1$/check_snmp_synology -v -2 $USER2$ -h $HOSTADDRESS$','check_snmp_synology'),
+  (204,'check_snmp_with_args','$USER1$/./check_snmp -H 10.151.2.41 -C $USER2$ -o','check_snmp_with_args'),
+  (205,'check_netapp_vol_aggr','$USER1$/check_netapp_sam.pl -H $HOSTADDRESS$ -C $USER2$ -T $ARG1$ -v $ARG2$  -w $ARG3$ -c $ARG4$','check_netapp_vol_aggr'),
+  (206,'check_Nettap','perl $USER1$/check_netapp3.pl -H $HOSTADDRESS$ -v $SERVICEDESC$','check_Nettap'),
+  (207,'check_equallogic','$USER1$/check_equallogic.sh -C $USER2$ -H $HOSTADDRESS$ -t $SERVICEDISPLAYNAME$ -w $ARG1$ -c $ARG2$','check_equallogic'),
+  (208,'check_snmp_dell_equallogic','$USER1$/check_snmp_dell_equallogic_eon.sh -C $USER2$ -H $HOSTADDRESS$ -n $ARG1$ -t $SERVICEDISPLAYNAME$ -w $ARG2$ -c $ARG3$','check_snmp_dell_equallogic'),
+  (209,'check_solidfire','$USER1$/checkSolidFire.py $HOSTADDRESS$ $ARG1$ $USER8$ $USER23$ mvip','check_solidfire'),
+  (210,'check_3par','$USER1$/check_3PAR $HOSTADDRESS$ $USER9$ $ARG1$','check_3par'),
+  (211,'emc_check_storage_pool','$USER1$/check_emc_clariion.pl -H $HOSTADDRESS$ -u $USER6$ -p $USER21$ -t storage_pool --storage_pool_id $ARG1$','emc_check_storage_pool'),
+  (212,'emc_check_lun','$USER1$/check_emc_clariion.pl -H $HOSTADDRESS$ -u $USER6$ -p $USER21$ -t lun --lun_id $ARG1$','emc_check_lun'),
+  (213,'emc_check_simple_2','$USER1$/check_emc_clariion_2.pl -H $HOSTADDRESS$ -u $USER6$ -p $USER21$ -t $ARG1$','emc_check_simple_2'),
+  (214,'emc_check_simple','$USER1$/check_emc_clariion.pl -H $HOSTADDRESS$ -u $USER6$ -p $USER21$ -t $ARG1$','emc_check_simple'),
+  (215,'process_vcsa','perl $USER1$/check_snmp_process.pl -H $HOSTADDRESS$ -C $USER2$ -n $ARG1$','check the load of a given process - arg1 : process name'),
+  (216,'check_int_traffic_vcsa','$USER1$/check_snmp_int.pl -H $HOSTADDRESS$ -C $USER2$ -n ','check_int_traffic_vcsa'),
+  (217,'check_disk_vcsa','$USER1$/check_snmp_storage.pl -H $HOSTADDRESS$ -C $USER2$ -m $ARG1$ -w $ARG2$ -c $ARG3$ -S 0 -f','used space on a windows partition or linux file system'),
+  (218,'Compellent_Global_Status','$USER1$/check_snmp -H $HOSTADDRESS$ -o $ARG1$ -w 3 -c 3 -C $USER2$ -u ALL','Compellent_Global_Status'),
+  (219,'Compellent_Disk_Status','$USER1$/check_snmp -H $HOSTADDRESS$ -o $ARG1$ -w 1 -c 1 -C $USER2$ -u UP','Compellent_Disk_Status'),
+  (220,'Compellent_Temperature_Panier','$USER1$/check_snmp -H $HOSTADDRESS$ -o $ARG1$ -w 40 -c 50 -C $USER2$ -u degres','Compellent_Temperature_Panier'),
+  (221,'Compellent_Temperature_Status','$USER1$/check_snmp -H $HOSTADDRESS$ -o $ARG1$ -w 60 -c 70 -C $USER2$ -u degres','Compellent_Temperature_Status'),
+  (222,'check_datadomain','perl $USER1$/check_dd.pl -H $HOSTADDRESS$ -v ALERTS','check_datadomain'),
+  (223,'brocade_status','$USER1$/check_FCBrocade_hardware.sh -H $HOSTADDRESS$ -c $USER2$','brocade status'),
+  (224,'check_nrpe_wrapper','$USER1$/ce/check_nrpe_wrapper $HOSTADDRESS$ $ARG1$','check_nrpe_wrapper'),
+  (225,'check_nrpe_wrapper_1arg','$USER1$/ce/check_nrpe_wrapper_1arg $HOSTADDRESS$ $ARG1$ $ARG2$','check_nrpe_wrapper_1arg'),
+  (226,'check_nrpe_wrapper_3arg','$USER1$/ce/check_nrpe_wrapper_3arg $HOSTADDRESS$ $ARG1$ $ARG2$ $ARG3$ $ARG4$','check_nrpe_wrapper_3arg'),
+  (227,'check_nrpe_wrapper_2arg','$USER1$/ce/check_nrpe_wrapper_2arg $HOSTADDRESS$ $ARG1$ $ARG2$ $ARG3$','check_nrpe_wrapper_2arg'),
+  (228,'check_ntp','$USER1$/ce/check_ntp_wrapper $HOSTADDRESS$','check_ntp for Celerra'),
+  (229,'check_ssh_wrapper','$USER1$/ce/check_ssh_wrapper $HOSTADDRESS$','check_ssh_wrapper for Celerra'),
+  (230,'check_nrpe_availability','$USER1$/ce/check_nrpe_availability $HOSTADDRESS$','check_nrpe_availability for Celerra'),
+  (231,'Arkoon uptime','$USER1$/check_snmp_uptime.sh $HOSTADDRESS$ public 1 $ARG1$ $ARG2$','uptime snmp'),
+  (232,'check_memory-fortinet','$USER1$/check_fortigate_memory -H $HOSTADDRESS$ -C $USER2$ -w $ARG1$ -c $ARG2$','memory load of a fortinet'),
+  (233,'check_mge_power','$USER1$/check_mge_power_status.sh -H $HOSTADDRESS$ -l $ARG1$ -p $ARG2$ -w $ARG3$ -c $ARG4$','Commande de verification de la consommation PDU'),
+  (234,'check_mge_temp','$USER1$/check_temp_mge_sensor.sh -H $HOSTADDRESS$ -l $ARG1$ -p $ARG2$ -w $ARG3$ -c $ARG4$','Commande de verification des sondes de temperature PDU'),
+  (235,'check_es_uptime','python $USER1$/uptime.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$','Uptime from ElasticSearch/MetricBeat'),
+  (236,'check_es_cpu','python $USER1$/cpu.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$','CPU from ElasticSearch/MetricBeat'),
+  (237,'check_es_load','python $USER1$/load.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$','LOAD AVERAGE from ElasticSearch/MetricBeat'),
+  (238,'check_es_memory','python $USER1$/memory.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$','Memory from ElasticSearch/MetricBeat'),
+  (239,'check_es_disk','python $USER1$/disk.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$','DISK from ElasticSearch/MetricBeat'),
+  (240,'check_nwc_health','$USER1$/check_nwc_health --mode $SERVICEDISPLAYNAME$ --hostname $HOSTADDRESS$ --community $USER5$ -t 300','check_nwc_health'),
+  (241,'passive','$USER1$/check_dummy 1 \"Etat de la sonde anormal\"','Commande pour la reception des Alerts RGMA'),
+  (242,'check_nrpe','$USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$','check_nrpe'),
+  (243,'brocade_fc_status','$USER1$/check_snmp_FCports_brocade-v1.3.pl -H $HOSTADDRESS$ -C $USER5$','brocade_fc_status'),
+  (244,'bp_status','$USER1$/check_bp_status.pl -b $SERVICEDESC$','bp_status'),
+  (245,'check_nutanix_snmp','$USER1$/check_nutanix.pl -H $HOSTADDRESS$ -a SHA -u $USER7$ -A $USER17$ -x AES -X $USER17$ -t $ARG1$ -s $SERVICEDESC$ -w $SERVICEDESC$=$ARG2$ -c $SERVICEDESC$=$ARG2$','check_nutanix_snmp');
 /*!40000 ALTER TABLE `nagios_command` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -674,7 +595,9 @@ CREATE TABLE `nagios_contact` (
 
 LOCK TABLES `nagios_contact` WRITE;
 /*!40000 ALTER TABLE `nagios_contact` DISABLE KEYS */;
-INSERT INTO `nagios_contact` VALUES (3,'admin','default user','','',1,1,11,11,1,1,1,0,0,1,1,1,1,0,1,1,1),(5,'test','test','',NULL,1,1,11,11,1,1,1,1,1,1,1,1,1,1,1,1,1),(6,'ged','ged Brocking events',NULL,NULL,1,1,11,11,1,1,1,1,1,1,1,1,1,1,1,1,1);
+INSERT INTO `nagios_contact` VALUES (3,'admin','default user','','',1,1,11,11,1,1,1,0,0,1,1,1,1,0,1,1,1),
+  (5,'test','test','',NULL,1,1,11,11,1,1,1,1,1,1,1,1,1,1,1,1,1),
+  (6,'ged','ged Brocking events',NULL,NULL,1,1,11,11,1,1,1,1,1,1,1,1,1,1,1,1,1);
 /*!40000 ALTER TABLE `nagios_contact` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -751,7 +674,9 @@ CREATE TABLE `nagios_contact_group` (
 
 LOCK TABLES `nagios_contact_group` WRITE;
 /*!40000 ALTER TABLE `nagios_contact_group` DISABLE KEYS */;
-INSERT INTO `nagios_contact_group` VALUES (3,'admins','EyesOfNetwork Administrators'),(5,'test','test'),(7,'Exploitation','Groupes pour la reception des notifications avancÃ©es');
+INSERT INTO `nagios_contact_group` VALUES (3,'admins','EyesOfNetwork Administrators'),
+  (5,'test','test'),
+  (7,'Exploitation','Groupes pour la reception des notifications avancÃ©es');
 /*!40000 ALTER TABLE `nagios_contact_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -778,7 +703,8 @@ CREATE TABLE `nagios_contact_group_member` (
 
 LOCK TABLES `nagios_contact_group_member` WRITE;
 /*!40000 ALTER TABLE `nagios_contact_group_member` DISABLE KEYS */;
-INSERT INTO `nagios_contact_group_member` VALUES (5,5,5),(12,3,3);
+INSERT INTO `nagios_contact_group_member` VALUES (5,5,5),
+  (12,3,3);
 /*!40000 ALTER TABLE `nagios_contact_group_member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -806,7 +732,14 @@ CREATE TABLE `nagios_contact_notification_command` (
 
 LOCK TABLES `nagios_contact_notification_command` WRITE;
 /*!40000 ALTER TABLE `nagios_contact_notification_command` DISABLE KEYS */;
-INSERT INTO `nagios_contact_notification_command` VALUES (56,3,91,'host'),(55,3,68,'service'),(13,0,91,'host'),(14,1,68,'service'),(15,5,62,'host'),(16,5,64,'service'),(66,6,68,'service'),(65,6,91,'host');
+INSERT INTO `nagios_contact_notification_command` VALUES (56,3,91,'host'),
+  (55,3,68,'service'),
+  (13,0,91,'host'),
+  (14,1,68,'service'),
+  (15,5,62,'host'),
+  (16,5,64,'service'),
+  (66,6,68,'service'),
+  (65,6,91,'host');
 /*!40000 ALTER TABLE `nagios_contact_notification_command` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1061,7 +994,46 @@ CREATE TABLE `nagios_host` (
 
 LOCK TABLES `nagios_host` WRITE;
 /*!40000 ALTER TABLE `nagios_host` DISABLE KEYS */;
-INSERT INTO `nagios_host` VALUES (6,'rgm-01-poc','EyesOfNetwork Network Server','RGM',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(153,'venus.budcca-demo.lab','10.112.11.100','VENUS',NULL,'venus.budcca-demo.lab',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(154,'neptune.budcca-demo.lab','10.112.11.100','NEPTUNE',NULL,'neptune.budcca-demo.lab',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(155,'mars.budcca-demo.lab','10.112.11.100','MARS',NULL,'mars.budcca-demo.lab',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(156,'LUNE','storeonce','LUNE',NULL,'10.112.11.14',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(157,'jupiter.budcca-demo.lab','10.112.11.100','JUPITER',NULL,'jupiter.budcca-demo.lab',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(158,'ilo-venus.budcca-demo.lab','ilo-venus.budcca-demo.lab','ILO-VENUS',NULL,'10.112.11.4',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(159,'ilo-neptune.budcca-demo.lab','ilo-neptune.budcca-demo.lab','ILO-NEPTUNE',NULL,'10.112.11.36',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(183,'ENV_DEV_JULIEN','ENV_DEV_JULIEN','ENV_DEV_JULIEN',NULL,'10.112.11.167',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(161,'ilo-jupiter.budcca-demo.lab','ilo-jupiter.budcca-demo.lab','ILO-JUPITER',NULL,'10.112.11.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(162,'elk','ElasticStack','ELK',NULL,'10.112.11.57',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(163,'CLUSTER-BUDCA','CLUSTER-BUDCA','CLUSTER-BUDCA',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(164,'BUDCA','BUDCA','BUDCA',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(165,'ADBUDCCA','ADBUDCCA','ADBUDCCA',NULL,'10.112.11.150',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(192,'APPLI_METIER','APPLI_METIER','APPLI_METIER',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'computer.png',NULL,'computer.png','computer.png',NULL,NULL),(169,'ADBUDCCA2','ADBUDCCA2','ADBUDCCA2',NULL,'10.112.11.151',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(170,'SOLIDFIRE','SOLIDFIRE','SOLIDFIRE',NULL,'10.112.11.220',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(171,'3PAR','3PAR','3PAR',NULL,'10.112.11.12',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(172,'client1','La Banque Postale','La Banque Postale',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(173,'client2','Kiabi','Kiabi',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(174,'client3','Compass Group','Compass Group',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(175,'client4','Conseil General Haute Loire','Conseil General Haute Loire',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(176,'ERIS','ERIS','ERIS',NULL,'10.112.11.10',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(177,'RGMA','Sondes applicatives','RGMA',NULL,'10.112.11.65',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'windows2012.png',NULL,'windows2012.png','windows2012.png',NULL,NULL),(181,'ENV_DEV_GUILLAUME','ENV_DEV_GUILLAUME','ENV_DEV_GUILLAUME',NULL,'10.112.11.23',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(180,'ENV_DEV_SAM','ENV_DEV_SAM','ENV_DEV_SAM',NULL,'10.112.11.165',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(182,'SELENE','SELENE','SELENE',NULL,'10.112.11.11',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(184,'ENV_DEV_MICHAEL','ENV_DEV_MICHAEL','ENV_DEV_MICHAEL',NULL,'10.112.11.166',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(185,'nextcloud','NEXTCLOUD','NEXTCLOUD',NULL,'10.112.11.58',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(186,'docker_nextcloud_webserver','docker_nextcloud_webserver','docker_nextcloud_webserver',NULL,'10.112.11.58',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL),(187,'docker_reverent_chandrasekhar','docker_reverent_chandrasekhar','docker_reverent_chandrasekhar',NULL,'10.112.11.58',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL),(188,'docker_letsencrypt-companion','docker_letsencrypt-companion','docker_letsencrypt-companion',NULL,'10.112.11.58',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL),(189,'docker_nextcloud_proxy','docker_nextcloud_proxy','docker_nextcloud_proxy',NULL,'10.112.11.58',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL),(190,'docker_nextcloud_db','docker_nextcloud_db','docker_nextcloud_db',NULL,'10.112.11.58',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL),(191,'APPLI_INFRA','APPLI_INFRA','APPLI_INFRA',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'computer.png',NULL,'computer.png','computer.png',NULL,NULL),(193,'NUTANIX_CVM1','NUTANIX_CVM1','NUTANIX_CVM1',NULL,'10.112.11.133',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(194,'NUTANIX_CVM2','NUTANIX_CVM2','NUTANIX_CVM2',NULL,'10.112.11.136',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(195,'NUTANIX_CVM3','NUTANIX_CVM3','NUTANIX_CVM3',NULL,'10.112.11.139',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(198,'Mike_TEST_NEW','My_Test',NULL,NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(10000,'ADBUDCCA-2327','ADBUDCCA','ADBUDCCA',NULL,'10.112.11.150',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_host` VALUES (6,'rgm-01-poc','EyesOfNetwork Network Server','RGM',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (153,'venus.budcca-demo.lab','10.112.11.100','VENUS',NULL,'venus.budcca-demo.lab',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (154,'neptune.budcca-demo.lab','10.112.11.100','NEPTUNE',NULL,'neptune.budcca-demo.lab',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (155,'mars.budcca-demo.lab','10.112.11.100','MARS',NULL,'mars.budcca-demo.lab',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (156,'LUNE','storeonce','LUNE',NULL,'10.112.11.14',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (157,'jupiter.budcca-demo.lab','10.112.11.100','JUPITER',NULL,'jupiter.budcca-demo.lab',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (158,'ilo-venus.budcca-demo.lab','ilo-venus.budcca-demo.lab','ILO-VENUS',NULL,'10.112.11.4',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (159,'ilo-neptune.budcca-demo.lab','ilo-neptune.budcca-demo.lab','ILO-NEPTUNE',NULL,'10.112.11.36',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (183,'ENV_DEV_JULIEN','ENV_DEV_JULIEN','ENV_DEV_JULIEN',NULL,'10.112.11.167',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (161,'ilo-jupiter.budcca-demo.lab','ilo-jupiter.budcca-demo.lab','ILO-JUPITER',NULL,'10.112.11.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (162,'elk','ElasticStack','ELK',NULL,'10.112.11.57',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (163,'CLUSTER-BUDCA','CLUSTER-BUDCA','CLUSTER-BUDCA',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (164,'BUDCA','BUDCA','BUDCA',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (165,'ADBUDCCA','ADBUDCCA','ADBUDCCA',NULL,'10.112.11.150',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (192,'APPLI_METIER','APPLI_METIER','APPLI_METIER',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'computer.png',NULL,'computer.png','computer.png',NULL,NULL),
+  (169,'ADBUDCCA2','ADBUDCCA2','ADBUDCCA2',NULL,'10.112.11.151',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (170,'SOLIDFIRE','SOLIDFIRE','SOLIDFIRE',NULL,'10.112.11.220',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (171,'3PAR','3PAR','3PAR',NULL,'10.112.11.12',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (172,'client1','La Banque Postale','La Banque Postale',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (173,'client2','Kiabi','Kiabi',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (174,'client3','Compass Group','Compass Group',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (175,'client4','Conseil General Haute Loire','Conseil General Haute Loire',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (176,'ERIS','ERIS','ERIS',NULL,'10.112.11.10',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (177,'RGMA','Sondes applicatives','RGMA',NULL,'10.112.11.65',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'windows2012.png',NULL,'windows2012.png','windows2012.png',NULL,NULL),
+  (181,'ENV_DEV_GUILLAUME','ENV_DEV_GUILLAUME','ENV_DEV_GUILLAUME',NULL,'10.112.11.23',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (180,'ENV_DEV_SAM','ENV_DEV_SAM','ENV_DEV_SAM',NULL,'10.112.11.165',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (182,'SELENE','SELENE','SELENE',NULL,'10.112.11.11',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (184,'ENV_DEV_MICHAEL','ENV_DEV_MICHAEL','ENV_DEV_MICHAEL',NULL,'10.112.11.166',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (185,'nextcloud','NEXTCLOUD','NEXTCLOUD',NULL,'10.112.11.58',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (186,'docker_nextcloud_webserver','docker_nextcloud_webserver','docker_nextcloud_webserver',NULL,'10.112.11.58',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL),
+  (187,'docker_reverent_chandrasekhar','docker_reverent_chandrasekhar','docker_reverent_chandrasekhar',NULL,'10.112.11.58',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL),
+  (188,'docker_letsencrypt-companion','docker_letsencrypt-companion','docker_letsencrypt-companion',NULL,'10.112.11.58',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL),
+  (189,'docker_nextcloud_proxy','docker_nextcloud_proxy','docker_nextcloud_proxy',NULL,'10.112.11.58',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL),
+  (190,'docker_nextcloud_db','docker_nextcloud_db','docker_nextcloud_db',NULL,'10.112.11.58',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL),
+  (191,'APPLI_INFRA','APPLI_INFRA','APPLI_INFRA',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'computer.png',NULL,'computer.png','computer.png',NULL,NULL),
+  (193,'NUTANIX_CVM1','NUTANIX_CVM1','NUTANIX_CVM1',NULL,'10.112.11.133',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (194,'NUTANIX_CVM2','NUTANIX_CVM2','NUTANIX_CVM2',NULL,'10.112.11.136',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (195,'NUTANIX_CVM3','NUTANIX_CVM3','NUTANIX_CVM3',NULL,'10.112.11.139',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (198,'Mike_TEST_NEW','My_Test',NULL,NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (10000,'ADBUDCCA-2327','ADBUDCCA','ADBUDCCA',NULL,'10.112.11.150',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `nagios_host` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1117,7 +1089,8 @@ CREATE TABLE `nagios_host_contact_member` (
 
 LOCK TABLES `nagios_host_contact_member` WRITE;
 /*!40000 ALTER TABLE `nagios_host_contact_member` DISABLE KEYS */;
-INSERT INTO `nagios_host_contact_member` VALUES (30,198,NULL,3),(27,NULL,33,6);
+INSERT INTO `nagios_host_contact_member` VALUES (30,198,NULL,3),
+  (27,NULL,33,6);
 /*!40000 ALTER TABLE `nagios_host_contact_member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1146,7 +1119,9 @@ CREATE TABLE `nagios_host_contactgroup` (
 
 LOCK TABLES `nagios_host_contactgroup` WRITE;
 /*!40000 ALTER TABLE `nagios_host_contactgroup` DISABLE KEYS */;
-INSERT INTO `nagios_host_contactgroup` VALUES (48,NULL,79,3),(49,NULL,33,3),(51,198,NULL,5);
+INSERT INTO `nagios_host_contactgroup` VALUES (48,NULL,79,3),
+  (49,NULL,33,3),
+  (51,198,NULL,5);
 /*!40000 ALTER TABLE `nagios_host_contactgroup` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1206,7 +1181,12 @@ CREATE TABLE `nagios_host_parent` (
 
 LOCK TABLES `nagios_host_parent` WRITE;
 /*!40000 ALTER TABLE `nagios_host_parent` DISABLE KEYS */;
-INSERT INTO `nagios_host_parent` VALUES (2,186,NULL,185),(3,187,NULL,185),(4,188,NULL,185),(5,189,NULL,185),(6,190,NULL,185),(14,198,NULL,171);
+INSERT INTO `nagios_host_parent` VALUES (2,186,NULL,185),
+  (3,187,NULL,185),
+  (4,188,NULL,185),
+  (5,189,NULL,185),
+  (6,190,NULL,185),
+  (14,198,NULL,171);
 /*!40000 ALTER TABLE `nagios_host_parent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1286,7 +1266,46 @@ CREATE TABLE `nagios_host_template` (
 
 LOCK TABLES `nagios_host_template` WRITE;
 /*!40000 ALTER TABLE `nagios_host_template` DISABLE KEYS */;
-INSERT INTO `nagios_host_template` VALUES (10,'RGM_WINDOWS_SNMP','Template Windows',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'windows2012.png',NULL,'windows2012.png','windows2012.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(11,'RGM_LINUX_SNMP','Template Linux',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'linux40.png',NULL,'linux40.png','linux40.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(59,'RGM_NUTANIX_AHV','Template Nutanix Hyperviseur AHV',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'nutanix.png',NULL,'nutanix.png','nutanix.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(60,'RGM_UPS','Template Onduleur UPS',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'legrand.png',NULL,'legrand.png','legrand.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(61,'RGM_WINDOWS_WMI_ADVANCED','Template Windows WMI compteurs specifiques',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Windows_2012.png',NULL,'Windows_2012.png','Windows_2012.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(62,'RGM_WINDOWS_WMI','Template Windows base en WMI',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'windows2012.png',NULL,'windows2012.png','windows2012.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(63,'RGM_MSSQL_DBHEALTH','Template Mssql DB',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'MSSQL2008.png',NULL,'MSSQL2008.png','MSSQL2008.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(64,'RGM_MYSQL_DBHEALTH','Template Mysql DB',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'mysql.png',NULL,'mysql.png','mysql.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(36,'RGM_WINDOWS_VMTOOLS','Template Windows Virtual Machine',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'windows2012.png',NULL,'windows2012.png','windows2012.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(37,'RGM_LINUX_VMTOOLS','Template Linux Virtual Machine',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'linux.png',NULL,'linux.png','linux.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(58,'RGM_MS_HYPER-V','Template HYPER-V',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'windowsxp.png',NULL,'windowsxp.png','windowsxp.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(33,'GENERIC_HOST','Template Generic',NULL,NULL,61,NULL,NULL,2,4,1,11,0,0,0,1,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,10,11,1,1,1,1,1,1,1,1,1,1,NULL,NULL,NULL,NULL,'https://10.112.11.38/module/module_frame/index.php?url=%2Fnagvis%2Ffrontend%2Fnagvis-js%2FRGM_DTE_PART1_Supervision.pdf','/grafana/dashboard/script/histou.js?host=$HOSTNAME$&refresh=30s','computer.png',NULL,'computer.png','computer.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(56,'RGM_HPE_SWITCH','Template Network device',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'network_node.png',NULL,'network_node.png','network_node.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(57,'RGM_DELL_HARDWARE','Template Hardware iDRAC',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'dell2.png',NULL,'dell2.png','dell2.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(52,'RGM_VMWARE_ESX','Template ESX',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'vmware2.png',NULL,'vmware2.png','vmware2.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(53,'RGM_HPE_STOREONCE','Template Baie Storeonce',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'HP_logo_1.jpg',NULL,'HP_logo_1.jpg','HP_logo_1.jpg',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(54,'RGM_HPE_HARDWARE','Template Hardware ILO',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'HP_logo_1.jpg',NULL,'HP_logo_1.jpg','HP_logo_1.jpg',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(65,'RGM_ORACLE_DBHEALTH','Template Oracle DB',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'oracle.png',NULL,'oracle.png','oracle.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(66,'RGM_NAS_SYNOLOGY','Template NAS Synology',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'synology.png',NULL,'synology.png','synology.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(67,'RGM_EMC_ISILON','Template EMC ISILON',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(68,'RGM_NETAPP_METROCLUSTER','Template Netapp MetroCluster',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'netapp.png',NULL,'netapp.png','netapp.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(69,'RGM_DELL_EQUALLOGIC','Template DELL Equallogic',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'dell.png',NULL,'dell.png','dell.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(70,'RGM_NETAPP_SOLIDFIRE','Template Netapp Solidfire',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'netapp.png',NULL,'netapp.png','netapp.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(71,'RGM_HPE_3PAR','Template 3PAR',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'3PAR.png',NULL,'3PAR.png','3PAR.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(72,'RGM_EMC_VNX','Template Emc VNX',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'EMC2.png',NULL,'EMC2.png','EMC2.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(73,'RGM_VMWARE_VCSA','Template VCenter Aplliance',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'vmware.png',NULL,'vmware.png','vmware.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(74,'RGM_DELL_COMPELLENT','Template DELL Compellent',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'compellent.png',NULL,'compellent.png','compellent.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(75,'RGM_EMC_DATADOMAIN','Template EMC Datadomain',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'EMC2.png',NULL,'EMC2.png','EMC2.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(77,'RGM_EMC_CELERRA','Template EMC Celerra',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'EMC2.png',NULL,'EMC2.png','EMC2.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(79,'RGM_MGE_PDU','Template PDU MGE',NULL,NULL,61,NULL,NULL,2,4,1,11,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,11,1,1,1,1,NULL,NULL,NULL,1,1,1,NULL,NULL,NULL,NULL,NULL,'/module/capacity_for_nagios/index.php?ip=$HOSTNAME$','rack1.png',NULL,'rack1.png','rack1.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(80,'RGM_LINUX_SNMP_MEMUP','Template Linux',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'linux40.png',NULL,'linux40.png','linux40.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(81,'RGM_NETWORK_DEVICE','Template Network device',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'network_node.png',NULL,'network_node.png','network_node.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(82,'RGM_LINUX_ES','RGM_LINUX_ES',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'linux.png',NULL,'linux.png','linux.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(83,'RGM_DOCKER_NEXCLOUD_WS','RGM_DOCKER_NEXCLOUD_WS',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(84,'RGM_DOCKER_NEXCLOUD_RC','RGM_DOCKER_NEXCLOUD_RC',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(85,'RGM_DOCKER_NEXCLOUD_LC','RGM_DOCKER_NEXCLOUD_LC',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(86,'RGM_DOCKER_NEXCLOUD_PROXY','RGM_DOCKER_NEXCLOUD_PROXY',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(87,'RGM_DOCKER_NEXCLOUD_DB','RGM_DOCKER_NEXCLOUD_DB',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(91,'RGM_NUTANIX_SNMPv3','RGM_NUTANIX_SNMPv3',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'nutanix.png',NULL,'nutanix.png','nutanix.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(89,'RGM_BROCADE_SWITCH','RGM_BROCADE_SWITCH',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'brocade.png',NULL,'brocade.png','brocade.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_host_template` VALUES (10,'RGM_WINDOWS_SNMP','Template Windows',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'windows2012.png',NULL,'windows2012.png','windows2012.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (11,'RGM_LINUX_SNMP','Template Linux',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'linux40.png',NULL,'linux40.png','linux40.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (59,'RGM_NUTANIX_AHV','Template Nutanix Hyperviseur AHV',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'nutanix.png',NULL,'nutanix.png','nutanix.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (60,'RGM_UPS','Template Onduleur UPS',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'legrand.png',NULL,'legrand.png','legrand.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (61,'RGM_WINDOWS_WMI_ADVANCED','Template Windows WMI compteurs specifiques',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Windows_2012.png',NULL,'Windows_2012.png','Windows_2012.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (62,'RGM_WINDOWS_WMI','Template Windows base en WMI',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'windows2012.png',NULL,'windows2012.png','windows2012.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (63,'RGM_MSSQL_DBHEALTH','Template Mssql DB',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'MSSQL2008.png',NULL,'MSSQL2008.png','MSSQL2008.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (64,'RGM_MYSQL_DBHEALTH','Template Mysql DB',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'mysql.png',NULL,'mysql.png','mysql.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (36,'RGM_WINDOWS_VMTOOLS','Template Windows Virtual Machine',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'windows2012.png',NULL,'windows2012.png','windows2012.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (37,'RGM_LINUX_VMTOOLS','Template Linux Virtual Machine',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'linux.png',NULL,'linux.png','linux.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (58,'RGM_MS_HYPER-V','Template HYPER-V',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'windowsxp.png',NULL,'windowsxp.png','windowsxp.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (33,'GENERIC_HOST','Template Generic',NULL,NULL,61,NULL,NULL,2,4,1,11,0,0,0,1,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,10,11,1,1,1,1,1,1,1,1,1,1,NULL,NULL,NULL,NULL,'https://10.112.11.38/module/module_frame/index.php?url=%2Fnagvis%2Ffrontend%2Fnagvis-js%2FRGM_DTE_PART1_Supervision.pdf','/grafana/dashboard/script/histou.js?host=$HOSTNAME$&refresh=30s','computer.png',NULL,'computer.png','computer.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (56,'RGM_HPE_SWITCH','Template Network device',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'network_node.png',NULL,'network_node.png','network_node.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (57,'RGM_DELL_HARDWARE','Template Hardware iDRAC',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'dell2.png',NULL,'dell2.png','dell2.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (52,'RGM_VMWARE_ESX','Template ESX',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'vmware2.png',NULL,'vmware2.png','vmware2.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (53,'RGM_HPE_STOREONCE','Template Baie Storeonce',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'HP_logo_1.jpg',NULL,'HP_logo_1.jpg','HP_logo_1.jpg',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (54,'RGM_HPE_HARDWARE','Template Hardware ILO',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'HP_logo_1.jpg',NULL,'HP_logo_1.jpg','HP_logo_1.jpg',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (65,'RGM_ORACLE_DBHEALTH','Template Oracle DB',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'oracle.png',NULL,'oracle.png','oracle.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (66,'RGM_NAS_SYNOLOGY','Template NAS Synology',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'synology.png',NULL,'synology.png','synology.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (67,'RGM_EMC_ISILON','Template EMC ISILON',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (68,'RGM_NETAPP_METROCLUSTER','Template Netapp MetroCluster',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'netapp.png',NULL,'netapp.png','netapp.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (69,'RGM_DELL_EQUALLOGIC','Template DELL Equallogic',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'dell.png',NULL,'dell.png','dell.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (70,'RGM_NETAPP_SOLIDFIRE','Template Netapp Solidfire',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'netapp.png',NULL,'netapp.png','netapp.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (71,'RGM_HPE_3PAR','Template 3PAR',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'3PAR.png',NULL,'3PAR.png','3PAR.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (72,'RGM_EMC_VNX','Template Emc VNX',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'EMC2.png',NULL,'EMC2.png','EMC2.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (73,'RGM_VMWARE_VCSA','Template VCenter Aplliance',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'vmware.png',NULL,'vmware.png','vmware.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (74,'RGM_DELL_COMPELLENT','Template DELL Compellent',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'compellent.png',NULL,'compellent.png','compellent.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (75,'RGM_EMC_DATADOMAIN','Template EMC Datadomain',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'EMC2.png',NULL,'EMC2.png','EMC2.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (77,'RGM_EMC_CELERRA','Template EMC Celerra',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'EMC2.png',NULL,'EMC2.png','EMC2.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (79,'RGM_MGE_PDU','Template PDU MGE',NULL,NULL,61,NULL,NULL,2,4,1,11,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,11,1,1,1,1,NULL,NULL,NULL,1,1,1,NULL,NULL,NULL,NULL,NULL,'/module/capacity_for_nagios/index.php?ip=$HOSTNAME$','rack1.png',NULL,'rack1.png','rack1.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (80,'RGM_LINUX_SNMP_MEMUP','Template Linux',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'linux40.png',NULL,'linux40.png','linux40.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (81,'RGM_NETWORK_DEVICE','Template Network device',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'network_node.png',NULL,'network_node.png','network_node.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (82,'RGM_LINUX_ES','RGM_LINUX_ES',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'linux.png',NULL,'linux.png','linux.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (83,'RGM_DOCKER_NEXCLOUD_WS','RGM_DOCKER_NEXCLOUD_WS',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (84,'RGM_DOCKER_NEXCLOUD_RC','RGM_DOCKER_NEXCLOUD_RC',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (85,'RGM_DOCKER_NEXCLOUD_LC','RGM_DOCKER_NEXCLOUD_LC',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (86,'RGM_DOCKER_NEXCLOUD_PROXY','RGM_DOCKER_NEXCLOUD_PROXY',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (87,'RGM_DOCKER_NEXCLOUD_DB','RGM_DOCKER_NEXCLOUD_DB',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'docker.png',NULL,'docker.png','docker.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (91,'RGM_NUTANIX_SNMPv3','RGM_NUTANIX_SNMPv3',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'nutanix.png',NULL,'nutanix.png','nutanix.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (89,'RGM_BROCADE_SWITCH','RGM_BROCADE_SWITCH',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'brocade.png',NULL,'brocade.png','brocade.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `nagios_host_template` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1346,7 +1365,91 @@ CREATE TABLE `nagios_host_template_inheritance` (
 
 LOCK TABLES `nagios_host_template_inheritance` WRITE;
 /*!40000 ALTER TABLE `nagios_host_template_inheritance` DISABLE KEYS */;
-INSERT INTO `nagios_host_template_inheritance` VALUES (30,NULL,36,33,0),(31,NULL,37,33,0),(278,169,NULL,36,0),(279,NULL,61,33,0),(273,NULL,60,33,0),(270,NULL,57,33,0),(280,NULL,62,33,0),(349,182,NULL,89,0),(253,NULL,11,33,0),(263,NULL,10,33,0),(313,NULL,82,33,0),(282,NULL,64,33,0),(281,NULL,63,33,0),(269,NULL,56,33,0),(326,184,NULL,61,0),(353,191,NULL,33,0),(347,6,NULL,82,0),(348,NULL,89,33,0),(271,NULL,58,33,0),(272,NULL,59,33,0),(247,NULL,52,33,0),(248,153,NULL,52,0),(249,154,NULL,52,0),(250,155,NULL,52,0),(251,NULL,53,33,0),(252,156,NULL,53,0),(254,157,NULL,52,0),(255,NULL,54,33,0),(256,158,NULL,54,0),(257,159,NULL,54,0),(323,183,NULL,61,0),(259,161,NULL,54,0),(346,162,NULL,11,0),(261,163,NULL,33,0),(262,164,NULL,33,0),(275,165,NULL,36,0),(283,NULL,65,33,0),(284,NULL,66,33,0),(285,NULL,67,33,0),(286,NULL,68,33,0),(287,NULL,69,33,0),(288,170,NULL,70,0),(289,NULL,70,33,0),(290,NULL,71,33,0),(291,171,NULL,71,0),(292,NULL,72,33,0),(293,NULL,73,33,0),(294,NULL,74,33,0),(295,NULL,75,33,0),(297,NULL,77,33,0),(299,NULL,79,33,0),(309,175,NULL,80,0),(308,174,NULL,80,0),(307,173,NULL,80,0),(306,172,NULL,80,0),(305,NULL,80,33,0),(310,176,NULL,56,0),(311,NULL,81,33,0),(312,177,NULL,33,0),(320,181,NULL,61,0),(318,180,NULL,61,0),(324,165,NULL,61,1),(325,169,NULL,61,1),(331,NULL,84,33,0),(329,NULL,83,33,0),(330,186,NULL,83,0),(332,NULL,85,33,0),(333,NULL,86,33,0),(334,NULL,87,33,0),(356,193,NULL,59,0),(336,187,NULL,84,0),(338,188,NULL,85,0),(340,189,NULL,86,0),(342,190,NULL,87,0),(357,194,NULL,59,0),(354,192,NULL,33,0),(355,185,NULL,82,0),(358,195,NULL,59,0),(359,NULL,91,33,0),(360,194,NULL,91,1),(363,198,NULL,82,0),(364,193,NULL,91,1),(365,195,NULL,91,1),(10000,10000,NULL,36,0),(10001,10000,NULL,61,1);
+INSERT INTO `nagios_host_template_inheritance` VALUES (30,NULL,36,33,0),
+  (31,NULL,37,33,0),
+  (278,169,NULL,36,0),
+  (279,NULL,61,33,0),
+  (273,NULL,60,33,0),
+  (270,NULL,57,33,0),
+  (280,NULL,62,33,0),
+  (349,182,NULL,89,0),
+  (253,NULL,11,33,0),
+  (263,NULL,10,33,0),
+  (313,NULL,82,33,0),
+  (282,NULL,64,33,0),
+  (281,NULL,63,33,0),
+  (269,NULL,56,33,0),
+  (326,184,NULL,61,0),
+  (353,191,NULL,33,0),
+  (347,6,NULL,82,0),
+  (348,NULL,89,33,0),
+  (271,NULL,58,33,0),
+  (272,NULL,59,33,0),
+  (247,NULL,52,33,0),
+  (248,153,NULL,52,0),
+  (249,154,NULL,52,0),
+  (250,155,NULL,52,0),
+  (251,NULL,53,33,0),
+  (252,156,NULL,53,0),
+  (254,157,NULL,52,0),
+  (255,NULL,54,33,0),
+  (256,158,NULL,54,0),
+  (257,159,NULL,54,0),
+  (323,183,NULL,61,0),
+  (259,161,NULL,54,0),
+  (346,162,NULL,11,0),
+  (261,163,NULL,33,0),
+  (262,164,NULL,33,0),
+  (275,165,NULL,36,0),
+  (283,NULL,65,33,0),
+  (284,NULL,66,33,0),
+  (285,NULL,67,33,0),
+  (286,NULL,68,33,0),
+  (287,NULL,69,33,0),
+  (288,170,NULL,70,0),
+  (289,NULL,70,33,0),
+  (290,NULL,71,33,0),
+  (291,171,NULL,71,0),
+  (292,NULL,72,33,0),
+  (293,NULL,73,33,0),
+  (294,NULL,74,33,0),
+  (295,NULL,75,33,0),
+  (297,NULL,77,33,0),
+  (299,NULL,79,33,0),
+  (309,175,NULL,80,0),
+  (308,174,NULL,80,0),
+  (307,173,NULL,80,0),
+  (306,172,NULL,80,0),
+  (305,NULL,80,33,0),
+  (310,176,NULL,56,0),
+  (311,NULL,81,33,0),
+  (312,177,NULL,33,0),
+  (320,181,NULL,61,0),
+  (318,180,NULL,61,0),
+  (324,165,NULL,61,1),
+  (325,169,NULL,61,1),
+  (331,NULL,84,33,0),
+  (329,NULL,83,33,0),
+  (330,186,NULL,83,0),
+  (332,NULL,85,33,0),
+  (333,NULL,86,33,0),
+  (334,NULL,87,33,0),
+  (356,193,NULL,59,0),
+  (336,187,NULL,84,0),
+  (338,188,NULL,85,0),
+  (340,189,NULL,86,0),
+  (342,190,NULL,87,0),
+  (357,194,NULL,59,0),
+  (354,192,NULL,33,0),
+  (355,185,NULL,82,0),
+  (358,195,NULL,59,0),
+  (359,NULL,91,33,0),
+  (360,194,NULL,91,1),
+  (363,198,NULL,82,0),
+  (364,193,NULL,91,1),
+  (365,195,NULL,91,1),
+  (10000,10000,NULL,36,0),
+  (10001,10000,NULL,61,1);
 /*!40000 ALTER TABLE `nagios_host_template_inheritance` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1374,7 +1477,17 @@ CREATE TABLE `nagios_hostgroup` (
 
 LOCK TABLES `nagios_hostgroup` WRITE;
 /*!40000 ALTER TABLE `nagios_hostgroup` DISABLE KEYS */;
-INSERT INTO `nagios_hostgroup` VALUES (8,'WINDOWS','HostGroup Windows',NULL,NULL,NULL),(7,'LINUX','HostGroup Linux',NULL,NULL,NULL),(11,'VMWARE','HostGroup VmWare',NULL,NULL,NULL),(12,'ESX','HostGroup Esx',NULL,NULL,NULL),(30,'role_wins_1Osec','Role de metricbeat Ã  10sec',NULL,NULL,NULL),(29,'BROCADE','HostGroup Brocade',NULL,NULL,NULL),(28,'EMC','HostGroup Emc',NULL,NULL,NULL),(24,'CISCO','HostGroup Cisco',NULL,NULL,NULL),(25,'ALL','ALL',NULL,NULL,NULL),(26,'MSSQL','MSSQL',NULL,NULL,NULL),(27,'ORACLE','ORACLE',NULL,NULL,NULL);
+INSERT INTO `nagios_hostgroup` VALUES (8,'WINDOWS','HostGroup Windows',NULL,NULL,NULL),
+  (7,'LINUX','HostGroup Linux',NULL,NULL,NULL),
+  (11,'VMWARE','HostGroup VmWare',NULL,NULL,NULL),
+  (12,'ESX','HostGroup Esx',NULL,NULL,NULL),
+  (30,'role_wins_1Osec','Role de metricbeat Ã  10sec',NULL,NULL,NULL),
+  (29,'BROCADE','HostGroup Brocade',NULL,NULL,NULL),
+  (28,'EMC','HostGroup Emc',NULL,NULL,NULL),
+  (24,'CISCO','HostGroup Cisco',NULL,NULL,NULL),
+  (25,'ALL','ALL',NULL,NULL,NULL),
+  (26,'MSSQL','MSSQL',NULL,NULL,NULL),
+  (27,'ORACLE','ORACLE',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `nagios_hostgroup` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1403,7 +1516,20 @@ CREATE TABLE `nagios_hostgroup_membership` (
 
 LOCK TABLES `nagios_hostgroup_membership` WRITE;
 /*!40000 ALTER TABLE `nagios_hostgroup_membership` DISABLE KEYS */;
-INSERT INTO `nagios_hostgroup_membership` VALUES (30,NULL,11,7),(31,NULL,10,8),(8,NULL,36,11),(9,NULL,37,11),(42,NULL,75,7),(37,NULL,65,27),(47,159,NULL,30),(40,NULL,73,7),(36,NULL,63,26),(35,NULL,61,8),(38,NULL,72,28),(48,NULL,80,7),(45,161,NULL,30),(41,NULL,74,7);
+INSERT INTO `nagios_hostgroup_membership` VALUES (30,NULL,11,7),
+  (31,NULL,10,8),
+  (8,NULL,36,11),
+  (9,NULL,37,11),
+  (42,NULL,75,7),
+  (37,NULL,65,27),
+  (47,159,NULL,30),
+  (40,NULL,73,7),
+  (36,NULL,63,26),
+  (35,NULL,61,8),
+  (38,NULL,72,28),
+  (48,NULL,80,7),
+  (45,161,NULL,30),
+  (41,NULL,74,7);
 /*!40000 ALTER TABLE `nagios_hostgroup_membership` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1701,7 +1827,367 @@ CREATE TABLE `nagios_service` (
 
 LOCK TABLES `nagios_service` WRITE;
 /*!40000 ALTER TABLE `nagios_service` DISABLE KEYS */;
-INSERT INTO `nagios_service` VALUES (185,'processor',NULL,NULL,10,NULL,NULL,NULL,99,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(611,'status','status',NULL,84,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(186,'memory',NULL,NULL,10,NULL,NULL,NULL,100,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(609,'uptime','uptime',NULL,84,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(187,'partitions',NULL,NULL,10,NULL,NULL,NULL,164,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(610,'restarts','restarts',NULL,84,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(33,'process_ged',NULL,6,NULL,NULL,NULL,NULL,94,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(179,'processor',NULL,NULL,11,NULL,NULL,NULL,69,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/grafana/dashboard/script/histou.js?host=$HOSTNAME$&service=$SERVICEDESC$&refresh=30s',NULL,NULL),(180,'memory',NULL,NULL,11,NULL,NULL,NULL,70,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(588,'processor','processor',NULL,82,NULL,NULL,NULL,236,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(181,'partitions',NULL,NULL,11,NULL,NULL,NULL,164,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/grafana/dashboard/script/histou.js?host=$HOSTNAME$&service=$SERVICEDESC$&refresh=30s',NULL,NULL),(38,'mysql',NULL,6,NULL,NULL,NULL,NULL,145,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(39,'ssh',NULL,6,NULL,NULL,NULL,NULL,146,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(266,'VMXNet3_Network_Error','VMXNet3_Network_Error',NULL,61,NULL,NULL,NULL,185,15,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(182,'systime',NULL,NULL,11,NULL,NULL,NULL,153,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(188,'systime',NULL,NULL,10,NULL,NULL,NULL,153,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(269,'processor','processor',NULL,62,NULL,NULL,NULL,194,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(249,'Hyper-V Virtual Machine Management','Hyper-V Virtual Machine Management',NULL,58,NULL,NULL,NULL,116,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(189,'uptime',NULL,NULL,10,NULL,NULL,NULL,148,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(263,'Processor_Usage','Processor_Usage',NULL,61,NULL,NULL,NULL,188,15,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(265,'VMXNet_Network_Output_Queue','VMXNet_Network_Output_Queue',NULL,61,NULL,NULL,NULL,186,15,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(111,'vmware_tools',NULL,NULL,36,NULL,NULL,NULL,116,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'vmware.png',NULL),(112,'vmware_tools',NULL,NULL,37,NULL,NULL,NULL,94,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'vmware.png',NULL),(264,'PageFile_Usage_PCT','PageFile_Usage_PCT',NULL,61,NULL,NULL,NULL,187,6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(183,'uptime',NULL,NULL,11,NULL,NULL,NULL,148,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(268,'uptime','uptime',NULL,62,NULL,NULL,NULL,196,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(267,'Physical_MemoryFree','Physical_MemoryFree',NULL,61,NULL,NULL,NULL,184,6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(270,'partition_C','partition_C',NULL,62,NULL,NULL,NULL,195,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(250,'alerts_nutanix','alerts_nutanix',NULL,59,NULL,NULL,NULL,182,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(251,'status_nutanix','status_nutanix',NULL,59,NULL,NULL,NULL,181,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(252,'num_output_lines','num_output_lines',NULL,60,NULL,NULL,NULL,183,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(253,'num_input_lines','num_input_lines',NULL,60,NULL,NULL,NULL,183,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(254,'ups_alarm','ups_alarm',NULL,60,NULL,NULL,NULL,183,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(184,'interfaces',NULL,NULL,11,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL),(190,'interfaces',NULL,NULL,10,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(262,'Processor_Queue','Processor_Queue',NULL,61,NULL,NULL,NULL,189,20,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(261,'C_Current_Disk_Queue','C_Current_Disk_Queue',NULL,61,NULL,NULL,NULL,190,15,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(260,'VMXNet_Network_State','VMXNet_Network_State',NULL,61,NULL,NULL,NULL,191,15,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(259,'battery_charge_remain','battery_charge_remain',NULL,60,NULL,NULL,NULL,183,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(258,'battery_status','battery_status',NULL,60,NULL,NULL,NULL,183,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(255,'battery_temp','battery_temp',NULL,60,NULL,NULL,NULL,183,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(256,'input_voltage','input_voltage',NULL,60,NULL,NULL,NULL,183,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(257,'output_load','output_load',NULL,60,NULL,NULL,NULL,183,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(247,'Hyper-V Image Management Service','Hyper-V Image Management Service',NULL,58,NULL,NULL,NULL,116,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(246,'hyper-V_Global_Status','hyper-V_Global_Status',NULL,58,NULL,NULL,NULL,180,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(248,'Hyper-V Networking Management Service','Hyper-V Networking Management Service',NULL,58,NULL,NULL,NULL,116,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(245,'OS_Status','OS_Status',NULL,57,NULL,NULL,NULL,179,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(243,'Model_Status','Model_Status',NULL,57,NULL,NULL,NULL,179,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(244,'Global_Status','Global_Status',NULL,57,NULL,NULL,NULL,179,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(238,'uptime','uptime',NULL,56,NULL,NULL,NULL,240,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(586,'application-web','application-web',177,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(240,'interface-usage','interface-usage',NULL,56,NULL,NULL,NULL,240,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(241,'interface-availability','interface-availability',NULL,56,NULL,NULL,NULL,240,NULL,1440,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(590,'memory','memory',NULL,82,NULL,NULL,NULL,238,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(217,'hardware_status','hardware_status',NULL,54,NULL,NULL,NULL,177,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(218,'cpu',NULL,NULL,52,NULL,NULL,NULL,173,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(219,'memory',NULL,NULL,52,NULL,NULL,NULL,173,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(220,'status',NULL,NULL,52,NULL,NULL,NULL,173,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(221,'network',NULL,NULL,52,NULL,NULL,NULL,173,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(222,'volumes','volumes',NULL,52,NULL,NULL,NULL,172,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(223,'io','io',NULL,52,NULL,NULL,NULL,171,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(224,'service','service',NULL,52,NULL,NULL,NULL,170,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(587,'application-lourde','application-lourde',177,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(235,'interface-errors','interface-errors',NULL,56,NULL,NULL,NULL,240,NULL,60,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(228,'hardware_status','hardware_status',NULL,53,NULL,NULL,NULL,176,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(229,'system_health','system_health',NULL,53,NULL,NULL,NULL,175,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(230,'service_status','service_status',NULL,53,NULL,NULL,NULL,174,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(602,'uptime','uptime',NULL,61,NULL,NULL,NULL,196,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(272,'processor_average','processor_average',NULL,62,NULL,NULL,NULL,194,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(273,'memory','memory',NULL,62,NULL,NULL,NULL,194,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(274,'Interfaces','Interfaces',NULL,62,NULL,NULL,NULL,193,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(276,'database-free','database-free',NULL,63,NULL,NULL,NULL,199,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(284,'connection-time','connection-time',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(278,'connection-time','connection-time',NULL,63,NULL,NULL,NULL,197,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(279,'io-busy','io-busy',NULL,63,NULL,NULL,NULL,197,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(280,'full-scans','full-scans',NULL,63,NULL,NULL,NULL,197,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(281,'mem-pool-data-buffer-hit-ratio','mem-pool-data-buffer-hit-ratio',NULL,63,NULL,NULL,NULL,197,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(282,'page-life-expectancy','page-life-expectancy',NULL,63,NULL,NULL,NULL,197,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(283,'free-list-stalls','free-list-stalls',NULL,63,NULL,NULL,NULL,197,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(285,'uptime-db','uptime-db',NULL,64,NULL,NULL,NULL,201,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(286,'threads-connected','threads-connected',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(287,'threadcache-hitrate','threadcache-hitrate',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(288,'querycache-hitrate','querycache-hitrate',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(289,'querycache-lowmem-prunes','querycache-lowmem-prunes',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(290,'myisam-keycache-hitrate','myisam-keycache-hitrate',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(291,'innodb-bufferpool-hitrate','innodb-bufferpool-hitrate',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(292,'innodb-bufferpool-wait-free','innodb-bufferpool-wait-free',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(293,'innodb-log-waits','innodb-log-waits',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(294,'tablecache-hitrate','tablecache-hitrate',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(295,'table-lock-contention','table-lock-contention',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(296,'index-usage','index-usage',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(297,'tmp-disk-tables','tmp-disk-tables',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(298,'slow-queries','slow-queries',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(299,'long-running-procs','long-running-procs',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(300,'slave-lag','slave-lag',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(301,'slave-io-running','slave-io-running',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(302,'slave-sql-running','slave-sql-running',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(303,'sql','sql',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(304,'open-files','open-files',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(305,'encode','encode',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(306,'cluster-ndb-running','cluster-ndb-running',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(307,'sga-library-cache-hit-ratio','sga-library-cache-hit-ratio',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(308,'sga-latches-hit-ratio','sga-latches-hit-ratio',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(309,'sga-shared-pool-reloads','sga-shared-pool-reloads',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(310,'sga-data-buffer-hit-ratio','sga-data-buffer-hit-ratio',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(311,'connection-time','connection-time',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(312,'sga-shared-pool-free','sga-shared-pool-free',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(313,'pga-in-memory-sort-ratio','pga-in-memory-sort-ratio',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(314,'switch-interval','switch-interval',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(315,'tablespace-free','tablespace-free',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(316,'datafile-io-traffic','datafile-io-traffic',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(317,'tablespace-fragmentation','tablespace-fragmentation',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(318,'connected-users','connected-users',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(319,'sga-dictionary-cache-hit-ratio','sga-dictionary-cache-hit-ratio',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(320,'Global_Status','Global_Status',NULL,66,NULL,NULL,NULL,203,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(321,'Utilisation_Processeur','Utilisation_Processeur',NULL,67,NULL,NULL,NULL,69,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(322,'SNMP_CLUSTER_HEALTH','SNMP_CLUSTER_HEALTH',NULL,67,NULL,NULL,NULL,204,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(323,'uptime','uptime',NULL,67,NULL,NULL,NULL,148,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(324,'SNMP_ONEFS_VERSION','SNMP_ONEFS_VERSION',NULL,67,NULL,NULL,NULL,204,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(325,'SNMP_CONFIGURED_NODES','SNMP_CONFIGURED_NODES',NULL,67,NULL,NULL,NULL,204,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(326,'systime','systime',NULL,67,NULL,NULL,NULL,153,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(327,'SNMP_ONLINE_NODES','SNMP_ONLINE_NODES',NULL,67,NULL,NULL,NULL,204,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(328,'ORACLE_DEV_DATA','ORACLE_DEV_DATA',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(361,'controller','controller',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(330,'CPULOAD','CPULOAD',NULL,68,NULL,NULL,NULL,206,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(331,'UPTIME','UPTIME',NULL,68,NULL,NULL,NULL,206,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(332,'CPTIME','CPTIME',NULL,68,NULL,NULL,NULL,206,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(333,'CPBACK','CPBACK',NULL,68,NULL,NULL,NULL,206,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(334,' aggr_sas_status',' aggr_sas_status',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(362,'health','health',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(336,'SHELFINFO','SHELFINFO',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(337,'DISK_STATUS','DISK_STATUS',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(338,'AUTOSUPPORTSTATUS','AUTOSUPPORTSTATUS',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(360,'battery','battery',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(340,'ORACLE_DATA','ORACLE_DATA',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(366,'redundancy','redundancy',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(358,'latency','latency',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(343,'VMWARE_PROD01','VMWARE_PROD01',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(344,'VMWARE_PROD02','VMWARE_PROD02',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(367,'usage','usage',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(346,'vol_VM_Oracle','vol_VM_Oracle',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(347,'datas','datas',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(365,'network','network',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(364,'info','info',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(363,'disk','disk',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(351,'GENNFS_SHARE_TEST','GENNFS_SHARE_TEST',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(359,'temperature','temperature',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(357,'io','io',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(356,'fan','fan',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(355,'connection','connection',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(368,'raid','raid',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(369,'volumes','volumes',NULL,69,NULL,NULL,NULL,207,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(370,'ps','ps',NULL,69,NULL,NULL,NULL,207,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(371,'uptime','uptime',NULL,69,NULL,NULL,NULL,207,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(372,'global_status','global_status',NULL,70,NULL,NULL,NULL,209,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(373,'node_status','node_status',NULL,71,NULL,NULL,NULL,210,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(374,'physical_disks','physical_disks',NULL,71,NULL,NULL,NULL,210,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(375,'logical_disks','logical_disks',NULL,71,NULL,NULL,NULL,210,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(376,'virtual_volumes','virtual_volumes',NULL,71,NULL,NULL,NULL,210,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(377,'power_supply','power_supply',NULL,71,NULL,NULL,NULL,210,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(378,'fc_ports','fc_ports',NULL,71,NULL,NULL,NULL,210,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(430,'vmware-sca','vmware-sca',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(381,'disks',NULL,NULL,72,NULL,NULL,NULL,214,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(382,'spB',NULL,NULL,72,NULL,NULL,NULL,213,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(383,'spA',NULL,NULL,72,NULL,NULL,NULL,213,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(384,'errors',NULL,NULL,72,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(385,'cache',NULL,NULL,72,NULL,NULL,NULL,213,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(429,'vmware-syslog-health','vmware-syslog-health',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(428,'vsphere-client','vsphere-client',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(389,'VMWARE','VMWARE',NULL,72,NULL,NULL,NULL,212,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(390,'VMWARE_BKP','VMWARE_BKP',NULL,72,NULL,NULL,NULL,212,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(416,'partitions',NULL,NULL,73,NULL,NULL,NULL,217,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$&view=1',NULL,NULL),(415,'Apache_Status','Apache_Status',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(417,'systime',NULL,NULL,73,NULL,NULL,NULL,153,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(418,'uptime',NULL,NULL,73,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(419,'interfaces',NULL,NULL,73,NULL,NULL,NULL,216,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(420,'vmware-cm','vmware-cm',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(421,'vmware-sps','vmware-sps',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(422,'vmware-vdcs','vmware-vdcs',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(423,'vmware-cis-license','vmware-cis-license',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(424,'vmware-stsd','vmware-stsd',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(425,'vmware-psc-client','vmware-psc-client',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(426,'vmware-sts-idmd','vmware-sts-idmd',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(427,'vmware-vpx-workflow','vmware-vpx-workflow',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(407,'IMPAX_RIS_DB','IMPAX_RIS_DB',NULL,72,NULL,NULL,NULL,212,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(431,'vmware-vsm','vmware-vsm',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(432,'vmware-vapi-endpoint','vmware-vapi-endpoint',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(412,'Tier_1','Tier_1',NULL,72,NULL,NULL,NULL,211,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(413,'Tier_2','Tier_2',NULL,72,NULL,NULL,NULL,211,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(414,'Tier_3','Tier_3',NULL,72,NULL,NULL,NULL,211,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(433,'vmware-vsan-health','vmware-vsan-health',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(434,'vmware-perfcharts','vmware-perfcharts',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(435,'vmware-invsvc','vmware-invsvc',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(436,'Temperature','Temperature',NULL,74,NULL,NULL,NULL,221,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(437,'Status_FAN2-1','Status_FAN2-1',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(438,'Status_Enclosure2','Status_Enclosure2',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(439,'Status_Enclosure1','Status_Enclosure1',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(440,'uptime',NULL,NULL,74,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(442,'10K_Status_Disk01-01','10K_Status_Disk01-01',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(581,'hardware-health','hardware-health',NULL,81,NULL,NULL,NULL,240,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(444,'10K_Status_Disk01-02','10K_Status_Disk01-02',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(445,'SSD_Status_Disk02-00','SSD_Status_Disk02-00',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(446,'10K_Status_Disk01-10','10K_Status_Disk01-10',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(571,'partitions',NULL,NULL,80,NULL,NULL,NULL,164,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$&view=1',NULL,NULL),(448,'Status_FAN2-4','Status_FAN2-4',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(449,'10K_Status_Disk01-18','10K_Status_Disk01-18',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(450,'10K_Status_Disk01-05','10K_Status_Disk01-05',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(451,'10K_Status_Disk01-11','10K_Status_Disk01-11',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(452,'SSD_Status_Disk02-01','SSD_Status_Disk02-01',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(580,'cpu-load','cpu-load',NULL,81,NULL,NULL,NULL,240,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(582,'interface-errors','interface-errors',NULL,81,NULL,NULL,NULL,240,NULL,60,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(456,'Status_FAN1-1','Status_FAN1-1',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(457,'10K_Status_Disk01-22','10K_Status_Disk01-22',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(458,'10K_Status_Disk01-03','10K_Status_Disk01-03',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(459,'10K_Status_Disk01-06','10K_Status_Disk01-06',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(460,'10K_Status_Disk01-16','10K_Status_Disk01-16',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(461,'10K_Status_Disk01-12','10K_Status_Disk01-12',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(462,'10K_Status_Disk01-20','10K_Status_Disk01-20',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(463,'SSD_Status_Disk02-05','SSD_Status_Disk02-05',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(464,'SSD_Status_Disk02-03','SSD_Status_Disk02-03',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(465,'LUN_PROD_VM1','LUN_PROD_VM1',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(466,'Power_Supply2-2','Power_Supply2-2',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(467,'Power_Supply2-1','Power_Supply2-1',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(468,'Temperature_Panier_Central_Encl1','Temperature_Panier_Central_Encl1',NULL,74,NULL,NULL,NULL,220,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(469,'Temperature_Panier_Central_Encl2','Temperature_Panier_Central_Encl2',NULL,74,NULL,NULL,NULL,220,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(470,'Status_FAN2-3','Status_FAN2-3',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(471,'Status_FAN1-3','Status_FAN1-3',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(472,'10K_Status_Disk01-09','10K_Status_Disk01-09',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(473,'10K_Status_Disk01-04','10K_Status_Disk01-04',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(474,'10K_Status_Disk01-08','10K_Status_Disk01-08',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(475,'10K_Status_Disk01-07','10K_Status_Disk01-07',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(476,'10K_Status_Disk01-15','10K_Status_Disk01-15',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(477,'10K_Status_Disk01-14','10K_Status_Disk01-14',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(478,'10K_Status_Disk01-13','10K_Status_Disk01-13',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(479,'10K_Status_Disk01-17','10K_Status_Disk01-17',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(480,'10K_Status_Disk01-19','10K_Status_Disk01-19',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(481,'10K_Status_Disk01-21','10K_Status_Disk01-21',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(482,'10K_Status_Disk01-23','10K_Status_Disk01-23',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(547,'SAVVOL-DATA1','SAVVOL-DATA1',NULL,77,NULL,NULL,NULL,227,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(484,'SSD_Status_Disk02-02','SSD_Status_Disk02-02',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(485,'SSD_Status_Disk02-04','SSD_Status_Disk02-04',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(486,'SSD_Status_Disk02-06','SSD_Status_Disk02-06',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(578,'interface-usage','interface-usage',NULL,81,NULL,NULL,NULL,240,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(556,'NFS Exports','NFS Exports',NULL,77,NULL,NULL,NULL,224,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(557,'HW-Status','HW Status',NULL,77,NULL,NULL,NULL,224,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(608,'uptime','uptime',NULL,83,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(569,'processor',NULL,NULL,80,NULL,NULL,NULL,69,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(551,'Replication-vdm1','Replication-vdm1',NULL,77,NULL,NULL,NULL,225,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(550,'CheckPoints','CheckPoints',NULL,77,NULL,NULL,NULL,225,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(579,'interface-availability','interface-availability',NULL,81,NULL,NULL,NULL,240,NULL,1440,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(560,'TEMP','Temperature',NULL,79,NULL,NULL,NULL,234,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(561,'POWER','Power consomation',NULL,79,NULL,NULL,NULL,233,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(546,'NTP','NTP',NULL,77,NULL,NULL,NULL,228,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(498,'Power_Supply1-1','Power_Supply1-1',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(499,'Power_Supply1-2','Power_Supply1-2',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(500,'Status_FAN1-2','Status_FAN1-2',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(501,'Status_FAN2-2','Status_FAN2-2',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(502,'Status_FAN1-4','Status_FAN1-4',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(570,'memory',NULL,NULL,80,NULL,NULL,NULL,70,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(552,'Anti-Virus','Anti Virus',NULL,77,NULL,NULL,NULL,224,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(553,'Data-Mover','Data-Mover',NULL,77,NULL,NULL,NULL,224,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(554,'User-mapper','User Mapper',NULL,77,NULL,NULL,NULL,224,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(555,'CIFS-SERVERS','CIFS Servers',NULL,77,NULL,NULL,NULL,224,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(573,'uptime',NULL,NULL,80,NULL,NULL,NULL,148,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(574,'interfaces',NULL,NULL,80,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL),(575,'status','status',NULL,81,NULL,NULL,NULL,240,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(576,'uptime','uptime',NULL,81,NULL,NULL,NULL,240,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(577,'memory-usage','memory-usage',NULL,81,NULL,NULL,NULL,240,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(548,'FS-DATA1','FS-DATA1',NULL,77,NULL,NULL,NULL,227,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(549,'Quota-DATA1','Quota-DATA1',NULL,77,NULL,NULL,NULL,226,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(572,'systime',NULL,NULL,80,NULL,NULL,NULL,153,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(534,'uptime',NULL,NULL,75,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(533,'global_service','global_service',NULL,75,NULL,NULL,NULL,222,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(535,'systime',NULL,NULL,75,NULL,NULL,NULL,153,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(536,'partitions',NULL,NULL,75,NULL,NULL,NULL,101,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(537,'memory',NULL,NULL,75,NULL,NULL,NULL,70,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(538,'processor',NULL,NULL,75,NULL,NULL,NULL,69,6,5,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),(540,'SystemFS','SystemFS',NULL,77,NULL,NULL,NULL,227,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(541,'NRPE-Availlability','NRPE-Availlability',NULL,77,NULL,NULL,NULL,230,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(542,'SSH','SSH',NULL,77,NULL,NULL,NULL,229,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(543,'Load','Load',NULL,77,NULL,NULL,NULL,227,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(544,'Total-Process','Total-Process',NULL,77,NULL,NULL,NULL,227,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(545,'Zombie-Process','Zombie-Process',NULL,77,NULL,NULL,NULL,227,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(530,'Cache_Battery_Status_Encl1','Cache_Battery_Status_Encl1',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(531,'Cache_Battery_Status_Encl2','Cache_Battery_Status_Encl2',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(532,'Global_Status','Global_Status',NULL,74,NULL,NULL,NULL,218,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(591,'uptime','uptime',NULL,82,NULL,NULL,NULL,235,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(592,'load','load',NULL,82,NULL,NULL,NULL,237,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(593,'partitions','partitions',NULL,82,NULL,NULL,NULL,239,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(607,'restarts','restarts',NULL,83,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(606,'status','status',NULL,83,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'http://10.112.11.58/index.php/apps/files/?dir=/seafile-BUDCA/Documentation%20Constructeur-Editeur/Docker%20Technical%20Sales%20Professional/02%20-%20Product&fileid=212664',NULL,NULL,NULL),(605,'memory','memory',NULL,83,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(604,'processor','processor',NULL,83,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(612,'memory','memory',NULL,84,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(613,'processor','processor',NULL,84,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(614,'status','status',NULL,85,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(615,'uptime','uptime',NULL,85,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(616,'restarts','restarts',NULL,85,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(617,'memory','memory',NULL,85,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(618,'processor','processor',NULL,85,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(619,'status','status',NULL,86,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(620,'uptime','uptime',NULL,86,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(621,'restarts','restarts',NULL,86,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(622,'memory','memory',NULL,86,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(623,'processor','processor',NULL,86,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(624,'status','status',NULL,87,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(625,'uptime','uptime',NULL,87,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(626,'restarts','restarts',NULL,87,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(627,'memory','memory',NULL,87,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(628,'processor','processor',NULL,87,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(638,'port_FC_status','port_FC_status',NULL,89,NULL,NULL,NULL,243,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(656,'vmPowerState','vmPowerState',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(655,'EYESOFNETWORK','EYESOFNETWORK',192,NULL,NULL,NULL,NULL,244,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(654,'NUTANIX','NUTANIX',191,NULL,NULL,NULL,NULL,244,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(639,'hardware_status','hardware_status',NULL,89,NULL,NULL,NULL,223,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(640,'uptime','uptime',NULL,89,NULL,NULL,NULL,147,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(643,'3PAR','3PAR',191,NULL,NULL,NULL,NULL,244,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(651,'ELASTIC_STACK','ELASTIC_STACK',191,NULL,NULL,NULL,NULL,244,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(645,'SOLIDFIRE','SOLIDFIRE',191,NULL,NULL,NULL,NULL,244,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(646,'CLUSTER_ESX','CLUSTER_ESX',191,NULL,NULL,NULL,NULL,244,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(647,'APPLICATION_DOCKER','APPLICATION_DOCKER',192,NULL,NULL,NULL,NULL,244,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(653,'KUBERNETES','KUBERNETES',191,NULL,NULL,NULL,NULL,244,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(652,'OPENSTACK','OPENSTACK',191,NULL,NULL,NULL,NULL,244,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(657,'vmReadIOPerSecond','vmReadIOPerSecond',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(658,'vmCpuUsagePercent','vmCpuUsagePercent',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(659,'vmMemoryUsagePercent','vmMemoryUsagePercent',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(660,'vmRxBytes','vmRxBytes',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(661,'vmRxDropCount','vmRxDropCount',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(662,'vmAverageLatency','vmAverageLatency',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(663,'vmTxBytes','vmTxBytes',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(664,'vmWriteIOPerSecond','vmWriteIOPerSecond',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(665,'vmTxDropCount','vmTxDropCount',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(666,'citIOPerSecond','citIOPerSecond',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(667,'citUsedCapacity','citUsedCapacity',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(668,'citAvgLatencyUsecs','citAvgLatencyUsecs',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(669,'citIOBandwidth','citIOBandwidth',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(670,'dstNumFreeBytes','dstNumFreeBytes',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(671,'clusterLatency','clusterLatency',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(672,'dstAverageLatency','dstAverageLatency',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(673,'dstState','dstState',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(674,'dstNumberIops','dstNumberIops',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(675,'dstIOBandwidth','dstIOBandwidth',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(676,'clusterUsedStorageCapacity','clusterUsedStorageCapacity',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(677,'clusterIops','clusterIops',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(678,'clusterStatus','clusterStatus',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(679,'cstControllerVMStatus','cstControllerVMStatus',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(680,'cstDataServiceStatus','cstDataServiceStatus',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(681,'cstMetadataServiceStatus','cstMetadataServiceStatus',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(682,'hypervisorTxDropCount','hypervisorTxDropCount',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(683,'hypervisorRxBytes','hypervisorRxBytes',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(684,'hypervisorWriteIOPerSecond','hypervisorWriteIOPerSecond',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(685,'hypervisorCpuUsagePercent','hypervisorCpuUsagePercent',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(686,'hypervisorMemoryUsagePercent','hypervisorMemoryUsagePercent',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(687,'hypervisorReadIOPerSecond','hypervisorReadIOPerSecond',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(688,'hypervisorIOBandwidth','hypervisorIOBandwidth',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(689,'hypervisorRxDropCount','hypervisorRxDropCount',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(690,'hypervisorTxBytes','hypervisorTxBytes',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(691,'spitIOPerSecond','spitIOPerSecond',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(692,'spitIOBandwidth','spitIOBandwidth',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(693,'spitAvgLatencyUsecs','spitAvgLatencyUsecs',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(694,'spitUsedCapacity','spitUsedCapacity',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (185,'processor',NULL,NULL,10,NULL,NULL,NULL,99,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (611,'status','status',NULL,84,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (186,'memory',NULL,NULL,10,NULL,NULL,NULL,100,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (609,'uptime','uptime',NULL,84,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (187,'partitions',NULL,NULL,10,NULL,NULL,NULL,164,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (610,'restarts','restarts',NULL,84,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (33,'process_ged',NULL,6,NULL,NULL,NULL,NULL,94,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (179,'processor',NULL,NULL,11,NULL,NULL,NULL,69,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/grafana/dashboard/script/histou.js?host=$HOSTNAME$&service=$SERVICEDESC$&refresh=30s',NULL,NULL),
+  (180,'memory',NULL,NULL,11,NULL,NULL,NULL,70,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (588,'processor','processor',NULL,82,NULL,NULL,NULL,236,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (181,'partitions',NULL,NULL,11,NULL,NULL,NULL,164,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/grafana/dashboard/script/histou.js?host=$HOSTNAME$&service=$SERVICEDESC$&refresh=30s',NULL,NULL),
+  (38,'mysql',NULL,6,NULL,NULL,NULL,NULL,145,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (39,'ssh',NULL,6,NULL,NULL,NULL,NULL,146,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (266,'VMXNet3_Network_Error','VMXNet3_Network_Error',NULL,61,NULL,NULL,NULL,185,15,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (182,'systime',NULL,NULL,11,NULL,NULL,NULL,153,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (188,'systime',NULL,NULL,10,NULL,NULL,NULL,153,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (269,'processor','processor',NULL,62,NULL,NULL,NULL,194,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (249,'Hyper-V Virtual Machine Management','Hyper-V Virtual Machine Management',NULL,58,NULL,NULL,NULL,116,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (189,'uptime',NULL,NULL,10,NULL,NULL,NULL,148,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (263,'Processor_Usage','Processor_Usage',NULL,61,NULL,NULL,NULL,188,15,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (265,'VMXNet_Network_Output_Queue','VMXNet_Network_Output_Queue',NULL,61,NULL,NULL,NULL,186,15,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (111,'vmware_tools',NULL,NULL,36,NULL,NULL,NULL,116,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'vmware.png',NULL),
+  (112,'vmware_tools',NULL,NULL,37,NULL,NULL,NULL,94,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'vmware.png',NULL),
+  (264,'PageFile_Usage_PCT','PageFile_Usage_PCT',NULL,61,NULL,NULL,NULL,187,6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (183,'uptime',NULL,NULL,11,NULL,NULL,NULL,148,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (268,'uptime','uptime',NULL,62,NULL,NULL,NULL,196,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (267,'Physical_MemoryFree','Physical_MemoryFree',NULL,61,NULL,NULL,NULL,184,6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (270,'partition_C','partition_C',NULL,62,NULL,NULL,NULL,195,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (250,'alerts_nutanix','alerts_nutanix',NULL,59,NULL,NULL,NULL,182,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (251,'status_nutanix','status_nutanix',NULL,59,NULL,NULL,NULL,181,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (252,'num_output_lines','num_output_lines',NULL,60,NULL,NULL,NULL,183,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (253,'num_input_lines','num_input_lines',NULL,60,NULL,NULL,NULL,183,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (254,'ups_alarm','ups_alarm',NULL,60,NULL,NULL,NULL,183,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (184,'interfaces',NULL,NULL,11,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL),
+  (190,'interfaces',NULL,NULL,10,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (262,'Processor_Queue','Processor_Queue',NULL,61,NULL,NULL,NULL,189,20,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (261,'C_Current_Disk_Queue','C_Current_Disk_Queue',NULL,61,NULL,NULL,NULL,190,15,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (260,'VMXNet_Network_State','VMXNet_Network_State',NULL,61,NULL,NULL,NULL,191,15,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (259,'battery_charge_remain','battery_charge_remain',NULL,60,NULL,NULL,NULL,183,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (258,'battery_status','battery_status',NULL,60,NULL,NULL,NULL,183,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (255,'battery_temp','battery_temp',NULL,60,NULL,NULL,NULL,183,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (256,'input_voltage','input_voltage',NULL,60,NULL,NULL,NULL,183,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (257,'output_load','output_load',NULL,60,NULL,NULL,NULL,183,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (247,'Hyper-V Image Management Service','Hyper-V Image Management Service',NULL,58,NULL,NULL,NULL,116,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (246,'hyper-V_Global_Status','hyper-V_Global_Status',NULL,58,NULL,NULL,NULL,180,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (248,'Hyper-V Networking Management Service','Hyper-V Networking Management Service',NULL,58,NULL,NULL,NULL,116,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (245,'OS_Status','OS_Status',NULL,57,NULL,NULL,NULL,179,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (243,'Model_Status','Model_Status',NULL,57,NULL,NULL,NULL,179,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (244,'Global_Status','Global_Status',NULL,57,NULL,NULL,NULL,179,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (238,'uptime','uptime',NULL,56,NULL,NULL,NULL,240,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (586,'application-web','application-web',177,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (240,'interface-usage','interface-usage',NULL,56,NULL,NULL,NULL,240,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (241,'interface-availability','interface-availability',NULL,56,NULL,NULL,NULL,240,NULL,1440,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (590,'memory','memory',NULL,82,NULL,NULL,NULL,238,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (217,'hardware_status','hardware_status',NULL,54,NULL,NULL,NULL,177,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (218,'cpu',NULL,NULL,52,NULL,NULL,NULL,173,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (219,'memory',NULL,NULL,52,NULL,NULL,NULL,173,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (220,'status',NULL,NULL,52,NULL,NULL,NULL,173,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (221,'network',NULL,NULL,52,NULL,NULL,NULL,173,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (222,'volumes','volumes',NULL,52,NULL,NULL,NULL,172,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (223,'io','io',NULL,52,NULL,NULL,NULL,171,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (224,'service','service',NULL,52,NULL,NULL,NULL,170,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (587,'application-lourde','application-lourde',177,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (235,'interface-errors','interface-errors',NULL,56,NULL,NULL,NULL,240,NULL,60,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (228,'hardware_status','hardware_status',NULL,53,NULL,NULL,NULL,176,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (229,'system_health','system_health',NULL,53,NULL,NULL,NULL,175,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (230,'service_status','service_status',NULL,53,NULL,NULL,NULL,174,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (602,'uptime','uptime',NULL,61,NULL,NULL,NULL,196,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (272,'processor_average','processor_average',NULL,62,NULL,NULL,NULL,194,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (273,'memory','memory',NULL,62,NULL,NULL,NULL,194,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (274,'Interfaces','Interfaces',NULL,62,NULL,NULL,NULL,193,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (276,'database-free','database-free',NULL,63,NULL,NULL,NULL,199,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (284,'connection-time','connection-time',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (278,'connection-time','connection-time',NULL,63,NULL,NULL,NULL,197,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (279,'io-busy','io-busy',NULL,63,NULL,NULL,NULL,197,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (280,'full-scans','full-scans',NULL,63,NULL,NULL,NULL,197,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (281,'mem-pool-data-buffer-hit-ratio','mem-pool-data-buffer-hit-ratio',NULL,63,NULL,NULL,NULL,197,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (282,'page-life-expectancy','page-life-expectancy',NULL,63,NULL,NULL,NULL,197,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (283,'free-list-stalls','free-list-stalls',NULL,63,NULL,NULL,NULL,197,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (285,'uptime-db','uptime-db',NULL,64,NULL,NULL,NULL,201,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (286,'threads-connected','threads-connected',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (287,'threadcache-hitrate','threadcache-hitrate',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (288,'querycache-hitrate','querycache-hitrate',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (289,'querycache-lowmem-prunes','querycache-lowmem-prunes',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (290,'myisam-keycache-hitrate','myisam-keycache-hitrate',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (291,'innodb-bufferpool-hitrate','innodb-bufferpool-hitrate',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (292,'innodb-bufferpool-wait-free','innodb-bufferpool-wait-free',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (293,'innodb-log-waits','innodb-log-waits',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (294,'tablecache-hitrate','tablecache-hitrate',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (295,'table-lock-contention','table-lock-contention',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (296,'index-usage','index-usage',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (297,'tmp-disk-tables','tmp-disk-tables',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (298,'slow-queries','slow-queries',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (299,'long-running-procs','long-running-procs',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (300,'slave-lag','slave-lag',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (301,'slave-io-running','slave-io-running',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (302,'slave-sql-running','slave-sql-running',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (303,'sql','sql',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (304,'open-files','open-files',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (305,'encode','encode',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (306,'cluster-ndb-running','cluster-ndb-running',NULL,64,NULL,NULL,NULL,200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (307,'sga-library-cache-hit-ratio','sga-library-cache-hit-ratio',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (308,'sga-latches-hit-ratio','sga-latches-hit-ratio',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (309,'sga-shared-pool-reloads','sga-shared-pool-reloads',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (310,'sga-data-buffer-hit-ratio','sga-data-buffer-hit-ratio',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (311,'connection-time','connection-time',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (312,'sga-shared-pool-free','sga-shared-pool-free',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (313,'pga-in-memory-sort-ratio','pga-in-memory-sort-ratio',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (314,'switch-interval','switch-interval',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (315,'tablespace-free','tablespace-free',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (316,'datafile-io-traffic','datafile-io-traffic',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (317,'tablespace-fragmentation','tablespace-fragmentation',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (318,'connected-users','connected-users',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (319,'sga-dictionary-cache-hit-ratio','sga-dictionary-cache-hit-ratio',NULL,65,NULL,NULL,NULL,202,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (320,'Global_Status','Global_Status',NULL,66,NULL,NULL,NULL,203,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (321,'Utilisation_Processeur','Utilisation_Processeur',NULL,67,NULL,NULL,NULL,69,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (322,'SNMP_CLUSTER_HEALTH','SNMP_CLUSTER_HEALTH',NULL,67,NULL,NULL,NULL,204,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (323,'uptime','uptime',NULL,67,NULL,NULL,NULL,148,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (324,'SNMP_ONEFS_VERSION','SNMP_ONEFS_VERSION',NULL,67,NULL,NULL,NULL,204,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (325,'SNMP_CONFIGURED_NODES','SNMP_CONFIGURED_NODES',NULL,67,NULL,NULL,NULL,204,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (326,'systime','systime',NULL,67,NULL,NULL,NULL,153,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (327,'SNMP_ONLINE_NODES','SNMP_ONLINE_NODES',NULL,67,NULL,NULL,NULL,204,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (328,'ORACLE_DEV_DATA','ORACLE_DEV_DATA',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (361,'controller','controller',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (330,'CPULOAD','CPULOAD',NULL,68,NULL,NULL,NULL,206,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (331,'UPTIME','UPTIME',NULL,68,NULL,NULL,NULL,206,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (332,'CPTIME','CPTIME',NULL,68,NULL,NULL,NULL,206,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (333,'CPBACK','CPBACK',NULL,68,NULL,NULL,NULL,206,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (334,' aggr_sas_status',' aggr_sas_status',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (362,'health','health',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (336,'SHELFINFO','SHELFINFO',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (337,'DISK_STATUS','DISK_STATUS',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (338,'AUTOSUPPORTSTATUS','AUTOSUPPORTSTATUS',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (360,'battery','battery',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (340,'ORACLE_DATA','ORACLE_DATA',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (366,'redundancy','redundancy',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (358,'latency','latency',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (343,'VMWARE_PROD01','VMWARE_PROD01',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (344,'VMWARE_PROD02','VMWARE_PROD02',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (367,'usage','usage',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (346,'vol_VM_Oracle','vol_VM_Oracle',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (347,'datas','datas',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (365,'network','network',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (364,'info','info',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (363,'disk','disk',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (351,'GENNFS_SHARE_TEST','GENNFS_SHARE_TEST',NULL,68,NULL,NULL,NULL,205,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (359,'temperature','temperature',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (357,'io','io',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (356,'fan','fan',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (355,'connection','connection',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (368,'raid','raid',NULL,69,NULL,NULL,NULL,208,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (369,'volumes','volumes',NULL,69,NULL,NULL,NULL,207,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (370,'ps','ps',NULL,69,NULL,NULL,NULL,207,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (371,'uptime','uptime',NULL,69,NULL,NULL,NULL,207,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (372,'global_status','global_status',NULL,70,NULL,NULL,NULL,209,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (373,'node_status','node_status',NULL,71,NULL,NULL,NULL,210,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (374,'physical_disks','physical_disks',NULL,71,NULL,NULL,NULL,210,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (375,'logical_disks','logical_disks',NULL,71,NULL,NULL,NULL,210,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (376,'virtual_volumes','virtual_volumes',NULL,71,NULL,NULL,NULL,210,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (377,'power_supply','power_supply',NULL,71,NULL,NULL,NULL,210,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (378,'fc_ports','fc_ports',NULL,71,NULL,NULL,NULL,210,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (430,'vmware-sca','vmware-sca',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (381,'disks',NULL,NULL,72,NULL,NULL,NULL,214,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (382,'spB',NULL,NULL,72,NULL,NULL,NULL,213,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (383,'spA',NULL,NULL,72,NULL,NULL,NULL,213,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (384,'errors',NULL,NULL,72,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (385,'cache',NULL,NULL,72,NULL,NULL,NULL,213,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (429,'vmware-syslog-health','vmware-syslog-health',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (428,'vsphere-client','vsphere-client',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (389,'VMWARE','VMWARE',NULL,72,NULL,NULL,NULL,212,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (390,'VMWARE_BKP','VMWARE_BKP',NULL,72,NULL,NULL,NULL,212,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (416,'partitions',NULL,NULL,73,NULL,NULL,NULL,217,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$&view=1',NULL,NULL),
+  (415,'Apache_Status','Apache_Status',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (417,'systime',NULL,NULL,73,NULL,NULL,NULL,153,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (418,'uptime',NULL,NULL,73,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (419,'interfaces',NULL,NULL,73,NULL,NULL,NULL,216,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (420,'vmware-cm','vmware-cm',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (421,'vmware-sps','vmware-sps',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (422,'vmware-vdcs','vmware-vdcs',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (423,'vmware-cis-license','vmware-cis-license',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (424,'vmware-stsd','vmware-stsd',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (425,'vmware-psc-client','vmware-psc-client',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (426,'vmware-sts-idmd','vmware-sts-idmd',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (427,'vmware-vpx-workflow','vmware-vpx-workflow',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (407,'IMPAX_RIS_DB','IMPAX_RIS_DB',NULL,72,NULL,NULL,NULL,212,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (431,'vmware-vsm','vmware-vsm',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (432,'vmware-vapi-endpoint','vmware-vapi-endpoint',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (412,'Tier_1','Tier_1',NULL,72,NULL,NULL,NULL,211,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (413,'Tier_2','Tier_2',NULL,72,NULL,NULL,NULL,211,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (414,'Tier_3','Tier_3',NULL,72,NULL,NULL,NULL,211,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (433,'vmware-vsan-health','vmware-vsan-health',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (434,'vmware-perfcharts','vmware-perfcharts',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (435,'vmware-invsvc','vmware-invsvc',NULL,73,NULL,NULL,NULL,215,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (436,'Temperature','Temperature',NULL,74,NULL,NULL,NULL,221,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (437,'Status_FAN2-1','Status_FAN2-1',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (438,'Status_Enclosure2','Status_Enclosure2',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (439,'Status_Enclosure1','Status_Enclosure1',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (440,'uptime',NULL,NULL,74,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (442,'10K_Status_Disk01-01','10K_Status_Disk01-01',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (581,'hardware-health','hardware-health',NULL,81,NULL,NULL,NULL,240,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (444,'10K_Status_Disk01-02','10K_Status_Disk01-02',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (445,'SSD_Status_Disk02-00','SSD_Status_Disk02-00',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (446,'10K_Status_Disk01-10','10K_Status_Disk01-10',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (571,'partitions',NULL,NULL,80,NULL,NULL,NULL,164,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$&view=1',NULL,NULL),
+  (448,'Status_FAN2-4','Status_FAN2-4',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (449,'10K_Status_Disk01-18','10K_Status_Disk01-18',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (450,'10K_Status_Disk01-05','10K_Status_Disk01-05',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (451,'10K_Status_Disk01-11','10K_Status_Disk01-11',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (452,'SSD_Status_Disk02-01','SSD_Status_Disk02-01',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (580,'cpu-load','cpu-load',NULL,81,NULL,NULL,NULL,240,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (582,'interface-errors','interface-errors',NULL,81,NULL,NULL,NULL,240,NULL,60,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (456,'Status_FAN1-1','Status_FAN1-1',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (457,'10K_Status_Disk01-22','10K_Status_Disk01-22',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (458,'10K_Status_Disk01-03','10K_Status_Disk01-03',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (459,'10K_Status_Disk01-06','10K_Status_Disk01-06',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (460,'10K_Status_Disk01-16','10K_Status_Disk01-16',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (461,'10K_Status_Disk01-12','10K_Status_Disk01-12',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (462,'10K_Status_Disk01-20','10K_Status_Disk01-20',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (463,'SSD_Status_Disk02-05','SSD_Status_Disk02-05',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (464,'SSD_Status_Disk02-03','SSD_Status_Disk02-03',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (465,'LUN_PROD_VM1','LUN_PROD_VM1',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (466,'Power_Supply2-2','Power_Supply2-2',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (467,'Power_Supply2-1','Power_Supply2-1',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (468,'Temperature_Panier_Central_Encl1','Temperature_Panier_Central_Encl1',NULL,74,NULL,NULL,NULL,220,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (469,'Temperature_Panier_Central_Encl2','Temperature_Panier_Central_Encl2',NULL,74,NULL,NULL,NULL,220,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (470,'Status_FAN2-3','Status_FAN2-3',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (471,'Status_FAN1-3','Status_FAN1-3',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (472,'10K_Status_Disk01-09','10K_Status_Disk01-09',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (473,'10K_Status_Disk01-04','10K_Status_Disk01-04',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (474,'10K_Status_Disk01-08','10K_Status_Disk01-08',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (475,'10K_Status_Disk01-07','10K_Status_Disk01-07',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (476,'10K_Status_Disk01-15','10K_Status_Disk01-15',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (477,'10K_Status_Disk01-14','10K_Status_Disk01-14',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (478,'10K_Status_Disk01-13','10K_Status_Disk01-13',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (479,'10K_Status_Disk01-17','10K_Status_Disk01-17',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (480,'10K_Status_Disk01-19','10K_Status_Disk01-19',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (481,'10K_Status_Disk01-21','10K_Status_Disk01-21',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (482,'10K_Status_Disk01-23','10K_Status_Disk01-23',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (547,'SAVVOL-DATA1','SAVVOL-DATA1',NULL,77,NULL,NULL,NULL,227,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (484,'SSD_Status_Disk02-02','SSD_Status_Disk02-02',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (485,'SSD_Status_Disk02-04','SSD_Status_Disk02-04',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (486,'SSD_Status_Disk02-06','SSD_Status_Disk02-06',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (578,'interface-usage','interface-usage',NULL,81,NULL,NULL,NULL,240,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (556,'NFS Exports','NFS Exports',NULL,77,NULL,NULL,NULL,224,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (557,'HW-Status','HW Status',NULL,77,NULL,NULL,NULL,224,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (608,'uptime','uptime',NULL,83,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (569,'processor',NULL,NULL,80,NULL,NULL,NULL,69,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (551,'Replication-vdm1','Replication-vdm1',NULL,77,NULL,NULL,NULL,225,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (550,'CheckPoints','CheckPoints',NULL,77,NULL,NULL,NULL,225,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (579,'interface-availability','interface-availability',NULL,81,NULL,NULL,NULL,240,NULL,1440,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (560,'TEMP','Temperature',NULL,79,NULL,NULL,NULL,234,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (561,'POWER','Power consomation',NULL,79,NULL,NULL,NULL,233,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (546,'NTP','NTP',NULL,77,NULL,NULL,NULL,228,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (498,'Power_Supply1-1','Power_Supply1-1',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (499,'Power_Supply1-2','Power_Supply1-2',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (500,'Status_FAN1-2','Status_FAN1-2',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (501,'Status_FAN2-2','Status_FAN2-2',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (502,'Status_FAN1-4','Status_FAN1-4',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (570,'memory',NULL,NULL,80,NULL,NULL,NULL,70,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (552,'Anti-Virus','Anti Virus',NULL,77,NULL,NULL,NULL,224,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (553,'Data-Mover','Data-Mover',NULL,77,NULL,NULL,NULL,224,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (554,'User-mapper','User Mapper',NULL,77,NULL,NULL,NULL,224,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (555,'CIFS-SERVERS','CIFS Servers',NULL,77,NULL,NULL,NULL,224,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (573,'uptime',NULL,NULL,80,NULL,NULL,NULL,148,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (574,'interfaces',NULL,NULL,80,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL),
+  (575,'status','status',NULL,81,NULL,NULL,NULL,240,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (576,'uptime','uptime',NULL,81,NULL,NULL,NULL,240,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (577,'memory-usage','memory-usage',NULL,81,NULL,NULL,NULL,240,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (548,'FS-DATA1','FS-DATA1',NULL,77,NULL,NULL,NULL,227,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (549,'Quota-DATA1','Quota-DATA1',NULL,77,NULL,NULL,NULL,226,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (572,'systime',NULL,NULL,80,NULL,NULL,NULL,153,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (534,'uptime',NULL,NULL,75,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (533,'global_service','global_service',NULL,75,NULL,NULL,NULL,222,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (535,'systime',NULL,NULL,75,NULL,NULL,NULL,153,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (536,'partitions',NULL,NULL,75,NULL,NULL,NULL,101,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (537,'memory',NULL,NULL,75,NULL,NULL,NULL,70,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (538,'processor',NULL,NULL,75,NULL,NULL,NULL,69,6,5,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$',NULL,NULL),
+  (540,'SystemFS','SystemFS',NULL,77,NULL,NULL,NULL,227,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (541,'NRPE-Availlability','NRPE-Availlability',NULL,77,NULL,NULL,NULL,230,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (542,'SSH','SSH',NULL,77,NULL,NULL,NULL,229,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (543,'Load','Load',NULL,77,NULL,NULL,NULL,227,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (544,'Total-Process','Total-Process',NULL,77,NULL,NULL,NULL,227,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (545,'Zombie-Process','Zombie-Process',NULL,77,NULL,NULL,NULL,227,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (530,'Cache_Battery_Status_Encl1','Cache_Battery_Status_Encl1',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (531,'Cache_Battery_Status_Encl2','Cache_Battery_Status_Encl2',NULL,74,NULL,NULL,NULL,219,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (532,'Global_Status','Global_Status',NULL,74,NULL,NULL,NULL,218,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (591,'uptime','uptime',NULL,82,NULL,NULL,NULL,235,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (592,'load','load',NULL,82,NULL,NULL,NULL,237,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (593,'partitions','partitions',NULL,82,NULL,NULL,NULL,239,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (607,'restarts','restarts',NULL,83,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (606,'status','status',NULL,83,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'http://10.112.11.58/index.php/apps/files/?dir=/seafile-BUDCA/Documentation%20Constructeur-Editeur/Docker%20Technical%20Sales%20Professional/02%20-%20Product&fileid=212664',NULL,NULL,NULL),
+  (605,'memory','memory',NULL,83,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (604,'processor','processor',NULL,83,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (612,'memory','memory',NULL,84,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (613,'processor','processor',NULL,84,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (614,'status','status',NULL,85,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (615,'uptime','uptime',NULL,85,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (616,'restarts','restarts',NULL,85,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (617,'memory','memory',NULL,85,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (618,'processor','processor',NULL,85,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (619,'status','status',NULL,86,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (620,'uptime','uptime',NULL,86,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (621,'restarts','restarts',NULL,86,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (622,'memory','memory',NULL,86,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (623,'processor','processor',NULL,86,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (624,'status','status',NULL,87,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (625,'uptime','uptime',NULL,87,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (626,'restarts','restarts',NULL,87,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (627,'memory','memory',NULL,87,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (628,'processor','processor',NULL,87,NULL,NULL,NULL,242,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (638,'port_FC_status','port_FC_status',NULL,89,NULL,NULL,NULL,243,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (656,'vmPowerState','vmPowerState',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (655,'EYESOFNETWORK','EYESOFNETWORK',192,NULL,NULL,NULL,NULL,244,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (654,'NUTANIX','NUTANIX',191,NULL,NULL,NULL,NULL,244,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (639,'hardware_status','hardware_status',NULL,89,NULL,NULL,NULL,223,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (640,'uptime','uptime',NULL,89,NULL,NULL,NULL,147,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (643,'3PAR','3PAR',191,NULL,NULL,NULL,NULL,244,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (651,'ELASTIC_STACK','ELASTIC_STACK',191,NULL,NULL,NULL,NULL,244,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (645,'SOLIDFIRE','SOLIDFIRE',191,NULL,NULL,NULL,NULL,244,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (646,'CLUSTER_ESX','CLUSTER_ESX',191,NULL,NULL,NULL,NULL,244,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (647,'APPLICATION_DOCKER','APPLICATION_DOCKER',192,NULL,NULL,NULL,NULL,244,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (653,'KUBERNETES','KUBERNETES',191,NULL,NULL,NULL,NULL,244,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (652,'OPENSTACK','OPENSTACK',191,NULL,NULL,NULL,NULL,244,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (657,'vmReadIOPerSecond','vmReadIOPerSecond',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (658,'vmCpuUsagePercent','vmCpuUsagePercent',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (659,'vmMemoryUsagePercent','vmMemoryUsagePercent',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (660,'vmRxBytes','vmRxBytes',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (661,'vmRxDropCount','vmRxDropCount',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (662,'vmAverageLatency','vmAverageLatency',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (663,'vmTxBytes','vmTxBytes',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (664,'vmWriteIOPerSecond','vmWriteIOPerSecond',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (665,'vmTxDropCount','vmTxDropCount',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (666,'citIOPerSecond','citIOPerSecond',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (667,'citUsedCapacity','citUsedCapacity',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (668,'citAvgLatencyUsecs','citAvgLatencyUsecs',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (669,'citIOBandwidth','citIOBandwidth',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (670,'dstNumFreeBytes','dstNumFreeBytes',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (671,'clusterLatency','clusterLatency',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (672,'dstAverageLatency','dstAverageLatency',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (673,'dstState','dstState',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (674,'dstNumberIops','dstNumberIops',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (675,'dstIOBandwidth','dstIOBandwidth',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (676,'clusterUsedStorageCapacity','clusterUsedStorageCapacity',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (677,'clusterIops','clusterIops',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (678,'clusterStatus','clusterStatus',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (679,'cstControllerVMStatus','cstControllerVMStatus',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (680,'cstDataServiceStatus','cstDataServiceStatus',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (681,'cstMetadataServiceStatus','cstMetadataServiceStatus',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (682,'hypervisorTxDropCount','hypervisorTxDropCount',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (683,'hypervisorRxBytes','hypervisorRxBytes',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (684,'hypervisorWriteIOPerSecond','hypervisorWriteIOPerSecond',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (685,'hypervisorCpuUsagePercent','hypervisorCpuUsagePercent',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (686,'hypervisorMemoryUsagePercent','hypervisorMemoryUsagePercent',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (687,'hypervisorReadIOPerSecond','hypervisorReadIOPerSecond',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (688,'hypervisorIOBandwidth','hypervisorIOBandwidth',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (689,'hypervisorRxDropCount','hypervisorRxDropCount',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (690,'hypervisorTxBytes','hypervisorTxBytes',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (691,'spitIOPerSecond','spitIOPerSecond',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (692,'spitIOBandwidth','spitIOBandwidth',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (693,'spitAvgLatencyUsecs','spitAvgLatencyUsecs',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (694,'spitUsedCapacity','spitUsedCapacity',NULL,91,NULL,NULL,NULL,245,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `nagios_service` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1729,7 +2215,503 @@ CREATE TABLE `nagios_service_check_command_parameter` (
 
 LOCK TABLES `nagios_service_check_command_parameter` WRITE;
 /*!40000 ALTER TABLE `nagios_service_check_command_parameter` DISABLE KEYS */;
-INSERT INTO `nagios_service_check_command_parameter` VALUES (170,38,NULL,'root'),(291,180,NULL,'90'),(858,590,NULL,'90'),(287,179,NULL,'90'),(388,260,NULL,'3'),(298,185,NULL,'90'),(297,185,NULL,'80'),(300,186,NULL,'95'),(299,186,NULL,'80'),(303,187,NULL,'95'),(26,33,NULL,'ged'),(272,NULL,12,'80'),(304,188,NULL,'300'),(387,260,NULL,'C'),(386,259,NULL,'90'),(385,259,NULL,'95'),(379,255,NULL,'23'),(384,257,NULL,'30'),(373,243,NULL,'model_servicetag'),(374,244,NULL,'global'),(859,590,NULL,'40'),(171,38,NULL,'root66'),(809,NULL,6,'10'),(380,255,NULL,'26'),(391,261,NULL,'3'),(390,261,NULL,'C:'),(389,260,NULL,'15'),(174,111,NULL,'\"Vmware Tools\"'),(175,112,NULL,'vmware-guestd'),(295,182,NULL,'300'),(302,187,NULL,'90'),(286,179,NULL,'80'),(294,181,NULL,'95'),(293,181,NULL,'90'),(292,181,NULL,'/'),(289,180,NULL,'20'),(288,180,NULL,'80'),(301,187,NULL,'^[A-Z]'),(383,257,NULL,'25'),(810,NULL,6,'5'),(382,256,NULL,'225:245'),(381,256,NULL,'230:240'),(296,184,NULL,'-v 2 -g'),(305,190,NULL,'-v 2'),(378,249,NULL,'\"Hyper-V Virtual Machine Management\"'),(377,248,NULL,'\"Hyper-V Networking Management Service\"'),(371,235,NULL,'--lookback 3600'),(375,245,NULL,'os'),(376,247,NULL,'\"Hyper-V Image Management Service\"'),(322,185,NULL,'80'),(323,185,NULL,'90'),(395,263,NULL,'80'),(394,262,NULL,'12'),(326,187,NULL,'^[A-Z]'),(327,187,NULL,'90'),(328,187,NULL,'95'),(329,188,NULL,'300'),(330,190,NULL,'-v 2'),(856,588,NULL,'90'),(855,588,NULL,'80'),(333,180,NULL,'30'),(857,590,NULL,'80'),(337,181,NULL,'/'),(338,181,NULL,'90'),(339,181,NULL,'95'),(340,182,NULL,'300'),(341,184,NULL,'-v 2 -g'),(342,218,NULL,'cpu'),(343,218,NULL,'usage'),(344,218,NULL,' -w 80% -c 90%'),(345,219,NULL,'mem'),(346,219,NULL,'usage'),(347,219,NULL,'-w 80% -c 90%'),(348,220,NULL,'runtime'),(349,220,NULL,'status'),(350,221,NULL,'net'),(351,221,NULL,'nic'),(352,222,NULL,'volumes'),(353,222,NULL,'--gigabyte'),(354,222,NULL,'-w 10%'),(355,222,NULL,'-c 5%'),(356,223,NULL,'io'),(357,223,NULL,'usage'),(358,224,NULL,'service'),(359,33,NULL,'ged'),(360,38,NULL,'root'),(361,38,NULL,'root66'),(393,262,NULL,'6'),(392,261,NULL,'15'),(396,263,NULL,'95'),(397,265,NULL,'10'),(398,265,NULL,'20'),(399,266,NULL,'100'),(400,266,NULL,'1000'),(401,267,NULL,'15'),(402,267,NULL,'5'),(403,268,NULL,'checkuptime'),(404,268,NULL,'95'),(405,268,NULL,'98'),(406,269,NULL,'checkcpu'),(407,269,NULL,'95'),(408,269,NULL,'98'),(409,270,NULL,'\"c:\"'),(410,270,NULL,'80'),(411,270,NULL,'90'),(884,602,NULL,'5'),(883,602,NULL,'checkuptime'),(415,272,NULL,'checkcpuq'),(416,272,NULL,'95'),(417,272,NULL,'98'),(418,273,NULL,'checkmem'),(419,273,NULL,'80'),(420,273,NULL,'90'),(421,274,NULL,'checknetwork'),(422,274,NULL,'\"vmxnet3 Ethernet Adapter\"'),(426,309,NULL,'SID'),(425,285,NULL,'uptime'),(427,309,NULL,'USER'),(428,309,NULL,'PASS'),(429,321,NULL,'80'),(430,321,NULL,'90'),(431,322,NULL,'.1.3.6.1.4.1.12124.1.1.2.0 -e 1 -t 10 -c 0'),(432,323,NULL,'10'),(433,323,NULL,'5'),(434,324,NULL,'.1.3.6.1.2.1.1.1.0'),(435,325,NULL,'.1.3.6.1.4.1.12124.1.1.5.0'),(436,326,NULL,'300'),(437,327,NULL,'.1.3.6.1.4.1.12124.1.1.6.0'),(438,328,NULL,'DISKUSED'),(439,328,NULL,'/vol/ORACLE_DEV_DATA'),(440,328,NULL,'80'),(441,328,NULL,'90'),(544,368,NULL,'San-Prod'),(543,367,NULL,'San-Prod'),(542,366,NULL,'San-Prod'),(446,334,NULL,'DISKUSED'),(447,334,NULL,'aggr_sas'),(448,334,NULL,'85'),(449,334,NULL,'90'),(547,374,NULL,'check_pd'),(546,373,NULL,'check_node'),(545,372,NULL,'443'),(454,336,NULL,'SHELFINFO'),(455,336,NULL,'0'),(456,336,NULL,'0'),(457,337,NULL,'DISKSUMMARY'),(458,337,NULL,'0'),(459,337,NULL,'0'),(460,338,NULL,'AUTOSUPPORTSTATUS'),(461,338,NULL,'0'),(462,338,NULL,'0'),(541,365,NULL,'San-Prod'),(540,364,NULL,'San-Prod'),(539,363,NULL,'San-Prod'),(467,340,NULL,'DISKUSED'),(468,340,NULL,'/vol/ORACLE_DATA'),(469,340,NULL,'80'),(470,340,NULL,'90'),(560,383,NULL,'sp --sp A'),(559,382,NULL,'sp --sp B'),(558,381,NULL,'disk'),(535,359,NULL,'50'),(534,359,NULL,'45'),(533,359,NULL,'San-Prod'),(479,343,NULL,'DISKUSED'),(480,343,NULL,'/vol/VMWARE_PROD01'),(481,343,NULL,'80'),(482,343,NULL,'90'),(483,344,NULL,'DISKUSED'),(484,344,NULL,'/vol/VMWARE_PROD02'),(485,344,NULL,'80'),(486,344,NULL,'90'),(661,430,NULL,'vmware-sca'),(562,385,NULL,'cache'),(561,384,NULL,'faults'),(491,346,NULL,'DISKUSED'),(492,346,NULL,'/vol/vol_VM_Oracle'),(493,346,NULL,'80'),(494,346,NULL,'90'),(495,347,NULL,'DISKUSED'),(496,347,NULL,'/vol/datas'),(497,347,NULL,'80'),(498,347,NULL,'90'),(665,434,NULL,'vmware-perfcharts'),(664,433,NULL,'vmware-vsan-health'),(663,432,NULL,'vmware-vapi-endpoint'),(662,431,NULL,'vmware-vsm'),(551,378,NULL,'check_port_fc'),(550,377,NULL,'check_ps'),(549,376,NULL,'check_vv'),(548,375,NULL,'check_ld'),(511,351,NULL,'DISKUSED'),(512,351,NULL,'/vol/GENNFS_SHARE_PROD'),(513,351,NULL,'80'),(514,351,NULL,'90'),(538,362,NULL,'San-Prod'),(537,361,NULL,'San-Prod'),(536,360,NULL,'San-Prod'),(532,358,NULL,'San-Prod'),(531,357,NULL,'San-Prod'),(530,356,NULL,'San-Prod'),(529,355,NULL,'250'),(528,355,NULL,'200'),(527,355,NULL,'San-Prod'),(660,429,NULL,'vmware-syslog-health'),(659,428,NULL,'vsphere-client'),(572,389,NULL,'61'),(573,389,NULL,'10'),(574,389,NULL,'5'),(575,390,NULL,'62'),(576,390,NULL,'10'),(577,390,NULL,'5'),(648,416,NULL,'90'),(647,416,NULL,'/'),(646,415,NULL,'httpd2'),(666,435,NULL,'vmware-invsvc'),(669,436,NULL,'.1.3.6.1.4.1.16139.2.19.1.5.1.1'),(670,437,NULL,'.1.3.6.1.4.1.16139.2.20.1.3.2.1'),(651,420,NULL,'vmware-cm'),(650,417,NULL,'300'),(649,416,NULL,'95'),(652,421,NULL,'vmware-sps'),(653,422,NULL,'vmware-vdcs'),(654,423,NULL,'vmware-cis-license'),(655,424,NULL,'vmware-vdcs'),(656,425,NULL,'vmware-psc-client'),(657,426,NULL,'vmware-sts-idmd'),(658,427,NULL,'vmware-vpx-workflow'),(671,438,NULL,'.1.3.6.1.4.1.16139.2.15.1.3.2'),(672,439,NULL,'.1.3.6.1.4.1.16139.2.15.1.3.1'),(626,407,NULL,'73'),(627,407,NULL,'10'),(628,407,NULL,'5'),(891,608,NULL,'check_docker_nextcloud_webserver_uptime'),(674,442,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.18'),(641,412,NULL,'0'),(642,413,NULL,'1'),(643,414,NULL,'2'),(820,561,NULL,'3.50'),(676,444,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.31'),(677,445,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.3'),(678,446,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.22'),(815,560,NULL,'30'),(680,448,NULL,'.1.3.6.1.4.1.16139.2.20.1.3.2.4'),(681,449,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.14'),(682,450,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.26'),(683,451,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.19'),(684,452,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.24'),(818,561,NULL,'MGEUPS'),(819,561,NULL,'2.50'),(816,560,NULL,'35'),(688,456,NULL,'.1.3.6.1.4.1.16139.2.20.1.3.1.1'),(689,457,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.9'),(690,458,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.17'),(691,459,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.29'),(692,460,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.8'),(693,461,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.15'),(694,462,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.25'),(695,463,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.2'),(696,464,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.5'),(697,465,NULL,'.1.3.6.1.4.1.16139.2.26.1.3.1'),(698,466,NULL,'.1.3.6.1.4.1.16139.2.21.1.3.2.2'),(699,467,NULL,'.1.3.6.1.4.1.16139.2.21.1.3.2.1'),(700,468,NULL,'.1.3.6.1.4.1.16139.2.23.1.5.1.2'),(701,469,NULL,'.1.3.6.1.4.1.16139.2.23.1.5.2.3'),(702,470,NULL,'.1.3.6.1.4.1.16139.2.20.1.3.2.3'),(703,471,NULL,'.1.3.6.1.4.1.16139.2.20.1.3.1.3'),(704,472,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.28'),(705,473,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.27'),(706,474,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.21'),(707,475,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.23'),(708,476,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.10'),(709,477,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.30'),(710,478,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.16'),(711,479,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.13'),(712,480,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.12'),(713,481,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.20'),(714,482,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.11'),(785,544,NULL,'400'),(716,484,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.4'),(717,485,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.6'),(718,486,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.7'),(817,561,NULL,'MGEUPS'),(803,552,NULL,'check_antivirus'),(804,553,NULL,'check_datamover'),(805,554,NULL,'check_usermapper'),(806,555,NULL,'check_cifs'),(807,556,NULL,'check_nfs'),(789,547,NULL,'check_savvol'),(790,547,NULL,'data1'),(791,547,NULL,'80'),(792,548,NULL,'check_fs'),(793,548,NULL,'data1'),(784,544,NULL,'300'),(730,498,NULL,'.1.3.6.1.4.1.16139.2.21.1.3.1.1'),(731,499,NULL,'.1.3.6.1.4.1.16139.2.21.1.3.1.2'),(732,500,NULL,'.1.3.6.1.4.1.16139.2.20.1.3.1.2'),(733,501,NULL,'.1.3.6.1.4.1.16139.2.20.1.3.2.2'),(734,502,NULL,'.1.3.6.1.4.1.16139.2.20.1.3.1.4'),(814,560,NULL,'MGEUPS'),(813,560,NULL,'MGEUPS'),(808,557,NULL,'check_hardware'),(794,548,NULL,'90'),(795,549,NULL,'check_quota'),(796,549,NULL,'data1'),(797,549,NULL,'group'),(798,549,NULL,'1024'),(799,550,NULL,'check_checkpoints'),(800,550,NULL,'home'),(801,551,NULL,'check_replication'),(802,551,NULL,'vdm1'),(786,545,NULL,'check_zombie_procs'),(787,545,NULL,'1'),(788,545,NULL,'1'),(767,535,NULL,'300'),(768,536,NULL,'/'),(769,536,NULL,'90'),(770,536,NULL,'95'),(771,537,NULL,'90'),(772,537,NULL,'20'),(773,537,NULL,'95'),(774,537,NULL,'30'),(775,538,NULL,'85'),(776,538,NULL,'95'),(777,540,NULL,'check_disk'),(778,540,NULL,'10%'),(779,540,NULL,'5%'),(780,543,NULL,'check_load'),(781,543,NULL,'8,8,8'),(782,543,NULL,'10,10,10'),(783,544,NULL,'check_total_procs'),(762,530,NULL,'.1.3.6.1.4.1.16139.2.28.1.5.1'),(763,531,NULL,'.1.3.6.1.4.1.16139.2.28.1.5.2'),(764,532,NULL,'.1.3.6.1.4.1.16139.2.6.0'),(890,607,NULL,'check_docker_nextcloud_webserver_restarts'),(889,606,NULL,'check_docker_nextcloud_webserver_status'),(831,569,NULL,'80'),(832,569,NULL,'90'),(833,569,NULL,'80'),(834,569,NULL,'90'),(835,570,NULL,'95'),(836,570,NULL,'40'),(837,570,NULL,'98'),(838,570,NULL,'50'),(854,582,NULL,'--lookback 3600'),(853,575,NULL,'cisco'),(843,571,NULL,'/'),(844,571,NULL,'90'),(845,571,NULL,'95'),(846,571,NULL,'/'),(847,571,NULL,'90'),(848,571,NULL,'95'),(849,572,NULL,'300'),(850,572,NULL,'300'),(851,574,NULL,'-v 2 -g'),(852,574,NULL,'-v 2 -g'),(860,590,NULL,'50'),(861,591,NULL,'5'),(862,591,NULL,'10'),(863,592,NULL,'10'),(864,592,NULL,'5'),(865,593,NULL,'80'),(866,593,NULL,'90'),(888,605,NULL,'check_docker_nextcloud_webserver_memory'),(887,604,NULL,'check_docker_nextcloud_webserver_cpu'),(940,659,NULL,'80'),(941,659,NULL,'90'),(942,660,NULL,'VirtualMachines'),(885,602,NULL,'10'),(892,609,NULL,'check_docker_reverent_chandrasekhar_uptime'),(893,610,NULL,'check_docker_reverent_chandrasekhar_restarts'),(894,611,NULL,'check_docker_reverent_chandrasekhar_status'),(895,612,NULL,'check_docker_reverent_chandrasekhar_memory'),(896,613,NULL,'check_docker_reverent_chandrasekhar_cpu'),(897,614,NULL,'check_docker_letsencrypt-companion_status'),(898,615,NULL,'check_docker_letsencrypt-companion_uptime'),(899,616,NULL,'check_docker_letsencrypt-companion_restarts'),(900,617,NULL,'check_docker_letsencrypt-companion_memory'),(901,618,NULL,'check_docker_letsencrypt-companion_cpu'),(902,619,NULL,'check_docker_proxy_status'),(903,620,NULL,'check_docker_proxy_uptime'),(904,621,NULL,'check_docker_proxy_restarts'),(905,622,NULL,'check_docker_proxy_memory'),(906,623,NULL,'check_docker_proxy_cpu'),(907,624,NULL,'check_docker_db_status'),(908,625,NULL,'check_docker_db_uptime'),(909,626,NULL,'check_docker_db_restarts'),(910,627,NULL,'check_docker_db_memory'),(911,628,NULL,'check_docker_db_cpu'),(928,640,NULL,'10'),(929,640,NULL,'5'),(937,658,NULL,'80'),(938,658,NULL,'90'),(939,659,NULL,'VirtualMachines'),(935,657,NULL,'2000000'),(934,657,NULL,'1000000'),(933,657,NULL,'VirtualMachines'),(932,656,NULL,'2'),(931,656,NULL,'1'),(936,658,NULL,'VirtualMachines'),(930,656,NULL,'VirtualMachines'),(943,660,NULL,'100000000000'),(944,660,NULL,'200000000000'),(945,661,NULL,'VirtualMachines'),(946,661,NULL,'1000'),(947,661,NULL,'2000'),(948,662,NULL,'VirtualMachines'),(949,662,NULL,'1000000'),(950,662,NULL,'2000000'),(951,663,NULL,'VirtualMachines'),(952,663,NULL,'100000000000'),(953,663,NULL,'200000000000'),(954,664,NULL,'VirtualMachines'),(955,664,NULL,'1000000'),(956,664,NULL,'2000000'),(957,665,NULL,'VirtualMachines'),(958,665,NULL,'1000'),(959,665,NULL,'2000'),(960,666,NULL,'Containers'),(961,666,NULL,'100000000'),(962,666,NULL,'200000000'),(963,667,NULL,'Containers'),(964,667,NULL,'80'),(965,667,NULL,'90'),(966,668,NULL,'Containers'),(967,668,NULL,'100000000'),(968,668,NULL,'200000000'),(969,669,NULL,'Containers'),(970,669,NULL,'100000000'),(971,669,NULL,'200000000'),(972,670,NULL,'Disks'),(973,670,NULL,'10'),(974,670,NULL,'5'),(975,671,NULL,'Cluster'),(976,671,NULL,'100000000000'),(977,671,NULL,'200000000000'),(978,672,NULL,'Disks'),(979,672,NULL,'100000000000'),(980,672,NULL,'200000000000'),(981,673,NULL,'Disks'),(982,673,NULL,'1'),(983,673,NULL,'2'),(984,674,NULL,'Disks'),(985,674,NULL,'100000000000'),(986,674,NULL,'200000000000'),(987,675,NULL,'Disks'),(988,675,NULL,'100000000000'),(989,675,NULL,'200000000000'),(990,676,NULL,'Cluster'),(991,676,NULL,'80'),(992,676,NULL,'90'),(993,677,NULL,'Cluster'),(994,677,NULL,'100000000000'),(995,677,NULL,'200000000000'),(996,678,NULL,'Cluster'),(1000,680,NULL,'Controllers'),(999,679,NULL,'Controllers'),(1001,681,NULL,'Controllers'),(1002,682,NULL,'Hypervisors'),(1003,682,NULL,'100000000000'),(1004,682,NULL,'200000000000'),(1005,683,NULL,'Hypervisors'),(1006,683,NULL,'100000000000'),(1007,683,NULL,'200000000000'),(1008,684,NULL,'Hypervisors'),(1009,684,NULL,'100000000000'),(1010,684,NULL,'200000000000'),(1011,685,NULL,'Hypervisors'),(1012,685,NULL,'80'),(1013,685,NULL,'90'),(1014,686,NULL,'Hypervisors'),(1015,686,NULL,'80'),(1016,686,NULL,'90'),(1017,687,NULL,'Hypervisors'),(1018,687,NULL,'100000000000'),(1019,687,NULL,'200000000000'),(1020,688,NULL,'Hypervisors'),(1021,688,NULL,'100000000000'),(1022,688,NULL,'200000000000'),(1023,689,NULL,'Hypervisors'),(1024,689,NULL,'100000000000'),(1025,689,NULL,'200000000000'),(1026,690,NULL,'Hypervisors'),(1027,690,NULL,'100000000000'),(1028,690,NULL,'200000000000'),(1029,691,NULL,'Pools'),(1030,691,NULL,'100000000000'),(1031,691,NULL,'200000000000'),(1032,692,NULL,'Pools'),(1033,692,NULL,'100000000000'),(1034,692,NULL,'200000000000'),(1035,693,NULL,'Pools'),(1036,693,NULL,'100000000000'),(1037,693,NULL,'200000000000'),(1038,694,NULL,'Pools'),(1039,694,NULL,'80'),(1040,694,NULL,'90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (170,38,NULL,'root'),
+  (291,180,NULL,'90'),
+  (858,590,NULL,'90'),
+  (287,179,NULL,'90'),
+  (388,260,NULL,'3'),
+  (298,185,NULL,'90'),
+  (297,185,NULL,'80'),
+  (300,186,NULL,'95'),
+  (299,186,NULL,'80'),
+  (303,187,NULL,'95'),
+  (26,33,NULL,'ged'),
+  (272,NULL,12,'80'),
+  (304,188,NULL,'300'),
+  (387,260,NULL,'C'),
+  (386,259,NULL,'90'),
+  (385,259,NULL,'95'),
+  (379,255,NULL,'23'),
+  (384,257,NULL,'30'),
+  (373,243,NULL,'model_servicetag'),
+  (374,244,NULL,'global'),
+  (859,590,NULL,'40'),
+  (171,38,NULL,'root66'),
+  (809,NULL,6,'10'),
+  (380,255,NULL,'26'),
+  (391,261,NULL,'3'),
+  (390,261,NULL,'C:'),
+  (389,260,NULL,'15'),
+  (174,111,NULL,'\"Vmware Tools\"'),
+  (175,112,NULL,'vmware-guestd'),
+  (295,182,NULL,'300'),
+  (302,187,NULL,'90'),
+  (286,179,NULL,'80'),
+  (294,181,NULL,'95'),
+  (293,181,NULL,'90'),
+  (292,181,NULL,'/'),
+  (289,180,NULL,'20'),
+  (288,180,NULL,'80'),
+  (301,187,NULL,'^[A-Z]'),
+  (383,257,NULL,'25'),
+  (810,NULL,6,'5'),
+  (382,256,NULL,'225:245'),
+  (381,256,NULL,'230:240'),
+  (296,184,NULL,'-v 2 -g'),
+  (305,190,NULL,'-v 2'),
+  (378,249,NULL,'\"Hyper-V Virtual Machine Management\"'),
+  (377,248,NULL,'\"Hyper-V Networking Management Service\"'),
+  (371,235,NULL,'--lookback 3600'),
+  (375,245,NULL,'os'),
+  (376,247,NULL,'\"Hyper-V Image Management Service\"'),
+  (322,185,NULL,'80'),
+  (323,185,NULL,'90'),
+  (395,263,NULL,'80'),
+  (394,262,NULL,'12'),
+  (326,187,NULL,'^[A-Z]'),
+  (327,187,NULL,'90'),
+  (328,187,NULL,'95'),
+  (329,188,NULL,'300'),
+  (330,190,NULL,'-v 2'),
+  (856,588,NULL,'90'),
+  (855,588,NULL,'80'),
+  (333,180,NULL,'30'),
+  (857,590,NULL,'80'),
+  (337,181,NULL,'/'),
+  (338,181,NULL,'90'),
+  (339,181,NULL,'95'),
+  (340,182,NULL,'300'),
+  (341,184,NULL,'-v 2 -g'),
+  (342,218,NULL,'cpu'),
+  (343,218,NULL,'usage'),
+  (344,218,NULL,' -w 80% -c 90%'),
+  (345,219,NULL,'mem'),
+  (346,219,NULL,'usage'),
+  (347,219,NULL,'-w 80% -c 90%'),
+  (348,220,NULL,'runtime'),
+  (349,220,NULL,'status'),
+  (350,221,NULL,'net'),
+  (351,221,NULL,'nic'),
+  (352,222,NULL,'volumes'),
+  (353,222,NULL,'--gigabyte'),
+  (354,222,NULL,'-w 10%'),
+  (355,222,NULL,'-c 5%'),
+  (356,223,NULL,'io'),
+  (357,223,NULL,'usage'),
+  (358,224,NULL,'service'),
+  (359,33,NULL,'ged'),
+  (360,38,NULL,'root'),
+  (361,38,NULL,'root66'),
+  (393,262,NULL,'6'),
+  (392,261,NULL,'15'),
+  (396,263,NULL,'95'),
+  (397,265,NULL,'10'),
+  (398,265,NULL,'20'),
+  (399,266,NULL,'100'),
+  (400,266,NULL,'1000'),
+  (401,267,NULL,'15'),
+  (402,267,NULL,'5'),
+  (403,268,NULL,'checkuptime'),
+  (404,268,NULL,'95'),
+  (405,268,NULL,'98'),
+  (406,269,NULL,'checkcpu'),
+  (407,269,NULL,'95'),
+  (408,269,NULL,'98'),
+  (409,270,NULL,'\"c:\"'),
+  (410,270,NULL,'80'),
+  (411,270,NULL,'90'),
+  (884,602,NULL,'5'),
+  (883,602,NULL,'checkuptime'),
+  (415,272,NULL,'checkcpuq'),
+  (416,272,NULL,'95'),
+  (417,272,NULL,'98'),
+  (418,273,NULL,'checkmem'),
+  (419,273,NULL,'80'),
+  (420,273,NULL,'90'),
+  (421,274,NULL,'checknetwork'),
+  (422,274,NULL,'\"vmxnet3 Ethernet Adapter\"'),
+  (426,309,NULL,'SID'),
+  (425,285,NULL,'uptime'),
+  (427,309,NULL,'USER'),
+  (428,309,NULL,'PASS'),
+  (429,321,NULL,'80'),
+  (430,321,NULL,'90'),
+  (431,322,NULL,'.1.3.6.1.4.1.12124.1.1.2.0 -e 1 -t 10 -c 0'),
+  (432,323,NULL,'10'),
+  (433,323,NULL,'5'),
+  (434,324,NULL,'.1.3.6.1.2.1.1.1.0'),
+  (435,325,NULL,'.1.3.6.1.4.1.12124.1.1.5.0'),
+  (436,326,NULL,'300'),
+  (437,327,NULL,'.1.3.6.1.4.1.12124.1.1.6.0'),
+  (438,328,NULL,'DISKUSED'),
+  (439,328,NULL,'/vol/ORACLE_DEV_DATA'),
+  (440,328,NULL,'80'),
+  (441,328,NULL,'90'),
+  (544,368,NULL,'San-Prod'),
+  (543,367,NULL,'San-Prod'),
+  (542,366,NULL,'San-Prod'),
+  (446,334,NULL,'DISKUSED'),
+  (447,334,NULL,'aggr_sas'),
+  (448,334,NULL,'85'),
+  (449,334,NULL,'90'),
+  (547,374,NULL,'check_pd'),
+  (546,373,NULL,'check_node'),
+  (545,372,NULL,'443'),
+  (454,336,NULL,'SHELFINFO'),
+  (455,336,NULL,'0'),
+  (456,336,NULL,'0'),
+  (457,337,NULL,'DISKSUMMARY'),
+  (458,337,NULL,'0'),
+  (459,337,NULL,'0'),
+  (460,338,NULL,'AUTOSUPPORTSTATUS'),
+  (461,338,NULL,'0'),
+  (462,338,NULL,'0'),
+  (541,365,NULL,'San-Prod'),
+  (540,364,NULL,'San-Prod'),
+  (539,363,NULL,'San-Prod'),
+  (467,340,NULL,'DISKUSED'),
+  (468,340,NULL,'/vol/ORACLE_DATA'),
+  (469,340,NULL,'80'),
+  (470,340,NULL,'90'),
+  (560,383,NULL,'sp --sp A'),
+  (559,382,NULL,'sp --sp B'),
+  (558,381,NULL,'disk'),
+  (535,359,NULL,'50'),
+  (534,359,NULL,'45'),
+  (533,359,NULL,'San-Prod'),
+  (479,343,NULL,'DISKUSED'),
+  (480,343,NULL,'/vol/VMWARE_PROD01'),
+  (481,343,NULL,'80'),
+  (482,343,NULL,'90'),
+  (483,344,NULL,'DISKUSED'),
+  (484,344,NULL,'/vol/VMWARE_PROD02'),
+  (485,344,NULL,'80'),
+  (486,344,NULL,'90'),
+  (661,430,NULL,'vmware-sca'),
+  (562,385,NULL,'cache'),
+  (561,384,NULL,'faults'),
+  (491,346,NULL,'DISKUSED'),
+  (492,346,NULL,'/vol/vol_VM_Oracle'),
+  (493,346,NULL,'80'),
+  (494,346,NULL,'90'),
+  (495,347,NULL,'DISKUSED'),
+  (496,347,NULL,'/vol/datas'),
+  (497,347,NULL,'80'),
+  (498,347,NULL,'90'),
+  (665,434,NULL,'vmware-perfcharts'),
+  (664,433,NULL,'vmware-vsan-health'),
+  (663,432,NULL,'vmware-vapi-endpoint'),
+  (662,431,NULL,'vmware-vsm'),
+  (551,378,NULL,'check_port_fc'),
+  (550,377,NULL,'check_ps'),
+  (549,376,NULL,'check_vv'),
+  (548,375,NULL,'check_ld'),
+  (511,351,NULL,'DISKUSED'),
+  (512,351,NULL,'/vol/GENNFS_SHARE_PROD'),
+  (513,351,NULL,'80'),
+  (514,351,NULL,'90'),
+  (538,362,NULL,'San-Prod'),
+  (537,361,NULL,'San-Prod'),
+  (536,360,NULL,'San-Prod'),
+  (532,358,NULL,'San-Prod'),
+  (531,357,NULL,'San-Prod'),
+  (530,356,NULL,'San-Prod'),
+  (529,355,NULL,'250'),
+  (528,355,NULL,'200'),
+  (527,355,NULL,'San-Prod'),
+  (660,429,NULL,'vmware-syslog-health'),
+  (659,428,NULL,'vsphere-client'),
+  (572,389,NULL,'61'),
+  (573,389,NULL,'10'),
+  (574,389,NULL,'5'),
+  (575,390,NULL,'62'),
+  (576,390,NULL,'10'),
+  (577,390,NULL,'5'),
+  (648,416,NULL,'90'),
+  (647,416,NULL,'/'),
+  (646,415,NULL,'httpd2'),
+  (666,435,NULL,'vmware-invsvc'),
+  (669,436,NULL,'.1.3.6.1.4.1.16139.2.19.1.5.1.1'),
+  (670,437,NULL,'.1.3.6.1.4.1.16139.2.20.1.3.2.1'),
+  (651,420,NULL,'vmware-cm'),
+  (650,417,NULL,'300'),
+  (649,416,NULL,'95'),
+  (652,421,NULL,'vmware-sps'),
+  (653,422,NULL,'vmware-vdcs'),
+  (654,423,NULL,'vmware-cis-license'),
+  (655,424,NULL,'vmware-vdcs'),
+  (656,425,NULL,'vmware-psc-client'),
+  (657,426,NULL,'vmware-sts-idmd'),
+  (658,427,NULL,'vmware-vpx-workflow'),
+  (671,438,NULL,'.1.3.6.1.4.1.16139.2.15.1.3.2'),
+  (672,439,NULL,'.1.3.6.1.4.1.16139.2.15.1.3.1'),
+  (626,407,NULL,'73'),
+  (627,407,NULL,'10'),
+  (628,407,NULL,'5'),
+  (891,608,NULL,'check_docker_nextcloud_webserver_uptime'),
+  (674,442,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.18'),
+  (641,412,NULL,'0'),
+  (642,413,NULL,'1'),
+  (643,414,NULL,'2'),
+  (820,561,NULL,'3.50'),
+  (676,444,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.31'),
+  (677,445,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.3'),
+  (678,446,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.22'),
+  (815,560,NULL,'30'),
+  (680,448,NULL,'.1.3.6.1.4.1.16139.2.20.1.3.2.4'),
+  (681,449,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.14'),
+  (682,450,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.26'),
+  (683,451,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.19'),
+  (684,452,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.24'),
+  (818,561,NULL,'MGEUPS'),
+  (819,561,NULL,'2.50'),
+  (816,560,NULL,'35'),
+  (688,456,NULL,'.1.3.6.1.4.1.16139.2.20.1.3.1.1'),
+  (689,457,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.9'),
+  (690,458,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.17'),
+  (691,459,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.29'),
+  (692,460,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.8'),
+  (693,461,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.15'),
+  (694,462,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.25'),
+  (695,463,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.2'),
+  (696,464,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.5'),
+  (697,465,NULL,'.1.3.6.1.4.1.16139.2.26.1.3.1'),
+  (698,466,NULL,'.1.3.6.1.4.1.16139.2.21.1.3.2.2'),
+  (699,467,NULL,'.1.3.6.1.4.1.16139.2.21.1.3.2.1'),
+  (700,468,NULL,'.1.3.6.1.4.1.16139.2.23.1.5.1.2'),
+  (701,469,NULL,'.1.3.6.1.4.1.16139.2.23.1.5.2.3'),
+  (702,470,NULL,'.1.3.6.1.4.1.16139.2.20.1.3.2.3'),
+  (703,471,NULL,'.1.3.6.1.4.1.16139.2.20.1.3.1.3'),
+  (704,472,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.28'),
+  (705,473,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.27'),
+  (706,474,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.21'),
+  (707,475,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.23'),
+  (708,476,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.10'),
+  (709,477,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.30'),
+  (710,478,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.16'),
+  (711,479,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.13'),
+  (712,480,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.12'),
+  (713,481,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.20'),
+  (714,482,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.11'),
+  (785,544,NULL,'400'),
+  (716,484,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.4'),
+  (717,485,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.6'),
+  (718,486,NULL,'.1.3.6.1.4.1.16139.2.14.1.3.7'),
+  (817,561,NULL,'MGEUPS'),
+  (803,552,NULL,'check_antivirus'),
+  (804,553,NULL,'check_datamover'),
+  (805,554,NULL,'check_usermapper'),
+  (806,555,NULL,'check_cifs'),
+  (807,556,NULL,'check_nfs'),
+  (789,547,NULL,'check_savvol'),
+  (790,547,NULL,'data1'),
+  (791,547,NULL,'80'),
+  (792,548,NULL,'check_fs'),
+  (793,548,NULL,'data1'),
+  (784,544,NULL,'300'),
+  (730,498,NULL,'.1.3.6.1.4.1.16139.2.21.1.3.1.1'),
+  (731,499,NULL,'.1.3.6.1.4.1.16139.2.21.1.3.1.2'),
+  (732,500,NULL,'.1.3.6.1.4.1.16139.2.20.1.3.1.2'),
+  (733,501,NULL,'.1.3.6.1.4.1.16139.2.20.1.3.2.2'),
+  (734,502,NULL,'.1.3.6.1.4.1.16139.2.20.1.3.1.4'),
+  (814,560,NULL,'MGEUPS'),
+  (813,560,NULL,'MGEUPS'),
+  (808,557,NULL,'check_hardware'),
+  (794,548,NULL,'90'),
+  (795,549,NULL,'check_quota'),
+  (796,549,NULL,'data1'),
+  (797,549,NULL,'group'),
+  (798,549,NULL,'1024'),
+  (799,550,NULL,'check_checkpoints'),
+  (800,550,NULL,'home'),
+  (801,551,NULL,'check_replication'),
+  (802,551,NULL,'vdm1'),
+  (786,545,NULL,'check_zombie_procs'),
+  (787,545,NULL,'1'),
+  (788,545,NULL,'1'),
+  (767,535,NULL,'300'),
+  (768,536,NULL,'/'),
+  (769,536,NULL,'90'),
+  (770,536,NULL,'95'),
+  (771,537,NULL,'90'),
+  (772,537,NULL,'20'),
+  (773,537,NULL,'95'),
+  (774,537,NULL,'30'),
+  (775,538,NULL,'85'),
+  (776,538,NULL,'95'),
+  (777,540,NULL,'check_disk'),
+  (778,540,NULL,'10%'),
+  (779,540,NULL,'5%'),
+  (780,543,NULL,'check_load'),
+  (781,543,NULL,'8,8,8'),
+  (782,543,NULL,'10,10,10'),
+  (783,544,NULL,'check_total_procs'),
+  (762,530,NULL,'.1.3.6.1.4.1.16139.2.28.1.5.1'),
+  (763,531,NULL,'.1.3.6.1.4.1.16139.2.28.1.5.2'),
+  (764,532,NULL,'.1.3.6.1.4.1.16139.2.6.0'),
+  (890,607,NULL,'check_docker_nextcloud_webserver_restarts'),
+  (889,606,NULL,'check_docker_nextcloud_webserver_status'),
+  (831,569,NULL,'80'),
+  (832,569,NULL,'90'),
+  (833,569,NULL,'80'),
+  (834,569,NULL,'90'),
+  (835,570,NULL,'95'),
+  (836,570,NULL,'40'),
+  (837,570,NULL,'98'),
+  (838,570,NULL,'50'),
+  (854,582,NULL,'--lookback 3600'),
+  (853,575,NULL,'cisco'),
+  (843,571,NULL,'/'),
+  (844,571,NULL,'90'),
+  (845,571,NULL,'95'),
+  (846,571,NULL,'/'),
+  (847,571,NULL,'90'),
+  (848,571,NULL,'95'),
+  (849,572,NULL,'300'),
+  (850,572,NULL,'300'),
+  (851,574,NULL,'-v 2 -g'),
+  (852,574,NULL,'-v 2 -g'),
+  (860,590,NULL,'50'),
+  (861,591,NULL,'5'),
+  (862,591,NULL,'10'),
+  (863,592,NULL,'10'),
+  (864,592,NULL,'5'),
+  (865,593,NULL,'80'),
+  (866,593,NULL,'90'),
+  (888,605,NULL,'check_docker_nextcloud_webserver_memory'),
+  (887,604,NULL,'check_docker_nextcloud_webserver_cpu'),
+  (940,659,NULL,'80'),
+  (941,659,NULL,'90'),
+  (942,660,NULL,'VirtualMachines'),
+  (885,602,NULL,'10'),
+  (892,609,NULL,'check_docker_reverent_chandrasekhar_uptime'),
+  (893,610,NULL,'check_docker_reverent_chandrasekhar_restarts'),
+  (894,611,NULL,'check_docker_reverent_chandrasekhar_status'),
+  (895,612,NULL,'check_docker_reverent_chandrasekhar_memory'),
+  (896,613,NULL,'check_docker_reverent_chandrasekhar_cpu'),
+  (897,614,NULL,'check_docker_letsencrypt-companion_status'),
+  (898,615,NULL,'check_docker_letsencrypt-companion_uptime'),
+  (899,616,NULL,'check_docker_letsencrypt-companion_restarts'),
+  (900,617,NULL,'check_docker_letsencrypt-companion_memory'),
+  (901,618,NULL,'check_docker_letsencrypt-companion_cpu'),
+  (902,619,NULL,'check_docker_proxy_status'),
+  (903,620,NULL,'check_docker_proxy_uptime'),
+  (904,621,NULL,'check_docker_proxy_restarts'),
+  (905,622,NULL,'check_docker_proxy_memory'),
+  (906,623,NULL,'check_docker_proxy_cpu'),
+  (907,624,NULL,'check_docker_db_status'),
+  (908,625,NULL,'check_docker_db_uptime'),
+  (909,626,NULL,'check_docker_db_restarts'),
+  (910,627,NULL,'check_docker_db_memory'),
+  (911,628,NULL,'check_docker_db_cpu'),
+  (928,640,NULL,'10'),
+  (929,640,NULL,'5'),
+  (937,658,NULL,'80'),
+  (938,658,NULL,'90'),
+  (939,659,NULL,'VirtualMachines'),
+  (935,657,NULL,'2000000'),
+  (934,657,NULL,'1000000'),
+  (933,657,NULL,'VirtualMachines'),
+  (932,656,NULL,'2'),
+  (931,656,NULL,'1'),
+  (936,658,NULL,'VirtualMachines'),
+  (930,656,NULL,'VirtualMachines'),
+  (943,660,NULL,'100000000000'),
+  (944,660,NULL,'200000000000'),
+  (945,661,NULL,'VirtualMachines'),
+  (946,661,NULL,'1000'),
+  (947,661,NULL,'2000'),
+  (948,662,NULL,'VirtualMachines'),
+  (949,662,NULL,'1000000'),
+  (950,662,NULL,'2000000'),
+  (951,663,NULL,'VirtualMachines'),
+  (952,663,NULL,'100000000000'),
+  (953,663,NULL,'200000000000'),
+  (954,664,NULL,'VirtualMachines'),
+  (955,664,NULL,'1000000'),
+  (956,664,NULL,'2000000'),
+  (957,665,NULL,'VirtualMachines'),
+  (958,665,NULL,'1000'),
+  (959,665,NULL,'2000'),
+  (960,666,NULL,'Containers'),
+  (961,666,NULL,'100000000'),
+  (962,666,NULL,'200000000'),
+  (963,667,NULL,'Containers'),
+  (964,667,NULL,'80'),
+  (965,667,NULL,'90'),
+  (966,668,NULL,'Containers'),
+  (967,668,NULL,'100000000'),
+  (968,668,NULL,'200000000'),
+  (969,669,NULL,'Containers'),
+  (970,669,NULL,'100000000'),
+  (971,669,NULL,'200000000'),
+  (972,670,NULL,'Disks'),
+  (973,670,NULL,'10'),
+  (974,670,NULL,'5'),
+  (975,671,NULL,'Cluster'),
+  (976,671,NULL,'100000000000'),
+  (977,671,NULL,'200000000000'),
+  (978,672,NULL,'Disks'),
+  (979,672,NULL,'100000000000'),
+  (980,672,NULL,'200000000000'),
+  (981,673,NULL,'Disks'),
+  (982,673,NULL,'1'),
+  (983,673,NULL,'2'),
+  (984,674,NULL,'Disks'),
+  (985,674,NULL,'100000000000'),
+  (986,674,NULL,'200000000000'),
+  (987,675,NULL,'Disks'),
+  (988,675,NULL,'100000000000'),
+  (989,675,NULL,'200000000000'),
+  (990,676,NULL,'Cluster'),
+  (991,676,NULL,'80'),
+  (992,676,NULL,'90'),
+  (993,677,NULL,'Cluster'),
+  (994,677,NULL,'100000000000'),
+  (995,677,NULL,'200000000000'),
+  (996,678,NULL,'Cluster'),
+  (1000,680,NULL,'Controllers'),
+  (999,679,NULL,'Controllers'),
+  (1001,681,NULL,'Controllers'),
+  (1002,682,NULL,'Hypervisors'),
+  (1003,682,NULL,'100000000000'),
+  (1004,682,NULL,'200000000000'),
+  (1005,683,NULL,'Hypervisors'),
+  (1006,683,NULL,'100000000000'),
+  (1007,683,NULL,'200000000000'),
+  (1008,684,NULL,'Hypervisors'),
+  (1009,684,NULL,'100000000000'),
+  (1010,684,NULL,'200000000000'),
+  (1011,685,NULL,'Hypervisors'),
+  (1012,685,NULL,'80'),
+  (1013,685,NULL,'90'),
+  (1014,686,NULL,'Hypervisors'),
+  (1015,686,NULL,'80'),
+  (1016,686,NULL,'90'),
+  (1017,687,NULL,'Hypervisors'),
+  (1018,687,NULL,'100000000000'),
+  (1019,687,NULL,'200000000000'),
+  (1020,688,NULL,'Hypervisors'),
+  (1021,688,NULL,'100000000000'),
+  (1022,688,NULL,'200000000000'),
+  (1023,689,NULL,'Hypervisors'),
+  (1024,689,NULL,'100000000000'),
+  (1025,689,NULL,'200000000000'),
+  (1026,690,NULL,'Hypervisors'),
+  (1027,690,NULL,'100000000000'),
+  (1028,690,NULL,'200000000000'),
+  (1029,691,NULL,'Pools'),
+  (1030,691,NULL,'100000000000'),
+  (1031,691,NULL,'200000000000'),
+  (1032,692,NULL,'Pools'),
+  (1033,692,NULL,'100000000000'),
+  (1034,692,NULL,'200000000000'),
+  (1035,693,NULL,'Pools'),
+  (1036,693,NULL,'100000000000'),
+  (1037,693,NULL,'200000000000'),
+  (1038,694,NULL,'Pools'),
+  (1039,694,NULL,'80'),
+  (1040,694,NULL,'90');
 /*!40000 ALTER TABLE `nagios_service_check_command_parameter` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1845,7 +2827,10 @@ CREATE TABLE `nagios_service_group` (
 
 LOCK TABLES `nagios_service_group` WRITE;
 /*!40000 ALTER TABLE `nagios_service_group` DISABLE KEYS */;
-INSERT INTO `nagios_service_group` VALUES (3,'DELL','ServiceGroup Dell',NULL,NULL,NULL),(4,'SERVICES','ServiceGroup Specifics',NULL,NULL,NULL),(5,'VMWARE','ServiceGroup Vmware',NULL,NULL,NULL),(6,'HTTP','ServiceGroup Http',NULL,NULL,NULL);
+INSERT INTO `nagios_service_group` VALUES (3,'DELL','ServiceGroup Dell',NULL,NULL,NULL),
+  (4,'SERVICES','ServiceGroup Specifics',NULL,NULL,NULL),
+  (5,'VMWARE','ServiceGroup Vmware',NULL,NULL,NULL),
+  (6,'HTTP','ServiceGroup Http',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `nagios_service_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1874,7 +2859,10 @@ CREATE TABLE `nagios_service_group_member` (
 
 LOCK TABLES `nagios_service_group_member` WRITE;
 /*!40000 ALTER TABLE `nagios_service_group_member` DISABLE KEYS */;
-INSERT INTO `nagios_service_group_member` VALUES (4,NULL,9,4),(5,112,NULL,5),(6,111,NULL,5),(10,NULL,12,6);
+INSERT INTO `nagios_service_group_member` VALUES (4,NULL,9,4),
+  (5,112,NULL,5),
+  (6,111,NULL,5),
+  (10,NULL,12,6);
 /*!40000 ALTER TABLE `nagios_service_group_member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1948,7 +2936,14 @@ CREATE TABLE `nagios_service_template` (
 
 LOCK TABLES `nagios_service_template` WRITE;
 /*!40000 ALTER TABLE `nagios_service_template` DISABLE KEYS */;
-INSERT INTO `nagios_service_template` VALUES (5,'GENERIC_SERVICE','Template Generic',NULL,NULL,NULL,4,4,NULL,NULL,1,1,11,1,0,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,15,11,1,1,1,1,1,1,1,1,1,1,1,NULL,NULL,NULL,NULL,NULL,NULL),(6,'UPTIME','Template Uptime',NULL,NULL,231,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(15,'GENERIC_GRAPH','Template generic + pnp link',NULL,NULL,NULL,4,4,NULL,NULL,1,1,11,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,11,1,1,1,1,NULL,NULL,1,NULL,1,1,1,NULL,NULL,NULL,'/grafana/dashboard/script/histou.js?host=$HOSTNAME$&service=$SERVICEDESC$&refresh=30s',NULL,NULL),(12,'HTTP_80','Template Http port 80',NULL,NULL,112,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(9,'WINDOWS_SERVICE','Template Windows Service',NULL,NULL,116,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(17,'GENERIC_PASSIVE','Template passif for RGMA',NULL,NULL,241,NULL,NULL,NULL,NULL,0,1,11,1,NULL,1,1200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/grafana/dashboard/script/histou.js?host=$HOSTNAME$&service=$SERVICEDESC$&refresh=30s',NULL,NULL),(13,'TRAFFIC','Template network traffic',NULL,NULL,163,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$&view=1',NULL,NULL),(16,'EMC','Template Emc',NULL,NULL,213,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service_template` VALUES (5,'GENERIC_SERVICE','Template Generic',NULL,NULL,NULL,4,4,NULL,NULL,1,1,11,1,0,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,15,11,1,1,1,1,1,1,1,1,1,1,1,NULL,NULL,NULL,NULL,NULL,NULL),
+  (6,'UPTIME','Template Uptime',NULL,NULL,231,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (15,'GENERIC_GRAPH','Template generic + pnp link',NULL,NULL,NULL,4,4,NULL,NULL,1,1,11,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,11,1,1,1,1,NULL,NULL,1,NULL,1,1,1,NULL,NULL,NULL,'/grafana/dashboard/script/histou.js?host=$HOSTNAME$&service=$SERVICEDESC$&refresh=30s',NULL,NULL),
+  (12,'HTTP_80','Template Http port 80',NULL,NULL,112,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (9,'WINDOWS_SERVICE','Template Windows Service',NULL,NULL,116,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+  (17,'GENERIC_PASSIVE','Template passif for RGMA',NULL,NULL,241,NULL,NULL,NULL,NULL,0,1,11,1,NULL,1,1200,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/grafana/dashboard/script/histou.js?host=$HOSTNAME$&service=$SERVICEDESC$&refresh=30s',NULL,NULL),
+  (13,'TRAFFIC','Template network traffic',NULL,NULL,163,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$&view=1',NULL,NULL),
+  (16,'EMC','Template Emc',NULL,NULL,213,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `nagios_service_template` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1978,7 +2973,374 @@ CREATE TABLE `nagios_service_template_inheritance` (
 
 LOCK TABLES `nagios_service_template_inheritance` WRITE;
 /*!40000 ALTER TABLE `nagios_service_template_inheritance` DISABLE KEYS */;
-INSERT INTO `nagios_service_template_inheritance` VALUES (206,185,NULL,15,0),(295,266,NULL,15,0),(299,269,NULL,15,0),(281,252,NULL,5,0),(315,285,NULL,5,0),(290,261,NULL,15,0),(41,39,NULL,5,0),(40,38,NULL,5,0),(202,181,NULL,15,0),(201,180,NULL,15,0),(200,179,NULL,15,0),(35,33,NULL,5,0),(208,187,NULL,15,0),(207,186,NULL,15,0),(183,NULL,12,5,0),(597,NULL,6,5,0),(298,268,NULL,5,0),(472,NULL,15,5,0),(314,284,NULL,5,0),(279,250,NULL,5,0),(296,267,NULL,15,0),(308,278,NULL,5,0),(210,189,NULL,6,0),(291,262,NULL,15,0),(280,251,NULL,5,0),(113,111,NULL,5,0),(204,183,NULL,6,0),(311,281,NULL,5,0),(310,280,NULL,5,0),(317,287,NULL,5,0),(316,286,NULL,5,0),(318,288,NULL,5,0),(312,282,NULL,5,0),(313,283,NULL,5,0),(125,NULL,9,5,0),(209,188,NULL,5,0),(203,182,NULL,5,0),(300,270,NULL,15,0),(267,238,NULL,15,0),(114,112,NULL,5,0),(309,279,NULL,5,0),(304,274,NULL,5,0),(303,273,NULL,15,0),(449,NULL,13,5,0),(302,272,NULL,5,0),(646,602,NULL,5,0),(205,184,NULL,13,0),(211,190,NULL,13,0),(306,276,NULL,5,0),(289,260,NULL,15,0),(288,259,NULL,5,0),(287,258,NULL,5,0),(286,257,NULL,5,0),(285,256,NULL,5,0),(284,255,NULL,5,0),(283,254,NULL,5,0),(282,253,NULL,5,0),(294,265,NULL,15,0),(293,264,NULL,15,0),(292,263,NULL,15,0),(276,247,NULL,5,0),(319,289,NULL,5,0),(277,248,NULL,5,0),(275,246,NULL,5,0),(274,245,NULL,5,0),(278,249,NULL,5,0),(270,241,NULL,15,0),(272,243,NULL,5,0),(630,NULL,17,15,0),(269,240,NULL,15,0),(629,586,NULL,17,0),(273,244,NULL,5,0),(245,217,NULL,5,0),(603,223,NULL,15,0),(605,221,NULL,15,0),(248,220,NULL,5,0),(606,222,NULL,15,0),(659,615,NULL,15,0),(604,219,NULL,15,0),(252,224,NULL,5,0),(631,587,NULL,17,0),(632,588,NULL,15,0),(264,235,NULL,15,0),(256,228,NULL,5,0),(257,229,NULL,5,0),(258,230,NULL,5,0),(320,290,NULL,5,0),(321,291,NULL,5,0),(322,292,NULL,5,0),(323,293,NULL,5,0),(324,294,NULL,5,0),(325,295,NULL,5,0),(326,296,NULL,5,0),(327,297,NULL,5,0),(328,298,NULL,5,0),(329,299,NULL,5,0),(330,300,NULL,5,0),(331,301,NULL,5,0),(332,302,NULL,5,0),(333,303,NULL,5,0),(334,304,NULL,5,0),(335,305,NULL,5,0),(336,306,NULL,5,0),(337,307,NULL,5,0),(338,308,NULL,5,0),(339,309,NULL,5,0),(340,310,NULL,5,0),(341,311,NULL,5,0),(342,312,NULL,5,0),(343,313,NULL,5,0),(344,314,NULL,5,0),(345,315,NULL,5,0),(346,316,NULL,5,0),(347,317,NULL,5,0),(348,318,NULL,5,0),(349,319,NULL,5,0),(350,320,NULL,5,0),(352,321,NULL,15,0),(353,322,NULL,5,0),(354,323,NULL,5,0),(355,324,NULL,5,0),(356,325,NULL,5,0),(357,326,NULL,5,0),(358,327,NULL,5,0),(359,328,NULL,5,0),(391,360,NULL,5,0),(361,330,NULL,5,0),(362,331,NULL,5,0),(363,332,NULL,5,0),(364,333,NULL,5,0),(365,334,NULL,5,0),(392,361,NULL,5,0),(367,336,NULL,5,0),(368,337,NULL,5,0),(369,338,NULL,5,0),(390,359,NULL,5,0),(371,340,NULL,5,0),(396,365,NULL,5,0),(388,357,NULL,5,0),(374,343,NULL,5,0),(375,344,NULL,5,0),(397,366,NULL,5,0),(377,346,NULL,5,0),(378,347,NULL,5,0),(395,364,NULL,5,0),(394,363,NULL,5,0),(393,362,NULL,5,0),(382,351,NULL,5,0),(389,358,NULL,5,0),(387,356,NULL,5,0),(386,355,NULL,5,0),(398,367,NULL,5,0),(399,368,NULL,5,0),(400,369,NULL,5,0),(401,370,NULL,5,0),(402,371,NULL,5,0),(403,372,NULL,5,0),(404,373,NULL,5,0),(405,374,NULL,5,0),(406,375,NULL,5,0),(407,376,NULL,5,0),(408,377,NULL,5,0),(409,378,NULL,5,0),(411,NULL,16,5,0),(463,427,NULL,15,0),(464,428,NULL,15,0),(414,381,NULL,16,0),(415,382,NULL,16,0),(416,383,NULL,16,0),(417,384,NULL,16,0),(418,385,NULL,16,0),(462,426,NULL,15,0),(461,425,NULL,15,0),(460,424,NULL,15,0),(422,389,NULL,15,0),(423,390,NULL,15,0),(451,415,NULL,15,0),(465,429,NULL,15,0),(466,430,NULL,15,0),(467,431,NULL,15,0),(468,432,NULL,15,0),(452,416,NULL,15,0),(453,417,NULL,5,0),(454,418,NULL,6,0),(455,419,NULL,13,0),(456,420,NULL,15,0),(457,421,NULL,15,0),(458,422,NULL,15,0),(459,423,NULL,15,0),(469,433,NULL,15,0),(470,434,NULL,15,0),(471,435,NULL,15,0),(440,407,NULL,15,0),(474,436,NULL,15,0),(475,437,NULL,5,0),(476,438,NULL,5,0),(477,439,NULL,5,0),(445,412,NULL,15,0),(446,413,NULL,15,0),(447,414,NULL,15,0),(478,440,NULL,6,0),(624,581,NULL,15,0),(480,442,NULL,5,0),(615,572,NULL,5,0),(482,444,NULL,5,0),(483,445,NULL,5,0),(484,446,NULL,5,0),(594,555,NULL,5,0),(486,448,NULL,5,0),(487,449,NULL,5,0),(488,450,NULL,5,0),(489,451,NULL,5,0),(490,452,NULL,5,0),(613,570,NULL,15,0),(620,577,NULL,15,0),(601,561,NULL,5,0),(494,456,NULL,5,0),(495,457,NULL,5,0),(496,458,NULL,5,0),(497,459,NULL,5,0),(498,460,NULL,5,0),(499,461,NULL,5,0),(500,462,NULL,5,0),(501,463,NULL,5,0),(502,464,NULL,5,0),(503,465,NULL,5,0),(504,466,NULL,5,0),(505,467,NULL,5,0),(506,468,NULL,15,0),(507,469,NULL,15,0),(508,470,NULL,5,0),(509,471,NULL,5,0),(510,472,NULL,5,0),(511,473,NULL,5,0),(512,474,NULL,5,0),(513,475,NULL,5,0),(514,476,NULL,5,0),(515,477,NULL,5,0),(516,478,NULL,5,0),(517,479,NULL,5,0),(518,480,NULL,5,0),(519,481,NULL,5,0),(520,482,NULL,5,0),(581,542,NULL,5,0),(522,484,NULL,5,0),(523,485,NULL,5,0),(524,486,NULL,5,0),(658,614,NULL,15,0),(585,546,NULL,5,0),(655,611,NULL,15,0),(617,574,NULL,13,0),(591,552,NULL,5,0),(596,557,NULL,5,0),(583,544,NULL,5,0),(656,612,NULL,15,0),(587,548,NULL,5,0),(589,550,NULL,5,0),(577,538,NULL,5,0),(536,498,NULL,5,0),(537,499,NULL,5,0),(538,500,NULL,5,0),(539,501,NULL,5,0),(540,502,NULL,5,0),(590,551,NULL,5,0),(588,549,NULL,5,0),(586,547,NULL,5,0),(584,545,NULL,5,0),(595,556,NULL,5,0),(616,573,NULL,6,0),(614,571,NULL,15,0),(602,218,NULL,15,0),(618,575,NULL,5,0),(619,576,NULL,15,0),(612,569,NULL,15,0),(582,543,NULL,5,0),(657,613,NULL,15,0),(600,560,NULL,5,0),(572,533,NULL,5,0),(580,541,NULL,5,0),(576,537,NULL,5,0),(573,534,NULL,6,0),(579,540,NULL,5,0),(574,535,NULL,5,0),(575,536,NULL,5,0),(592,553,NULL,5,0),(593,554,NULL,5,0),(625,582,NULL,15,0),(623,580,NULL,15,0),(621,578,NULL,15,0),(622,579,NULL,15,0),(568,530,NULL,5,0),(569,531,NULL,5,0),(570,532,NULL,5,0),(634,590,NULL,15,0),(635,591,NULL,5,0),(636,593,NULL,15,0),(654,610,NULL,15,0),(653,609,NULL,15,0),(652,608,NULL,15,0),(651,607,NULL,15,0),(650,606,NULL,15,0),(649,605,NULL,15,0),(648,604,NULL,15,0),(687,643,NULL,5,0),(645,592,NULL,15,0),(660,616,NULL,15,0),(661,617,NULL,15,0),(662,618,NULL,15,0),(663,619,NULL,15,0),(664,620,NULL,15,0),(665,621,NULL,15,0),(666,622,NULL,15,0),(667,623,NULL,15,0),(668,624,NULL,15,0),(669,625,NULL,15,0),(670,626,NULL,15,0),(671,627,NULL,15,0),(672,628,NULL,15,0),(682,638,NULL,5,0),(684,640,NULL,5,0),(683,639,NULL,5,0),(695,651,NULL,5,0),(689,645,NULL,5,0),(703,658,NULL,5,0),(700,656,NULL,5,0),(699,655,NULL,5,0),(698,654,NULL,5,0),(690,646,NULL,5,0),(691,647,NULL,5,0),(702,657,NULL,15,0),(697,653,NULL,5,0),(696,652,NULL,5,0),(704,659,NULL,5,0),(705,660,NULL,5,0),(706,661,NULL,15,0),(707,662,NULL,15,0),(708,663,NULL,5,0),(709,664,NULL,15,0),(710,665,NULL,15,0),(711,666,NULL,5,0),(712,667,NULL,5,0),(713,668,NULL,5,0),(714,669,NULL,5,0),(715,670,NULL,15,0),(716,671,NULL,15,0),(717,672,NULL,15,0),(718,673,NULL,15,0),(719,674,NULL,15,0),(720,675,NULL,15,0),(721,676,NULL,15,0),(722,677,NULL,15,0),(723,678,NULL,15,0),(724,679,NULL,15,0),(725,680,NULL,15,0),(726,681,NULL,15,0),(727,682,NULL,15,0),(728,683,NULL,15,0),(729,684,NULL,15,0),(730,685,NULL,15,0),(731,686,NULL,15,0),(732,687,NULL,15,0),(733,688,NULL,15,0),(734,689,NULL,15,0),(735,690,NULL,15,0),(736,691,NULL,15,0),(737,692,NULL,15,0),(738,693,NULL,15,0),(739,694,NULL,15,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (206,185,NULL,15,0),
+  (295,266,NULL,15,0),
+  (299,269,NULL,15,0),
+  (281,252,NULL,5,0),
+  (315,285,NULL,5,0),
+  (290,261,NULL,15,0),
+  (41,39,NULL,5,0),
+  (40,38,NULL,5,0),
+  (202,181,NULL,15,0),
+  (201,180,NULL,15,0),
+  (200,179,NULL,15,0),
+  (35,33,NULL,5,0),
+  (208,187,NULL,15,0),
+  (207,186,NULL,15,0),
+  (183,NULL,12,5,0),
+  (597,NULL,6,5,0),
+  (298,268,NULL,5,0),
+  (472,NULL,15,5,0),
+  (314,284,NULL,5,0),
+  (279,250,NULL,5,0),
+  (296,267,NULL,15,0),
+  (308,278,NULL,5,0),
+  (210,189,NULL,6,0),
+  (291,262,NULL,15,0),
+  (280,251,NULL,5,0),
+  (113,111,NULL,5,0),
+  (204,183,NULL,6,0),
+  (311,281,NULL,5,0),
+  (310,280,NULL,5,0),
+  (317,287,NULL,5,0),
+  (316,286,NULL,5,0),
+  (318,288,NULL,5,0),
+  (312,282,NULL,5,0),
+  (313,283,NULL,5,0),
+  (125,NULL,9,5,0),
+  (209,188,NULL,5,0),
+  (203,182,NULL,5,0),
+  (300,270,NULL,15,0),
+  (267,238,NULL,15,0),
+  (114,112,NULL,5,0),
+  (309,279,NULL,5,0),
+  (304,274,NULL,5,0),
+  (303,273,NULL,15,0),
+  (449,NULL,13,5,0),
+  (302,272,NULL,5,0),
+  (646,602,NULL,5,0),
+  (205,184,NULL,13,0),
+  (211,190,NULL,13,0),
+  (306,276,NULL,5,0),
+  (289,260,NULL,15,0),
+  (288,259,NULL,5,0),
+  (287,258,NULL,5,0),
+  (286,257,NULL,5,0),
+  (285,256,NULL,5,0),
+  (284,255,NULL,5,0),
+  (283,254,NULL,5,0),
+  (282,253,NULL,5,0),
+  (294,265,NULL,15,0),
+  (293,264,NULL,15,0),
+  (292,263,NULL,15,0),
+  (276,247,NULL,5,0),
+  (319,289,NULL,5,0),
+  (277,248,NULL,5,0),
+  (275,246,NULL,5,0),
+  (274,245,NULL,5,0),
+  (278,249,NULL,5,0),
+  (270,241,NULL,15,0),
+  (272,243,NULL,5,0),
+  (630,NULL,17,15,0),
+  (269,240,NULL,15,0),
+  (629,586,NULL,17,0),
+  (273,244,NULL,5,0),
+  (245,217,NULL,5,0),
+  (603,223,NULL,15,0),
+  (605,221,NULL,15,0),
+  (248,220,NULL,5,0),
+  (606,222,NULL,15,0),
+  (659,615,NULL,15,0),
+  (604,219,NULL,15,0),
+  (252,224,NULL,5,0),
+  (631,587,NULL,17,0),
+  (632,588,NULL,15,0),
+  (264,235,NULL,15,0),
+  (256,228,NULL,5,0),
+  (257,229,NULL,5,0),
+  (258,230,NULL,5,0),
+  (320,290,NULL,5,0),
+  (321,291,NULL,5,0),
+  (322,292,NULL,5,0),
+  (323,293,NULL,5,0),
+  (324,294,NULL,5,0),
+  (325,295,NULL,5,0),
+  (326,296,NULL,5,0),
+  (327,297,NULL,5,0),
+  (328,298,NULL,5,0),
+  (329,299,NULL,5,0),
+  (330,300,NULL,5,0),
+  (331,301,NULL,5,0),
+  (332,302,NULL,5,0),
+  (333,303,NULL,5,0),
+  (334,304,NULL,5,0),
+  (335,305,NULL,5,0),
+  (336,306,NULL,5,0),
+  (337,307,NULL,5,0),
+  (338,308,NULL,5,0),
+  (339,309,NULL,5,0),
+  (340,310,NULL,5,0),
+  (341,311,NULL,5,0),
+  (342,312,NULL,5,0),
+  (343,313,NULL,5,0),
+  (344,314,NULL,5,0),
+  (345,315,NULL,5,0),
+  (346,316,NULL,5,0),
+  (347,317,NULL,5,0),
+  (348,318,NULL,5,0),
+  (349,319,NULL,5,0),
+  (350,320,NULL,5,0),
+  (352,321,NULL,15,0),
+  (353,322,NULL,5,0),
+  (354,323,NULL,5,0),
+  (355,324,NULL,5,0),
+  (356,325,NULL,5,0),
+  (357,326,NULL,5,0),
+  (358,327,NULL,5,0),
+  (359,328,NULL,5,0),
+  (391,360,NULL,5,0),
+  (361,330,NULL,5,0),
+  (362,331,NULL,5,0),
+  (363,332,NULL,5,0),
+  (364,333,NULL,5,0),
+  (365,334,NULL,5,0),
+  (392,361,NULL,5,0),
+  (367,336,NULL,5,0),
+  (368,337,NULL,5,0),
+  (369,338,NULL,5,0),
+  (390,359,NULL,5,0),
+  (371,340,NULL,5,0),
+  (396,365,NULL,5,0),
+  (388,357,NULL,5,0),
+  (374,343,NULL,5,0),
+  (375,344,NULL,5,0),
+  (397,366,NULL,5,0),
+  (377,346,NULL,5,0),
+  (378,347,NULL,5,0),
+  (395,364,NULL,5,0),
+  (394,363,NULL,5,0),
+  (393,362,NULL,5,0),
+  (382,351,NULL,5,0),
+  (389,358,NULL,5,0),
+  (387,356,NULL,5,0),
+  (386,355,NULL,5,0),
+  (398,367,NULL,5,0),
+  (399,368,NULL,5,0),
+  (400,369,NULL,5,0),
+  (401,370,NULL,5,0),
+  (402,371,NULL,5,0),
+  (403,372,NULL,5,0),
+  (404,373,NULL,5,0),
+  (405,374,NULL,5,0),
+  (406,375,NULL,5,0),
+  (407,376,NULL,5,0),
+  (408,377,NULL,5,0),
+  (409,378,NULL,5,0),
+  (411,NULL,16,5,0),
+  (463,427,NULL,15,0),
+  (464,428,NULL,15,0),
+  (414,381,NULL,16,0),
+  (415,382,NULL,16,0),
+  (416,383,NULL,16,0),
+  (417,384,NULL,16,0),
+  (418,385,NULL,16,0),
+  (462,426,NULL,15,0),
+  (461,425,NULL,15,0),
+  (460,424,NULL,15,0),
+  (422,389,NULL,15,0),
+  (423,390,NULL,15,0),
+  (451,415,NULL,15,0),
+  (465,429,NULL,15,0),
+  (466,430,NULL,15,0),
+  (467,431,NULL,15,0),
+  (468,432,NULL,15,0),
+  (452,416,NULL,15,0),
+  (453,417,NULL,5,0),
+  (454,418,NULL,6,0),
+  (455,419,NULL,13,0),
+  (456,420,NULL,15,0),
+  (457,421,NULL,15,0),
+  (458,422,NULL,15,0),
+  (459,423,NULL,15,0),
+  (469,433,NULL,15,0),
+  (470,434,NULL,15,0),
+  (471,435,NULL,15,0),
+  (440,407,NULL,15,0),
+  (474,436,NULL,15,0),
+  (475,437,NULL,5,0),
+  (476,438,NULL,5,0),
+  (477,439,NULL,5,0),
+  (445,412,NULL,15,0),
+  (446,413,NULL,15,0),
+  (447,414,NULL,15,0),
+  (478,440,NULL,6,0),
+  (624,581,NULL,15,0),
+  (480,442,NULL,5,0),
+  (615,572,NULL,5,0),
+  (482,444,NULL,5,0),
+  (483,445,NULL,5,0),
+  (484,446,NULL,5,0),
+  (594,555,NULL,5,0),
+  (486,448,NULL,5,0),
+  (487,449,NULL,5,0),
+  (488,450,NULL,5,0),
+  (489,451,NULL,5,0),
+  (490,452,NULL,5,0),
+  (613,570,NULL,15,0),
+  (620,577,NULL,15,0),
+  (601,561,NULL,5,0),
+  (494,456,NULL,5,0),
+  (495,457,NULL,5,0),
+  (496,458,NULL,5,0),
+  (497,459,NULL,5,0),
+  (498,460,NULL,5,0),
+  (499,461,NULL,5,0),
+  (500,462,NULL,5,0),
+  (501,463,NULL,5,0),
+  (502,464,NULL,5,0),
+  (503,465,NULL,5,0),
+  (504,466,NULL,5,0),
+  (505,467,NULL,5,0),
+  (506,468,NULL,15,0),
+  (507,469,NULL,15,0),
+  (508,470,NULL,5,0),
+  (509,471,NULL,5,0),
+  (510,472,NULL,5,0),
+  (511,473,NULL,5,0),
+  (512,474,NULL,5,0),
+  (513,475,NULL,5,0),
+  (514,476,NULL,5,0),
+  (515,477,NULL,5,0),
+  (516,478,NULL,5,0),
+  (517,479,NULL,5,0),
+  (518,480,NULL,5,0),
+  (519,481,NULL,5,0),
+  (520,482,NULL,5,0),
+  (581,542,NULL,5,0),
+  (522,484,NULL,5,0),
+  (523,485,NULL,5,0),
+  (524,486,NULL,5,0),
+  (658,614,NULL,15,0),
+  (585,546,NULL,5,0),
+  (655,611,NULL,15,0),
+  (617,574,NULL,13,0),
+  (591,552,NULL,5,0),
+  (596,557,NULL,5,0),
+  (583,544,NULL,5,0),
+  (656,612,NULL,15,0),
+  (587,548,NULL,5,0),
+  (589,550,NULL,5,0),
+  (577,538,NULL,5,0),
+  (536,498,NULL,5,0),
+  (537,499,NULL,5,0),
+  (538,500,NULL,5,0),
+  (539,501,NULL,5,0),
+  (540,502,NULL,5,0),
+  (590,551,NULL,5,0),
+  (588,549,NULL,5,0),
+  (586,547,NULL,5,0),
+  (584,545,NULL,5,0),
+  (595,556,NULL,5,0),
+  (616,573,NULL,6,0),
+  (614,571,NULL,15,0),
+  (602,218,NULL,15,0),
+  (618,575,NULL,5,0),
+  (619,576,NULL,15,0),
+  (612,569,NULL,15,0),
+  (582,543,NULL,5,0),
+  (657,613,NULL,15,0),
+  (600,560,NULL,5,0),
+  (572,533,NULL,5,0),
+  (580,541,NULL,5,0),
+  (576,537,NULL,5,0),
+  (573,534,NULL,6,0),
+  (579,540,NULL,5,0),
+  (574,535,NULL,5,0),
+  (575,536,NULL,5,0),
+  (592,553,NULL,5,0),
+  (593,554,NULL,5,0),
+  (625,582,NULL,15,0),
+  (623,580,NULL,15,0),
+  (621,578,NULL,15,0),
+  (622,579,NULL,15,0),
+  (568,530,NULL,5,0),
+  (569,531,NULL,5,0),
+  (570,532,NULL,5,0),
+  (634,590,NULL,15,0),
+  (635,591,NULL,5,0),
+  (636,593,NULL,15,0),
+  (654,610,NULL,15,0),
+  (653,609,NULL,15,0),
+  (652,608,NULL,15,0),
+  (651,607,NULL,15,0),
+  (650,606,NULL,15,0),
+  (649,605,NULL,15,0),
+  (648,604,NULL,15,0),
+  (687,643,NULL,5,0),
+  (645,592,NULL,15,0),
+  (660,616,NULL,15,0),
+  (661,617,NULL,15,0),
+  (662,618,NULL,15,0),
+  (663,619,NULL,15,0),
+  (664,620,NULL,15,0),
+  (665,621,NULL,15,0),
+  (666,622,NULL,15,0),
+  (667,623,NULL,15,0),
+  (668,624,NULL,15,0),
+  (669,625,NULL,15,0),
+  (670,626,NULL,15,0),
+  (671,627,NULL,15,0),
+  (672,628,NULL,15,0),
+  (682,638,NULL,5,0),
+  (684,640,NULL,5,0),
+  (683,639,NULL,5,0),
+  (695,651,NULL,5,0),
+  (689,645,NULL,5,0),
+  (703,658,NULL,5,0),
+  (700,656,NULL,5,0),
+  (699,655,NULL,5,0),
+  (698,654,NULL,5,0),
+  (690,646,NULL,5,0),
+  (691,647,NULL,5,0),
+  (702,657,NULL,15,0),
+  (697,653,NULL,5,0),
+  (696,652,NULL,5,0),
+  (704,659,NULL,5,0),
+  (705,660,NULL,5,0),
+  (706,661,NULL,15,0),
+  (707,662,NULL,15,0),
+  (708,663,NULL,5,0),
+  (709,664,NULL,15,0),
+  (710,665,NULL,15,0),
+  (711,666,NULL,5,0),
+  (712,667,NULL,5,0),
+  (713,668,NULL,5,0),
+  (714,669,NULL,5,0),
+  (715,670,NULL,15,0),
+  (716,671,NULL,15,0),
+  (717,672,NULL,15,0),
+  (718,673,NULL,15,0),
+  (719,674,NULL,15,0),
+  (720,675,NULL,15,0),
+  (721,676,NULL,15,0),
+  (722,677,NULL,15,0),
+  (723,678,NULL,15,0),
+  (724,679,NULL,15,0),
+  (725,680,NULL,15,0),
+  (726,681,NULL,15,0),
+  (727,682,NULL,15,0),
+  (728,683,NULL,15,0),
+  (729,684,NULL,15,0),
+  (730,685,NULL,15,0),
+  (731,686,NULL,15,0),
+  (732,687,NULL,15,0),
+  (733,688,NULL,15,0),
+  (734,689,NULL,15,0),
+  (735,690,NULL,15,0),
+  (736,691,NULL,15,0),
+  (737,692,NULL,15,0),
+  (738,693,NULL,15,0),
+  (739,694,NULL,15,0);
 /*!40000 ALTER TABLE `nagios_service_template_inheritance` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2030,7 +3392,75 @@ CREATE TABLE `nagios_timeperiod_entry` (
 
 LOCK TABLES `nagios_timeperiod_entry` WRITE;
 /*!40000 ALTER TABLE `nagios_timeperiod_entry` DISABLE KEYS */;
-INSERT INTO `nagios_timeperiod_entry` VALUES (1,NULL,'sunday','00:00-24:00'),(2,NULL,'monday','00:00-24:00'),(3,NULL,'tuesday','00:00-24:00'),(4,NULL,'wednesday','00:00-24:00'),(5,NULL,'thursday','00:00-24:00'),(6,NULL,'friday','00:00-24:00'),(7,NULL,'saturday','00:00-24:00'),(8,NULL,'monday','09:00-17:00'),(9,NULL,'tuesday','09:00-17:00'),(10,NULL,'wednesday','09:00-17:00'),(11,NULL,'thursday','09:00-17:00'),(12,NULL,'friday','09:00-17:00'),(13,NULL,'january 1','00:00-00:00'),(14,NULL,'monday -1 may','00:00-00:00'),(15,NULL,'monday 1 september','00:00-00:00'),(16,NULL,'july 4','00:00-00:00'),(17,NULL,'thursday -1 november','00:00-00:00'),(18,NULL,'december 25','00:00-00:00'),(19,NULL,'january 1','00:00-00:00'),(20,NULL,'monday -1 may','00:00-00:00'),(21,NULL,'monday 1 september','00:00-00:00'),(22,NULL,'july 4','00:00-00:00'),(23,NULL,'thursday -1 november','00:00-00:00'),(24,NULL,'december 25','00:00-00:00'),(25,NULL,'sunday','00:00-24:00'),(26,NULL,'monday','00:00-24:00'),(27,NULL,'tuesday','00:00-24:00'),(28,NULL,'wednesday','00:00-24:00'),(29,NULL,'thursday','00:00-24:00'),(30,NULL,'friday','00:00-24:00'),(31,NULL,'saturday','00:00-24:00'),(32,NULL,'sunday','00:00-24:00'),(33,NULL,'monday','00:00-24:00'),(34,NULL,'tuesday','00:00-24:00'),(35,NULL,'wednesday','00:00-24:00'),(36,NULL,'thursday','00:00-24:00'),(37,NULL,'friday','00:00-24:00'),(38,NULL,'saturday','00:00-24:00'),(39,NULL,'monday','09:00-17:00'),(40,NULL,'tuesday','09:00-17:00'),(41,NULL,'wednesday','09:00-17:00'),(42,NULL,'thursday','09:00-17:00'),(43,NULL,'friday','09:00-17:00'),(44,NULL,'january 1','00:00-00:00'),(45,NULL,'monday -1 may','00:00-00:00'),(46,NULL,'monday 1 september','00:00-00:00'),(47,NULL,'july 4','00:00-00:00'),(48,NULL,'thursday -1 november','00:00-00:00'),(49,NULL,'december 25','00:00-00:00'),(50,NULL,'january 1','00:00-00:00'),(51,NULL,'monday -1 may','00:00-00:00'),(52,NULL,'monday 1 september','00:00-00:00'),(53,NULL,'july 4','00:00-00:00'),(54,NULL,'thursday -1 november','00:00-00:00'),(55,NULL,'december 25','00:00-00:00'),(56,NULL,'sunday','00:00-24:00'),(57,NULL,'monday','00:00-24:00'),(58,NULL,'tuesday','00:00-24:00'),(59,NULL,'wednesday','00:00-24:00'),(60,NULL,'thursday','00:00-24:00'),(61,NULL,'friday','00:00-24:00'),(62,NULL,'saturday','00:00-24:00'),(265,11,'sunday','00:00-24:00'),(264,11,'monday','00:00-24:00'),(263,11,'tuesday','00:00-24:00'),(262,11,'wednesday','00:00-24:00'),(261,11,'thursday','00:00-24:00'),(260,11,'friday','00:00-24:00'),(259,11,'saturday','00:00-24:00');
+INSERT INTO `nagios_timeperiod_entry` VALUES (1,NULL,'sunday','00:00-24:00'),
+  (2,NULL,'monday','00:00-24:00'),
+  (3,NULL,'tuesday','00:00-24:00'),
+  (4,NULL,'wednesday','00:00-24:00'),
+  (5,NULL,'thursday','00:00-24:00'),
+  (6,NULL,'friday','00:00-24:00'),
+  (7,NULL,'saturday','00:00-24:00'),
+  (8,NULL,'monday','09:00-17:00'),
+  (9,NULL,'tuesday','09:00-17:00'),
+  (10,NULL,'wednesday','09:00-17:00'),
+  (11,NULL,'thursday','09:00-17:00'),
+  (12,NULL,'friday','09:00-17:00'),
+  (13,NULL,'january 1','00:00-00:00'),
+  (14,NULL,'monday -1 may','00:00-00:00'),
+  (15,NULL,'monday 1 september','00:00-00:00'),
+  (16,NULL,'july 4','00:00-00:00'),
+  (17,NULL,'thursday -1 november','00:00-00:00'),
+  (18,NULL,'december 25','00:00-00:00'),
+  (19,NULL,'january 1','00:00-00:00'),
+  (20,NULL,'monday -1 may','00:00-00:00'),
+  (21,NULL,'monday 1 september','00:00-00:00'),
+  (22,NULL,'july 4','00:00-00:00'),
+  (23,NULL,'thursday -1 november','00:00-00:00'),
+  (24,NULL,'december 25','00:00-00:00'),
+  (25,NULL,'sunday','00:00-24:00'),
+  (26,NULL,'monday','00:00-24:00'),
+  (27,NULL,'tuesday','00:00-24:00'),
+  (28,NULL,'wednesday','00:00-24:00'),
+  (29,NULL,'thursday','00:00-24:00'),
+  (30,NULL,'friday','00:00-24:00'),
+  (31,NULL,'saturday','00:00-24:00'),
+  (32,NULL,'sunday','00:00-24:00'),
+  (33,NULL,'monday','00:00-24:00'),
+  (34,NULL,'tuesday','00:00-24:00'),
+  (35,NULL,'wednesday','00:00-24:00'),
+  (36,NULL,'thursday','00:00-24:00'),
+  (37,NULL,'friday','00:00-24:00'),
+  (38,NULL,'saturday','00:00-24:00'),
+  (39,NULL,'monday','09:00-17:00'),
+  (40,NULL,'tuesday','09:00-17:00'),
+  (41,NULL,'wednesday','09:00-17:00'),
+  (42,NULL,'thursday','09:00-17:00'),
+  (43,NULL,'friday','09:00-17:00'),
+  (44,NULL,'january 1','00:00-00:00'),
+  (45,NULL,'monday -1 may','00:00-00:00'),
+  (46,NULL,'monday 1 september','00:00-00:00'),
+  (47,NULL,'july 4','00:00-00:00'),
+  (48,NULL,'thursday -1 november','00:00-00:00'),
+  (49,NULL,'december 25','00:00-00:00'),
+  (50,NULL,'january 1','00:00-00:00'),
+  (51,NULL,'monday -1 may','00:00-00:00'),
+  (52,NULL,'monday 1 september','00:00-00:00'),
+  (53,NULL,'july 4','00:00-00:00'),
+  (54,NULL,'thursday -1 november','00:00-00:00'),
+  (55,NULL,'december 25','00:00-00:00'),
+  (56,NULL,'sunday','00:00-24:00'),
+  (57,NULL,'monday','00:00-24:00'),
+  (58,NULL,'tuesday','00:00-24:00'),
+  (59,NULL,'wednesday','00:00-24:00'),
+  (60,NULL,'thursday','00:00-24:00'),
+  (61,NULL,'friday','00:00-24:00'),
+  (62,NULL,'saturday','00:00-24:00'),
+  (265,11,'sunday','00:00-24:00'),
+  (264,11,'monday','00:00-24:00'),
+  (263,11,'tuesday','00:00-24:00'),
+  (262,11,'wednesday','00:00-24:00'),
+  (261,11,'thursday','00:00-24:00'),
+  (260,11,'friday','00:00-24:00'),
+  (259,11,'saturday','00:00-24:00');
 /*!40000 ALTER TABLE `nagios_timeperiod_entry` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2059,159 +3489,6 @@ LOCK TABLES `nagios_timeperiod_exclude` WRITE;
 /*!40000 ALTER TABLE `nagios_timeperiod_exclude` DISABLE KEYS */;
 /*!40000 ALTER TABLE `nagios_timeperiod_exclude` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `proc`
---
-
-DROP TABLE IF EXISTS `proc`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `proc` (
-  `db` char(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  `name` char(64) NOT NULL DEFAULT '',
-  `type` enum('FUNCTION','PROCEDURE') NOT NULL,
-  `specific_name` char(64) NOT NULL DEFAULT '',
-  `language` enum('SQL') NOT NULL DEFAULT 'SQL',
-  `sql_data_access` enum('CONTAINS_SQL','NO_SQL','READS_SQL_DATA','MODIFIES_SQL_DATA') NOT NULL DEFAULT 'CONTAINS_SQL',
-  `is_deterministic` enum('YES','NO') NOT NULL DEFAULT 'NO',
-  `security_type` enum('INVOKER','DEFINER') NOT NULL DEFAULT 'DEFINER',
-  `param_list` blob NOT NULL,
-  `returns` char(64) NOT NULL DEFAULT '',
-  `body` longblob NOT NULL,
-  `definer` char(77) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `sql_mode` set('REAL_AS_FLOAT','PIPES_AS_CONCAT','ANSI_QUOTES','IGNORE_SPACE','NOT_USED','ONLY_FULL_GROUP_BY','NO_UNSIGNED_SUBTRACTION','NO_DIR_IN_CREATE','POSTGRESQL','ORACLE','MSSQL','DB2','MAXDB','NO_KEY_OPTIONS','NO_TABLE_OPTIONS','NO_FIELD_OPTIONS','MYSQL323','MYSQL40','ANSI','NO_AUTO_VALUE_ON_ZERO','NO_BACKSLASH_ESCAPES','STRICT_TRANS_TABLES','STRICT_ALL_TABLES','NO_ZERO_IN_DATE','NO_ZERO_DATE','INVALID_DATES','ERROR_FOR_DIVISION_BY_ZERO','TRADITIONAL','NO_AUTO_CREATE_USER','HIGH_NOT_PRECEDENCE') NOT NULL DEFAULT '',
-  `comment` char(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY (`db`,`name`,`type`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Stored Procedures';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `proc`
---
-
-LOCK TABLES `proc` WRITE;
-/*!40000 ALTER TABLE `proc` DISABLE KEYS */;
-/*!40000 ALTER TABLE `proc` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
---
--- Table structure for table `sessions`
---
-
-DROP TABLE IF EXISTS `sessions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `sessions` (
-  `session_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`session_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `sessions`
---
-
-LOCK TABLES `sessions` WRITE;
-/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES (492497698,1),(28606106,1),(441613760,1),(1720051301,1),(870243470,1),(702108421,1),(823766042,1),(422274446,1),(263648232,1),(1915648207,1),(302361342,1),(617102946,1),(1466204130,1),(60829471,1),(1734173596,1),(1987706233,1),(249011468,1),(1496175577,1),(1915706287,1),(1317409294,1),(1105508206,1),(831322301,1),(1143918270,1),(1163037470,1),(981536038,1),(1044787949,1),(974287469,1),(791459635,1),(648125182,1),(1900932230,1),(969400127,1),(1715459471,1),(196669677,1),(1969908833,1),(1186566863,1),(2103252725,1),(391235915,1),(80825841,1),(747831338,1),(2071494830,1),(414826920,1),(1126270771,1),(871221863,1),(199194682,1),(1988129119,1),(773457402,1),(2074130127,1),(332649926,1),(895968206,1),(1696699474,1),(431282348,1),(92774534,1),(1571593217,1),(1706486725,1),(900833683,1),(463546101,1),(862234212,1),(40464539,1),(795131004,1),(619681427,1),(1160798909,1),(1067162689,1),(119151738,1),(919606161,1),(696852254,1),(2126491130,1),(105972945,1),(449500175,1),(966925097,1),(933764547,1),(1933111206,1),(1434137188,1),(2121742314,1),(1363804782,3),(1793163444,1),(773356986,1),(1486822661,1),(2103910936,1),(1986979242,1),(411246207,1),(1511113946,1),(2035962001,1),(166509589,1),(1532927190,1),(948968071,1),(2111740117,2),(876577792,1),(574454426,1),(648544556,1),(280710041,1),(1109100372,1),(1641660244,1),(288110360,1),(351886457,1),(1497038052,1),(352214961,1),(1440693710,1),(1859500703,1),(1630575608,1),(890157969,1),(2117579733,1),(1957761162,1),(12100676,1),(626213642,1),(403609289,1),(363223016,1),(483940922,1),(1560761297,1),(1534127198,1),(1940989038,1),(508223156,5),(997576797,1),(1426826732,1),(113951287,1),(919935458,1),(2146963264,1),(1532294524,1),(1256053442,1),(1649015285,1),(1143363427,1),(2091143952,1),(1058769421,1),(358684642,1),(1342122725,1),(2089909044,1),(543000647,1),(854745940,1),(718389366,1),(1609673238,2),(326468362,1),(2028013339,1),(472065943,1),(98211640,1),(2081927001,1),(1920292904,1),(578310584,1),(244663337,1),(283076576,1),(499021484,1),(1739007367,1),(1780096029,1),(1865718259,1),(629616053,1),(1342199316,1),(215679761,1),(414273175,1),(813398438,1),(2114110080,1),(484030289,1),(397075600,1),(116570416,1),(1518680760,1),(1186724097,1),(1964247944,1),(1349461907,1),(30968559,2),(1187540406,1),(2484405,1),(1915689927,1),(848629125,1),(814168527,1),(626560179,1),(1236230029,1),(431839315,1);
-/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
---
--- Table structure for table `user`
---
-
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
-  `Host` char(60) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `User` char(16) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `Password` char(41) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL DEFAULT '',
-  `Select_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Insert_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Update_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Delete_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Create_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Drop_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Reload_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Shutdown_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Process_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `File_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Grant_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `References_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Index_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Alter_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Show_db_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Super_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Create_tmp_table_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Lock_tables_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Execute_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Repl_slave_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Repl_client_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Create_view_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Show_view_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Create_routine_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Alter_routine_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `Create_user_priv` enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N',
-  `ssl_type` enum('','ANY','X509','SPECIFIED') CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `ssl_cipher` blob NOT NULL,
-  `x509_issuer` blob NOT NULL,
-  `x509_subject` blob NOT NULL,
-  `max_questions` int(11) unsigned NOT NULL DEFAULT '0',
-  `max_updates` int(11) unsigned NOT NULL DEFAULT '0',
-  `max_connections` int(11) unsigned NOT NULL DEFAULT '0',
-  `max_user_connections` int(11) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`Host`,`User`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Users and global privileges';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user`
---
-
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('localhost','root','19c3b9c273eb815b','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','','','','',0,0,0,0),('localhost.localdomain','root','','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','','','','',0,0,0,0),('127.0.0.1','root','','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','','','','',0,0,0,0),('localhost','','','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','','','','',0,0,0,0),('localhost.localdomain','','','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','','','','',0,0,0,0),('localhost','gedadmin','47817a2109ee1a66','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','','','','',0,0,0,0),('localhost','cacti','19c3b9c273eb815b','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','','','','',0,0,0,0),('localhost','eonweb','19c3b9c273eb815b','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','','','','',0,0,0,0),('localhost','lilac','19c3b9c273eb815b','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','','','','',0,0,0,0);
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `users`
---
-
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
-  `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `group_id` int(11) NOT NULL,
-  `user_name` varchar(255) NOT NULL,
-  `user_passwd` varchar(255) NOT NULL,
-  `user_descr` varchar(255) DEFAULT NULL,
-  `user_type` tinyint(1) NOT NULL,
-  `user_location` varchar(255) DEFAULT NULL,
-  `user_limitation` tinyint(1) NOT NULL,
-  PRIMARY KEY (`user_id`,`user_name`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,1,'admin','21232f297a57a5a743894a0e4a801fc3','default user',0,'',0),(2,1,'system','6539e8d6913c820fb4b36c46e65f25bb','Administrateur Systemes',0,'',0),(3,1,'systemx','6539e8d6913c820fb4b36c46e65f25bb','Administrateur Systemes Unix-Linux',0,'',0),(4,1,'systemw','6539e8d6913c820fb4b36c46e65f25bb','Administrateur Systemes Windows',0,'',0),(5,2,'linux','6539e8d6913c820fb4b36c46e65f25bb','Operateur Systemes Linux',0,'',0),(6,3,'aix','6539e8d6913c820fb4b36c46e65f25bb','Operateur Systemes AIX',0,'',0),(7,4,'opwin','6539e8d6913c820fb4b36c46e65f25bb','Operateur systemes Windows',0,'',0),(8,5,'sgbd','6539e8d6913c820fb4b36c46e65f25bb','Operateur SGBD',0,'',0),(9,6,'exploit','6539e8d6913c820fb4b36c46e65f25bb','Operateur Exploit',0,'',0),(10,0,'manager','6539e8d6913c820fb4b36c46e65f25bb','Utilisateur Manager',0,'',1),(11,1,'alarmpoint','6539e8d6913c820fb4b36c46e65f25bb','Operateur AlarmPoint',0,'',0);
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
-
 
 DROP TABLE IF EXISTS `label`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
