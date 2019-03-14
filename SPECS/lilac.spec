@@ -73,13 +73,16 @@ chown -h nagios:rgm %{linkdir}
 %clean
 rm -rf %{buildroot}
 
+
 %files
-%{rgmconfdir}
 %defattr(-, nagios, %{rgm_group}, 0755)
 %config %{datadir}/includes/lilac-conf.php
 %{datadir}
+%defattr(-, root, %{rgm_group}, 0644)
+%{rgmlibdir}
 %defattr(-, root, root, 0644)
 %config %{_sysconfdir}/httpd/conf.d/lilac.conf
+
 
 %changelog
 * Thu Mar 14 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 2.5-2.rgm
