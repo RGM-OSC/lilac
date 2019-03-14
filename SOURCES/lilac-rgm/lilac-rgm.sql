@@ -256,7 +256,7 @@ CREATE TABLE `import_job` (
   `stats` text NOT NULL,
   `cmd` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Import Job Information';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Import Job Information';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -283,23 +283,8 @@ CREATE TABLE `import_log_entry` (
   `type` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `import_log_entry_FI_1` (`job`)
-) ENGINE=MyISAM AUTO_INCREMENT=317 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Import Job Entry';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Import Job Entry';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `import_log_entry`
---
-
-LOCK TABLES `import_log_entry` WRITE;
-/*!40000 ALTER TABLE `import_log_entry` DISABLE KEYS */;
-/*!40000 ALTER TABLE `import_log_entry` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `label`
---
-
-
 
 --
 -- Table structure for table `lilac_configuration`
