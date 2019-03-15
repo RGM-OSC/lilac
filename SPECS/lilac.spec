@@ -67,7 +67,7 @@ ln -nsf %{datadir} %{linkdir}
 chown -h nagios:rgm %{linkdir}
 
 # execute SQL postinstall script
-/usr/share/rgm/manage_sql.sh "%{rgm_db_lilac}" "%{rgmlibdir}/lilac-rgm.sql" "%{rgm_sql_internal_user}" "%{rgm_sql_internal_pwd}"
+/usr/share/rgm/manage_sql.sh -d %{rgm_db_lilac} -s %{rgmlibdir}/lilac-rgm.sql -u %{rgm_sql_internal_user} -p %{rgm_sql_internal_pwd}"
 
 
 %clean
