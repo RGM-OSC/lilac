@@ -182,9 +182,9 @@ LOCK TABLES `export_job` WRITE;
 /*!40000 ALTER TABLE `export_job` DISABLE KEYS */;
 INSERT INTO `export_job` VALUES
   (1,'nagios','',
-  'O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:5:{s:15:\"backup_existing\";b:0;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:70:\"/srv/eyesofnetwork/nagios/bin/nagios -v /tmp/lilac-export-1/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}',
+  'O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:5:{s:15:\"backup_existing\";b:0;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:70:\"/srv/rgm/nagios/bin/nagios -v /tmp/lilac-export-1/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}',
   NULL,NULL,'Complete',4,NULL,'O:11:\"ImportStats\":2:{s:18:\"\0ImportStats\0stats\";a:0:{}s:16:\"\0ImportStats\0job\";N;}','start'),
-  (2,'nagios_incremental','','O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:9:{s:12:\"export_debug\";b:0;s:11:\"export_diff\";b:0;s:10:\"export_dep\";b:0;s:10:\"export_esc\";b:0;s:15:\"backup_existing\";b:0;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:70:\"/srv/eyesofnetwork/nagios/bin/nagios -v /tmp/lilac-export-3/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}',
+  (2,'nagios_incremental','','O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:9:{s:12:\"export_debug\";b:0;s:11:\"export_diff\";b:0;s:10:\"export_dep\";b:0;s:10:\"export_esc\";b:0;s:15:\"backup_existing\";b:0;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:70:\"/srv/rgm/nagios/bin/nagios -v /tmp/lilac-export-3/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}',
   NULL,NULL,'Complete',4,NULL,'O:11:\"ImportStats\":2:{s:18:\"\0ImportStats\0stats\";a:0:{}s:16:\"\0ImportStats\0job\";N;}','start');
 /*!40000 ALTER TABLE `export_job` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -330,7 +330,7 @@ CREATE TABLE `nagios_broker_module` (
 
 LOCK TABLES `nagios_broker_module` WRITE;
 /*!40000 ALTER TABLE `nagios_broker_module` DISABLE KEYS */;
-INSERT INTO `nagios_broker_module` VALUES (2,'/srv/eyesofnetwork/mk-livestatus/lib/livestatus.o /srv/eyesofnetwork/nagios/var/log/rw/live');
+INSERT INTO `nagios_broker_module` VALUES (2,'/srv/rgm/mk-livestatus/lib/livestatus.o /srv/rgm/nagios/var/log/rw/live');
 /*!40000 ALTER TABLE `nagios_broker_module` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -387,7 +387,7 @@ CREATE TABLE `nagios_cgi_configuration` (
 
 LOCK TABLES `nagios_cgi_configuration` WRITE;
 /*!40000 ALTER TABLE `nagios_cgi_configuration` DISABLE KEYS */;
-INSERT INTO `nagios_cgi_configuration` VALUES (3,'/srv/eyesofnetwork/nagios/share','/nagios',1,'','admin','admin','admin','admin','admin','admin','admin',NULL,NULL,5,NULL,4,90,NULL,NULL,NULL,NULL,NULL,'/bin/ping',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_cgi_configuration` VALUES (3,'/srv/rgm/nagios/share','/nagios',1,'','admin','admin','admin','admin','admin','admin','admin',NULL,NULL,5,NULL,4,90,NULL,NULL,NULL,NULL,NULL,'/bin/ping',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `nagios_cgi_configuration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -421,13 +421,13 @@ INSERT INTO `nagios_command` VALUES (49,'dns_status','$USER1$/check_dns -H $ARG1
   (59,'check_telnet','$USER1$/check_tcp -H $HOSTADDRESS$ -p 23','check the openning of the telnet port (23)'),
   (60,'check_udp','$USER1$/check_udp -H $HOSTADDRESS$ -p $ARG1$','check the openning of a given udp port'),
   (61,'check-host-alive','$USER1$/check_ping -H $HOSTADDRESS$ -w 3000.0,80% -c 5000.0,100% -p 1','check the availability of a host by ping'),
-  (62,'notify-by-email-host','/srv/eyesofnetwork/notifier/bin/notifier.pl -t host -c /srv/eyesofnetwork/notifier/etc/notifier.cfg -r /srv/eyesofnetwork/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -e \"$HOSTSTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$HOSTOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$HOSTNOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','notification mail hosts'),
+  (62,'notify-by-email-host','/srv/rgm/notifier/bin/notifier.pl -t host -c /srv/rgm/notifier/etc/notifier.cfg -r /srv/rgm/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -e \"$HOSTSTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$HOSTOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$HOSTNOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','notification mail hosts'),
   (63,'host-notify-by-epager','/usr/bin/printf \"%b\" \"Host \\\'$HOSTALIAS$\\\' is $HOSTSTATE$\\\\nInfo: $HOSTOUTPUT$\\\\nTime: $LONGDATETIME$\" | /bin/mail -s \"$NOTIFICATIONTYPE$ alert - Host $HOSTNAME$ is $HOSTSTATE$\" $CONTACTPAGER$','be notified about problems by epager'),
-  (64,'notify-by-email-service','/srv/eyesofnetwork/notifier/bin/notifier.pl -t service -c /srv/eyesofnetwork/notifier/etc/notifier.cfg -r /srv/eyesofnetwork/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -s \"$SERVICEDESC$\" -e \"$SERVICESTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$SERVICEOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -B \"$SERVICEGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$SERVICENOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','notification mail services'),
+  (64,'notify-by-email-service','/srv/rgm/notifier/bin/notifier.pl -t service -c /srv/rgm/notifier/etc/notifier.cfg -r /srv/rgm/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -s \"$SERVICEDESC$\" -e \"$SERVICESTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$SERVICEOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -B \"$SERVICEGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$SERVICENOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','notification mail services'),
   (65,'notify-by-epager','/usr/bin/printf \"%b\" \"Service: $SERVICEDESC$\\\\nHost: $HOSTNAME$\\\\nAddress: $HOSTADDRESS$\\\\nState: $SERVICESTATE$\\\\nInfo: $SERVICEOUTPUT$\\\\nDate: $LONGDATETIME$\" | /bin/mail -s \"$NOTIFICATIONTYPE$: $HOSTALIAS$/$SERVICEDESC$ is $SERVICESTATE$\" $CONTACTPAGER$','service notification by epager'),
-  (66,'process-host-perfdata','/usr/bin/printf \"%b\" \"$LASTHOSTCHECK$\\\\t$HOSTNAME$\\\\t$HOSTSTATE$\\\\t$HOSTATTEMPT$\\\\t$HOSTSTATETYPE$\\\\t$HOSTEXECUTIONTIME$\\\\t$HOSTOUTPUT$\\\\t$HOSTPERFDATA$\\\\n\" >> /srv/eyesofnetwork/nagios/var/log/host-perfdata.out','generate host perfdata'),
-  (67,'process-service-perfdata','/usr/bin/printf \"%b\" \"$LASTSERVICECHECK$\\\\t$HOSTNAME$\\\\t$SERVICEDESC$\\\\t$SERVICESTATE$\\\\t$SERVICEATTEMPT$\\\\t$SERVICESTATETYPE$\\\\t$SERVICEEXECUTIONTIME$\\\\t$SERVICELATENCY$\\\\t$SERVICEOUTPUT$\\\\t$SERVICEPERFDATA$\\\\n\" >> /srv/eyesofnetwork/nagios/var/log/service-perfdata.out','generate service perfdata'),
-  (68,'event-browser-service','/srv/eyesofnetwork/ged/scripts/ged-nagios-service \"$HOSTNAME$\" \"$SERVICEDESC$\" \"$SERVICESTATE$\" \"$SERVICEOUTPUT$\" \"$HOSTADDRESS$\" \"$HOSTALIAS$\" \"$HOSTGROUPNAMES$\" \"$SERVICEGROUPNAMES$\"','event browser command for services'),
+  (66,'process-host-perfdata','/usr/bin/printf \"%b\" \"$LASTHOSTCHECK$\\\\t$HOSTNAME$\\\\t$HOSTSTATE$\\\\t$HOSTATTEMPT$\\\\t$HOSTSTATETYPE$\\\\t$HOSTEXECUTIONTIME$\\\\t$HOSTOUTPUT$\\\\t$HOSTPERFDATA$\\\\n\" >> /srv/rgm/nagios/var/log/host-perfdata.out','generate host perfdata'),
+  (67,'process-service-perfdata','/usr/bin/printf \"%b\" \"$LASTSERVICECHECK$\\\\t$HOSTNAME$\\\\t$SERVICEDESC$\\\\t$SERVICESTATE$\\\\t$SERVICEATTEMPT$\\\\t$SERVICESTATETYPE$\\\\t$SERVICEEXECUTIONTIME$\\\\t$SERVICELATENCY$\\\\t$SERVICEOUTPUT$\\\\t$SERVICEPERFDATA$\\\\n\" >> /srv/rgm/nagios/var/log/service-perfdata.out','generate service perfdata'),
+  (68,'event-browser-service','/srv/rgm/ged/scripts/ged-nagios-service \"$HOSTNAME$\" \"$SERVICEDESC$\" \"$SERVICESTATE$\" \"$SERVICEOUTPUT$\" \"$HOSTADDRESS$\" \"$HOSTALIAS$\" \"$HOSTGROUPNAMES$\" \"$SERVICEGROUPNAMES$\"','event browser command for services'),
   (69,'linux_cpu','$USER1$/check_snmp_load.pl -H $HOSTADDRESS$ -T netsc -C $USER2$ -w $ARG1$ -c $ARG2$ -f','cpu load of a linux host'),
   (70,'linux_memory','$USER1$/check_snmp_mem.pl -H $HOSTADDRESS$ -f -C $USER2$ -w $ARG1$,$ARG2$ -c $ARG3$,$ARG4$ -b -2','memory load of a linux host'),
   (180,'check_HyperV','$USER1$/check_hyperv-health.sh $HOSTADDRESS$ $USER2$','check_HyperV'),
@@ -438,11 +438,11 @@ INSERT INTO `nagios_command` VALUES (49,'dns_status','$USER1$/check_dns -H $ARG1
   (76,'notes_availability','$USER1$/check_lotus.pl -H $HOSTADDRESS$','availability of a notes server'),
   (77,'dhcp_status','$USER1$/check_dhcp -s $HOSTADDRESS$','check the response time of a DHCP server'),
   (80,'check_snmp_interface','perl $USER1$/check_snmp_int.pl -H $HOSTADDRESS$ -C $USER2$ -r -n $ARG1$ -k -w $ARG2$,$ARG3$ -c $ARG4$,$ARG5$','check the bandwith\\\'s state of a given interface'),
-  (167,'process-service-perfdata-file','/bin/mv /srv/eyesofnetwork/graphios/var/spool/service-perfdata /srv/eyesofnetwork/graphios/var/spool/service-perfdata.$TIMET$','process-service-perfdata-file'),
-  (166,'process-host-perfdata-file','/bin/mv /srv/eyesofnetwork/graphios/var/spool/host-perfdata /srv/eyesofnetwork/graphios/var/spool/host-perfdata.$TIMET$','process-host-perfdata-file'),
+  (167,'process-service-perfdata-file','/bin/mv /srv/rgm/graphios/var/spool/service-perfdata /srv/rgm/graphios/var/spool/service-perfdata.$TIMET$','process-service-perfdata-file'),
+  (166,'process-host-perfdata-file','/bin/mv /srv/rgm/graphios/var/spool/host-perfdata /srv/rgm/graphios/var/spool/host-perfdata.$TIMET$','process-host-perfdata-file'),
   (188,'check_wmi_Processor','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m checkcpu $ARG1$ $ARG2$','Check % Processor Usage of Windows Server ARG1 and ARG2 avail for custom applying'),
   (187,'check_wmi_PageFileUsage','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m checkpage $ARG1$ $ARG2$','Check Usage Pagefile Usage of Windows Server. ARG1 and ARG2 available for customization.'),
-  (91,'event-browser-host','/srv/eyesofnetwork/ged/scripts/ged-nagios-host \"$HOSTNAME$\" \"PING\" \"$HOSTSTATE$\" \"$HOSTOUTPUT$\" \"$HOSTADDRESS$\" \"$HOSTALIAS$\" \"$HOSTGROUPNAMES$\"','event browser command for hosts'),
+  (91,'event-browser-host','/srv/rgm/ged/scripts/ged-nagios-host \"$HOSTNAME$\" \"PING\" \"$HOSTSTATE$\" \"$HOSTOUTPUT$\" \"$HOSTADDRESS$\" \"$HOSTALIAS$\" \"$HOSTGROUPNAMES$\"','event browser command for hosts'),
   (94,'process','perl $USER1$/check_snmp_process.pl -H $HOSTADDRESS$ -C $USER2$ -r -n $ARG1$','check the load of a given process - arg1 : process name'),
   (99,'snmp_cpu','$USER1$/check_snmp_load.pl -H $HOSTADDRESS$ -C $USER2$ -w $ARG1$ -c $ARG2$ -f','cpu average'),
   (100,'win_snmp_memory','$USER1$/check_snmp_storage.pl -H $HOSTADDRESS$ -C $USER2$ -m \"Mem\" -w $ARG1$ -c $ARG2$ -f','memory load of a windows server'),
@@ -467,8 +467,8 @@ INSERT INTO `nagios_command` VALUES (49,'dns_status','$USER1$/check_dns -H $ARG1
   (185,'check_wmi_Network_PacketError_vmxnet3','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m  checknetwork -a vmxnet3 -w PacketsReceivedErrors=$ARG1$ -c PacketsReceivedErrors=$ARG2$ ','Check Network Packets Received Errors of Windows Server. ARG1warning size,  ARG2 critical'),
   (152,'dell_status','$USER1$/check_openmanage -H $HOSTADDRESS$ -C $USER2$','dell openmanage state'),
   (153,'systime','$USER1$/check_systime.pl -H $HOSTADDRESS$ -C $USER2$ -n $ARG1$','systime snmp'),
-  (161,'eon_service_notifier','/srv/eyesofnetwork/notifier/bin/notifier.pl -t service -c /srv/eyesofnetwork/notifier/etc/notifier.cfg -r /srv/eyesofnetwork/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -s \"$SERVICEDESC$\" -e \"$SERVICESTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$SERVICEOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -B \"$SERVICEGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$SERVICENOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','Eon notification broker for service'),
-  (162,'eon_host_notifier','/srv/eyesofnetwork/notifier/bin/notifier.pl -t host -c /srv/eyesofnetwork/notifier/etc/notifier.cfg -r /srv/eyesofnetwork/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -e \"$HOSTSTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$HOSTOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$HOSTNOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','Eon notification broker for host'),
+  (161,'eon_service_notifier','/srv/rgm/notifier/bin/notifier.pl -t service -c /srv/rgm/notifier/etc/notifier.cfg -r /srv/rgm/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -s \"$SERVICEDESC$\" -e \"$SERVICESTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$SERVICEOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -B \"$SERVICEGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$SERVICENOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','Eon notification broker for service'),
+  (162,'eon_host_notifier','/srv/rgm/notifier/bin/notifier.pl -t host -c /srv/rgm/notifier/etc/notifier.cfg -r /srv/rgm/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -e \"$HOSTSTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$HOSTOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$HOSTNOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','Eon notification broker for host'),
   (163,'check_int_traffic','$USER1$/check_int_traffic.pl -H $HOSTADDRESS$ -C $USER2$ $ARG1$','check_int_traffic'),
   (164,'check_disk','$USER1$/check_snmp_storage.pl -H $HOSTADDRESS$ -C $USER2$ -m $ARG1$ -w $ARG2$ -c $ARG3$ -S 0 -q FixedDisk -f','used space on a windows partition or linux file system'),
   (189,'check_wmi_Processor-Queue','$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER4$/$USER7$ -p $USER23$ -m checkcpuq $ARG1$ $ARG2$','Check  Processor Queue Lenght of Windows Server ARG1 and ARG2 avail for custom applying'),
@@ -659,7 +659,7 @@ CREATE TABLE `nagios_contact_group` (
 
 LOCK TABLES `nagios_contact_group` WRITE;
 /*!40000 ALTER TABLE `nagios_contact_group` DISABLE KEYS */;
-INSERT INTO `nagios_contact_group` VALUES (3,'admins','EyesOfNetwork Administrators'),
+INSERT INTO `nagios_contact_group` VALUES (3,'admins','RGM Administrators'),
   (5,'test','test'),
   (7,'Exploitation','Groupes pour la reception des notifications avancÃ©es');
 /*!40000 ALTER TABLE `nagios_contact_group` ENABLE KEYS */;
@@ -979,7 +979,7 @@ CREATE TABLE `nagios_host` (
 
 LOCK TABLES `nagios_host` WRITE;
 /*!40000 ALTER TABLE `nagios_host` DISABLE KEYS */;
-INSERT INTO `nagios_host` VALUES (6,'rgm-01-poc','EyesOfNetwork Network Server','RGM',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+INSERT INTO `nagios_host` VALUES (6,'rgm-01-poc','RGM Server','RGM',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
   (153,'venus.budcca-demo.lab','10.112.11.100','VENUS',NULL,'venus.budcca-demo.lab',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
   (154,'neptune.budcca-demo.lab','10.112.11.100','NEPTUNE',NULL,'neptune.budcca-demo.lab',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
   (155,'mars.budcca-demo.lab','10.112.11.100','MARS',NULL,'mars.budcca-demo.lab',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
@@ -1677,7 +1677,7 @@ CREATE TABLE `nagios_main_configuration` (
 
 LOCK TABLES `nagios_main_configuration` WRITE;
 /*!40000 ALTER TABLE `nagios_main_configuration` DISABLE KEYS */;
-INSERT INTO `nagios_main_configuration` VALUES (3,'/srv/eyesofnetwork/nagios/etc','/srv/eyesofnetwork/nagios/var/log/nagios.log','/srv/eyesofnetwork/nagios/var/log/nagios.tmp','/srv/eyesofnetwork/nagios/var/log/status.dat',15,'nagios','eyesofnetwork',1,1,1,1,'d','/srv/eyesofnetwork/nagios/var/log/archives',1,NULL,'/srv/eyesofnetwork/nagios/var/log/rw/nagios.cmd','/var/run/nagios/nagios.pid',1,'/srv/eyesofnetwork/nagios/var/log/retention.dat',60,1,0,1,1,1,1,0,1,1,91,68,NULL,NULL,'s',0,10,60,0,1,5,20,5,20,0,20,10,30,30,5,NULL,5,0,NULL,1,0,1,NULL,'euro','`~!$%^&*|\\\'\"<>?,()=','`~$&|\\\'\"<>','nagios','pagenagios',1,'s',0,1,5,'s',5,0,30,180,NULL,NULL,NULL,1,60,60,0,0,'-1',0,NULL,NULL,'/srv/eyesofnetwork/nagflux/var/spool/host-perfdata','DATATYPE::HOSTPERFDATA\\tTIMET::$TIMET$\\tHOSTNAME::$HOSTNAME$\\tHOSTPERFDATA::$HOSTPERFDATA$\\tHOSTCHECKCOMMAND::$HOSTCHECKCOMMAND$\\tHOSTSTATE::$HOSTSTATE$\\tHOSTSTATETYPE::$HOSTSTATETYPE$\\tGRAPHITEPREFIX::rgm\\tGRAPHITEPOSTFIX::hgraph\\tMETRICTYPE::gauge','/srv/eyesofnetwork/nagflux/var/spool/service-perfdata','DATATYPE::SERVICEPERFDATA\\tTIMET::$TIMET$\\tHOSTNAME::$HOSTNAME$\\tSERVICEDESC::$SERVICEDESC$\\tSERVICEPERFDATA::$SERVICEPERFDATA$\\tSERVICECHECKCOMMAND::$SERVICECHECKCOMMAND$\\tHOSTSTATE::$HOSTSTATE$\\tHOSTSTATETYPE::$HOSTSTATETYPE$\\tSERVICESTATE::$SERVICESTATE$\\tSERVICESTATETYPE::$SERVICESTATETYPE$\\tGRAPHITEPREFIX::rgm\\tGRAPHITEPOSTFIX::sgraph\\tMETRICTYPE::gauge','a','a',166,167,15,15,'/srv/eyesofnetwork/nagios/var/log/objects.cache',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/tmp',0,0,0,NULL,NULL,NULL);
+INSERT INTO `nagios_main_configuration` VALUES (3,'/srv/rgm/nagios/etc','/srv/rgm/nagios/var/log/nagios.log','/srv/rgm/nagios/var/log/nagios.tmp','/srv/rgm/nagios/var/log/status.dat',15,'nagios','rgm',1,1,1,1,'d','/srv/rgm/nagios/var/log/archives',1,NULL,'/srv/rgm/nagios/var/log/rw/nagios.cmd','/var/run/nagios/nagios.pid',1,'/srv/rgm/nagios/var/log/retention.dat',60,1,0,1,1,1,1,0,1,1,91,68,NULL,NULL,'s',0,10,60,0,1,5,20,5,20,0,20,10,30,30,5,NULL,5,0,NULL,1,0,1,NULL,'euro','`~!$%^&*|\\\'\"<>?,()=','`~$&|\\\'\"<>','nagios','pagenagios',1,'s',0,1,5,'s',5,0,30,180,NULL,NULL,NULL,1,60,60,0,0,'-1',0,NULL,NULL,'/srv/rgm/nagflux/var/spool/host-perfdata','DATATYPE::HOSTPERFDATA\\tTIMET::$TIMET$\\tHOSTNAME::$HOSTNAME$\\tHOSTPERFDATA::$HOSTPERFDATA$\\tHOSTCHECKCOMMAND::$HOSTCHECKCOMMAND$\\tHOSTSTATE::$HOSTSTATE$\\tHOSTSTATETYPE::$HOSTSTATETYPE$\\tGRAPHITEPREFIX::rgm\\tGRAPHITEPOSTFIX::hgraph\\tMETRICTYPE::gauge','/srv/rgm/nagflux/var/spool/service-perfdata','DATATYPE::SERVICEPERFDATA\\tTIMET::$TIMET$\\tHOSTNAME::$HOSTNAME$\\tSERVICEDESC::$SERVICEDESC$\\tSERVICEPERFDATA::$SERVICEPERFDATA$\\tSERVICECHECKCOMMAND::$SERVICECHECKCOMMAND$\\tHOSTSTATE::$HOSTSTATE$\\tHOSTSTATETYPE::$HOSTSTATETYPE$\\tSERVICESTATE::$SERVICESTATE$\\tSERVICESTATETYPE::$SERVICESTATETYPE$\\tGRAPHITEPREFIX::rgm\\tGRAPHITEPOSTFIX::sgraph\\tMETRICTYPE::gauge','a','a',166,167,15,15,'/srv/rgm/nagios/var/log/objects.cache',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/tmp',0,0,0,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `nagios_main_configuration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1732,7 +1732,7 @@ CREATE TABLE `nagios_resource` (
 
 LOCK TABLES `nagios_resource` WRITE;
 /*!40000 ALTER TABLE `nagios_resource` DISABLE KEYS */;
-INSERT INTO `nagios_resource` VALUES (2,'/srv/eyesofnetwork/nagios/plugins','scc_com1','/srv/eyesofnetwork/notifier','budcca','public','','svc-rgm','admin','3paradm','/srv/eyesofnetwork/pnp4nagios','','','','','','','3f64b92e9948c84f1566c92e53d58e418a2163c2','','','','','Constell@tion123','Constell@tion','','','','','','','','','');
+INSERT INTO `nagios_resource` VALUES (2,'/srv/rgm/nagios/plugins','scc_com1','/srv/rgm/notifier','budcca','public','','svc-rgm','admin','3paradm','/srv/rgm/pnp4nagios','','','','','','','3f64b92e9948c84f1566c92e53d58e418a2163c2','','','','','Constell@tion123','Constell@tion','','','','','','','','','');
 /*!40000 ALTER TABLE `nagios_resource` ENABLE KEYS */;
 UNLOCK TABLES;
 
