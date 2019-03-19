@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:2.5
-Release: 2.rgm
+Release: 3.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -9,7 +9,7 @@ URL: http://www.lilacplatform.com/
 Source0: %{name}-%{version}.tar.gz
 Source1: %{name}-rgm.tar.gz
 
-Requires: rgm-base, httpd, mariadb-server, php, php-mysql, php-pear, php-process, php-xml, nagios >= 3.0, nmap
+Requires: rgm-base, httpd, mariadb-libs, php, php-mysql, php-pear, php-process, php-xml, nagios >= 3.0, nmap
 BuildRequires: rpm-macros-rgm
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -85,6 +85,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Mar 19 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 2.5-3.rgm
+- fix mariadb dependency to mariadb-libs
+
 * Thu Mar 14 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 2.5-2.rgm
 - SQL schema sanitization (removal of table garbage, update all table charsets to UTF8)
 - adds rgm-base package dependency
