@@ -19,8 +19,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 %define linkdir		%{rgm_path}/%{name}
 # /var/lib/rgm/rgmweb
 %define rgmlibdir       %{_sharedstatedir}/rgm/%{name}
-# /usr/share/doc/rgm
-%define rgmdocdir       %{_datarootdir}/doc/rgm
+
 
 %description
 The Lilac Platform is a collection of tools to enhance existing open source monitoring applications, written by Lilac Networks. 
@@ -46,7 +45,7 @@ cp -afpvr %{name}-%{version}/* %{buildroot}%{datadir}
 
 # rgm - specific
 install -d -m0755 %{buildroot}%{rgmlibdir}
-install -d -m0755 %{buildroot}%{rgmdocdir}
+install -d -m0755 %{buildroot}%{rgm_docdir}
 cp -afpvr %{name}-rgm/* %{buildroot}%{rgmlibdir}
 cp -afpv %{name}-rgm/%{name}.conf  %{buildroot}%{_sysconfdir}/httpd/conf.d
 cp -afpv %{name}-rgm/%{name}-conf.php  %{buildroot}%{datadir}/includes/
