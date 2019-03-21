@@ -23,10 +23,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 require_once('includes/config.inc');
 print_header();
 
-print_window_header("About Eonweb Configurator", "100%");
+print_window_header("About RGMweb Configurator", "100%");
 ?>
 <p>
-<h2>Eonweb Configurator <?php echo LILAC_VERSION;?></h2>
+<h2>RGMweb Configurator <?php echo LILAC_VERSION;?></h2>
 The community site is available at <a href="http://www.eyesofnetwork.com">www.eyesofnetwork.com</a>.  
 </p>
 <p>
