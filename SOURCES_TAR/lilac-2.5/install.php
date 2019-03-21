@@ -4,26 +4,27 @@
  */
 require_once('includes/init.inc.php');
 
-
-if(isset($_POST['reg'])) {
-	// We are registering!
-	$curl = curl_init('http://register.eyesofnetwork.com/');
-	$request = array();
-	$request['organizationName'] = $_POST['organizationName'];
-	$request['organizationCountry'] = $_POST['organizationCountry'];
-	$request['organizationSize'] = $_POST['organizationSize']; 
-	$request['lilacUse'] = $_POST['lilacUse'];
-	$request['lilacVersion'] = $_POST['lilacVersion'];
-	$request['interestedEmail'] = $_POST['interestedEmail'];
-	$request['interestedInServices'] = $_POST['interestedInServices'];
-	curl_setopt($curl, CURLOPT_POST, 1);
-	curl_setopt($curl, CURLOPT_POSTFIELDS, array('request' => json_encode($request)));
-	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-	$response = curl_exec($curl);
-	$response = json_decode($response, true);
-	print json_encode(true);
-	die();
-}
+/** Thus sucks... comment it out
+ * if(isset($_POST['reg'])) {
+ * 	// We are registering!
+ * 	$curl = curl_init('http://register.eyesofnetwork.com/');
+ * 	$request = array();
+ * 	$request['organizationName'] = $_POST['organizationName'];
+ * 	$request['organizationCountry'] = $_POST['organizationCountry'];
+ * 	$request['organizationSize'] = $_POST['organizationSize']; 
+ * 	$request['lilacUse'] = $_POST['lilacUse'];
+ * 	$request['lilacVersion'] = $_POST['lilacVersion'];
+ * 	$request['interestedEmail'] = $_POST['interestedEmail'];
+ * 	$request['interestedInServices'] = $_POST['interestedInServices'];
+ * 	curl_setopt($curl, CURLOPT_POST, 1);
+ * 	curl_setopt($curl, CURLOPT_POSTFIELDS, array('request' => json_encode($request)));
+ * 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+ * 	$response = curl_exec($curl);
+ * 	$response = json_decode($response, true);
+ * 	print json_encode(true);
+ * 	die();
+ * }
+ */
 
 // Check to see if we're being called from CLI mode, to check if we can run PHP scripts via cli
 if(isset($argv) && sizeof($argv) > 0) {
