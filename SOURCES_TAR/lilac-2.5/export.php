@@ -326,7 +326,7 @@ if(!isset($exportJob))	{
 	<p>
 <?php
 // Get Next Job Id
-include("/srv/eyesofnetwork/eonweb/include/config.php");
+include("/srv/rgm/rgmweb/include/config.php");
 $link = mysql_connect( $databas_host, $database_username, $database_password );
 mysql_select_db( $database_lilac );
 $query = mysql_query( "SHOW TABLE STATUS LIKE 'export_job';" );

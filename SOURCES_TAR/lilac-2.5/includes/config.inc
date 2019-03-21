@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 require_once(dirname(__FILE__) . "/init.inc.php");	// This should be moved into other files.
 
 
-$sys_config['logos_path'] = '/srv/eyesofnetwork/nagios/share/images/logos/';		// legacy
+$sys_config['logos_path'] = '/srv/rgm/nagios/share/images/logos/';		// legacy
 $path_config['image_root'] = 'images/';		// legacy	
 
 if ( ! defined( "PATH_SEPARATOR" ) ) {
