@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:2.5
-Release: 3.rgm
+Release: 4.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -67,7 +67,7 @@ chown -h nagios:rgm %{linkdir}
 
 # execute SQL postinstall script
 /usr/share/rgm/manage_sql.sh -d %{rgm_db_lilac} -s %{rgmlibdir}/lilac-rgm.sql -u %{rgm_sql_internal_user} -p "%{rgm_sql_internal_pwd}"
-
+/usr/share/rgm/lilac_manage_auto_increments.sh -s
 
 %clean
 rm -rf %{buildroot}
@@ -84,6 +84,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Mar 18 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 2.5-4.rgm
+- the provided SQL schema AUTO_INCREMENTS are now dynamically set at %post section
+  (use lilac_* scripts from rgm-base package)
+
 * Thu Mar 19 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 2.5-3.rgm
 - fix mariadb dependency to mariadb-libs
 
