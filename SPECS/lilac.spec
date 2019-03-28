@@ -84,7 +84,7 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Thu Mar 18 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 2.5-4.rgm
+* Thu Mar 28 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 2.5-4.rgm
 - the provided SQL schema AUTO_INCREMENTS are now dynamically set at %post section
   (use lilac_* scripts from rgm-base package)
 
