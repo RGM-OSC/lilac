@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 'Helvetica Neue';
-    src: url('/fonts/HelveticaNeue-ThinCond.woff'); 
+    font-family: 'Fira Sans';
+    src: url('/fonts/FiraSans-Light.woff'); 
 }
 
 .btn-primary {
@@ -10,7 +10,7 @@
 }
 
 html, body {
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family: "Fira Sans",Helvetica,Arial,sans-serif;
 	background: #fff;
 	font-size: 0.9em;
 	min-width: 900px;
@@ -152,7 +152,7 @@ a.networkadd {
     font-weight: 500;
     line-height: 1.1;
     color: #a7a9ac;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Fira Sans",Helvetica,Arial,sans-serif;
 }
 
 #navigation {
