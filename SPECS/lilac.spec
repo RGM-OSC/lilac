@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
-Version:2.5
-Release: 4.rgm
+Version:3.0
+Release: 0.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -84,6 +84,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Apr 24 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-0.rgm
+- upgrade to lilac 3.0 from upstream
+- backport style tweaks from 2.5-4.rgm
+
 * Thu Mar 28 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 2.5-4.rgm
 - the provided SQL schema AUTO_INCREMENTS are now dynamically set at %post section
   (use lilac_* scripts from rgm-base package)
