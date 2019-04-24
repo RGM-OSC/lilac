@@ -12,9 +12,9 @@ $conf = array (
       'adapter' => 'mysql',
       'connection' => 
       array (
-        'dsn' => 'mysql:host=localhost;dbname=lilac',
-        'user' => 'lilac',
-        'password' => 'root66',
+        'dsn' => 'mysql:host=localhost;port=3306;dbname=lilac',
+        'user' => 'rgminternal',
+        'password' => '0rd0-c0m1735-b47h0n143',
         'options' => 
         array (
           'ATTR_PERSISTENT' => 
