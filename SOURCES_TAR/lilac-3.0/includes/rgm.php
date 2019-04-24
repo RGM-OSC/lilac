@@ -20,7 +20,7 @@
 */
 
 // EoN Classes
-include_once(LILAC_FS_ROOT . 'includes/eon.inc');
+include_once(LILAC_FS_ROOT . 'includes/rgm.inc');
 include_once(LILAC_FS_ROOT . 'classes/EoN_Exporter.php');
 include_once(LILAC_FS_ROOT . 'classes/EoN_Importer.php');
 include_once(LILAC_FS_ROOT . 'classes/EoN_Job_Exporter.php');

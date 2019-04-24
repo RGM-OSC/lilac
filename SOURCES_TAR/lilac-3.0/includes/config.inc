@@ -40,7 +40,7 @@ include_once(LILAC_FS_ROOT . 'exporter/classes.inc.php');
 include_once(LILAC_FS_ROOT . 'autodiscovery/classes.inc.php');
 include_once(LILAC_FS_ROOT . 'includes/output.php');
 include_once(LILAC_FS_ROOT . 'includes/lilac.inc');
-include_once(LILAC_FS_ROOT . 'includes/eon.php');
+include_once(LILAC_FS_ROOT . 'includes/rgm.php');
 include_once(LILAC_FS_ROOT . 'classes/Module.php');
 include_once(LILAC_FS_ROOT . 'classes/LilacCoreModule.php');
 

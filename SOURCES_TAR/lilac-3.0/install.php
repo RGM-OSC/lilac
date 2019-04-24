@@ -4,7 +4,7 @@
  */
 require_once('includes/init.inc.php');
 
-
+/*
 if(isset($_POST['reg'])) {
 	// We are registering!
 	$curl = curl_init('http://register.eyesofnetwork.com/');
@@ -23,7 +23,7 @@ if(isset($_POST['reg'])) {
 	$response = json_decode($response, true);
 	print json_encode(true);
 	die();
-}
+}*/
 
 // Check to see if we're being called from CLI mode, to check if we can run PHP scripts via cli
 if(isset($argv) && sizeof($argv) > 0) {

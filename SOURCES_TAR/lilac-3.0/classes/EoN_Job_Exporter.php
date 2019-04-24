@@ -20,8 +20,8 @@
 #########################################
 */
 
-include_once("/srv/eyesofnetwork/eonweb/include/config.php");
-include_once("/srv/eyesofnetwork/eonweb/include/function.php");
+include_once("/srv/rgm/rgmweb/include/config.php");
+include_once("/srv/rgm/rgmweb/include/function.php");
 
 // sanitizeFileName
 function sanitizeFileName($dangerous_filename, $platform = 'Unix'){

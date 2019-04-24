@@ -1,7 +1,7 @@
 <?php
 
-include_once("/srv/eyesofnetwork/eonweb/include/config.php");
-include_once("/srv/eyesofnetwork/eonweb/include/function.php");
+include_once("/srv/rgm/rgmweb/include/config.php");
+include_once("/srv/rgm/rgmweb/include/function.php");
 
 abstract class NagiosExporter extends Exporter {
 	
@@ -93,7 +93,7 @@ class NagiosExportEngine extends ExportEngine {
 			<legend>Path Locations</legend>
 			<p>
 			<label for="nagios_path">Nagios Sanity-Check Command (Required if Doing Sanity Check)</label>
-			<input type="text" size="100" maxlength="255" id="nagios_path" name="nagios_path" value="/srv/eyesofnetwork/nagios/bin/nagios -v /tmp/lilac-export-<?php echo $jobID; ?>/nagios.cfg" />
+			<input type="text" size="100" maxlength="255" id="nagios_path" name="nagios_path" value="/srv/rgm/nagios/bin/nagios -v /tmp/lilac-export-<?php echo $jobID; ?>/nagios.cfg" />
 			</p>
 			
 			<p>
