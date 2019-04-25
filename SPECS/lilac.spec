@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0
-Release: 0.rgm
+Release: 1.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -66,7 +66,7 @@ ln -nsf %{datadir} %{linkdir}
 chown -h nagios:rgm %{linkdir}
 
 # execute SQL postinstall script
-/usr/share/rgm/manage_sql.sh -d %{rgm_db_lilac} -s %{rgmlibdir}/lilac-rgm.sql -u %{rgm_sql_internal_user} -p "%{rgm_sql_internal_pwd}"
+/usr/share/rgm/manage_sql.sh -d %{rgm_db_lilac} -s %{rgmlibdir}/lilac-rgm.sql -a %{rgmlibdir}/lilac-procedures.sql -u %{rgm_sql_internal_user} -p "%{rgm_sql_internal_pwd}"
 /usr/share/rgm/lilac_manage_auto_increments.sh -s
 
 %clean
@@ -84,6 +84,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Apr 25 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-1.rgm
+- introduce SQL stored procedures to handle nagios contacts from rgmweb
+- SQL schema updates with default contact group on root templates
+
 * Wed Apr 24 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-0.rgm
 - upgrade to lilac 3.0 from upstream
 - backport style tweaks from 2.5-4.rgm
