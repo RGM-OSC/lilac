@@ -1,9 +1,11 @@
 
--- CALL create_lilac_user_from_rgmweb('roger', 'Roger Rabbit', 'rrabbit@acme.com');
+USE lilac;
+
+-- CALL create_update_lilac_user_from_rgmweb('roger', 'Roger Rabbit', 'rrabbit@acme.com');
 -- CALL delete_lilac_user_from_rgmweb('roger');
 
-USE lilac;
 DELIMITER //
+    
 DROP PROCEDURE IF EXISTS `create_update_lilac_user_from_rgmweb` //
 CREATE PROCEDURE create_update_lilac_user_from_rgmweb (
     IN username VARCHAR(64),
@@ -12,15 +14,38 @@ CREATE PROCEDURE create_update_lilac_user_from_rgmweb (
 )
 COMMENT 'create or update a Nagios contact with default group and notification commands'
 BEGIN
-    DECLARE defgroupid INT;             -- default Nagios Contact Group to apply to user
+    DECLARE default_groupid INT;        -- default Nagios Contact Group to apply to user
     DECLARE notify_host_command INT;    -- default host notifier command
     DECLARE notify_service_command INT; -- default service notifier command
     DECLARE userid INT;
     
-    SET defgroupid = 2;				-- everybody group
-    SET notify_host_command = 1;    -- event-brower-host command
-    SET notify_service_command = 2;	-- event-brower-service command
     SET AUTOCOMMIT = 1;
+    
+    --
+    -- retrieve default Nagios Contact Group from lilac_configuration table
+    --
+   	SET default_groupid = (SELECT `value` FROM lilac_configuration WHERE `key` = 'rgm_user_default_group_id');
+    IF default_groupid IS NULL THEN
+		SET default_groupid = 2;
+        INSERT INTO lilac_configuration (`key`, `value`) VALUES ('rgm_user_default_group_id', '2');
+	END IF;
+    --
+    -- retrieve default host notifier command from lilac_configuration table
+    --
+	SET notify_host_command = (SELECT `value` FROM lilac_configuration WHERE `key` = 'rgm_user_default_notify_host_command');
+    IF notify_host_command IS NULL THEN
+		SET notify_host_command = 1;
+        INSERT INTO lilac_configuration (`key`, `value`) VALUES ('rgm_user_default_notify_host_command', '1');
+	END IF;
+    --
+    -- retrieve default service notifier command from lilac_configuration table
+    --
+	SET notify_service_command = (SELECT `value` FROM lilac_configuration WHERE `key` = 'rgm_user_default_notify_service_command');
+    IF notify_service_command IS NULL THEN
+		SET notify_service_command = 2;
+        INSERT INTO lilac_configuration (`key`, `value`) VALUES ('rgm_user_default_notify_service_command', '2');
+	END IF;
+    
     -- 
     -- insert or update user
     --
@@ -66,8 +91,8 @@ BEGIN
     --
     -- affect default group to user if needed
     --
-    IF (SELECT id FROM nagios_contact_group_member WHERE contact = userid AND contactgroup = defgroupid) IS NULL THEN
-        INSERT INTO nagios_contact_group_member (contact, contactgroup) VALUES (userid, defgroupid);
+    IF (SELECT id FROM nagios_contact_group_member WHERE contact = userid AND contactgroup = default_groupid) IS NULL THEN
+        INSERT INTO nagios_contact_group_member (contact, contactgroup) VALUES (userid, default_groupid);
     END IF;
 END;
 //
@@ -78,6 +103,12 @@ CREATE PROCEDURE delete_lilac_user_from_rgmweb (
 COMMENT 'Delete a Nagios contact and its related group and notification commands'
 BEGIN
     DECLARE userid INT;
+    SET AUTOCOMMIT = 1;
+
+    --
+    -- if an ID is found for the requested username:
+    -- suppress it from groups, notification, and contact tables
+    --
     SET userid = (SELECT id FROM nagios_contact WHERE name = username);
     IF userid IS NOT NULL THEN
         DELETE FROM nagios_contact_group_member WHERE contact = userid;
