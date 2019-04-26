@@ -3,6 +3,8 @@ USE lilac;
 
 -- CALL create_update_lilac_user_from_rgmweb('roger', 'Roger Rabbit', 'rrabbit@acme.com');
 -- CALL delete_lilac_user_from_rgmweb('roger');
+-- CALL create_update_lilac_group_from_rgmweb('all', 'all nagios contacts');
+-- CALL delete_lilac_group_from_rgmweb('all');
 
 DELIMITER //
     
@@ -18,8 +20,6 @@ BEGIN
     DECLARE notify_host_command INT;    -- default host notifier command
     DECLARE notify_service_command INT; -- default service notifier command
     DECLARE userid INT;
-    
-    SET AUTOCOMMIT = 1;
     
     --
     -- retrieve default Nagios Contact Group from lilac_configuration table
@@ -96,6 +96,8 @@ BEGIN
     END IF;
 END;
 //
+
+
 DROP PROCEDURE IF EXISTS `delete_lilac_user_from_rgmweb` //
 CREATE PROCEDURE delete_lilac_user_from_rgmweb (
     IN username VARCHAR(64)
@@ -103,8 +105,6 @@ CREATE PROCEDURE delete_lilac_user_from_rgmweb (
 COMMENT 'Delete a Nagios contact and its related group and notification commands'
 BEGIN
     DECLARE userid INT;
-    SET AUTOCOMMIT = 1;
-
     --
     -- if an ID is found for the requested username:
     -- suppress it from groups, notification, and contact tables
@@ -114,6 +114,43 @@ BEGIN
         DELETE FROM nagios_contact_group_member WHERE contact = userid;
         DELETE FROM nagios_contact_notification_command WHERE contact_id = userid;
         DELETE FROM nagios_contact WHERE id = userid;
+    END IF;
+END;
+//
+
+    
+DROP PROCEDURE IF EXISTS `create_update_lilac_group_from_rgmweb` //
+CREATE PROCEDURE create_update_lilac_group_from_rgmweb (
+    IN groupname VARCHAR(64),
+    IN groupdesc VARCHAR(64)
+)
+COMMENT 'create or update a Nagios contact group'
+BEGIN
+    DECLARE groupid INT;
+    
+    IF (SELECT id FROM nagios_contact_group WHERE `name` = groupname) IS NULL THEN
+		INSERT INTO nagios_contact_group (`name`, alias) VALUES (groupname, groupdesc);
+	ELSE
+		UPDATE nagios_contact_group SET alias = groupdesc WHERE `name` = groupname;
+    END IF;
+END;
+//
+
+
+DROP PROCEDURE IF EXISTS `delete_lilac_group_from_rgmweb` //
+CREATE PROCEDURE delete_lilac_group_from_rgmweb (
+    IN groupname VARCHAR(64)
+)
+COMMENT 'Delete a Nagios contact group and its related user associations'
+BEGIN
+    DECLARE groupid INT;
+    SET groupid = (SELECT id FROM nagios_contact_group WHERE `name` = groupname);
+    IF groupid IS NOT NULL THEN
+        DELETE FROM nagios_contact_group_member WHERE contactgroup = groupid;
+        DELETE FROM nagios_contact_group WHERE id = groupid;
+        DELETE FROM nagios_escalation_contactgroup WHERE contactgroup = groupid;
+        DELETE FROM nagios_host_contactgroup WHERE contactgroup = groupid;
+        DELETE FROM nagios_service_contact_group_member WHERE contact_group = groupid;
     END IF;
 END;
 //
