@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0
-Release: 1.rgm
+Release: 2.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -84,6 +84,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Apr 30 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-2.rgm
+- fix Lilac SQL schema for nagflux (commands and core config)
+
 * Thu Apr 25 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-1.rgm
 - introduce SQL stored procedures to handle nagios contacts from rgmweb
 - SQL schema updates with default contact group on root templates
