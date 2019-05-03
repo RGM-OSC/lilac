@@ -1,6 +1,3 @@
-USE mysql;
-UPDATE `mysql`.`proc` p SET definer = 'rgminternal@localhost' WHERE definer='@';
-
 USE lilac;
 
 -- CALL create_update_lilac_user_from_rgmweb('roger', 'Roger Rabbit', 'rrabbit@acme.com');
@@ -156,3 +153,7 @@ BEGIN
     END IF;
 END;
 //
+
+DELIMITER ;
+USE mysql;
+UPDATE `mysql`.`proc` p SET definer = 'rgminternal@localhost' WHERE definer='@';
