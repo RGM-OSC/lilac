@@ -1,3 +1,5 @@
+USE mysql;
+UPDATE `mysql`.`proc` p SET definer = 'rgminternal@localhost' WHERE definer='@';
 
 USE lilac;
 
