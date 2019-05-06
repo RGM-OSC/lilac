@@ -25,7 +25,7 @@ BEGIN
     --
    	SET default_groupid = (SELECT `value` FROM lilac_configuration WHERE `key` = 'rgm_user_default_group_id');
     IF default_groupid IS NULL THEN
-		SET default_groupid = 2;
+		SET default_groupid = 3;
         INSERT INTO lilac_configuration (`key`, `value`) VALUES ('rgm_user_default_group_id', '2');
 	END IF;
     --

@@ -317,7 +317,10 @@ CREATE TABLE `nagios_contact_group` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Nagios Contact Group';
 /*!40101 SET character_set_client = @saved_cs_client */;
-INSERT INTO `nagios_contact_group` VALUES (1,'administrators','RGM Administrators'),(2,'notify_everybody','A generic group to receive advanced notifications');
+INSERT INTO `nagios_contact_group` VALUES
+  (1,'administrators','RGM Administrators'),
+  (2,'notify_everybody','A generic group to receive advanced notifications'),
+  (3,'users','Default users group');
 DROP TABLE IF EXISTS `nagios_contact_group_member`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;

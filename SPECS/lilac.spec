@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0
-Release: 3.rgm
+Release: 4.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -84,6 +84,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon May 06 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-4.rgm
+- add defaut user group in schema
+
 * Fri May 03 2019 Michael Aubertin <maubertin@fr.scc.com> - 3.0-3.rgm
 - fix Lilac SQL procedure
 
