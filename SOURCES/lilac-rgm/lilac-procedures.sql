@@ -24,68 +24,71 @@ BEGIN
     -- get default group ID from config or set default value on local config    
    	SET @tmp = (SELECT `value` FROM lilac.lilac_configuration WHERE lilac_configuration.`key` = 'rgm_user_default_group_id' LIMIT 1);
     IF @tmp IS NULL THEN
-        INSERT INTO lilac.lilac_configuration (`key`, `value`) VALUES ('rgm_user_default_group_id', @default_groupid);
+        INSERT INTO lilac.lilac_configuration (`key`, `value`) VALUES ('rgm_user_default_group_id', default_groupid);
 	ELSE
-		SET @default_groupid = @tmp;
+		SET default_groupid = @tmp;
 	END IF;
     
     -- get default host notifier command from config or set default value on local config       
 	SET @tmp = (SELECT `value` FROM lilac.lilac_configuration WHERE `key` = 'rgm_user_default_notify_host_command');
 	IF @tmp IS NULL THEN
-		INSERT INTO lilac.lilac_configuration (`key`, `value`) VALUES ('rgm_user_default_notify_host_command', @notify_host_command);
+		INSERT INTO lilac.lilac_configuration (`key`, `value`) VALUES ('rgm_user_default_notify_host_command', notify_host_command);
 	ELSE
-		SET @notify_host_command = @tmp;
+		SET notify_host_command = @tmp;
     END IF;
         
     -- get default service notifier command from config or set default value on local config       
 	SET @tmp = (SELECT `value` FROM lilac_configuration WHERE `key` = 'rgm_user_default_notify_service_command');
     IF @tmp IS NULL THEN
-		INSERT INTO lilac_configuration (`key`, `value`) VALUES ('rgm_user_default_notify_service_command', @notify_service_command);
+		INSERT INTO lilac_configuration (`key`, `value`) VALUES ('rgm_user_default_notify_service_command', notify_service_command);
 	ELSE
-		SET @notify_service_command = @tmp;
+		SET notify_service_command = @tmp;
 	END IF;
     
     -- insert user if not already exists, or update the existing one
+    BEGIN
+        IF (SELECT `id` FROM nagios_contact WHERE `name` = username) IS NULL THEN
+            INSERT INTO nagios_contact SET
+                `name` = username,
+                alias = fullname,
+                email = email,
+                host_notifications_enabled = 1,
+                service_notifications_enabled = 1,
+                host_notification_period = 1,
+                service_notification_period = 1,
+                host_notification_on_down = 1,
+                host_notification_on_unreachable = 1,
+                host_notification_on_recovery = 1,
+                host_notification_on_flapping = 1,
+                host_notification_on_scheduled_downtime = 1,
+                service_notification_on_warning = 1,
+                service_notification_on_unknown = 1,
+                service_notification_on_critical = 1,
+                service_notification_on_recovery = 1,
+                service_notification_on_flapping = 1,
+                can_submit_commands = 1,
+                retain_status_information = 1,
+                retain_nonstatus_information = 1;
+        ELSE
+            SET @userid = (SELECT `id` FROM nagios_contact WHERE `name` = username);
+            IF fullname IS NOT NULL THEN UPDATE nagios_contact SET `alias` = fullname WHERE `id` = @userid; END IF;
+            IF email IS NOT NULL THEN UPDATE nagios_contact SET `email` = email WHERE `id` = @userid; END IF;
+        END IF;
+    END;
+
     SET @userid = (SELECT `id` FROM nagios_contact WHERE `name` = username);
-    IF @userid IS NULL THEN
-        INSERT INTO nagios_contact SET
-            `name` = username,
-            alias = fullname,
-            email = email,
-            host_notifications_enabled = 1,
-            service_notifications_enabled = 1,
-            host_notification_period = 1,
-            service_notification_period = 1,
-            host_notification_on_down = 1,
-            host_notification_on_unreachable = 1,
-            host_notification_on_recovery = 1,
-            host_notification_on_flapping = 1,
-            host_notification_on_scheduled_downtime = 1,
-            service_notification_on_warning = 1,
-            service_notification_on_unknown = 1,
-            service_notification_on_critical = 1,
-            service_notification_on_recovery = 1,
-            service_notification_on_flapping = 1,
-            can_submit_commands = 1,
-            retain_status_information = 1,
-            retain_nonstatus_information = 1;
-        SET @userid = (SELECT `id` FROM nagios_contact WHERE `name` = username);
-    ELSE
-        IF fullname IS NOT NULL THEN UPDATE nagios_contact SET `alias` = fullname WHERE `id` = @userid; END IF;
-        IF email IS NOT NULL THEN UPDATE nagios_contact SET `email` = email WHERE `id` = @userid; END IF;
-    END IF;
   
     -- add command notifier to user if it is not already done
-    IF (SELECT id FROM lilac.nagios_contact_notification_command WHERE type = 'host' AND nagios_contact_notification_command.contact_id = @userid AND nagios_contact_notification_command.command = @notify_host_command) IS NULL THEN
-        INSERT INTO lilac.nagios_contact_notification_command (contact_id, command, `type`) VALUES (@userid, @notify_host_command, 'host');
+    IF (SELECT id FROM lilac.nagios_contact_notification_command WHERE type = 'host' AND nagios_contact_notification_command.contact_id = @userid AND nagios_contact_notification_command.command = notify_host_command) IS NULL THEN
+        INSERT INTO lilac.nagios_contact_notification_command (contact_id, command, `type`) VALUES (@userid, notify_host_command, 'host');
     END IF;
-    IF (SELECT id FROM lilac.nagios_contact_notification_command WHERE type = 'service' AND nagios_contact_notification_command.contact_id = @userid AND nagios_contact_notification_command.command = @notify_service_command) IS NULL THEN
-        INSERT INTO lilac.nagios_contact_notification_command (contact_id, command, `type`) VALUES (@userid, @notify_service_command, 'service');
+    IF (SELECT id FROM lilac.nagios_contact_notification_command WHERE type = 'service' AND nagios_contact_notification_command.contact_id = @userid AND nagios_contact_notification_command.command = notify_service_command) IS NULL THEN
+        INSERT INTO lilac.nagios_contact_notification_command (contact_id, command, `type`) VALUES (@userid, notify_service_command, 'service');
     END IF;
 
 	-- add user to its default group member it is not already done    
-    IF (SELECT id FROM lilac.nagios_contact_group_member WHERE nagios_contact_group_member.contact = @userid AND nagios_contact_group_member.contactgroup = @default_groupid) IS NULL THEN
-        INSERT INTO lilac.nagios_contact_group_member (contact, contactgroup) VALUES (@userid, @default_groupid);
+    IF (SELECT id FROM lilac.nagios_contact_group_member WHERE nagios_contact_group_member.contact = @userid AND nagios_contact_group_member.contactgroup = default_groupid) IS NULL THEN
+        INSERT INTO lilac.nagios_contact_group_member (contact, contactgroup) VALUES (@userid, default_groupid);
     END IF;
 END;
 //
