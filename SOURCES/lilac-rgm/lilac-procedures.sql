@@ -33,7 +33,7 @@ BEGIN
     
 	SET notify_service_command = (SELECT `value` FROM lilac_configuration WHERE `key` = 'rgm_user_default_notify_service_command');
     IF notify_service_command IS NULL THEN
-		INSERT INTO lilac_configuration (`key`, `value`) VALUES ('rgm_user_default_notify_service_command', notify_service_command);
+		INSERT INTO lilac_configuration (`key`, `value`) VALUES ('rgm_user_default_notify_service_command', default_notify_service_command);
 		SET notify_service_command = default_notify_service_command;
 	END IF;
 END;
