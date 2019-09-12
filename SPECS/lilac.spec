@@ -9,7 +9,7 @@ URL: http://www.lilacplatform.com/
 Source0: %{name}-%{version}.tar.gz
 Source1: %{name}-rgm.tar.gz
 
-Requires: rgm-base, httpd, mariadb-libs, php, php-mysql, php-pear, php-process, php-xml, nagios >= 3.0, nmap
+Requires: rgm-base, mariadb, httpd, mariadb-libs, php, php-mysql, php-pear, php-process, php-xml, nagios >= 3.0, nmap
 BuildRequires: rpm-macros-rgm
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -84,6 +84,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Sep 06 2019 Samuel Ronciaux <sronciaux@fr.scc.com> - 3.0-5.rgm
+- lilac initial schema update
+
 * Mon May 06 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-4.rgm
 - add defaut user group in schema
 
