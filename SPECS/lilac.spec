@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0
-Release: 5.rgm
+Release: 6.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -66,8 +66,8 @@ ln -nsf %{datadir} %{linkdir}
 chown -h nagios:rgm %{linkdir}
 
 # execute SQL postinstall script
-/usr/share/rgm/manage_sql.sh -d %{rgm_db_lilac} -s %{rgmlibdir}/lilac-rgm.sql -a %{rgmlibdir}/lilac-procedures.sql -u %{rgm_sql_internal_user} -p "%{rgm_sql_internal_pwd}"
-/usr/share/rgm/lilac_manage_auto_increments.sh -s
+#/usr/share/rgm/manage_sql.sh -d %{rgm_db_lilac} -s %{rgmlibdir}/lilac-rgm.sql -a %{rgmlibdir}/lilac-procedures.sql -u %{rgm_sql_internal_user} -p "%{rgm_sql_internal_pwd}"
+#/usr/share/rgm/lilac_manage_auto_increments.sh -s
 
 %clean
 rm -rf %{buildroot}
@@ -84,6 +84,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Sep 16 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-6.rgm
+- lilac schema update
+- lilac schema no longuer automatically configured. Now it's up to user to manually configure its SQL backend
+
 * Fri Sep 06 2019 Samuel Ronciaux <sronciaux@fr.scc.com> - 3.0-5.rgm
 - lilac initial schema update
 
