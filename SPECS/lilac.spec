@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0
-Release: 6.rgm
+Release: 7.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -84,6 +84,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Sep 16 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-.rgm
+- lilac schema update
+
 * Mon Sep 16 2019 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-6.rgm
 - lilac schema update
 - lilac schema no longuer automatically configured. Now it's up to user to manually configure its SQL backend
