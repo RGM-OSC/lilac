@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0
-Release: 9.rgm
+Release: 10.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -84,6 +84,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Sep 25 2019 Michael Aubertin <maubertin@fr.scc.com> - 3.0-10.rgm
+- Fix header
+
 * Tue Sep 24 2019 Samuel RONCIAUX <sronciaux@fr.scc.com> - 3.0-9.rgm
 - Plilac schema update
 

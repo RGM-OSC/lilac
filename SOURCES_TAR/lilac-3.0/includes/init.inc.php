@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 define("LILAC_VERSION", "3.0");
 define("LILAC_VERSION_BUILD", "61");
-define("LILAC_NAME", "Eonweb Configurator");
+define("LILAC_NAME", "Configuration");
 define("LILAC_FS_ROOT", dirname(__FILE__) . "/../");
 
 // Setup include path to initially include from our library directory before including anything else.
