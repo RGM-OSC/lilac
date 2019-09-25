@@ -1,6 +1,6 @@
 Summary: Web configuration tool for nagios
 Name: lilac
-Version:3.0
+Version:3.0 
 Release: 10.rgm
 License: GPL
 Group: Applications/System
