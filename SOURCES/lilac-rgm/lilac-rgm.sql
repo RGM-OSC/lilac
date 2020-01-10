@@ -280,7 +280,11 @@ CREATE TABLE `nagios_contact` (
   PRIMARY KEY (`id`),
   KEY `nagios_contact_FI_1` (`host_notification_period`),
   KEY `nagios_contact_FI_2` (`service_notification_period`)
+<<<<<<< HEAD
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Nagios Contact';
+=======
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='Nagios Contact';
+>>>>>>> master
 /*!40101 SET character_set_client = @saved_cs_client */;
 INSERT INTO `nagios_contact` VALUES (1,'admin','default user','','',1,1,1,1,1,1,1,0,0,1,1,1,1,0,1,1,1),(2,'ged','ged brocking event ',NULL,NULL,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
 DROP TABLE IF EXISTS `nagios_contact_address`;
@@ -328,7 +332,11 @@ CREATE TABLE `nagios_contact_group_member` (
   PRIMARY KEY (`id`),
   KEY `nagios_contact_group_member_FI_1` (`contact`),
   KEY `nagios_contact_group_member_FI_2` (`contactgroup`)
+<<<<<<< HEAD
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Member of a Nagios Contact Group';
+=======
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Member of a Nagios Contact Group';
+>>>>>>> master
 /*!40101 SET character_set_client = @saved_cs_client */;
 INSERT INTO `nagios_contact_group_member` VALUES (1,1,1);
 DROP TABLE IF EXISTS `nagios_contact_notification_command`;

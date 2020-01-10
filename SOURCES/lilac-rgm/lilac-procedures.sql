@@ -17,28 +17,26 @@ BEGIN
     DECLARE default_notify_host_command INT DEFAULT 11;
     DECLARE default_notify_service_command INT DEFAULT 12;
     -- DECLARE tmp INT DEFAULT NULL;
-        
-   	SET group_id = (SELECT `value` FROM lilac.lilac_configuration WHERE `key` = 'rgm_user_default_group_id' LIMIT 1);
+
+       SET group_id = (SELECT `value` FROM lilac.lilac_configuration WHERE `key` = 'rgm_user_default_group_id' LIMIT 1);
     IF group_id IS NULL THEN
         INSERT INTO lilac.lilac_configuration (`key`, `value`) VALUES ('rgm_user_default_group_id', default_groupid);
         SET group_id = default_groupid;
-	END IF;
-        
-	SET notify_host_command = (SELECT `value` FROM lilac.lilac_configuration WHERE `key` = 'rgm_user_default_notify_host_command');
-	IF notify_host_command IS NULL THEN
-		INSERT INTO lilac.lilac_configuration (`key`, `value`) VALUES ('rgm_user_default_notify_host_command', default_notify_host_command);
+    END IF;
+
+    SET notify_host_command = (SELECT `value` FROM lilac.lilac_configuration WHERE `key` = 'rgm_user_default_notify_host_command');
+    IF notify_host_command IS NULL THEN
+        INSERT INTO lilac.lilac_configuration (`key`, `value`) VALUES ('rgm_user_default_notify_host_command', default_notify_host_command);
         SET notify_host_command = default_notify_host_command;
     END IF;
-        
-    
-	SET notify_service_command = (SELECT `value` FROM lilac_configuration WHERE `key` = 'rgm_user_default_notify_service_command');
+
+    SET notify_service_command = (SELECT `value` FROM lilac.lilac_configuration WHERE `key` = 'rgm_user_default_notify_service_command');
     IF notify_service_command IS NULL THEN
-		INSERT INTO lilac_configuration (`key`, `value`) VALUES ('rgm_user_default_notify_service_command', default_notify_service_command);
-		SET notify_service_command = default_notify_service_command;
-	END IF;
+        INSERT INTO lilac.lilac_configuration (`key`, `value`) VALUES ('rgm_user_default_notify_service_command', default_notify_service_command);
+        SET notify_service_command = default_notify_service_command;
+    END IF;
 END;
 $$
-    
 
 
 DROP PROCEDURE IF EXISTS `insert_lilac_user_from_rgmweb` $$
@@ -55,13 +53,13 @@ BEGIN
     DECLARE userid INT DEFAULT NULL;
     DECLARE tmp INT DEFAULT NULL;
         
-	CALL get_lilac_default_values(@default_groupid, @notify_host_command, @notify_service_command);
+    CALL get_lilac_default_values(@default_groupid, @notify_host_command, @notify_service_command);
 
     -- insert user if not already exists, or update the existing one
-	SET @userid = (SELECT `id` FROM nagios_contact WHERE `name` = username);
+    SET @userid = (SELECT `id` FROM nagios_contact WHERE `name` = username);
     IF @userid IS NULL THEN
-		INSERT INTO nagios_contact SET
-			`name` = username,
+        INSERT INTO nagios_contact SET
+            `name` = username,
             `alias` = fullname,
             `email` = email,
             `host_notifications_enabled` = 1,
@@ -81,12 +79,12 @@ BEGIN
             `can_submit_commands` = 1,
             `retain_status_information` = 1,
             `retain_nonstatus_information` = 1;
-		SET @userid = (SELECT LAST_INSERT_ID());
-	ELSE
+        SET @userid = (SELECT LAST_INSERT_ID());
+    ELSE
         IF fullname IS NOT NULL THEN UPDATE nagios_contact SET `alias` = fullname WHERE `id` = @userid; END IF;
         IF email IS NOT NULL THEN UPDATE nagios_contact SET `email` = email WHERE `id` = @userid; END IF;
-	END IF;
-  
+    END IF;
+
     -- add command notifier to user if it is not already done
     IF (SELECT `id` FROM lilac.nagios_contact_notification_command WHERE type = 'host' AND `contact_id` = @userid AND `command` = notify_host_command) IS NULL THEN
         INSERT INTO lilac.nagios_contact_notification_command (`contact_id`, `command`, `type`) VALUES (@userid, notify_host_command, 'host');
@@ -95,7 +93,7 @@ BEGIN
         INSERT INTO lilac.nagios_contact_notification_command (`contact_id`, `command`, `type`) VALUES (@userid, notify_service_command, 'service');
     END IF;
 
-	-- add user to its default group member it is not already done    
+    -- add user to its default group member it is not already done    
     IF (SELECT `id` FROM lilac.nagios_contact_group_member WHERE `contact` = @userid AND `contactgroup` = default_groupid) IS NULL THEN
         INSERT INTO lilac.nagios_contact_group_member (`contact`, `contactgroup`) VALUES (@userid, default_groupid);
     END IF;
@@ -116,17 +114,17 @@ rgm_update:BEGIN
     DECLARE notify_service_command INT DEFAULT 12;
     DECLARE userid INT DEFAULT NULL;
     DECLARE tmp INT DEFAULT NULL;
-        
-	CALL get_lilac_default_values(@default_groupid, @notify_host_command, @notify_service_command);
 
-	SET @userid = (SELECT `id` FROM nagios_contact WHERE `name` = username);
-	IF @userid IS NULL THEN
-		LEAVE rgm_update;
+    CALL get_lilac_default_values(@default_groupid, @notify_host_command, @notify_service_command);
+
+    SET @userid = (SELECT `id` FROM nagios_contact WHERE `name` = username);
+    IF @userid IS NULL THEN
+        LEAVE rgm_update;
     END IF;
-    
-	IF fullname IS NOT NULL THEN UPDATE nagios_contact SET `alias` = fullname WHERE `id` = @userid; END IF;
+
+    IF fullname IS NOT NULL THEN UPDATE nagios_contact SET `alias` = fullname WHERE `id` = @userid; END IF;
     IF email IS NOT NULL THEN UPDATE nagios_contact SET `email` = email WHERE `id` = @userid; END IF;
-  
+
     -- add command notifier to user if it is not already done
     IF (SELECT `id` FROM lilac.nagios_contact_notification_command WHERE type = 'host' AND `contact_id` = @userid AND `command` = notify_host_command) IS NULL THEN
         INSERT INTO lilac.nagios_contact_notification_command (`contact_id`, `command`, `type`) VALUES (@userid, notify_host_command, 'host');
@@ -135,7 +133,7 @@ rgm_update:BEGIN
         INSERT INTO lilac.nagios_contact_notification_command (`contact_id`, `command`, `type`) VALUES (@userid, notify_service_command, 'service');
     END IF;
 
-	-- add user to its default group member it is not already done    
+    -- add user to its default group member it is not already done    
     IF (SELECT `id` FROM lilac.nagios_contact_group_member WHERE `contact` = @userid AND `contactgroup` = default_groupid) IS NULL THEN
         INSERT INTO lilac.nagios_contact_group_member (`contact`, `contactgroup`) VALUES (@userid, default_groupid);
     END IF;
@@ -172,11 +170,11 @@ CREATE DEFINER=`rgminternal`@`localhost` PROCEDURE create_update_lilac_group_fro
 COMMENT 'create or update a Nagios contact group'
 BEGIN
     DECLARE groupid INT;
-    
+
     IF (SELECT `id` FROM nagios_contact_group WHERE `name` = groupname) IS NULL THEN
-		INSERT INTO nagios_contact_group (`name`, `alias`) VALUES (groupname, groupdesc);
-	ELSE
-		UPDATE nagios_contact_group SET `alias` = groupdesc WHERE `name` = groupname;
+        INSERT INTO nagios_contact_group (`name`, `alias`) VALUES (groupname, groupdesc);
+    ELSE
+        UPDATE nagios_contact_group SET `alias` = groupdesc WHERE `name` = groupname;
     END IF;
 END;
 $$
