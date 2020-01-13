@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0 
-Release: 12.rgm
+Release: 13.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -84,6 +84,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Jan 13 2020 Michael Aubertin <maubertin@fr.scc.com> - 3.0-13.rgm
+- Update initial templates (VMware ESX)
+
 * Fri Jan 10 2020 Michael Aubertin <maubertin@fr.scc.com> - 3.0-12.rgm
 - Update initial templates
 
