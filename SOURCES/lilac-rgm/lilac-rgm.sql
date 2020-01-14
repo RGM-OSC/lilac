@@ -1,5 +1,5 @@
 -- RGM Lilac database dump
--- Generated with lilac_dumper.sh on mar. janv. 14 12:22:42 CET 2020 from localhost server
+-- Generated with lilac_dumper.sh on mar. janv. 14 16:22:23 CET 2020 from localhost server
 -- cmdline: lilac_dumper.sh -c -r -d /root/lilac-rgm.sql
 --
 -- Copyright SCC 2019
@@ -582,7 +582,7 @@ INSERT INTO `nagios_command` VALUES (28,'snmp_process-vcsa','$USER1$/rgm/snmp/ch
 INSERT INTO `nagios_command` VALUES (29,'snmp_uptime','$USER1$/rgm/snmp/check_snmp_uptime.pl -H $HOSTADDRESS$ -C $USER2$ -2 -w $ARG1$ -c $ARG2$','uptime snmp');
 INSERT INTO `nagios_command` VALUES (30,'snmp_systime','$USER1$/rgm/system/check_systime.pl -H $HOSTADDRESS$ -C $USER2$ -n $ARG1$','systime snmp');
 INSERT INTO `nagios_command` VALUES (31,'snmp_partitions','$USER1$/rgm/snmp/check_snmp_storage.pl -H $HOSTADDRESS$ -C $USER2$ -m $ARG1$ -w $ARG2$ -c $ARG3$ -t 60 -f $ARG4$ $ARG5$ $ARG6$','used space on a windows partition or linux file system');
-INSERT INTO `nagios_command` VALUES (32,'db_oracle_health','perl $USER1$/rgm/database/check_oracle_health --connect \'(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=$HOSTADDRESS$)(PORT=$ARG1$))(LOAD_BALANCE=yes)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=$HOSTALIAS$)))\' --user $USER25$ --password $USER26$ --mode $SERVICEDISPLAYNAME$ $ARG2$ $ARG3$','Check Oracle (ARG1: TCP Port); ARG2 and ARG3 available for options.');
+INSERT INTO `nagios_command` VALUES (32,'db_oracle_health','perl $USER1$/rgm/database/check_oracle_health --connect \'(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=$HOSTADDRESS$)(PORT=$ARG1$))(LOAD_BALANCE=yes)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=$HOSTALIAS$)))\' --user $USER25$ --password $USER26$ --mode $SERVICEDISPLAYNAME$ $ARG2$ $ARG3$ $ARG4$ $ARG5$ $ARG6$','Check Oracle (ARG1: TCP Port); ARG2 and ARG3 available for options. (ARG2 could be: --report html) to handle long list');
 INSERT INTO `nagios_command` VALUES (33,'virt_ntx_snmp','$USER1$/rgm/virtu/check_nutanix.pl -H $HOSTADDRESS$ -a SHA -u $USER21$ -A $USER8$ -x AES -X $USER8$ -t $ARG1$ -s $SERVICEDESC$ -w $SERVICEDESC$=$ARG2$ -c $SERVICEDESC$=$ARG3$','check_nutanix_snmp');
 INSERT INTO `nagios_command` VALUES (34,'virt_ntx_snmp-vmpowerstate','$USER1$/rgm/virtu/check_nutanix.pl -H $HOSTADDRESS$ -a SHA -u $USER21$ -A $USER8$ -x AES -X $USER8$ -t $ARG1$ -s $SERVICEDESC$ -r \'$ARG2$\' -e -S','check_nutanix_snmp');
 INSERT INTO `nagios_command` VALUES (35,'virt_ntx_status','perl $USER1$/rgm/virtu/check_ssh_nutanix_cluster.pl -H $HOSTADDRESS$ -u $USER22$ -p $USER23$ -T status','nutanix_status');
@@ -1606,6 +1606,12 @@ INSERT INTO `nagios_service` VALUES (193,'invalid-objects','invalid-objects',NUL
 INSERT INTO `nagios_service` VALUES (194,'flash-recovery-area-usage','flash-recovery-area-usage',NULL,25,NULL,NULL,NULL,32,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_service` VALUES (195,'stale-statistics','stale-statistics',NULL,25,NULL,NULL,NULL,32,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_service` VALUES (196,'redo-io-traffic','redo-io-traffic',NULL,25,NULL,NULL,NULL,32,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (203,'backup_active','backup_active',NULL,6,NULL,NULL,NULL,32,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (202,'event-waits','event-waits',NULL,25,NULL,NULL,NULL,32,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (201,'event-waits','event-waits',NULL,6,NULL,NULL,NULL,32,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (204,'backup_active','backup_active',NULL,25,NULL,NULL,NULL,32,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (205,'session-active','session-active',NULL,6,NULL,NULL,NULL,32,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (206,'session-active','session-active',NULL,25,NULL,NULL,NULL,32,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 DROP TABLE IF EXISTS `nagios_service_check_command_parameter`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1936,6 +1942,16 @@ INSERT INTO `nagios_service_check_command_parameter` VALUES (395,196,NULL,'1522'
 INSERT INTO `nagios_service_check_command_parameter` VALUES (397,83,NULL,'5');
 INSERT INTO `nagios_service_check_command_parameter` VALUES (398,90,NULL,'15');
 INSERT INTO `nagios_service_check_command_parameter` VALUES (399,90,NULL,'5');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (407,30,NULL,'--report html');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (406,201,NULL,'--report html');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (405,202,NULL,'1522');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (404,201,NULL,'1521');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (408,202,NULL,'--report html');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (409,203,NULL,'1521');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (410,204,NULL,'1522');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (411,205,NULL,'1521');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (412,206,NULL,'1522');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (413,190,NULL,'--report html');
 DROP TABLE IF EXISTS `nagios_service_contact_group_member`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -2254,7 +2270,13 @@ INSERT INTO `nagios_service_template_inheritance` VALUES (219,195,NULL,2,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (220,196,NULL,2,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (221,90,NULL,1,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (222,83,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (230,203,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (229,202,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (228,201,NULL,2,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (227,NULL,7,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (231,204,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (232,205,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (233,206,NULL,2,0);
 DROP TABLE IF EXISTS `nagios_timeperiod`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;

@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0 
-Release: 16.rgm
+Release: 17.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -84,6 +84,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Jan 14 2020 Michael Aubertin <maubertin@fr.scc.com> - 3.0-17.rgm
+- Update Oracle template
+
 * Tue Jan 14 2020 Michael Aubertin <maubertin@fr.scc.com> - 3.0-16.rgm
 - Add elastic network initial templates
 
