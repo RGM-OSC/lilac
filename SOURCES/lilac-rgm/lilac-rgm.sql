@@ -1,5 +1,5 @@
 -- RGM Lilac database dump
--- Generated with lilac_dumper.sh on mar. janv. 14 11:29:16 CET 2020 from localhost server
+-- Generated with lilac_dumper.sh on mar. janv. 14 12:22:42 CET 2020 from localhost server
 -- cmdline: lilac_dumper.sh -c -r -d /root/lilac-rgm.sql
 --
 -- Copyright SCC 2019
@@ -617,6 +617,7 @@ INSERT INTO `nagios_command` VALUES (64,'virtu_vmware_esx','$USER1$/rgm/virtu/ch
 INSERT INTO `nagios_command` VALUES (65,'sys_tcp_connect','$USER1$/check_tcp -H $HOSTADDRESS$ -p $ARG1$ -w $ARG1$ -c $ARG2$','ARG1: port TCP');
 INSERT INTO `nagios_command` VALUES (66,'apache_status','bash $USER1$/rgm/apache/check_apache2.sh -H $HOSTADDRESS$ $ARG1$ $ARG2$','Apache Status Pages. ARG1 and ARG2 are available.');
 INSERT INTO `nagios_command` VALUES (67,'gedevent','$USER1$/rgm/nagios/check_gedevents.pl -t $ARG1$ -s $ARG2$  -u $USER12$ -p \"$USER13$\" -H $HOSTADDRESS$ $ARG3$ $ARG4$ -Pe $SERVICEDISPLAYNAME$','ARG1 host(groups), service(groups) ; ARG2 sting (Ex : Cam%) ; ARG3 -we/-ce ev nb, -Wo/-Co occ nb ; ARG4 -Sc complement in sql');
+INSERT INTO `nagios_command` VALUES (68,'net_interface_elastic','$USER17$/python-rgm/bin/python3 $USER1$/rgm/network/check_el_nwc.py -H \'$HOSTADDRESS$\' -n \'$SERVICEDISPLAYNAME$\'','Verification de l\'Ã©tat de l\'interface via elasticsearch');
 DROP TABLE IF EXISTS `nagios_contact`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1056,13 +1057,14 @@ INSERT INTO `nagios_host_template` VALUES (12,'RGM_WINDOWS_WMI','Monitor using W
 INSERT INTO `nagios_host_template` VALUES (13,'RGM_PGSQL_DB','Template PostgreSQL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'postgres.png',NULL,'postgres.png','postgres.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host_template` VALUES (14,'RGM_MYSQL_DB','RGM_MYSQL_DB',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'mysql.png',NULL,'mysql.png','mysql.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host_template` VALUES (15,'RGM_HAPROXY','RGM_HAPROXY',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'haproxy.png',NULL,'haproxy.png','haproxy.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-INSERT INTO `nagios_host_template` VALUES (17,'RGM_CISCO_CORE_SNMP','RGM_CISCO_CORE_SNMP',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'cisco2.png',NULL,'cisco2.png','cisco2.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_host_template` VALUES (17,'RGM_NETWORKSWITCH_CORE_SNMP','Basic SNMP network switch monitoring. USER2 = community',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'switch.gd2',NULL,'switch.gd2','switch.gd2',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host_template` VALUES (20,'RGM_CISCO_STATS_SNMP','RGM_CISCO_STATS_SNMP',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'cisco2.png',NULL,'cisco2.png','cisco2.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host_template` VALUES (19,'RGM_HPE_ARUBA_CORE_SNMP','RGM_HPE_ARUBA_CORE_SNMP',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'HP_logo_1.jpg',NULL,'HP_logo_1.jpg','HP_logo_1.jpg',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host_template` VALUES (21,'RGM_HPE_ARUBA_STATS_SNMP','RGM_HPE_ARUBA_STATS_SNMP',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'HP_logo_1.jpg',NULL,'HP_logo_1.jpg','HP_logo_1.jpg',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host_template` VALUES (22,'RGM_3PAR','RGM_3PAR',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'3PAR.png',NULL,'3PAR.png','3PAR.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host_template` VALUES (24,'RGM_VMWARE_ESX','Monitor ESX using VCenter: Datacenter FQDN in Host Description (HOSTALIAS); USER11 = Domain ; USER27 = Account ; USER28 = Password. <a href=\'http://bit.ly/2QOy2ZW\' target=\'_blank\'>Create Monitoring user account</a>',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'vmware2.png',NULL,'vmware2.png','vmware2.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host_template` VALUES (25,'RGM_ORACLE_DB_1522','Monitor using SQLNet port 1522: DB User: USER25; DB Password: USER26  <a href=\'https://labs.consol.de/nagios/check_oracle_health/\' target=\'_blank\'> Configure Oracle DB</a>',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'oracle.png',NULL,'oracle.png','oracle.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_host_template` VALUES (26,'RGM_CISCO_CORE_SNMP','RGM_CISCO_CORE_SNMP',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'cisco2.png',NULL,'cisco2.png','cisco2.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 DROP TABLE IF EXISTS `nagios_host_template_autodiscovery_service`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1121,6 +1123,7 @@ INSERT INTO `nagios_host_template_inheritance` VALUES (26,NULL,20,2,0);
 INSERT INTO `nagios_host_template_inheritance` VALUES (25,NULL,19,2,0);
 INSERT INTO `nagios_host_template_inheritance` VALUES (27,NULL,21,2,0);
 INSERT INTO `nagios_host_template_inheritance` VALUES (31,NULL,25,2,0);
+INSERT INTO `nagios_host_template_inheritance` VALUES (33,NULL,26,17,0);
 DROP TABLE IF EXISTS `nagios_hostgroup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1176,7 +1179,6 @@ INSERT INTO `nagios_hostgroup_membership` VALUES (9,NULL,6,53);
 INSERT INTO `nagios_hostgroup_membership` VALUES (8,NULL,11,1);
 INSERT INTO `nagios_hostgroup_membership` VALUES (10,NULL,10,54);
 INSERT INTO `nagios_hostgroup_membership` VALUES (23,NULL,23,50);
-INSERT INTO `nagios_hostgroup_membership` VALUES (13,NULL,17,14);
 INSERT INTO `nagios_hostgroup_membership` VALUES (16,NULL,20,14);
 INSERT INTO `nagios_hostgroup_membership` VALUES (15,NULL,19,12);
 INSERT INTO `nagios_hostgroup_membership` VALUES (19,NULL,16,31);
@@ -1187,6 +1189,8 @@ INSERT INTO `nagios_hostgroup_membership` VALUES (22,NULL,14,53);
 INSERT INTO `nagios_hostgroup_membership` VALUES (24,NULL,24,50);
 INSERT INTO `nagios_hostgroup_membership` VALUES (25,NULL,22,30);
 INSERT INTO `nagios_hostgroup_membership` VALUES (26,NULL,25,53);
+INSERT INTO `nagios_hostgroup_membership` VALUES (27,NULL,26,14);
+INSERT INTO `nagios_hostgroup_membership` VALUES (28,NULL,17,31);
 DROP TABLE IF EXISTS `nagios_main_configuration`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1669,4 +1673,627 @@ INSERT INTO `nagios_service_check_command_parameter` VALUES (59,42,NULL,'90');
 INSERT INTO `nagios_service_check_command_parameter` VALUES (60,43,NULL,'VirtualMachines');
 INSERT INTO `nagios_service_check_command_parameter` VALUES (61,43,NULL,'80');
 INSERT INTO `nagios_service_check_command_parameter` VALUES (62,43,NULL,'90');
-INSERT IN
+INSERT INTO `nagios_service_check_command_parameter` VALUES (63,44,NULL,'VirtualMachines');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (64,44,NULL,'10000000000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (65,44,NULL,'20000000000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (66,45,NULL,'VirtualMachines');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (67,45,NULL,'10000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (68,45,NULL,'20000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (69,46,NULL,'VirtualMachines');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (70,46,NULL,'10000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (71,46,NULL,'20000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (72,47,NULL,'VirtualMachines');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (73,47,NULL,'100000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (74,47,NULL,'200000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (75,48,NULL,'VirtualMachines');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (76,48,NULL,'TEST_SRVVMMPLT01_VL90|TEST_DEBIANTEST|PROD_SRVVMPPS01_LRSI_J1_VL90_replica|NE PAS DEMARRER AirWave 7.7.9_LAUT_H2|TEST_SRVVMSYNAPSET04_VL10');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (77,49,NULL,'VirtualMachines');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (78,49,NULL,'10000000000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (79,49,NULL,'20000000000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (80,50,NULL,'VirtualMachines');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (81,50,NULL,'10000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (82,50,NULL,'20000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (83,51,NULL,'VirtualMachines');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (84,51,NULL,'10000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (85,51,NULL,'20000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (86,52,NULL,'Disks');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (87,52,NULL,'20');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (88,52,NULL,'10');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (89,53,NULL,'Disks');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (90,53,NULL,'100000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (91,53,NULL,'200000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (92,54,NULL,'Disks');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (93,54,NULL,'10000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (94,54,NULL,'20000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (95,55,NULL,'Disks');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (96,55,NULL,'10000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (97,55,NULL,'20000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (98,56,NULL,'Disks');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (99,56,NULL,'10000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (100,56,NULL,'20000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (101,57,NULL,'Cluster');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (102,57,NULL,'10000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (103,57,NULL,'20000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (104,58,NULL,'Cluster');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (105,58,NULL,'80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (106,58,NULL,'90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (107,59,NULL,'Cluster');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (108,59,NULL,'10000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (109,59,NULL,'20000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (110,60,NULL,'Cluster');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (111,61,NULL,'Controllers');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (112,62,NULL,'Controllers');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (113,63,NULL,'Controllers');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (114,64,NULL,'Hypervisors');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (115,64,NULL,'10000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (116,64,NULL,'20000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (117,65,NULL,'Hypervisors');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (118,65,NULL,'10000000000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (119,65,NULL,'20000000000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (120,66,NULL,'Hypervisors');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (121,66,NULL,'10000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (122,66,NULL,'20000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (123,67,NULL,'Hypervisors');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (124,67,NULL,'80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (125,67,NULL,'90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (126,68,NULL,'Hypervisors');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (127,68,NULL,'10000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (128,68,NULL,'20000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (129,69,NULL,'Hypervisors');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (130,69,NULL,'80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (131,69,NULL,'90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (132,70,NULL,'Hypervisors');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (133,70,NULL,'10000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (134,70,NULL,'20000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (135,71,NULL,'Hypervisors');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (136,71,NULL,'10000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (137,71,NULL,'20000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (138,72,NULL,'Hypervisors');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (139,72,NULL,'10000000000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (140,72,NULL,'20000000000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (141,73,NULL,'Pools');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (142,73,NULL,'10000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (143,73,NULL,'20000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (144,74,NULL,'Pools');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (145,74,NULL,'10000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (146,74,NULL,'20000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (147,75,NULL,'Pools');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (148,75,NULL,'10000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (149,75,NULL,'20000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (150,76,NULL,'Pools');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (151,76,NULL,'10000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (152,76,NULL,'20000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (155,79,NULL,'80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (156,79,NULL,'90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (157,80,NULL,'80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (158,80,NULL,'50');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (159,80,NULL,'90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (160,80,NULL,'50');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (161,81,NULL,'/');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (162,81,NULL,'90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (163,81,NULL,'95');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (164,81,NULL,'-q FixedDisk');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (396,83,NULL,'15');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (167,82,NULL,'300');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (168,82,NULL,'300');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (381,29,NULL,'1521');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (380,32,NULL,'1521');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (171,85,NULL,'3000.0,80%');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (172,85,NULL,'5000.0,100%');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (173,85,NULL,'1');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (243,124,NULL,'--warning 80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (176,86,NULL,'^[B-Z]');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (177,86,NULL,'90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (178,86,NULL,'95');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (179,87,NULL,'80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (180,87,NULL,'90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (181,88,NULL,'80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (182,88,NULL,'90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (183,89,NULL,'300');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (184,89,NULL,'300');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (185,91,NULL,'-v 2 -g');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (186,91,NULL,'-v 2 -g');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (382,34,NULL,'1521');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (188,93,NULL,'checkuptime');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (189,94,NULL,'20');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (190,94,NULL,'10');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (191,95,NULL,'98');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (192,95,NULL,'99');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (193,97,NULL,'C:');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (194,97,NULL,'3');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (195,97,NULL,'15');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (200,100,NULL,'0rd0-c0m1735-b47h0n143');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (199,100,NULL,'rgminternal');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (201,101,NULL,'postgres');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (202,102,NULL,'postgres');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (203,103,NULL,'postgres');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (204,104,NULL,'postgres');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (205,105,NULL,'postgres');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (206,106,NULL,'postgres');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (207,106,NULL,'--warning 60');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (208,106,NULL,'--critical 120');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (209,107,NULL,'postgres');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (210,107,NULL,'--warning 800MB');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (211,107,NULL,'--critical 1GB');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (212,108,NULL,'postgres');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (213,108,NULL,'--warning 800MB');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (214,108,NULL,'--critical 1GB');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (215,109,NULL,'postgres');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (216,109,NULL,'--warning 800MB');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (217,109,NULL,'--critical 1GB');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (218,110,NULL,'3306');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (219,118,NULL,'3306');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (220,114,NULL,'3306');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (221,117,NULL,'3306');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (222,116,NULL,'3306');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (223,115,NULL,'3306');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (224,113,NULL,'3306');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (225,112,NULL,'3306');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (226,111,NULL,'3306');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (227,119,NULL,'nagios');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (228,119,NULL,'0');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (229,119,NULL,'0');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (230,120,NULL,'influxd');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (231,120,NULL,'0');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (232,120,NULL,'0');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (233,121,NULL,'nagflux');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (234,121,NULL,'0');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (235,121,NULL,'0');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (236,122,NULL,'http://IP_HAPROXY:PORT/stats');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (237,122,NULL,'80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (238,122,NULL,'90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (239,123,NULL,'/stats');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (240,123,NULL,'9999');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (241,123,NULL,'1');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (242,123,NULL,'2');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (245,124,NULL,'--units GB');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (246,126,NULL,'--warning 80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (247,126,NULL,'--warning 90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (248,126,NULL,'--units GB');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (249,127,NULL,'--warning 80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (250,127,NULL,'--critical 90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (251,127,NULL,'--units GB');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (252,128,NULL,'--negate warning=critical 5');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (253,128,NULL,'--negate critical=warning 10');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (254,128,NULL,'--units GB');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (255,125,NULL,'--warning 80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (256,125,NULL,'--critical 90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (257,125,NULL,'--units GB');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (262,130,NULL,'80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (261,130,NULL,'VLAN11');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (263,130,NULL,'90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (369,140,NULL,'1');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (267,132,NULL,'--warning 80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (268,132,NULL,'--critical 90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (284,140,NULL,'2403');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (283,138,NULL,'--critical 90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (282,138,NULL,'--warning 80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (320,NULL,4,'80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (321,NULL,4,'90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (370,140,NULL,'2');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (294,146,NULL,'--warning 80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (295,146,NULL,'--critical 90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (296,148,NULL,'--warning 80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (297,148,NULL,'--critical 90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (319,NULL,4,'port_name');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (318,157,NULL,'--units GB');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (317,157,NULL,'--negate critical=warning 10');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (316,157,NULL,'--negate warning=critical 5');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (310,154,NULL,'--negate warning=critical 5');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (311,154,NULL,'--negate critical=warning 10');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (312,154,NULL,'--units GB');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (322,NULL,5,'port_name');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (323,NULL,5,'80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (324,NULL,5,'90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (325,NULL,6,'port_name');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (326,NULL,6,'80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (327,NULL,6,'90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (328,159,NULL,'check_node');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (329,160,NULL,'check_pd');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (330,161,NULL,'check_ld');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (331,162,NULL,'check_vv');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (332,163,NULL,'check_ps');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (348,173,NULL,'vsphere-client');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (349,174,NULL,'vmware-eam');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (350,175,NULL,'vmware-sca');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (351,176,NULL,'vmware-vsm');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (352,177,NULL,'vsphere-ui');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (353,178,NULL,'vmware-perfcharts');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (354,179,NULL,'-S mem');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (355,179,NULL,'-B VMware Rollup Health State');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (356,180,NULL,'-S cpu');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (357,180,NULL,'-s usage');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (358,180,NULL,' -w 80% -c 90%');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (359,181,NULL,'-S runtime');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (360,181,NULL,'-s status');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (361,182,NULL,'-S net');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (362,182,NULL,'-s nic');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (363,183,NULL,'-S volumes');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (364,183,NULL,'--gigabyte');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (365,183,NULL,'-w 10% -c 5%');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (366,184,NULL,'-S io');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (367,184,NULL,'-s usage');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (368,185,NULL,'-S service');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (374,187,NULL,'5601');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (375,187,NULL,'1');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (376,187,NULL,'2');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (377,188,NULL,'9200');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (378,188,NULL,'1');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (379,188,NULL,'2');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (383,33,NULL,'1521');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (384,36,NULL,'1521');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (385,31,NULL,'1521');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (386,35,NULL,'1521');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (387,30,NULL,'1521');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (388,189,NULL,'1522');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (389,190,NULL,'1522');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (390,191,NULL,'1522');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (391,192,NULL,'1522');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (392,193,NULL,'1522');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (393,194,NULL,'1522');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (394,195,NULL,'1522');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (395,196,NULL,'1522');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (397,83,NULL,'5');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (398,90,NULL,'15');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (399,90,NULL,'5');
+DROP TABLE IF EXISTS `nagios_service_contact_group_member`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `nagios_service_contact_group_member` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service` int(11) DEFAULT NULL,
+  `template` int(11) DEFAULT NULL,
+  `contact_group` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `nagios_service_contact_group_member_FI_1` (`service`),
+  KEY `nagios_service_contact_group_member_FI_2` (`template`),
+  KEY `nagios_service_contact_group_member_FI_3` (`contact_group`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Nagios  Service Group';
+/*!40101 SET character_set_client = @saved_cs_client */;
+INSERT INTO `nagios_service_contact_group_member` VALUES (9,NULL,1,1);
+DROP TABLE IF EXISTS `nagios_service_contact_member`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `nagios_service_contact_member` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service` int(11) DEFAULT NULL,
+  `template` int(11) DEFAULT NULL,
+  `contact` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `nagios_service_contact_member_FI_1` (`service`),
+  KEY `nagios_service_contact_member_FI_2` (`template`),
+  KEY `nagios_service_contact_member_FI_3` (`contact`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Contacts which belong to service templates or services';
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `nagios_service_custom_object_var`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `nagios_service_custom_object_var` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service` int(11) DEFAULT NULL,
+  `service_template` int(11) DEFAULT NULL,
+  `var_name` varchar(255) NOT NULL,
+  `var_value` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nagios_service_custom_object_var_U_1` (`service`,`var_name`),
+  UNIQUE KEY `nagios_service_custom_object_var_U_2` (`service_template`,`var_name`),
+  KEY `nagios_service_custom_object_var_I_1` (`service`),
+  KEY `nagios_service_custom_object_var_I_2` (`service_template`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Custom Object Variables for Service';
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `nagios_service_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `nagios_service_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `alias` varchar(255) NOT NULL,
+  `notes` varchar(255) DEFAULT NULL,
+  `notes_url` varchar(255) DEFAULT NULL,
+  `action_url` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Nagios  Service Group';
+/*!40101 SET character_set_client = @saved_cs_client */;
+INSERT INTO `nagios_service_group` VALUES (1,'SERVICES','ServiceGroup for services',NULL,NULL,NULL);
+INSERT INTO `nagios_service_group` VALUES (2,'VMWARE','ServiceGroup Vmware',NULL,NULL,NULL);
+DROP TABLE IF EXISTS `nagios_service_group_member`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `nagios_service_group_member` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service` int(11) DEFAULT NULL,
+  `template` int(11) DEFAULT NULL,
+  `service_group` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `nagios_service_group_member_FI_1` (`service`),
+  KEY `nagios_service_group_member_FI_2` (`template`),
+  KEY `nagios_service_group_member_FI_3` (`service_group`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `nagios_service_template`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `nagios_service_template` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `initial_state` varchar(1) DEFAULT NULL,
+  `is_volatile` tinyint(4) DEFAULT NULL,
+  `check_command` int(11) DEFAULT NULL,
+  `maximum_check_attempts` int(11) DEFAULT NULL,
+  `normal_check_interval` int(11) DEFAULT NULL,
+  `retry_interval` int(11) DEFAULT NULL,
+  `first_notification_delay` int(11) DEFAULT NULL,
+  `active_checks_enabled` tinyint(4) DEFAULT NULL,
+  `passive_checks_enabled` tinyint(4) DEFAULT NULL,
+  `check_period` int(11) DEFAULT NULL,
+  `parallelize_check` tinyint(4) DEFAULT NULL,
+  `obsess_over_service` tinyint(4) DEFAULT NULL,
+  `check_freshness` tinyint(4) DEFAULT NULL,
+  `freshness_threshold` int(11) DEFAULT NULL,
+  `event_handler` int(11) DEFAULT NULL,
+  `event_handler_enabled` tinyint(4) DEFAULT NULL,
+  `low_flap_threshold` int(11) DEFAULT NULL,
+  `high_flap_threshold` int(11) DEFAULT NULL,
+  `flap_detection_enabled` tinyint(4) DEFAULT NULL,
+  `flap_detection_on_ok` tinyint(4) DEFAULT NULL,
+  `flap_detection_on_warning` tinyint(4) DEFAULT NULL,
+  `flap_detection_on_critical` tinyint(4) DEFAULT NULL,
+  `flap_detection_on_unknown` tinyint(4) DEFAULT NULL,
+  `process_perf_data` tinyint(4) DEFAULT NULL,
+  `retain_status_information` tinyint(4) DEFAULT NULL,
+  `retain_nonstatus_information` tinyint(4) DEFAULT NULL,
+  `notification_interval` int(11) DEFAULT NULL,
+  `notification_period` int(11) DEFAULT NULL,
+  `notification_on_warning` tinyint(4) DEFAULT NULL,
+  `notification_on_unknown` tinyint(4) DEFAULT NULL,
+  `notification_on_critical` tinyint(4) DEFAULT NULL,
+  `notification_on_recovery` tinyint(4) DEFAULT NULL,
+  `notification_on_flapping` tinyint(4) DEFAULT NULL,
+  `notification_on_scheduled_downtime` tinyint(4) DEFAULT NULL,
+  `notifications_enabled` tinyint(4) DEFAULT NULL,
+  `stalking_on_ok` tinyint(4) DEFAULT NULL,
+  `stalking_on_warning` tinyint(4) DEFAULT NULL,
+  `stalking_on_unknown` tinyint(4) DEFAULT NULL,
+  `stalking_on_critical` tinyint(4) DEFAULT NULL,
+  `failure_prediction_enabled` tinyint(4) DEFAULT NULL,
+  `notes` varchar(255) DEFAULT NULL,
+  `notes_url` varchar(255) DEFAULT NULL,
+  `action_url` varchar(255) DEFAULT NULL,
+  `icon_image` varchar(255) DEFAULT NULL,
+  `icon_image_alt` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `nagios_service_template_FI_1` (`check_command`),
+  KEY `nagios_service_template_FI_2` (`event_handler`),
+  KEY `nagios_service_template_FI_3` (`check_period`),
+  KEY `nagios_service_template_FI_4` (`notification_period`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Nagios Service Template';
+/*!40101 SET character_set_client = @saved_cs_client */;
+INSERT INTO `nagios_service_template` VALUES (1,'GENERIC_SERVICE','Template Generic',NULL,NULL,NULL,4,4,NULL,NULL,1,1,1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,1,1,1,1,1,1,1,0,0,0,0,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service_template` VALUES (2,'GENERIC_GRAPH','Template generic + pnp link',NULL,NULL,NULL,4,4,NULL,NULL,1,1,1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,1,1,1,1,1,1,1,1,0,0,0,0,NULL,NULL,NULL,'/grafana/dashboard/script/histou.js?host=$HOSTNAME$&service=$SERVICEDESC$&refresh=30s',NULL,NULL);
+INSERT INTO `nagios_service_template` VALUES (4,'RGM_NET_INT_TRAFFIC','Service template Network traffic through SNMP',NULL,NULL,37,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/grafana/dashboard/script/histou.js?host=$HOSTNAME$&service=$SERVICEDESC$&refresh=30s',NULL,NULL);
+INSERT INTO `nagios_service_template` VALUES (5,'RGM_NET_INT_ERROR','Service template Network error through SNMP',NULL,NULL,62,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/grafana/dashboard/script/histou.js?host=$HOSTNAME$&service=$SERVICEDESC$&refresh=30s',NULL,NULL);
+INSERT INTO `nagios_service_template` VALUES (6,'RGM_NET_INT_DISCARDS','Service template Network discards through SNMP',NULL,NULL,61,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/grafana/dashboard/script/histou.js?host=$HOSTNAME$&service=$SERVICEDESC$&refresh=30s',NULL,NULL);
+INSERT INTO `nagios_service_template` VALUES (7,'RGM_NET_INTERFACE_ELASTIC','RGM_NET_INTERFACE_ELASTIC',NULL,NULL,68,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+DROP TABLE IF EXISTS `nagios_service_template_inheritance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `nagios_service_template_inheritance` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `source_service` int(11) DEFAULT NULL,
+  `source_template` int(11) DEFAULT NULL,
+  `target_template` int(11) NOT NULL,
+  `order` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `nagios_service_template_inheritance_FI_1` (`source_service`),
+  KEY `nagios_service_template_inheritance_FI_2` (`source_template`),
+  KEY `nagios_service_template_inheritance_FI_3` (`target_template`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Nagios service Template Inheritance';
+/*!40101 SET character_set_client = @saved_cs_client */;
+INSERT INTO `nagios_service_template_inheritance` VALUES (201,NULL,2,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (2,1,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (3,2,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (4,3,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (5,4,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (6,5,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (7,6,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (9,7,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (10,8,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (11,9,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (12,10,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (13,11,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (142,125,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (202,179,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (200,178,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (140,124,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (199,177,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (198,176,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (197,175,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (196,174,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (195,173,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (194,172,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (193,171,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (192,170,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (191,169,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (190,168,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (189,167,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (188,166,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (187,165,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (186,164,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (34,29,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (35,30,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (36,31,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (37,32,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (38,33,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (39,34,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (40,35,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (41,36,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (213,189,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (44,38,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (45,39,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (46,40,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (47,41,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (48,42,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (49,43,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (50,44,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (51,45,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (52,46,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (53,47,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (54,48,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (55,49,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (56,50,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (57,51,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (58,52,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (59,53,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (60,54,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (61,55,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (62,56,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (63,57,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (64,58,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (65,59,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (66,60,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (67,61,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (68,62,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (69,63,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (70,64,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (71,65,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (72,66,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (73,67,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (74,68,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (75,69,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (76,70,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (77,71,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (78,72,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (79,73,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (80,74,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (81,75,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (82,76,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (83,77,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (84,78,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (88,79,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (89,80,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (90,81,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (91,82,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (143,127,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (214,190,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (95,85,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (99,86,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (100,87,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (101,88,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (102,89,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (141,126,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (104,91,NULL,4,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (215,191,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (107,93,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (108,94,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (109,95,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (110,96,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (111,97,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (113,99,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (114,100,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (115,101,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (116,102,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (117,103,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (118,104,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (119,105,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (120,106,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (121,107,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (122,108,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (123,109,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (124,110,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (125,111,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (126,112,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (127,113,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (128,114,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (129,115,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (130,116,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (131,117,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (132,118,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (133,119,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (134,120,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (135,121,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (136,122,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (137,123,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (144,128,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (145,129,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (146,130,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (158,140,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (148,132,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (157,139,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (154,138,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (177,NULL,4,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (156,133,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (175,157,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (176,158,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (164,146,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (165,147,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (166,148,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (167,149,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (172,154,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (173,155,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (178,NULL,5,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (179,NULL,6,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (180,159,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (181,160,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (182,161,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (183,162,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (184,163,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (203,180,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (204,181,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (205,182,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (206,183,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (207,184,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (208,185,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (210,187,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (211,188,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (212,186,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (216,192,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (217,193,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (218,194,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (219,195,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (220,196,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (221,90,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (222,83,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (227,NULL,7,2,0);
+DROP TABLE IF EXISTS `nagios_timeperiod`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `nagios_timeperiod` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `alias` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Nagios Timeperiods';
+/*!40101 SET character_set_client = @saved_cs_client */;
+INSERT INTO `nagios_timeperiod` VALUES (1,'24x7','24 Hours A Day, 7 Days A Week');
+DROP TABLE IF EXISTS `nagios_timeperiod_entry`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `nagios_timeperiod_entry` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `timeperiod_id` int(11) DEFAULT NULL,
+  `entry` varchar(255) NOT NULL,
+  `value` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `nagios_timeperiod_entry_FI_1` (`timeperiod_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Time Period Entries';
+/*!40101 SET character_set_client = @saved_cs_client */;
+INSERT INTO `nagios_timeperiod_entry` VALUES (112,1,'friday','00:00-24:00');
+INSERT INTO `nagios_timeperiod_entry` VALUES (111,1,'saturday','00:00-24:00');
+INSERT INTO `nagios_timeperiod_entry` VALUES (110,1,'thursday','00:00-24:00');
+INSERT INTO `nagios_timeperiod_entry` VALUES (109,1,'wednesday','00:00-24:00');
+INSERT INTO `nagios_timeperiod_entry` VALUES (108,1,'tuesday','00:00-24:00');
+INSERT INTO `nagios_timeperiod_entry` VALUES (107,1,'monday','00:00-24:00');
+INSERT INTO `nagios_timeperiod_entry` VALUES (106,1,'sunday','00:00-24:00');
+DROP TABLE IF EXISTS `nagios_timeperiod_exclude`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `nagios_timeperiod_exclude` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `timeperiod_id` int(11) DEFAULT NULL,
+  `excluded_timeperiod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `nagios_timeperiod_exclude_FI_1` (`timeperiod_id`),
+  KEY `nagios_timeperiod_exclude_FI_2` (`excluded_timeperiod`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Time Period Excludes';
+/*!40101 SET character_set_client = @saved_cs_client */;
