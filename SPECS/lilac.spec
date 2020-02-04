@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0 
-Release: 17.rgm
+Release: 18.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -84,6 +84,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Feb 04 2020 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-18.rgm
+- add nagios_bp_status on nagios_command
+
 * Tue Jan 14 2020 Michael Aubertin <maubertin@fr.scc.com> - 3.0-17.rgm
 - Update Oracle template
 
