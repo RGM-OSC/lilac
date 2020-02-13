@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0 
-Release: 18.rgm
+Release: 19.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -84,6 +84,12 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Feb 13 2020 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-19.rgm
+- add/update commands & templates for:
+- o TLS certs
+- o Ansible Tower ping API
+- o LDAP binding
+
 * Tue Feb 04 2020 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-18.rgm
 - add nagios_bp_status on nagios_command
 
