@@ -1,6 +1,6 @@
 -- RGM Lilac database dump
--- Generated with lilac_lilac_dumper.sh on jeu. févr. 13 16:58:05 CET 2020 from rgm server
--- cmdline: lilac_lilac_dumper.sh -c -r -d /tmp/dum_log.sql
+-- Generated with lilac_lilac_dumper.sh on lun. mai 11 19:17:18 CEST 2020 from rgm-rico.budcca-demo.lab server
+-- cmdline: lilac_lilac_dumper.sh -c -r -d /root/lilac_dump.sql
 --
 -- Copyright SCC 2019
 
@@ -104,7 +104,7 @@ CREATE TABLE `export_job` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Export Job Information';
 /*!40101 SET character_set_client = @saved_cs_client */;
-INSERT INTO `export_job` VALUES (1,'Nagios Export','Generates Nagios 3 compatible configuration files (full export)','O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:5:{s:15:\"backup_existing\";b:1;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:60:\"/srv/rgm/nagios/bin/nagios -v /tmp/lilac-export-1/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}','2020-02-13 09:56:23','2020-02-13 09:56:24','Complete',4,'2020-02-13 09:56:24','O:11:\"ImportStats\":2:{s:18:\"\0ImportStats\0stats\";a:0:{}s:16:\"\0ImportStats\0job\";N;}','start');
+INSERT INTO `export_job` VALUES (1,'Nagios Export','Generates Nagios 3 compatible configuration files (full export)','O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:5:{s:15:\"backup_existing\";b:1;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:60:\"/srv/rgm/nagios/bin/nagios -v /tmp/lilac-export-1/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}','2020-05-11 15:44:53','2020-05-11 15:44:54','Complete',4,'2020-05-11 15:44:54','O:11:\"ImportStats\":2:{s:18:\"\0ImportStats\0stats\";a:0:{}s:16:\"\0ImportStats\0job\";N;}','start');
 INSERT INTO `export_job` VALUES (2,'Incremental Nagios Export','Generates Nagios 3/4 compatible configuration files (incremental export)','O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:9:{s:12:\"export_debug\";b:0;s:11:\"export_diff\";b:1;s:10:\"export_dep\";b:1;s:10:\"export_esc\";b:0;s:15:\"backup_existing\";b:1;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:60:\"/srv/rgm/nagios/bin/nagios -v /tmp/lilac-export-2/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}','2020-01-10 10:46:23','2020-01-10 10:46:25','Complete',4,'2020-01-10 10:46:25','O:11:\"ImportStats\":2:{s:18:\"\0ImportStats\0stats\";a:0:{}s:16:\"\0ImportStats\0job\";N;}','start');
 DROP TABLE IF EXISTS `export_job_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -567,7 +567,6 @@ INSERT INTO `nagios_command` VALUES (3,'nagflux_host-perfdata_processor','mv /sr
 INSERT INTO `nagios_command` VALUES (4,'nagflux_service-perfdata_processor','mv /srv/rgm/nagflux/var/spool-nagios/host-perfdata /srv/rgm/nagflux/var/spool/host-perfdata-$(date +%s.%N)','generate service perfdata for NagFlux');
 INSERT INTO `nagios_command` VALUES (5,'nagios_true','/bin/true','Nagios command that always return true');
 INSERT INTO `nagios_command` VALUES (6,'nagios_false','/bin/false','Nagios command that always return false');
-INSERT INTO `nagios_command` VALUES (7,'nagios_bp_status','$USER1$/rgm/nagios/check_bp_status.pl -b \"$SERVICEDESC$\"','CHeck NagiosBP status for \"$SERVICEDESC$\"');
 INSERT INTO `nagios_command` VALUES (11,'rgm_host_notifier','$USER17$/notifier/bin/notifier.pl -t host -c $USER17$/notifier/etc/notifier.cfg -r $USER17$/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -e \"$HOSTSTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$HOSTOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$HOSTNOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','RGM notification broker for host');
 INSERT INTO `nagios_command` VALUES (12,'rgm_service_notifier','$USER17$/notifier/bin/notifier.pl -t service -c $USER17$/notifier/etc/notifier.cfg -r $USER17$/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -s \"$SERVICEDESC$\" -e \"$SERVICESTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$SERVICEOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -B \"$SERVICEGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$SERVICENOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','RGM notification broker for service');
 INSERT INTO `nagios_command` VALUES (20,'check-host-alive','$USER1$/check_ping -H $HOSTADDRESS$ -w 3000.0,80% -c 5000.0,100% -p 1','check the availability of a host by ping');
@@ -602,9 +601,10 @@ INSERT INTO `nagios_command` VALUES (48,'elastic_process','$USER1$/rgm/metricbea
 INSERT INTO `nagios_command` VALUES (49,'elastic_windows_service','$USER1$/rgm/metricbeat/service_windows.py -H $HOSTNAME$ -S $ARG1$ -c $ARG2$ $ARG3$ $AR4$ -t 5','ElasticSearch/MetricBeat metrics - SERVICES WINDOWS - ARG1: Service name (short name), ARG2: critical, ARG3-4 and warning: optional args (-t -Timeout)');
 INSERT INTO `nagios_command` VALUES (50,'db_mysql_simple_connect','$USER1$/rgm/database/check_mysql.pl -H $HOSTADDRESS$ -u $ARG1$ -p $ARG2$','Check mysql simple connection');
 INSERT INTO `nagios_command` VALUES (51,'db_postgres_health','$USER1$/rgm/database/check_postgres.pl --host=$HOSTADDRESS$ --dbname=$HOSTNAME$ --dbuser=$USER23$ --dbpass=$USER24$ --action=$SERVICEDESC$ $ARG2$ $ARG3$','ARG1: DB Name, ARG2: warning, ARG3: critical');
-INSERT INTO `nagios_command` VALUES (52,'sys_ldap_connect','$USER1$/check_ldap -H $HOSTADDRESS$ -b $USER8$ -D \"USER9\" -P $USER10$ $ARG1$ $ARG2$','USER8: base DN (DC=XXXX,DC=XXXX), USER9: binddn (CN=XXXXX,OU=XXXXX,,DC=XXXXXX,DC=XXXX), USER10: password ARG1, ARG2: optional arguments (eg; -w, -c...)');
-INSERT INTO `nagios_command` VALUES (54,'sys_certificate_validity','$USER1$/rgm/system/check_certificates.pl -w $ARG1$: -c $ARG2$: $ARG3$ $HOSTNAME$ ','ARG1: warning threshold ARG2: critical threshold remaining days certificate validity ARG3 : Optional argument (ex --validity)');
-INSERT INTO `nagios_command` VALUES (55,'sys_http_url_status','$USER1$/check_http -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ $ARG3$ $ARG4$','ARG1: warning response time, ARG2: critical response time ARG3, ARG4 : optional parameters (eg. -p , -u)');
+INSERT INTO `nagios_command` VALUES (52,'sys_ldap_connect','$USER1$/check_ldap -H $HOSTADDRESS$ -b $ARG1$ -P $ARG2$ -D \"$ARG3$\"','ARG1: base DN (DC=XXXX,DC=XXXX), ARG2: password, ARG3: binddn (CN=XXXXX,OU=XXXXX,,DC=XXXXXX,DC=XXXX)');
+INSERT INTO `nagios_command` VALUES (53,'sys_ldaps_connect','$USER1$/check_ldaps -H $HOSTADDRESS$ -b $ARG1$ -p $ARG2$ -P $ARG3$ -D \"$ARG4$\"','ARG1: base DN (DC=XXXX,DC=XXXX), ARG2: ssl_port ARG3: password, ARG4: binddn (CN=XXXXX,OU=XXXXX,,DC=XXXXXX,DC=XXXX)');
+INSERT INTO `nagios_command` VALUES (54,'sys_certificate_validity','$USER1$/rgm/system/check_certificates.pl -c $ARG1$: $HOSTADDRESS$','ARG1: port TCP, ARG2: warning,critical days before end time of certificate');
+INSERT INTO `nagios_command` VALUES (55,'sys_http_url_status','$USER1$/check_http -H $HOSTADDRESS$ -p $ARG1$ -w $ARG2$ -c $ARG3$','ARG1: port, ARG2: warning ARG3: critical');
 INSERT INTO `nagios_command` VALUES (56,'db_mysql_health','$USER1$/rgm/database/check_mysql_health --hostname $HOSTNAME$ --username $USER25$ --password $USER26$ --port $ARG1$ --mode $SERVICEDESC$','db_mysql_health');
 INSERT INTO `nagios_command` VALUES (57,'sys_dns_status','$USER1$/check_dns -H $ARG1$ -s $HOSTADDRESS$ -w $ARG2$ -c $ARG3$','ARG1: Domain Name (FQDN), ARG2: warning, ARG3: critical');
 INSERT INTO `nagios_command` VALUES (58,'sys_http_url_status_with_login','$USER1$/check_http -H $HOSTADDRESS$ -u $ARG1$ -p $ARG2$ -a $USER25$:$USER26$ -w $ARG3$ -c $ARG4$','ARG1: url directory, ARG2: port, ARG3: warning ARG4: critical');
@@ -618,6 +618,7 @@ INSERT INTO `nagios_command` VALUES (65,'sys_tcp_connect','$USER1$/check_tcp -H 
 INSERT INTO `nagios_command` VALUES (66,'apache_status','bash $USER1$/rgm/apache/check_apache2.sh -H $HOSTADDRESS$ $ARG1$ $ARG2$','Apache Status Pages. ARG1 and ARG2 are available.');
 INSERT INTO `nagios_command` VALUES (67,'gedevent','$USER1$/rgm/nagios/check_gedevents.pl -t $ARG1$ -s $ARG2$  -u $USER12$ -p \"$USER13$\" -H $HOSTADDRESS$ $ARG3$ $ARG4$ -Pe $SERVICEDISPLAYNAME$','ARG1 host(groups), service(groups) ; ARG2 sting (Ex : Cam%) ; ARG3 -we/-ce ev nb, -Wo/-Co occ nb ; ARG4 -Sc complement in sql');
 INSERT INTO `nagios_command` VALUES (68,'net_interface_elastic','$USER17$/python-rgm/bin/python3 $USER1$/rgm/network/check_el_nwc.py -H \'$HOSTADDRESS$\' -n \'$SERVICEDISPLAYNAME$\'','Verification de l\'Ã©tat de l\'interface via elasticsearch');
+INSERT INTO `nagios_command` VALUES (69,'hw_ilo4_snmp','$USER1$/rgm/hardware/check_hp -H $HOSTADDRESS$ -C $USER2$','Configure SNMP Community on USER2');
 DROP TABLE IF EXISTS `nagios_contact`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -890,7 +891,7 @@ CREATE TABLE `nagios_host` (
   KEY `nagios_host_FI_4` (`notification_period`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Nagios Host';
 /*!40101 SET character_set_client = @saved_cs_client */;
-INSERT INTO `nagios_host` VALUES (1,'rgm','RGM host itself','RGM_HOST',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'rgm.png',NULL,'rgm.png','rgm.png',NULL,NULL);
+INSERT INTO `nagios_host` VALUES (1,'rgm-rico','RGM host itself','RGM_HOST',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'rgm.png',NULL,'rgm.png','rgm.png',NULL,NULL);
 INSERT INTO `nagios_host` VALUES (2,'bp_apps_gold','BP application with Gold contract service placeholder',NULL,NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host` VALUES (3,'bp_apps_silver','BP application with Silver contract service placeholder',NULL,NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host` VALUES (4,'bp_apps_bronze','BP application with Bronze contract service placeholder',NULL,NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
@@ -1065,8 +1066,7 @@ INSERT INTO `nagios_host_template` VALUES (23,'RGM_VMWARE_VCSA','Template VCSA',
 INSERT INTO `nagios_host_template` VALUES (24,'RGM_VMWARE_ESX','Monitor ESX using VCenter: Datacenter FQDN in Host Description (HOSTALIAS); USER11 = Domain ; USER27 = Account ; USER28 = Password. <a href=\'http://bit.ly/2QOy2ZW\' target=\'_blank\'>Create Monitoring user account</a>',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'vmware2.png',NULL,'vmware2.png','vmware2.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host_template` VALUES (25,'RGM_ORACLE_DB_1522','Monitor using SQLNet port 1522: DB User: USER25; DB Password: USER26  <a href=\'https://labs.consol.de/nagios/check_oracle_health/\' target=\'_blank\'> Configure Oracle DB</a>',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'oracle.png',NULL,'oracle.png','oracle.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host_template` VALUES (26,'RGM_CISCO_CORE_SNMP','RGM_CISCO_CORE_SNMP',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'cisco2.png',NULL,'cisco2.png','cisco2.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-INSERT INTO `nagios_host_template` VALUES (27,'RGM_ANSIBLE_TOWER','Ping AWX/Tower API',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'redhat.png',NULL,'redhat.png','redhat.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-INSERT INTO `nagios_host_template` VALUES (28,'RGM_LDAP','RGM_LDAP',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'rgm.png',NULL,'rgm.png','rgm.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_host_template` VALUES (27,'RGM_HPE_ILO4','Template for HP ILO4 <a href=\'https://support.hpe.com/hpsc/doc/public/display?docId=emr_na-a00045551en_us&docLocale=en_US\' target=\'_blank\'> Configure SNMP on ILO4 </a>',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'HP_logo_1.jpg',NULL,'HP_logo_1.jpg','HP_logo_1.jpg',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 DROP TABLE IF EXISTS `nagios_host_template_autodiscovery_service`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1127,7 +1127,6 @@ INSERT INTO `nagios_host_template_inheritance` VALUES (30,NULL,24,2,0);
 INSERT INTO `nagios_host_template_inheritance` VALUES (31,NULL,25,2,0);
 INSERT INTO `nagios_host_template_inheritance` VALUES (33,NULL,26,17,0);
 INSERT INTO `nagios_host_template_inheritance` VALUES (34,NULL,27,2,0);
-INSERT INTO `nagios_host_template_inheritance` VALUES (35,NULL,28,2,0);
 DROP TABLE IF EXISTS `nagios_hostgroup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1616,8 +1615,7 @@ INSERT INTO `nagios_service` VALUES (203,'backup_active','backup_active',NULL,6,
 INSERT INTO `nagios_service` VALUES (204,'backup_active','backup_active',NULL,25,NULL,NULL,NULL,32,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_service` VALUES (205,'session-active','session-active',NULL,6,NULL,NULL,NULL,32,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_service` VALUES (206,'session-active','session-active',NULL,25,NULL,NULL,NULL,32,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-INSERT INTO `nagios_service` VALUES (207,'api_ping','api_ping',NULL,27,NULL,NULL,NULL,55,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-INSERT INTO `nagios_service` VALUES (208,'ldap_status','ldap_status',NULL,28,NULL,NULL,NULL,52,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (207,'hw_status','hw_status',NULL,27,NULL,NULL,NULL,69,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 DROP TABLE IF EXISTS `nagios_service_check_command_parameter`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1958,13 +1956,6 @@ INSERT INTO `nagios_service_check_command_parameter` VALUES (410,204,NULL,'1522'
 INSERT INTO `nagios_service_check_command_parameter` VALUES (411,205,NULL,'1521');
 INSERT INTO `nagios_service_check_command_parameter` VALUES (412,206,NULL,'1522');
 INSERT INTO `nagios_service_check_command_parameter` VALUES (413,190,NULL,'--report html');
-INSERT INTO `nagios_service_check_command_parameter` VALUES (414,207,NULL,'1');
-INSERT INTO `nagios_service_check_command_parameter` VALUES (415,207,NULL,'2');
-INSERT INTO `nagios_service_check_command_parameter` VALUES (416,207,NULL,'-p 443 -u /api/v1/ping/');
-INSERT INTO `nagios_service_check_command_parameter` VALUES (417,NULL,8,'14');
-INSERT INTO `nagios_service_check_command_parameter` VALUES (418,NULL,8,'7');
-INSERT INTO `nagios_service_check_command_parameter` VALUES (419,207,NULL,'-d \"Content-Type: application/json\"');
-INSERT INTO `nagios_service_check_command_parameter` VALUES (420,208,NULL,'-3');
 DROP TABLE IF EXISTS `nagios_service_contact_group_member`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -2104,7 +2095,6 @@ INSERT INTO `nagios_service_template` VALUES (4,'RGM_NET_INT_TRAFFIC','Service t
 INSERT INTO `nagios_service_template` VALUES (5,'RGM_NET_INT_ERROR','Service template Network error through SNMP',NULL,NULL,62,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/grafana/dashboard/script/histou.js?host=$HOSTNAME$&service=$SERVICEDESC$&refresh=30s',NULL,NULL);
 INSERT INTO `nagios_service_template` VALUES (6,'RGM_NET_INT_DISCARDS','Service template Network discards through SNMP',NULL,NULL,61,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/grafana/dashboard/script/histou.js?host=$HOSTNAME$&service=$SERVICEDESC$&refresh=30s',NULL,NULL);
 INSERT INTO `nagios_service_template` VALUES (7,'RGM_NET_INTERFACE_ELASTIC','RGM_NET_INTERFACE_ELASTIC',NULL,NULL,68,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-INSERT INTO `nagios_service_template` VALUES (8,'RGM_TLS_CERTIFICATE','RGM_TLS_CERTIFICATE',NULL,NULL,54,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 DROP TABLE IF EXISTS `nagios_service_template_inheritance`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -2291,9 +2281,7 @@ INSERT INTO `nagios_service_template_inheritance` VALUES (230,203,NULL,2,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (231,204,NULL,2,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (232,205,NULL,2,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (233,206,NULL,2,0);
-INSERT INTO `nagios_service_template_inheritance` VALUES (235,NULL,8,1,0);
-INSERT INTO `nagios_service_template_inheritance` VALUES (237,207,NULL,2,0);
-INSERT INTO `nagios_service_template_inheritance` VALUES (238,208,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (234,207,NULL,1,0);
 DROP TABLE IF EXISTS `nagios_timeperiod`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
