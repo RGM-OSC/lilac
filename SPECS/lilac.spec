@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0 
-Release: 20.rgm
+Release: 21.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -84,6 +84,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Jun 02 2020 Lucas FUEYO <lfueyo@fr.scc.com> - 3.0-21.rgm
+- edit WMI Windows Host Template
+
 * Mon May 11 2020 Samuel RONCIAUX <sronciaux@fr.scc.com> - 3.0-20.rgm
 - add HPE ILO Template 
 
