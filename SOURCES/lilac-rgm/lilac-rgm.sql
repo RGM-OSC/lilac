@@ -1,6 +1,6 @@
 -- RGM Lilac database dump
--- Generated with lilac_dumper.sh on mar. juin  2 14:49:51 CEST 2020 from rgm-4-lilac server
--- cmdline: lilac_dumper.sh -c -r -d /home/rgm/lilac_dump.sql
+-- Generated with lilac_dumper.sh on mer. juin  3 18:20:16 CEST 2020 from rgm-4-lilac server
+-- cmdline: lilac_dumper.sh -c -r -d /root/lilac_dump.sql
 --
 -- Copyright SCC 2019
 
@@ -105,7 +105,7 @@ CREATE TABLE `export_job` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Export Job Information';
 /*!40101 SET character_set_client = @saved_cs_client */;
 INSERT INTO `export_job` VALUES (1,'Nagios Export','Generates Nagios 3 compatible configuration files (full export)','O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:5:{s:15:\"backup_existing\";b:1;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:60:\"/srv/rgm/nagios/bin/nagios -v /tmp/lilac-export-1/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}','2020-06-02 11:03:21','2020-06-02 11:03:25','Complete',4,'2020-06-02 11:03:25','O:11:\"ImportStats\":2:{s:18:\"\0ImportStats\0stats\";a:0:{}s:16:\"\0ImportStats\0job\";N;}','start');
-INSERT INTO `export_job` VALUES (2,'Incremental Nagios Export','Generates Nagios 3/4 compatible configuration files (incremental export)','O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:9:{s:12:\"export_debug\";b:0;s:11:\"export_diff\";b:1;s:10:\"export_dep\";b:1;s:10:\"export_esc\";b:0;s:15:\"backup_existing\";b:1;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:60:\"/srv/rgm/nagios/bin/nagios -v /tmp/lilac-export-2/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}','2020-06-02 14:12:31','2020-06-02 14:12:32','Complete',4,'2020-06-02 14:12:32','O:11:\"ImportStats\":2:{s:18:\"\0ImportStats\0stats\";a:0:{}s:16:\"\0ImportStats\0job\";N;}','start');
+INSERT INTO `export_job` VALUES (2,'Incremental Nagios Export','Generates Nagios 3/4 compatible configuration files (incremental export)','O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:9:{s:12:\"export_debug\";b:0;s:11:\"export_diff\";b:1;s:10:\"export_dep\";b:1;s:10:\"export_esc\";b:0;s:15:\"backup_existing\";b:1;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:60:\"/srv/rgm/nagios/bin/nagios -v /tmp/lilac-export-2/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}','2020-06-03 17:20:54','2020-06-03 17:20:55','Complete',4,'2020-06-03 17:20:55','O:11:\"ImportStats\":2:{s:18:\"\0ImportStats\0stats\";a:0:{}s:16:\"\0ImportStats\0job\";N;}','start');
 DROP TABLE IF EXISTS `export_job_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -622,6 +622,10 @@ INSERT INTO `nagios_command` VALUES (69,'hw_ilo4_snmp','$USER1$/rgm/hardware/che
 INSERT INTO `nagios_command` VALUES (70,'wmi_Processor-Queue','$USER1$/rgm/windows/wmi/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER5$/$USER6$ -p $USER7$ -m checkcpuq $ARG1$ $ARG2$','Check  Processor Queue Lenght of Windows Server ARG1 and ARG2 avail for custom applying');
 INSERT INTO `nagios_command` VALUES (71,'wmi_Network_outQueue_vmxnet3','$USER1$/rgm/windows/wmi/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER5$/$USER6$ -p $USER7$ -m  checknetwork -a vmxnet3 -w OutputQueueLength=$ARG1$ -c OutputQueueLength=$ARG2$','Check Network Out Queue lenght of Windows Server VM. ARG1warning size,  ARG2 critical');
 INSERT INTO `nagios_command` VALUES (72,'wmi_Network_PacketError_vmxnet3','$USER1$/rgm/windows/wmi/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER5$/$USER6$ -p $USER7$ -m  checknetwork -a vmxnet3 -w PacketsReceivedErrors=$ARG1$ -c PacketsReceivedErrors=$ARG2$','Check Network Packets Received Errors of Windows Server VM. ARG1warning size,  ARG2 critical');
+INSERT INTO `nagios_command` VALUES (73,'container_cpu','$USER1$/rgm/container/check_container_cpu.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$ $ARG3$ $ARG4$','Prometheus metrics - Container CPU - ARG1: warning, ARG2: critical, ARG3, ARG4: optional args (-i -E)');
+INSERT INTO `nagios_command` VALUES (74,'container_disk','$USER1$/rgm/container/check_container_disk.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$ $ARG3$ $ARG4$ ','Prometheus metrics - Container Disk - ARG1: warning, ARG2: critical, ARG3, ARG4: optional args (-i -E)');
+INSERT INTO `nagios_command` VALUES (75,'container_memory','$USER1$/rgm/container/check_container_memory.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$ $ARG3$ $ARG4$ ','Prometheus metrics - Container Memory - ARG1: warning, ARG2: critical, ARG3, ARG4: optional args (-i -E)');
+INSERT INTO `nagios_command` VALUES (76,'container_uptime','$USER1$/rgm/container/check_container_uptime.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$ $ARG3$ $ARG4$','Prometheus metrics - Container Uptime - ARG1: warning, ARG2: critical, ARG3, ARG4: optional args (-i -E)');
 DROP TABLE IF EXISTS `nagios_contact`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1070,6 +1074,7 @@ INSERT INTO `nagios_host_template` VALUES (24,'RGM_VMWARE_ESX','Monitor ESX usin
 INSERT INTO `nagios_host_template` VALUES (25,'RGM_ORACLE_DB_1522','Monitor using SQLNet port 1522: DB User: USER25; DB Password: USER26  <a href=\'https://labs.consol.de/nagios/check_oracle_health/\' target=\'_blank\'> Configure Oracle DB</a>',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'oracle.png',NULL,'oracle.png','oracle.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host_template` VALUES (26,'RGM_CISCO_CORE_SNMP','RGM_CISCO_CORE_SNMP',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'cisco2.png',NULL,'cisco2.png','cisco2.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host_template` VALUES (27,'RGM_HPE_ILO4','Template for HP ILO4 <a href=\'https://support.hpe.com/hpsc/doc/public/display?docId=emr_na-a00045551en_us&docLocale=en_US\' target=\'_blank\'> Configure SNMP on ILO4 </a>',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'HP_logo_1.jpg',NULL,'HP_logo_1.jpg','HP_logo_1.jpg',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_host_template` VALUES (28,'RGM_CONTAINER','Monitor using Prometheus',NULL,NULL,21,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 DROP TABLE IF EXISTS `nagios_host_template_autodiscovery_service`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1130,6 +1135,7 @@ INSERT INTO `nagios_host_template_inheritance` VALUES (30,NULL,24,2,0);
 INSERT INTO `nagios_host_template_inheritance` VALUES (31,NULL,25,2,0);
 INSERT INTO `nagios_host_template_inheritance` VALUES (33,NULL,26,17,0);
 INSERT INTO `nagios_host_template_inheritance` VALUES (34,NULL,27,2,0);
+INSERT INTO `nagios_host_template_inheritance` VALUES (36,NULL,28,2,0);
 DROP TABLE IF EXISTS `nagios_hostgroup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1622,6 +1628,10 @@ INSERT INTO `nagios_service` VALUES (207,'hw_status','hw_status',NULL,27,NULL,NU
 INSERT INTO `nagios_service` VALUES (208,'processor-queue','processor-queue',NULL,12,NULL,NULL,NULL,70,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_service` VALUES (209,'network_outqueue_vmxnet3','network_outqueue_vmxnet3',NULL,12,NULL,NULL,NULL,71,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_service` VALUES (210,'network_packeterror_vmxnet3','network_packeterror_vmxnet3',NULL,12,NULL,NULL,NULL,72,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (211,'processor','processor',NULL,28,NULL,NULL,NULL,73,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (212,'memory','memory',NULL,28,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (213,'uptime','uptime',NULL,28,NULL,NULL,NULL,76,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (214,'partitions','partitions',NULL,28,NULL,NULL,NULL,74,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 DROP TABLE IF EXISTS `nagios_service_check_command_parameter`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1968,6 +1978,14 @@ INSERT INTO `nagios_service_check_command_parameter` VALUES (416,209,NULL,'10');
 INSERT INTO `nagios_service_check_command_parameter` VALUES (417,209,NULL,'20');
 INSERT INTO `nagios_service_check_command_parameter` VALUES (418,210,NULL,'100');
 INSERT INTO `nagios_service_check_command_parameter` VALUES (419,210,NULL,'1000');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (420,211,NULL,'80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (421,211,NULL,'90');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (422,212,NULL,'80,40');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (423,212,NULL,'90,50');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (424,213,NULL,'10');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (425,213,NULL,'5');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (426,214,NULL,'80');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (427,214,NULL,'90');
 DROP TABLE IF EXISTS `nagios_service_contact_group_member`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -2297,6 +2315,10 @@ INSERT INTO `nagios_service_template_inheritance` VALUES (234,207,NULL,1,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (235,208,NULL,2,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (236,209,NULL,2,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (237,210,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (238,211,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (239,212,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (240,213,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (241,214,NULL,2,0);
 DROP TABLE IF EXISTS `nagios_timeperiod`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
