@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0 
-Release: 22.rgm
+Release: 23.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -84,6 +84,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Oct 22 2020 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-23.rgm
+- add support for:
+  - metricbeat systime
+  - AirWave
+
 * Mon Jun 03 2020 Lucas FUEYO <lfueyo@fr.scc.com> - 3.0-22.rgm
 - Add RGM_CONTAINER Host Template 
 
