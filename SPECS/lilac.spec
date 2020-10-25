@@ -7,7 +7,6 @@ Group: Applications/System
 URL: http://www.lilacplatform.com/
 
 Source0: %{name}-%{version}.tar.gz
-Source1: %{name}-rgm.tar.gz
 
 Requires: rgm-base, mariadb, httpd, mariadb-libs, php, php-mysql, php-pear, php-process, php-xml, nagios >= 3.0, nmap
 BuildRequires: rpm-macros-rgm
@@ -34,7 +33,6 @@ Currently the focus is on the Lilac Configurator, a configuration tool written t
 
 %prep
 %setup -n %{name}-%{version} -T -b 0
-%setup -n %{name}-rgm -T -b 1
 
 %install
 cd ..
@@ -46,9 +44,9 @@ cp -afpvr %{name}-%{version}/* %{buildroot}%{datadir}
 # rgm - specific
 install -d -m0755 %{buildroot}%{rgmlibdir}
 install -d -m0755 %{buildroot}%{rgm_docdir}
-cp -afpvr %{name}-rgm/* %{buildroot}%{rgmlibdir}
-cp -afpv %{name}-rgm/%{name}.conf  %{buildroot}%{_sysconfdir}/httpd/conf.d
-cp -afpv %{name}-rgm/%{name}-conf.php  %{buildroot}%{datadir}/includes/
+cp -afpvr %{_sourcedir}/%{name}-rgm/* %{buildroot}%{rgmlibdir}
+cp -afpv %{_sourcedir}/%{name}-rgm/%{name}.conf  %{buildroot}%{_sysconfdir}/httpd/conf.d
+cp -afpv %{_sourcedir}/%{name}-rgm/%{name}-conf.php  %{buildroot}%{datadir}/includes/
 
 # patch lilac config file with macro values
 sed -i "s/mysqldbname/%{rgm_db_lilac}/" %{buildroot}%{datadir}/includes/lilac-conf.php
