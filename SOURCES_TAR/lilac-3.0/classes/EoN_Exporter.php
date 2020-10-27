@@ -198,7 +198,7 @@ class EoN_Exporter {
 
 		// Download xml file
 		header('Content-type: "text/xml"; charset="utf8"');
-		header('Content-disposition: attachment; filename="EoN_Export_'.$this->type.'.xml"');
+		header('Content-disposition: attachment; filename="RGM_Export_'.$this->type.'.xml"');
 		echo $this->xml_file->saveXML();
 		exit();
 		
