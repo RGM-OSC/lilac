@@ -43,7 +43,7 @@ cp -afpvr %{name}-%{version}/* %{buildroot}%{datadir}
 
 # rgm - specific
 install -d -m0755 %{buildroot}%{rgmlibdir}
-install -d -m0755 %{buildroot}%{rgm_docdir}
+install -d -m0755 %{buildroot}%{rgm_docdir}/httpd
 cp -afpvr %{_sourcedir}/%{name}-rgm/* %{buildroot}%{rgmlibdir}
 cp -afpv %{_sourcedir}/%{name}-rgm/httpd-lilac.example.conf %{buildroot}%{rgm_docdir}/httpd/
 cp -afpv %{_sourcedir}/%{name}-rgm/%{name}-conf.php  %{buildroot}%{datadir}/includes/
