@@ -37,7 +37,6 @@ require_once('propel/Propel.php');
 Propel::init(LILAC_FS_ROOT . "includes/lilac-conf.php");
 include_once(LILAC_FS_ROOT . 'importer/classes.inc.php');
 include_once(LILAC_FS_ROOT . 'exporter/classes.inc.php');
-include_once(LILAC_FS_ROOT . 'autodiscovery/classes.inc.php');
 include_once(LILAC_FS_ROOT . 'includes/output.php');
 include_once(LILAC_FS_ROOT . 'includes/lilac.inc');
 include_once(LILAC_FS_ROOT . 'includes/rgm.php');
