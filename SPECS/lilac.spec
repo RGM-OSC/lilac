@@ -6,7 +6,7 @@ License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
 
-Source0: %{name}-%{version}.tar.gz
+Source0: %{name}.tar.gz
 
 Requires: rgm-base, mariadb, httpd, mariadb-libs, php, php-mysql, php-pear, php-process, php-xml, nagios >= 3.0, nmap
 BuildRequires: rpm-macros-rgm
@@ -32,7 +32,7 @@ Currently the focus is on the Lilac Configurator, a configuration tool written t
 * Auto-Discovery tool to quickly add your infrastructure into your Nagios installation
 
 %prep
-%setup -n %{name}-%{version} -T -b 0
+%setup -n %{name} -T -b 0
 
 %install
 cd ..
