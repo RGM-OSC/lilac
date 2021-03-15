@@ -8,7 +8,7 @@ URL: http://www.lilacplatform.com/
 
 Source0: %{name}.tar.gz
 
-Requires: rgm-base, mariadb, httpd, mariadb-libs, php, php-mysql, php-pear, php-process, php-xml, nagios >= 3.0, nmap
+Requires: rgm-base, mariadb, httpd, mariadb-libs, php, php-mysql, php-pear, php-process, php-xml, nagios >= 3.0
 BuildRequires: rpm-macros-rgm
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -39,7 +39,7 @@ cd ..
 rm -rf %{buildroot}
 install -d -m0755 %{buildroot}%{datadir}
 install -d -m0755 %{buildroot}%{_sysconfdir}/httpd/conf.d
-cp -afpvr %{name}-%{version}/* %{buildroot}%{datadir}
+cp -afpvr %{name}/* %{buildroot}%{datadir}
 
 # rgm - specific
 install -d -m0755 %{buildroot}%{rgmlibdir}
