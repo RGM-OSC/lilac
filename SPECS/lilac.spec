@@ -1,14 +1,14 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0
-Release: 25.rgm
+Release: 26.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
 
-Source0: %{name}-%{version}.tar.gz
+Source0: %{name}.tar.gz
 
-Requires: rgm-base, mariadb, httpd, mariadb-libs, php, php-mysql, php-pear, php-process, php-xml, nagios >= 3.0, nmap
+Requires: rgm-base, mariadb, httpd, mariadb-libs, php, php-mysql, php-pear, php-process, php-xml, nagios >= 3.0
 BuildRequires: rpm-macros-rgm
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -32,56 +32,50 @@ Currently the focus is on the Lilac Configurator, a configuration tool written t
 * Auto-Discovery tool to quickly add your infrastructure into your Nagios installation
 
 %prep
-%setup -n %{name}-%{version} -T -b 0
+%setup -n %{name} -T -b 0
 
 %install
 cd ..
 rm -rf %{buildroot}
 install -d -m0755 %{buildroot}%{datadir}
 install -d -m0755 %{buildroot}%{_sysconfdir}/httpd/conf.d
-cp -afpvr %{name}-%{version}/* %{buildroot}%{datadir}
+cp -afpvr %{name}/* %{buildroot}%{datadir}
 
 # rgm - specific
 install -d -m0755 %{buildroot}%{rgmlibdir}
-install -d -m0755 %{buildroot}%{rgm_docdir}
+install -d -m0755 %{buildroot}%{rgm_docdir}/httpd
 cp -afpvr %{_sourcedir}/%{name}-rgm/* %{buildroot}%{rgmlibdir}
-cp -afpv %{_sourcedir}/%{name}-rgm/%{name}.conf  %{buildroot}%{_sysconfdir}/httpd/conf.d
+cp -afpv %{_sourcedir}/%{name}-rgm/httpd-lilac.example.conf %{buildroot}%{rgm_docdir}/httpd/
 cp -afpv %{_sourcedir}/%{name}-rgm/%{name}-conf.php  %{buildroot}%{datadir}/includes/
-
-# patch lilac config file with macro values
-sed -i "s/mysqldbname/%{rgm_db_lilac}/" %{buildroot}%{datadir}/includes/lilac-conf.php
-sed -i "s/mysqlusername/%{rgm_sql_internal_user}/" %{buildroot}%{datadir}/includes/lilac-conf.php
-sed -i "s/mysqlpassword/%{rgm_sql_internal_pwd}/" %{buildroot}%{datadir}/includes/lilac-conf.php
-
-# patch apache conf file with macro values
-sed -i 's|AuthrgmMySQLUsername rgminternal|AuthrgmMySQLUsername %{rgm_sql_internal_user}|' %{buildroot}%{_sysconfdir}/httpd/conf.d/%{name}.conf
-sed -i 's|AuthrgmMySQLPassword 0rd0-c0m1735-b47h0n143|AuthrgmMySQLPassword %{rgm_sql_internal_pwd}|' %{buildroot}%{_sysconfdir}/httpd/conf.d/%{name}.conf
-sed -i 's|AuthrgmMySQLDB rgmweb|AuthrgmMySQLDB %{rgm_db_rgmweb}|' %{buildroot}%{_sysconfdir}/httpd/conf.d/%{name}.conf
 
 
 %post
 ln -nsf %{datadir} %{linkdir}
 chown -h nagios:rgm %{linkdir}
+if [ -e %{_sysconfdir}/httpd/conf.d/lilac.conf ]; then
+    rm -f %{_sysconfdir}/httpd/conf.d/lilac.conf
+fi
 
-# execute SQL postinstall script
-#/usr/share/rgm/manage_sql.sh -d %{rgm_db_lilac} -s %{rgmlibdir}/lilac-rgm.sql -a %{rgmlibdir}/lilac-procedures.sql -u %{rgm_sql_internal_user} -p "%{rgm_sql_internal_pwd}"
-#/usr/share/rgm/lilac_manage_auto_increments.sh -s
 
 %clean
 rm -rf %{buildroot}
 
 
 %files
+%doc %{rgm_docdir}/httpd/httpd-lilac.example.conf
 %defattr(-, nagios, %{rgm_group}, 0755)
 %config %{datadir}/includes/lilac-conf.php
 %{datadir}
 %defattr(-, root, %{rgm_group}, 0644)
 %{rgmlibdir}
-%defattr(-, root, root, 0644)
-%config %{_sysconfdir}/httpd/conf.d/lilac.conf
 
 
 %changelog
+
+* Thu Mar 11 2021 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-26.rgm
+- remove autodiscovery features
+- remove the ability to add, modify or delete export jobs
+- move httpd lilac config file as example file in /usr/share/doc/rgm/httpd/
 
 * Tue Dec 08 2020 Lucas Fueyo <lfueyo@fr.scc.com> - 3.0-25.rgm
 - Modify more commands and templates 

@@ -48,7 +48,6 @@ if(isset($_GET['action']) && $_GET['action'] == "engineConfig") {
 	die();
 }
 
-
 if(isset($_GET['id'])) {
 	$exportJob = ExportJobPeer::retrieveByPK($_GET['id']);
 	if(!$exportJob) {
@@ -83,15 +82,8 @@ if(isset($_GET['id'])) {
 			$success = "Stopped Export Job";
 		}
 	}
-	if(isset($_GET['delete'])) {
-		// We want to delete the job!
-		exec("pkill -f 'php exporter/export.php ".$exportJob->getId()."' > /dev/null");
-		$exportJob->delete();
-		unset($_GET['id']);
-		unset($exportJob);
-		$success = "Removed Job";
-	}
 }
+
 if(isset($_GET['request']) && $_GET['request'] == 'status') {
 	// We're our AJAX client wanting status information
 	$result = array();
@@ -154,8 +146,6 @@ if(isset($_GET['request']) && $_GET['request'] == 'fetch') {
 	exit();
 }
 
-
-
 if(isset($_POST['request'])) {
 	if(!strlen(trim($_POST['job_name']))) {
 		$status_msg = "Job name must be provided.";
@@ -217,8 +207,8 @@ if(isset($exportJob)) {
     		title: false,
     		showToggleBtn: false, //show or hide column toggle popup
     		useRp: true,
-    		rp: 20,
-    		height: 200
+    		rp: 50,
+    		height: 'auto'
     	});
     	<?php
     	if(!in_array($exportJob->getStatusCode(), array(ExportJob::STATUS_FINISHED, ExportJob::STATUS_FAILED))) {
@@ -317,72 +307,9 @@ if(!isset($exportJob))	{
 		<?php
 		print_window_footer();	
 	}
-	
-	
-	
-	print_window_header("Create New Export Job", "100%", "center");
-	?>
-	<script type="text/javascript">
-		$(function() {
-		  	$("#job_engine_select").attr("value", ""); 	// Force the user to make a choice.
-
-			$("#job_engine_select").change(function() {
-										   if(this.value == "") {
-										   	$("#engine_config").html("Choose an Engine to use for your Export Job from Above.");
-											$("#export_submit").css("display", "none");
-											}
-											else {	
-										   $("#engine_config").html("Loading Engine Configuration...");
-										   $("#engine_config").load("export.php?action=engineConfig&className=" + this.value, null, function() {
-												  $("#export_submit").css("display", "inline");
-
-												  });
-										   }
-
-										   });
-
-		  });
-
-	</script>
-
-	To begin an export of your configuration, an Export Job must be defined.  Configure your export job below.  Once created, your export job will begin in the background.  
-	You will be able to check on the status of your export and view it's log as it continues running.  You are advised to NOT edit anything in Lilac while your export is 
-	running.
-	<br />
-	<form name="export_job" method="post" action="export.php">
-	<input type="hidden" name="request" value="export" />
-	<p>
-        <fieldset>
-                <legend>Job Definition ID : <?php echo $resultID->Auto_increment; ?> </legend>
-		<label for="job_name">Job Name</label>
-		<input id="job_name" name="job_name" type="text" size="100" maxlength="255" />
-		<label for="job_description">Job Description</label>
-		<textarea id="job_description" name="job_description" name="job_description" rows="5" cols="80" /></textarea>
-		<label for="job_engine">Export Engine To Use</label>
-		<select id="job_engine_select" name="job_engine">
-			<option value="">Select An Engine To Use </option>
-			<?php
-				foreach($availableEngines as $engine) {
-					?>
-						<option value="<?php echo $engine['class'];?>"><?php echo $engine['name'] . " - " . $engine['description'];?></option>
-					<?php
-				}	
-			?>
-		</select>
-
-	</fieldset>
-	</p>
-	<div id="engine_config">
-	Choose an Engine to use for your Import Job from Above.
-	</div>
-
-	<input class="btn btn-primary" id="export_submit" style="display:none;" type="submit" value="Begin Export" />
-	<?php
-	print_window_footer();
 }
 else {
-	?>
-	<?php
+
 	$stats = $exportJob->getStats();
 	if($stats) {
 		$stats = unserialize($stats);
@@ -449,7 +376,6 @@ else {
 
 	<a class="btn btn-primary" href="export.php?id=<?php echo $exportJob->getId();?>&action=restart">Restart Job</a>
 	<a class="btn btn-warning" href="export.php?id=<?php echo $exportJob->getId();?>&action=stop">Stop Job</a>
-	<a class="btn btn-danger" href="export.php?id=<?php echo $exportJob->getId();?>&delete=1" onclick="javascript:return confirmDelete();">Remove Job</a>
 	<a class="btn btn-default" href="export.php">Return To Exporter</a>
 	<?php
 	print_window_footer();
