@@ -994,7 +994,7 @@ print_header("Main Configuration File Editor", "main");
 		?>
 		<div class="formbox">
 			<b>Configuration Directory</b><br />
-			<input type="text" size="80" maxlength="255" name="main_config[config_dir]" value="<?php echo $mainConfig->getConfigDir();?>">
+			<input type="text" size="80" maxlength="255" name="main_config[config_dir]" value="<?php echo htmlspecialchars($mainConfig->getConfigDir());?>">
 			<?php echo $lilac->element_desc("config_dir", "nagios_main_desc"); ?><br />
 		</div>
 			<?php
