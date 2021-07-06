@@ -127,15 +127,15 @@ print_header("Nagios Command Editor");
 				}
 			?>
 			<b>Command Name:</b><br />
-			<input type="text" size="40" name="command_manage[command_name]" value="<?php echo isset($command) ? $command->getName() : '';?>">
+			<input type="text" size="40" name="command_manage[command_name]" value="<?php echo isset($command) ? htmlspecialchars($command->getName()) : '';?>">
 			<?php echo $lilac->element_desc("command_name", "nagios_commands_desc"); ?><br />
 			<br />
 			<b>Command Line:</b><br />
-			<textarea cols="100" rows=4 name="command_manage[command_line]"><?php echo isset($command) ? htmlentities($command->getLine()) : '';?></textarea>
+			<textarea cols="100" rows=4 name="command_manage[command_line]"><?php echo isset($command) ? htmlspecialchars($command->getLine()) : '';?></textarea>
 			<?php echo $lilac->element_desc("command_line", "nagios_commands_desc"); ?><br />
 			<br />
 			<b>Command Description:</b><br />
-			<input type="text" size="100" name="command_manage[command_desc]" value="<?php echo isset($command) ? $command->getDescription(): '';?>">
+			<input type="text" size="100" name="command_manage[command_desc]" value="<?php echo isset($command) ? htmlspecialchars($command->getDescription()): '';?>">
 			<?php echo $lilac->element_desc("command_desc", "nagios_commands_desc"); ?><br />
 			<br />		
 			<br />
@@ -184,9 +184,9 @@ print_header("Nagios Command Editor");
 					<?php
 				}
 				?>
-				<td height="20" class="altLeft" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');">&nbsp;<a href="commands.php?command_id=<?php echo $command_list[$counter]->getId();?>"><?php echo $command_list[$counter]->getName();?></a></td>
-				<td height="20" class="altLeft" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');">&nbsp;<?php echo $command_list[$counter]->getDescription();?></td>
-				<td align="center"><input type="checkbox" id="check<?php echo $counter?>" class="checkbox" name="EoN_Actions_Checks_Command[]" value="<?php echo $command_list[$counter]->getId();?>" onclick="checkBox('line<?php echo $counter?>','check<?php echo $counter?>');"></td>
+				<td height="20" class="altLeft" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');">&nbsp;<a href="commands.php?command_id=<?php echo $command_list[$counter]->getId();?>"><?php echo htmlspecialchars($command_list[$counter]->getName());?></a></td>
+				<td height="20" class="altLeft" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');">&nbsp;<?php echo htmlspecialchars($command_list[$counter]->getDescription());?></td>
+				<td align="center"><input type="checkbox" id="check<?php echo $counter?>" class="checkbox" name="EoN_Actions_Checks_Command[]" value="<?php echo htmlspecialchars($command_list[$counter]->getId());?>" onclick="checkBox('line<?php echo $counter?>','check<?php echo $counter?>');"></td>
 				</tr>
 				<?php
 			}

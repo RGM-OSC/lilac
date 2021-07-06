@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0
-Release: 27.rgm
+Release: 28.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -71,6 +71,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+
+* Wed Jul 07 2021 Alex Rocher <arocher@fr.scc.com> - 3.0-28.rgm
+- Fix: Escape values for all variables used in HTML tags
 
 * Mon Jul 05 2021 Alex Rocher <arocher@fr.scc.com> - 3.0-27.rgm
 - Fix: sanitize "Configuration Directory" from lilac configuration tab

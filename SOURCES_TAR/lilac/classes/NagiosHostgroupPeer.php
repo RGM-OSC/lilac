@@ -15,7 +15,7 @@
  */
 class NagiosHostgroupPeer extends BaseNagiosHostgroupPeer {
 	
-    public function getByName($name) {
+    public static function getByName($name) {
 		$c = new Criteria();
 		$c->add(NagiosHostgroupPeer::NAME, $name);
 		$c->setIgnoreCase(true);

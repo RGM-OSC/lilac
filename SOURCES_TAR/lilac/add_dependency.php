@@ -114,9 +114,9 @@ else {
 	$textTitle = $tempSource->getName();
 }
 
-print_header("Add Dependency To " . $title . " " . $textTitle);
+print_header("Add Dependency To " . htmlspecialchars($title) . " " . htmlspecialchars($textTitle));
 
-print_window_header("Add Dependency To " . $title . " " . $textTitle, "100%");
+print_window_header("Add Dependency To " . htmlspecialchars($title) . " " . htmlspecialchars($textTitle), "100%");
 	?>
 	<strong>Provide A Name for this Dependency</strong>
 		<form action="add_dependency.php?<?php echo $fieldName;?>=<?php echo $tempSource->getId();?>" method="post">
@@ -124,7 +124,7 @@ print_window_header("Add Dependency To " . $title . " " . $textTitle, "100%");
 		<input id="name" type="text" size="20" name="name" value="" /><br /><br />
 		<input class="btn btn-primary" type="submit" value="Create Dependency" /> 
 		<br />
-		<br /><a class="btn btn-default" href="<?php echo $link;?>?id=<?php echo $tempSource->getId();?>">Cancel And Return To <?php echo $title;?> <?php echo $textTitle;?></a>
+		<br /><a class="btn btn-default" href="<?php echo $link;?>?id=<?php echo $tempSource->getId();?>">Cancel And Return To <?php echo htmlspecialchars($title);?> <?php echo htmlspecialchars($textTitle);?></a>
 		</form>
 		<?php
 print_window_footer();

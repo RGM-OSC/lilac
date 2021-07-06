@@ -151,11 +151,11 @@ print_header("Contact Group Editor");
 					?>
 					<form name="command_form" method="post" action="contactgroups.php?contactgroup_id=<?php echo $_GET['contactgroup_id'];?>&edit=1">
 						<input type="hidden" name="request" value="modify_contactgroup" />
-						<b>Contact Group Name:</b> <input type="text" name="contactgroup_manage[contactgroup_name]" value="<?php echo $contactGroupInfo->getName();?>">
+						<b>Contact Group Name:</b> <input type="text" name="contactgroup_manage[contactgroup_name]" value="<?php echo htmlspecialchars($contactGroupInfo->getName());?>">
 						<?php echo $lilac->element_desc("contactgroup_name", "nagios_contactgroups_desc"); ?><br />
 						<br />
 						<b>Description:</b><br />
-						<input type="text" size="80" name="contactgroup_manage[alias]" value="<?php echo $contactGroupInfo->getAlias();?>">
+						<input type="text" size="80" name="contactgroup_manage[alias]" value="<?php echo htmlspecialchars($contactGroupInfo->getAlias());?>">
 						<?php echo $lilac->element_desc("alias", "nagios_contactgroups_desc"); ?><br />
 						<br />
 						<br />
@@ -165,8 +165,8 @@ print_header("Contact Group Editor");
 				}
 				else {
 					?>
-					<b>Contact Group Name:</b> <?php echo $contactGroupInfo->getName();?><br />
-					<b>Description:</b> <?php echo $contactGroupInfo->getAlias();?><br />
+					<b>Contact Group Name:</b> <?php echo htmlspecialchars($contactGroupInfo->getName());?><br />
+					<b>Description:</b> <?php echo htmlspecialchars($contactGroupInfo->getAlias());?><br />
 					<br />
 					<a class="btn btn-primary" href="contactgroups.php?contactgroup_id=<?php echo $_GET['contactgroup_id'];?>&section=general&edit=1">Edit</a>
 					<?php
@@ -211,7 +211,7 @@ print_header("Contact Group Editor");
 						}
 						?>
 						<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;<a class="btn btn-danger btn-xs" href="contactgroups.php?contactgroup_id=<?php echo $_GET['contactgroup_id'];?>&section=members&request=delete&contact_id=<?php echo $member_list[$counter]->getNagiosContact()->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-						<td height="20" class="altRight"><b><?php echo $member_list[$counter]->getNagiosContact()->getName();?>:</b> <?php echo $member_list[$counter]->getNagiosContact()->getAlias();?></td>
+						<td height="20" class="altRight"><b><?php echo htmlspecialchars($member_list[$counter]->getNagiosContact()->getName());?>:</b> <?php echo htmlspecialchars($member_list[$counter]->getNagiosContact()->getAlias());?></td>
 						</tr>
 						<?php
 					}
@@ -228,7 +228,7 @@ print_header("Contact Group Editor");
 				<br />
 				<form name="contactgroup_member_add" method="post" action="contactgroups.php?contactgroup_id=<?php echo $_GET['contactgroup_id'];?>&section=members">
 				<input type="hidden" name="request" value="add_member_command" />
-				<input type="hidden" name="contactgroup_manage[member_add][contactgroup_id]" value="<?php echo $_GET['contactgroup_id'];?>" />
+				<input type="hidden" name="contactgroup_manage[member_add][contactgroup_id]" value="<?php echo htmlspecialchars($_GET['contactgroup_id']);?>" />
 				<b>Add New Member:</b> <?php
 				if(!count($contact_list)) {
 					?><strong>No Contacts Available</strong><br /><?php
@@ -278,9 +278,9 @@ print_header("Contact Group Editor");
 					<?php
 				}
 				?>
-				<td height="20" class="altLeft" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');">&nbsp;<a href="contactgroups.php?contactgroup_id=<?php echo $contactgroups_list[$counter]->getId();?>"><?php echo $contactgroups_list[$counter]->getName();?></a></td>
-				<td height="20" class="altRight" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');"><?php echo $contactgroups_list[$counter]->getAlias();?></td>
-				<td align="center"><input type="checkbox" id="check<?php echo $counter?>" class="checkbox" name="EoN_Actions_Checks_ContactGroup[]" value="<?php echo $contactgroups_list[$counter]->getId();?>" onclick="checkBox('line<?php echo $counter?>','check<?php echo $counter?>');"></td>
+				<td height="20" class="altLeft" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');">&nbsp;<a href="contactgroups.php?contactgroup_id=<?php echo $contactgroups_list[$counter]->getId();?>"><?php echo htmlspecialchars($contactgroups_list[$counter]->getName());?></a></td>
+				<td height="20" class="altRight" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');"><?php echo htmlspecialchars($contactgroups_list[$counter]->getAlias());?></td>
+				<td align="center"><input type="checkbox" id="check<?php echo $counter?>" class="checkbox" name="EoN_Actions_Checks_ContactGroup[]" value="<?php echo htmlspecialchars($contactgroups_list[$counter]->getId());?>" onclick="checkBox('line<?php echo $counter?>','check<?php echo $counter?>');"></td>
 				</tr>
 				<?php
 			}

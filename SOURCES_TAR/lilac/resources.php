@@ -86,101 +86,101 @@ print_header("Environment Resources");
 		<table width="100%" cellspacing="10" align="center" border="0">
 		<tr>
 			<td width="50%" valign="top">
-			<b>$USER1$:</b> <input type="text" size="60" name="resource_config[user1]" value="<?php echo $resourceCfg->getUser1();?>"><br />
+			<b>$USER1$:</b> <input type="text" size="60" name="resource_config[user1]" value="<?php echo htmlspecialchars($resourceCfg->getUser1());?>"><br />
 			<br />
 			
-			<b>$USER2$:</b> <input type="text" size="60" name="resource_config[user2]" value="<?php echo $resourceCfg->getUser2();?>"><br />
+			<b>$USER2$:</b> <input type="text" size="60" name="resource_config[user2]" value="<?php echo htmlspecialchars($resourceCfg->getUser2());?>"><br />
 			<br />
 			
-			<b>$USER3$:</b> <input type="text" size="60" name="resource_config[user3]" value="<?php echo $resourceCfg->getUser3();?>"><br />
+			<b>$USER3$:</b> <input type="text" size="60" name="resource_config[user3]" value="<?php echo htmlspecialchars($resourceCfg->getUser3());?>"><br />
 			<br />
 			
-			<b>$USER4$:</b> <input type="text" size="60" name="resource_config[user4]" value="<?php echo $resourceCfg->getUser4();?>"><br />
+			<b>$USER4$:</b> <input type="text" size="60" name="resource_config[user4]" value="<?php echo htmlspecialchars($resourceCfg->getUser4());?>"><br />
 			<br />
 			
-			<b>$USER5$:</b> <input type="text" size="60" name="resource_config[user5]" value="<?php echo $resourceCfg->getUser5();?>"><br />
+			<b>$USER5$:</b> <input type="text" size="60" name="resource_config[user5]" value="<?php echo htmlspecialchars($resourceCfg->getUser5());?>"><br />
 			<br />
 			
-			<b>$USER6$:</b> <input type="text" size="60" name="resource_config[user6]" value="<?php echo $resourceCfg->getUser6();?>"><br />
+			<b>$USER6$:</b> <input type="text" size="60" name="resource_config[user6]" value="<?php echo htmlspecialchars($resourceCfg->getUser6());?>"><br />
 			<br />
 			
-			<b>$USER7$:</b> <input type="text" size="60" name="resource_config[user7]" value="<?php echo $resourceCfg->getUser7();?>"><br />
+			<b>$USER7$:</b> <input type="text" size="60" name="resource_config[user7]" value="<?php echo htmlspecialchars($resourceCfg->getUser7());?>"><br />
 			<br />
 			
-			<b>$USER8$:</b> <input type="text" size="60" name="resource_config[user8]" value="<?php echo $resourceCfg->getUser8();?>"><br />
+			<b>$USER8$:</b> <input type="text" size="60" name="resource_config[user8]" value="<?php echo htmlspecialchars($resourceCfg->getUser8());?>"><br />
 			<br />
 			
-			<b>$USER9$:</b> <input type="text" size="60" name="resource_config[user9]" value="<?php echo $resourceCfg->getUser9();?>"><br />
+			<b>$USER9$:</b> <input type="text" size="60" name="resource_config[user9]" value="<?php echo htmlspecialchars($resourceCfg->getUser9());?>"><br />
 			<br />
 			
-			<b>$USER10$:</b> <input type="text" size="60" name="resource_config[user10]" value="<?php echo $resourceCfg->getUser10();?>"><br />
+			<b>$USER10$:</b> <input type="text" size="60" name="resource_config[user10]" value="<?php echo htmlspecialchars($resourceCfg->getUser10());?>"><br />
 			<br />
 			
-			<b>$USER11$:</b> <input type="text" size="60" name="resource_config[user11]" value="<?php echo $resourceCfg->getUser11();?>"><br />
+			<b>$USER11$:</b> <input type="text" size="60" name="resource_config[user11]" value="<?php echo htmlspecialchars($resourceCfg->getUser11());?>"><br />
 			<br />
 			
-			<b>$USER12$:</b> <input type="text" size="60" name="resource_config[user12]" value="<?php echo $resourceCfg->getUser12();?>"><br />
+			<b>$USER12$:</b> <input type="text" size="60" name="resource_config[user12]" value="<?php echo htmlspecialchars($resourceCfg->getUser12());?>"><br />
 			<br />
 			
-			<b>$USER13$:</b> <input type="text" size="60" name="resource_config[user13]" value="<?php echo $resourceCfg->getUser13();?>"><br />
+			<b>$USER13$:</b> <input type="text" size="60" name="resource_config[user13]" value="<?php echo htmlspecialchars($resourceCfg->getUser13());?>"><br />
 			<br />
 			
-			<b>$USER14$:</b> <input type="text" size="60" name="resource_config[user14]" value="<?php echo $resourceCfg->getUser14();?>"><br />
+			<b>$USER14$:</b> <input type="text" size="60" name="resource_config[user14]" value="<?php echo htmlspecialchars($resourceCfg->getUser14());?>"><br />
 			<br />
 			
-			<b>$USER15$:</b> <input type="text" size="60" name="resource_config[user15]" value="<?php echo $resourceCfg->getUser15();?>"><br />
+			<b>$USER15$:</b> <input type="text" size="60" name="resource_config[user15]" value="<?php echo htmlspecialchars($resourceCfg->getUser15());?>"><br />
 			<br />
 			
-			<b>$USER16$:</b> <input type="text" size="60" name="resource_config[user16]" value="<?php echo $resourceCfg->getUser16();?>"><br />
+			<b>$USER16$:</b> <input type="text" size="60" name="resource_config[user16]" value="<?php echo htmlspecialchars($resourceCfg->getUser16());?>"><br />
 			</td>
 			<td width="50%">
 			
-			<b>$USER17$:</b> <input type="text" size="60" name="resource_config[user17]" value="<?php echo $resourceCfg->getUser17();?>"><br />
+			<b>$USER17$:</b> <input type="text" size="60" name="resource_config[user17]" value="<?php echo htmlspecialchars($resourceCfg->getUser17());?>"><br />
 			<br />
 			
-			<b>$USER18$:</b> <input type="text" size="60" name="resource_config[user18]" value="<?php echo $resourceCfg->getUser18();?>"><br />
+			<b>$USER18$:</b> <input type="text" size="60" name="resource_config[user18]" value="<?php echo htmlspecialchars($resourceCfg->getUser18());?>"><br />
 			<br />
 			
-			<b>$USER19$:</b> <input type="text" size="60" name="resource_config[user19]" value="<?php echo $resourceCfg->getUser19();?>"><br />
+			<b>$USER19$:</b> <input type="text" size="60" name="resource_config[user19]" value="<?php echo htmlspecialchars($resourceCfg->getUser19());?>"><br />
 			<br />
 			
-			<b>$USER20$:</b> <input type="text" size="60" name="resource_config[user20]" value="<?php echo $resourceCfg->getUser20();?>"><br />
+			<b>$USER20$:</b> <input type="text" size="60" name="resource_config[user20]" value="<?php echo htmlspecialchars($resourceCfg->getUser20());?>"><br />
 			<br />
 			
-			<b>$USER21$:</b> <input type="text" size="60" name="resource_config[user21]" value="<?php echo $resourceCfg->getUser21();?>"><br />
+			<b>$USER21$:</b> <input type="text" size="60" name="resource_config[user21]" value="<?php echo htmlspecialchars($resourceCfg->getUser21());?>"><br />
 			<br />
 			
-			<b>$USER22$:</b> <input type="text" size="60" name="resource_config[user22]" value="<?php echo $resourceCfg->getUser22();?>"><br />
+			<b>$USER22$:</b> <input type="text" size="60" name="resource_config[user22]" value="<?php echo htmlspecialchars($resourceCfg->getUser22());?>"><br />
 			<br />
 			
-			<b>$USER23$:</b> <input type="text" size="60" name="resource_config[user23]" value="<?php echo $resourceCfg->getUser23();?>"><br />
+			<b>$USER23$:</b> <input type="text" size="60" name="resource_config[user23]" value="<?php echo htmlspecialchars($resourceCfg->getUser23());?>"><br />
 			<br />
 			
-			<b>$USER24$:</b> <input type="text" size="60" name="resource_config[user24]" value="<?php echo $resourceCfg->getUser24();?>"><br />
+			<b>$USER24$:</b> <input type="text" size="60" name="resource_config[user24]" value="<?php echo htmlspecialchars($resourceCfg->getUser24());?>"><br />
 			<br />
 			
-			<b>$USER25$:</b> <input type="text" size="60" name="resource_config[user25]" value="<?php echo $resourceCfg->getUser25();?>"><br />
+			<b>$USER25$:</b> <input type="text" size="60" name="resource_config[user25]" value="<?php echo htmlspecialchars($resourceCfg->getUser25());?>"><br />
 			<br />
 			
-			<b>$USER26$:</b> <input type="text" size="60" name="resource_config[user26]" value="<?php echo $resourceCfg->getUser26();?>"><br />
+			<b>$USER26$:</b> <input type="text" size="60" name="resource_config[user26]" value="<?php echo htmlspecialchars($resourceCfg->getUser26());?>"><br />
 			<br />
 			
-			<b>$USER27$:</b> <input type="text" size="60" name="resource_config[user27]" value="<?php echo $resourceCfg->getUser27();?>"><br />
+			<b>$USER27$:</b> <input type="text" size="60" name="resource_config[user27]" value="<?php echo htmlspecialchars($resourceCfg->getUser27());?>"><br />
 			<br />
 	
-			<b>$USER28$:</b> <input type="text" size="60" name="resource_config[user28]" value="<?php echo $resourceCfg->getUser28();?>"><br />
+			<b>$USER28$:</b> <input type="text" size="60" name="resource_config[user28]" value="<?php echo htmlspecialchars($resourceCfg->getUser28());?>"><br />
 			<br />
 
-			<b>$USER29$:</b> <input type="text" size="60" name="resource_config[user29]" value="<?php echo $resourceCfg->getUser29();?>"><br />
+			<b>$USER29$:</b> <input type="text" size="60" name="resource_config[user29]" value="<?php echo htmlspecialchars($resourceCfg->getUser29());?>"><br />
 			<br />
 
-			<b>$USER30$:</b> <input type="text" size="60" name="resource_config[user30]" value="<?php echo $resourceCfg->getUser30();?>"><br />
+			<b>$USER30$:</b> <input type="text" size="60" name="resource_config[user30]" value="<?php echo htmlspecialchars($resourceCfg->getUser30());?>"><br />
 			<br />
 			
-			<b>$USER31$:</b> <input type="text" size="60" name="resource_config[user31]" value="<?php echo $resourceCfg->getUser31();?>"><br />
+			<b>$USER31$:</b> <input type="text" size="60" name="resource_config[user31]" value="<?php echo htmlspecialchars($resourceCfg->getUser31());?>"><br />
 			<br />
 			
-			<b>$USER32$:</b> <input type="text" size="60" name="resource_config[user32]" value="<?php echo $resourceCfg->getUser32();?>"><br />
+			<b>$USER32$:</b> <input type="text" size="60" name="resource_config[user32]" value="<?php echo htmlspecialchars($resourceCfg->getUser32());?>"><br />
 			<br />
 			</td>
 		</tr>

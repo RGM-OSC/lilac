@@ -53,7 +53,7 @@ class NagiosHostgroup extends BaseNagiosHostgroup {
 	/**
 	 * We should update this.
 	 *
-	 * @return unknown
+	 * @return Array
 	 */
 	public function getMembers() {
 		$members = array();	// Members are indexed by host names

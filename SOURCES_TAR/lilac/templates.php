@@ -66,8 +66,8 @@ print_header("Template Listings");
 					<?php
 			}
 			?>
-				<td height="20" class="altLeft" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');">&nbsp;<a href="host_template.php?id=<?php echo $hostTemplateList[$counter]->getId();?>"><?php echo $hostTemplateList[$counter]->getName();?></a></td>
-				<td height="20" class="altRight" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');">&nbsp;<?php echo $hostTemplateList[$counter]->getDescription();?></td>
+				<td height="20" class="altLeft" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');">&nbsp;<a href="host_template.php?id=<?php echo $hostTemplateList[$counter]->getId();?>"><?php echo htmlspecialchars($hostTemplateList[$counter]->getName());?></a></td>
+				<td height="20" class="altRight" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');">&nbsp;<?php echo htmlspecialchars($hostTemplateList[$counter]->getDescription());?></td>
 				<td align="center"><input type="checkbox" id="check<?php echo $counter?>" class="checkbox" name="EoN_Actions_Checks_HostTemplate[]" value="<?php echo $hostTemplateList[$counter]->getId();?>" onclick="checkBox('line<?php echo $counter?>','check<?php echo $counter?>');"></td>
 				</tr>
 				<?php
@@ -111,8 +111,8 @@ print_header("Template Listings");
 					<?php
 			}
 			?>
-				<td height="20" class="altLeft" onclick="checkLine('Sline<?php echo $counter?>','Scheck<?php echo $counter?>');">&nbsp;<a href="service_template.php?id=<?php echo $serviceTemplateList[$counter]->getId();?>"><?php echo $serviceTemplateList[$counter]->getName();?></a></td>
-				<td height="20" class="altRight" onclick="checkLine('Sline<?php echo $counter?>','Scheck<?php echo $counter?>');">&nbsp;<?php echo $serviceTemplateList[$counter]->getDescription();?></td>
+				<td height="20" class="altLeft" onclick="checkLine('Sline<?php echo $counter?>','Scheck<?php echo $counter?>');">&nbsp;<a href="service_template.php?id=<?php echo $serviceTemplateList[$counter]->getId();?>"><?php echo htmlspecialchars($serviceTemplateList[$counter]->getName());?></a></td>
+				<td height="20" class="altRight" onclick="checkLine('Sline<?php echo $counter?>','Scheck<?php echo $counter?>');">&nbsp;<?php echo htmlspecialchars($serviceTemplateList[$counter]->getDescription());?></td>
 				<td align="center"><input type="checkbox" id="Scheck<?php echo $counter?>" class="checkbox" name="EoN_Actions_Checks_ServiceTemplate[]" value="<?php echo $serviceTemplateList[$counter]->getId();?>" onclick="checkBox('Sline<?php echo $counter?>','Scheck<?php echo $counter?>');"></td>
 				</tr>
 				<?php

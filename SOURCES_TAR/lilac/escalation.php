@@ -220,37 +220,37 @@ $title = '';
 if($escalation->getNagiosService() || $escalation->getNagiosServiceTemplate()) {
 	$title .= "Service ";
 	if($escalation->getNagiosServiceTemplate()) {
-		$title .= "Template <i>" . $escalation->getNagiosServiceTemplate()->getName() . "</i>";
+		$title .= "Template <i>" . htmlspecialchars($escalation->getNagiosServiceTemplate()->getName()) . "</i>";
 		$sublink = "service_template.php?id=" . $escalation->getNagiosServiceTemplate()->getId();
-		$subText = "Return To Service Template " . $escalation->getNagiosServiceTemplate()->getName();
+		$subText = "Return To Service Template " . htmlspecialchars($escalation->getNagiosServiceTemplate()->getName());
 	}
 	else {
-		$title .= "<i>" . $escalation->getNagiosService()->getDescription() . "</i> On ";
+		$title .= "<i>" . htmlspecialchars($escalation->getNagiosService()->getDescription()) . "</i> On ";
 		if($escalation->getNagiosService()->getNagiosHostTemplate()) {
-			$title .= " Host Template <i>" . $escalation->getNagiosService()->getNagiosHostTemplate()->getName() . "</i>";
+			$title .= " Host Template <i>" . htmlspecialchars($escalation->getNagiosService()->getNagiosHostTemplate()->getName()) . "</i>";
 		}
 		else if($escalation->getNagiosService()->getNagiosHost()) {
-			$title .= "Host " . "<i>" . $escalation->getNagiosService()->getNagiosHost()->getName() . "</i>";
+			$title .= "Host " . "<i>" . htmlspecialchars($escalation->getNagiosService()->getNagiosHost()->getName()) . "</i>";
 		}
 		$sublink = "service.php?id=" . $escalation->getNagiosService()->getId();
-		$subText = "Return To Service " . $escalation->getNagiosService()->getDescription();
+		$subText = "Return To Service " . htmlspecialchars($escalation->getNagiosService()->getDescription());
 	}
 }
 else {	
 	if($escalation->getNagiosHostTemplate()) {
-		$title .= "Host Template <i>" . $escalation->getNagiosHostTemplate()->getName() . "</i>";
+		$title .= "Host Template <i>" . htmlspecialchars($escalation->getNagiosHostTemplate()->getName()) . "</i>";
 		$sublink = "host_template.php?id=" . $escalation->getNagiosHostTemplate()->getId();
-		$subText = "Return To Host Template " . $escalation->getNagiosHostTemplate()->getName();
+		$subText = "Return To Host Template " . htmlspecialchars($escalation->getNagiosHostTemplate()->getName());
 	}
 	else if($escalation->getNagiosHost()) {
-		$title .= "Host <i>" . $escalation->getNagiosHost()->getName() . "</i>";
+		$title .= "Host <i>" . htmlspecialchars($escalation->getNagiosHost()->getName()) . "</i>";
 		$sublink = "hosts.php?id=" . $escalation->getNagiosHost()->getId();
-		$subText = "Return To Host " . $escalation->getNagiosHost()->getName();
+		$subText = "Return To Host " . htmlspecialchars($escalation->getNagiosHost()->getName());
 	}
 	else if($escalation->getNagiosHostgroup()) {
-		$title .= "Hostgroup <i>" . $escalation->getNagiosHostgroup()->getName() . "</i>";
+		$title .= "Hostgroup <i>" . htmlspecialchars($escalation->getNagiosHostgroup()->getName()) . "</i>";
 		$sublink = "hostgroups.php?id=" . $escalation->getNagiosHostgroup()->getId();
-		$subText = "Return To Hostgroup " . $escalation->getNagiosHostgroup()->getName();
+		$subText = "Return To Hostgroup " . htmlspecialchars($escalation->getNagiosHostgroup()->getName());
 	}
 
 }
@@ -287,16 +287,16 @@ print_header("Escalation Editor for " . $title);
 					<form name="escalation_manage" method="post" action="escalation.php?id=<?php echo $_GET['id'];?>&section=general&edit=1">
 					<input type="hidden" name="request" value="escalation_modify_general" />
 					
-					<b>Escalation Description:</b> <input type="text" name="escalation_manage[escalation_description]" value="<?php echo $escalation->getDescription();?>" />
+					<b>Escalation Description:</b> <input type="text" name="escalation_manage[escalation_description]" value="<?php echo htmlspecialchars($escalation->getDescription());?>" />
 					<?php echo $lilac->element_desc("escalation_description", "nagios_escalations_desc"); ?><br />
 					<br />
-					<b>First Notification:</b> <input type="text" name="escalation_manage[first_notification]" value="<?php echo $escalation->getFirstNotification();?>" size="2" maxlength="2" />
+					<b>First Notification:</b> <input type="text" name="escalation_manage[first_notification]" value="<?php echo htmlspecialchars($escalation->getFirstNotification());?>" size="2" maxlength="2" />
 					<?php echo $lilac->element_desc("first_notification", "nagios_escalations_desc"); ?><br />
 					<br />
-					<b>Last Notification:</b> <input type="text" name="escalation_manage[last_notification]" value="<?php echo $escalation->getLastNotification();?>" size="2" maxlength="2" />
+					<b>Last Notification:</b> <input type="text" name="escalation_manage[last_notification]" value="<?php echo htmlspecialchars($escalation->getLastNotification());?>" size="2" maxlength="2" />
 					<?php echo $lilac->element_desc("last_notification", "nagios_escalations_desc"); ?><br />
 					<br />
-					<b>Notification Interval:</b> <input type="text" name="escalation_manage[notification_interval]" value="<?php echo $escalation->getNotificationInterval();?>" size="8" maxlength="8" />
+					<b>Notification Interval:</b> <input type="text" name="escalation_manage[notification_interval]" value="<?php echo htmlspecialchars($escalation->getNotificationInterval());?>" size="8" maxlength="8" />
 					<?php echo $lilac->element_desc("notification_interval", "nagios_escalations_desc"); ?><br />
 					<br />
 					<b>Escalation Period:</b> <?php print_select("escalation_manage[escalation_period]", $period_list, "timeperiod_id", "timeperiod_name",($escalation->getEscalationPeriod() != null) ? $escalation->getEscalationPeriod() : '');?>
@@ -343,44 +343,44 @@ print_header("Escalation Editor for " . $title);
 					?>
 					<b>Attached To <?php
 					if($escalation->getHost() !== null && !($escalation->getService() !== null))
-						print("Host:</b> " . $escalation->getNagiosHost()->getName());
+						print("Host:</b> " . htmlspecialchars($escalation->getNagiosHost()->getName()));
 					else if($escalation->getHostTemplate())
-						print("Host Template:</b> " . $escalation->getNagiosHostTemplate()->getName());
+						print("Host Template:</b> " . htmlspecialchars($escalation->getNagiosHostTemplate()->getName()));
 					else if($escalation->getService()) {
 						if($escalation->getNagiosService()->getNagiosHost() !== null)
-							print("Service:</b> " . $escalation->getNagiosService()->getDescription() . " On " . $escalation->getNagiosService()->getNagiosHost()->getName());
+							print("Service:</b> " . htmlspecialchars($escalation->getNagiosService()->getDescription()) . " On " . htmlspecialchars($escalation->getNagiosService()->getNagiosHost()->getName()));
 						else 
-							print("Service:</b> " . $escalation->getNagiosService()->getDescription() . " On Host Template " . $escalation->getNagiosService()->getNagiosHostTemplate()->getName());
+							print("Service:</b> " . htmlspecialchars($escalation->getNagiosService()->getDescription()) . " On Host Template " . htmlspecialchars($escalation->getNagiosService()->getNagiosHostTemplate()->getName()));
 					}
 					else if($escalation->getServiceTemplate()) {
-						print("Service Template:</b> " . $escalation->getNagiosServiceTemplate()->getName());
+						print("Service Template:</b> " . htmlspecialchars($escalation->getNagiosServiceTemplate()->getName()));
 					}
 					else if($escalation->getHostgroup() !== null) {
-						print("Hostgroup:</b> " . $escalation->getNagiosHostgroup()->getName());
+						print("Hostgroup:</b> " . htmlspecialchars($escalation->getNagiosHostgroup()->getName()));
 					}
 					?><br />
-					<b>Description:</b> <?php echo $escalation->getDescription();?><br />
+					<b>Description:</b> <?php echo htmlspecialchars($escalation->getDescription());?><br />
 					<br />
 					<b>Included In Definition:</b></br >
 					<?php
 					if($escalation->getFirstNotification() != null) {
 						?>
-						<b>First Notification:</b> #<?php echo $escalation->getFirstNotification();?> Notification<br />
+						<b>First Notification:</b> #<?php echo htmlspecialchars($escalation->getFirstNotification());?> Notification<br />
 						<?php
 					}
 					if($escalation->getLastNotification() != null) {
 						?>
-						<b>Last Notification:</b> #<?php echo $escalation->getLastNotification();?> Notification<br />
+						<b>Last Notification:</b> #<?php echo htmlspecialchars($escalation->getLastNotification());?> Notification<br />
 						<?php
 					}
 					if($escalation->getNotificationInterval() != null) {
 						?>
-						<b>Notification Interval:</b> <?php echo $escalation->getNotificationInterval();?> Time-Units<br />
+						<b>Notification Interval:</b> <?php echo htmlspecialchars($escalation->getNotificationInterval());?> Time-Units<br />
 						<?php
 					}
 					if($escalation->getEscalationPeriod()) {
 						?>
-						<b>Escalation Period:</b> <?php echo $lilac->return_period_name($escalation->getEscalationPeriod());?><br />
+						<b>Escalation Period:</b> <?php echo htmlspecialchars($lilac->return_period_name($escalation->getEscalationPeriod()));?><br />
 						<?php
 					}
 					if($escalation->getEscalationOptionsUp() != null || $escalation->getEscalationOptionsDown() != null || $escalation->getEscalationOptionsUnreachable() != null || $escalation->getEscalationOptionsOk() != null || $escalation->getEscalationOptionsWarning() != null || $escalation->getEscalationOptionsUnknown() != null || $escalation->getEscalationOptionsCritical() != null) {
@@ -463,7 +463,7 @@ print_header("Escalation Editor for " . $title);
 					}
 					?>
 						<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="escalation.php?id=<?php echo $_GET['id'];?>&section=contacts&request=delete&contact_id=<?php echo $contacts_list[$counter]->getNagiosContact()->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-						<td height="20" class="altRight"><b><?php echo $contacts_list[$counter]->getNagiosContact()->getName();?>:</b> <?php echo $contacts_list[$counter]->getNagiosContact()->getAlias();?></td>
+						<td height="20" class="altRight"><b><?php echo htmlspecialchars($contacts_list[$counter]->getNagiosContact()->getName());?>:</b> <?php echo htmlspecialchars($contacts_list[$counter]->getNagiosContact()->getAlias());?></td>
 						</tr>
 						<?php
 				}
@@ -530,7 +530,7 @@ print_header("Escalation Editor for " . $title);
 						}
 						?>
 						<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="escalation.php?id=<?php echo $_GET['id'];?>&section=contacts&request=delete&contactgroup_id=<?php echo $contactgroups_list[$counter]['contactgroup_id'];?>">Delete</a></td>
-						<td height="20" class="altRight"><b><?php echo $lilac->return_contactgroup_name($contactgroups_list[$counter]['contactgroup_id']);?>:</b> <?php echo $lilac->return_contactgroup_alias($contactgroups_list[$counter]['contactgroup_id']);?></td>
+						<td height="20" class="altRight"><b><?php echo htmlspecialchars($lilac->return_contactgroup_name($contactgroups_list[$counter]['contactgroup_id']));?>:</b> <?php echo htmlspecialchars($lilac->return_contactgroup_alias($contactgroups_list[$counter]['contactgroup_id']));?></td>
 						</tr>
 						<?php
 					}

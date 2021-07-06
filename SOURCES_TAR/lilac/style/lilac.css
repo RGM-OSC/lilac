@@ -562,4 +562,5 @@ li.general {
 
 input[type=checkbox]{
 	margin: 0 0 !important;
+    cursor: pointer;
 }

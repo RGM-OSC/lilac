@@ -351,7 +351,7 @@ class module_search_simple {
 		
 		?>
 <script type="text/javascript">
-<!--
+/*
 function clearSearch() {
 	id = document.getElementById("searchField");
 	if( id.value != "Enter a search") {
@@ -373,8 +373,7 @@ function validateForm() {
 	
 	return true;
 }
-
--->
+*/
 </script>
 <form action="search.php" method="post" target="rightHome" id="searchForm" onsubmit="return validateForm();">
 <input type="hidden" id="simpleSearch" name="simpleSearch" value="1" />
@@ -398,7 +397,6 @@ function validateForm() {
 	}
 	
 	public function renderResults() {
-		global $error;
 		global $OBJECTS;
 
 		if(count($this->searchResults)) {
@@ -408,14 +406,14 @@ function validateForm() {
 				?>
                                 <form name="EoN_Actions_Form" method="post">
 			        <?php echo EoN_Actions($OBJECTS[$group])?>
-				<input type="hidden" name="query" value="<?php echo $_GET["query"]?>">
+				<input type="hidden" name="query" value="<?php echo htmlspecialchars($_GET["query"])?>">
 				<table width="95%" border="0" align="center" cellspacing="0" cellpadding="0">
 				<tr>
 				<?php
 								if(count($this->searchTemplate[$group])) {
 									foreach( $this->searchTemplate[$group] as $key=>$value) {
 										if( $key != "type" && $key != "url") {
-											print "\t<td style=\"padding: 2px; border-bottom: 1px solid #aaaaaa;\"><b>$value</b></td>\n";
+											print "\t<td style=\"padding: 2px; border-bottom: 1px solid #aaaaaa;\"><b>" . htmlspecialchars($value) . "</b></td>\n";
 										}
 									}
 								}
@@ -449,7 +447,7 @@ function validateForm() {
 									if( strlen( $result->$key()) == 0) {
 										$temp = "&nbsp;";
 									} else {
-										$temp = "<a href=\"" . str_replace( "@1@", $id, $url) . "\">" . $result->$key() . "</a>";
+										$temp = "<a href=\"" . str_replace( "@1@", $id, $url) . "\">" . htmlspecialchars($result->$key()) . "</a>";
 									}
 									
 									print $temp . "</td>\n";

@@ -903,13 +903,13 @@ print_header("Host Template Editor");
 					?>
 					<form name="host_manage" method="post" action="host_template.php?id=<?php echo $_GET['id'];?>&section=general&edit=1">
 					<input type="hidden" name="request" value="host_template_modify_general" />
-					<input type="hidden" name="host_template_id" value="<?php echo $hostTemplate->getId();?>">
+					<input type="hidden" name="host_template_id" value="<?php echo htmlspecialchars($hostTemplate->getId());?>">
 					<b>Template Name:</b><br />
-					<input type="text" size="40" name="host_manage[template_name]" value="<?php echo $hostTemplate->getName();?>">
+					<input type="text" size="40" name="host_manage[template_name]" value="<?php echo htmlspecialchars($hostTemplate->getName());?>">
 					<?php echo $lilac->element_desc("template_name", "nagios_host_template_desc"); ?><br />
 					<br />		
 					<b>Description:</b><br />
-					<input type="text" size="80" name="host_manage[template_description]" value="<?php echo $hostTemplate->getDescription();?>">
+					<input type="text" size="80" name="host_manage[template_description]" value="<?php echo htmlspecialchars($hostTemplate->getDescription());?>">
 					<?php echo $lilac->element_desc("template_description", "nagios_host_template_desc"); ?><br />
 					<br />
 					<br />
@@ -918,8 +918,8 @@ print_header("Host Template Editor");
 				}
 				else {
 					?>
-					<b>Template Name:</b> <?php echo $hostTemplate->getName();?><br />
-					<b>Description:</b> <?php echo $hostTemplate->getDescription();?><br />
+					<b>Template Name:</b> <?php echo htmlspecialchars($hostTemplate->getName());?><br />
+					<b>Description:</b> <?php echo htmlspecialchars($hostTemplate->getDescription());?><br />
 					<br />
 					<a class="btn btn-primary" href="host_template.php?id=<?php echo $_GET['id'];?>&section=general&edit=1">Edit</a>
 					<?php
@@ -975,7 +975,7 @@ print_header("Host Template Editor");
 						<td height="20" width="80" class="altLeft"><?php if($numOfTemplates > 1 && $counter > 0) { ?><a class="btn btn-primary btn-xs" href="host_template.php?id=<?php echo $_GET['id'];?>&section=inheritance&request=moveup&template_id=<?php echo $templateInheritances[$counter]->getId();?>">Move Up</a><?php }?></td>
 						<td height="20" width="100" class="altLeft"><?php if($numOfTemplates > 1 && $counter < ($numOfTemplates -1)) { ?><a class="btn btn-primary btn-xs" href="host_template.php?id=<?php echo $_GET['id'];?>&section=inheritance&request=movedown&template_id=<?php echo $templateInheritances[$counter]->getId();?>">Move Down</a><?php }?></td>
 						<td height="20" width="80" nowrap="nowrap" class="altLeft"> <a class="btn btn-danger btn-xs" href="host_template.php?id=<?php echo $_GET['id'];?>&section=inheritance&request=delete&template_id=<?php echo $templateInheritances[$counter]->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-						<td height="20" class="altRight"><b><?php echo $templateInheritances[$counter]->getName();?></b></td>
+						<td height="20" class="altRight"><b><?php echo htmlspecialchars($templateInheritances[$counter]->getName());?></b></td>
 						</tr>
 						<?php
 					}
@@ -1011,13 +1011,13 @@ print_header("Host Template Editor");
 					<?php 
 					double_pane_form_window_start();
 
-						form_select_element_with_enabler($initialState_list, "value", "label", "host_manage", "initial_state", "Initial State", $lilac->element_desc("initial_state", "nagios_hosts_desc"), $templateValues, $_GET['id']);
+					form_select_element_with_enabler($initialState_list, "value", "label", "host_manage", "initial_state", "Initial State", $lilac->element_desc("initial_state", "nagios_hosts_desc"), $templateValues, $_GET['id']);
 					form_select_element_with_enabler($enable_list, "values", "text", "host_manage", "active_checks_enabled", "Active Checks", $lilac->element_desc("active_checks_enabled", "nagios_hosts_desc"), $templateValues, $_GET['id']);
 					form_select_element_with_enabler($enable_list, "values", "text", "host_manage", "passive_checks_enabled", "Passive Checks", $lilac->element_desc("passive_checks_enabled", "nagios_hosts_desc"), $templateValues, $_GET['id']);
 					form_select_element_with_enabler($period_list, "timeperiod_id", "timeperiod_name", "host_manage", "check_period", "Check Period", $lilac->element_desc("check_period", "nagios_hosts_desc"), $templateValues, $_GET['id']);					
 					form_select_element_with_enabler($command_list, "command_id", "command_name", "host_manage", "check_command", "Check Command", $lilac->element_desc("check_command", "nagios_hosts_desc"), $templateValues, $_GET['id']);
 					form_text_element_with_enabler(4, 4, "host_manage", "retry_interval", "Retry Interval", $lilac->element_desc("retry_interval", "nagios_hosts_desc"), $templateValues, $_GET['id']);
-				form_text_element_with_enabler(4, 4, "host_manage", "max_check_attempts", "Maximum Check Attempts", $lilac->element_desc("max_check_attempts", "nagios_hosts_desc"), $templateValues, $_GET['id']);
+				    form_text_element_with_enabler(4, 4, "host_manage", "max_check_attempts", "Maximum Check Attempts", $lilac->element_desc("max_check_attempts", "nagios_hosts_desc"), $templateValues, $_GET['id']);
 					form_text_element_with_enabler(8, 8, "host_manage", "check_interval", "Check Interval In Time-Units", $lilac->element_desc("check_interval", "nagios_hosts_desc"), $templateValues, $_GET['id']);
 					form_select_element_with_enabler($enable_list, "values", "text", "host_manage", "obsess_over_host", "Obsess Over Host", $lilac->element_desc("obsess_over_host", "nagios_hosts_desc"), $templateValues, $_GET['id']);
 					form_select_element_with_enabler($enable_list, "values", "text", "host_manage", "check_freshness", "Check Freshness", $lilac->element_desc("check_freshness", "nagios_hosts_desc"), $templateValues, $_GET['id']);
@@ -1036,7 +1036,7 @@ print_header("Host Template Editor");
 					<h3>Included In Template:</h3>
 					<?php
 					print_initialstate_display_field("Initial State", $templateValues, "initial_state", $_GET['id']);
-				print_enabled_display_field("Active Checks", $templateValues, "active_checks_enabled", $_GET['id']);
+				    print_enabled_display_field("Active Checks", $templateValues, "active_checks_enabled", $_GET['id']);
 					print_enabled_display_field("Passive Checks", $templateValues, "passive_checks_enabled", $_GET['id']);
 					print_timeperiod_display_field("Check Period", $templateValues, "check_period", $_GET['id']);
 					print_cmd_obj_display_field("Check Command", $cmdObj);
@@ -1281,7 +1281,7 @@ print_header("Host Template Editor");
                             if($templateValues['notification_on_scheduled_downtime']['value']) $values[] = "Scheduled Downtime";
                             print(implode(",", $values));
 						}
-						print("<b> - Inherited From: </b><i>".$templateValues['notification_on_down']['source']['name']."</i>");
+						print("<b> - Inherited From: </b><i>".htmlspecialchars($templateValues['notification_on_down']['source']['name'])."</i>");
 						print("<br />");
 					}
 					if($hostTemplate->getStalkingOnUp() !== null) {
@@ -1390,7 +1390,7 @@ print_header("Host Template Editor");
 							}
 							?>
 							<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-							<td height="20" class="altRight"><a href="hostgroups.php?id=<?php echo $inherited_list[$counter]->getId();?>"><b><?php echo $inherited_list[$counter]->getName();?>:</b></a> <?php echo $inherited_list[$counter]->getName();?></td>
+							<td height="20" class="altRight"><a href="hostgroups.php?id=<?php echo $inherited_list[$counter]->getId();?>"><b><?php echo htmlspecialchars($inherited_list[$counter]->getName());?>:</b></a> <?php echo htmlspecialchars($inherited_list[$counter]->getName());?></td>
 							</tr>
 							<?php
 						}
@@ -1419,7 +1419,7 @@ print_header("Host Template Editor");
 						}
 						?>
 						<td height="20" width="80" nowrap="nowrap" class="altLeft"> <a class="btn btn-danger btn-xs" href="host_template.php?id=<?php echo $_GET['id'];?>&section=groups&request=delete&hostgroup_id=<?php echo $group_list[$counter]->getNagiosHostgroup()->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-						<td height="20" class="altRight"><a href="hostgroups.php?id=<?php echo $group_list[$counter]->getNagiosHostgroup()->getId();?>"><b><?php echo $group_list[$counter]->getNagiosHostgroup()->getName();?>:</b></a> <?php echo $group_list[$counter]->getNagiosHostgroup()->getAlias();?></td>
+						<td height="20" class="altRight"><a href="hostgroups.php?id=<?php echo $group_list[$counter]->getNagiosHostgroup()->getId();?>"><b><?php echo htmlspecialchars($group_list[$counter]->getNagiosHostgroup()->getName());?>:</b></a> <?php echo htmlspecialchars($group_list[$counter]->getNagiosHostgroup()->getAlias());?></td>
 						</tr>
 						<?php
 					}
@@ -1481,7 +1481,7 @@ print_header("Host Template Editor");
 								}
 								?>
 								<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-								<td height="20" class="altRight"><b><a href="service.php?id=<?php echo $service->getId();?>"><?php echo $service->getDescription();?></a></b> from <b><?php echo $service->getNagiosHostTemplate()->getName();?></b></td>
+								<td height="20" class="altRight"><b><a href="service.php?id=<?php echo $service->getId();?>"><?php echo htmlspecialchars($service->getDescription());?></a></b> from <b><?php echo htmlspecialchars($service->getNagiosHostTemplate()->getName());?></b></td>
 								</tr>
 								<?php
 								$counter++;
@@ -1512,7 +1512,7 @@ print_header("Host Template Editor");
 						}
 						?>
 						<td height="20" width="120" nowrap="nowrap" class="altLeft"><a class="btn btn-primary btn-xs" href="host_template.php?id=<?php echo $_GET['id'];?>&section=services&request=duplicate&service_id=<?php echo $hostTemplateServiceList[$counter]->getId();?>" onClick="javascript:return confirmDelete();">Duplicate</a> <a class="btn btn-danger btn-xs" href="host_template.php?id=<?php echo $_GET['id'];?>&section=services&request=delete&service_id=<?php echo $hostTemplateServiceList[$counter]->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-						<td height="20" class="altRight"><b><a href="service.php?id=<?php echo $hostTemplateServiceList[$counter]->getId();?>"><?php echo $hostTemplateServiceList[$counter]->getDescription();?></a></b></td>
+						<td height="20" class="altRight"><b><a href="service.php?id=<?php echo $hostTemplateServiceList[$counter]->getId();?>"><?php echo htmlspecialchars($hostTemplateServiceList[$counter]->getDescription());?></a></b></td>
 						</tr>
 						<?php
 					}
@@ -1562,7 +1562,7 @@ print_header("Host Template Editor");
 								}
 								?>
 								<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-								<td height="20" class="altRight"><b>$ARG<?php echo ++$parameterCounter;?>$:</b> <?php echo $parameter->getParameter();?></td>
+								<td height="20" class="altRight"><b>$ARG<?php echo ++$parameterCounter;?>$:</b> <?php echo htmlspecialchars($parameter->getParameter());?></td>
 								</tr>
 								<?php
 							}
@@ -1595,7 +1595,7 @@ print_header("Host Template Editor");
                     <td height="20" class="altRight"><b>$ARG<?php echo $parameterCounter;?>$:</b><input type="text" <?php
              					echo 'name="param"';
              					echo ' style="width:300px;"';
-             					echo ' value=\''.$checkCommandParameters[$counter]->getParameter().'\'';
+             					echo ' value=\''.htmlspecialchars($checkCommandParameters[$counter]->getParameter()).'\'';
              					?>
                     >
                                 <input class="nicebutton" type="submit" value="Update" />
@@ -1652,7 +1652,7 @@ print_header("Host Template Editor");
 										}
 										?>
 										<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-										<td height="20" class="altRight"><b>$_HOST<?php echo $customObjectVariable->getVarName();?>$:</b> <?php echo $customObjectVariable->getVarValue();?> from <strong>(host template) <?php echo $customObjectVariable->getNagiosHostTemplate()->getName(); ?></strong></td>
+										<td height="20" class="altRight"><b>$_HOST<?php echo htmlspecialchars($customObjectVariable->getVarName());?>$:</b> <?php echo htmlspecialchars($customObjectVariable->getVarValue());?> from <strong>(host template) <?php echo htmlspecialchars($customObjectVariable->getNagiosHostTemplate()->getName()); ?></strong></td>
 										</tr>
 										<?php
 										
@@ -1684,7 +1684,7 @@ print_header("Host Template Editor");
 								}
 								?>
 								<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="host_template.php?id=<?php echo $_GET['id'];?>&section=customobjectvars&request=delete&customobjectvariable_id=<?php echo $customObjectVariable->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-								<td height="20" class="altRight"><b>$_HOST<?php echo $customObjectVariable->getVarName();?>$:</b> <?php echo $customObjectVariable->getVarValue();?></td>
+								<td height="20" class="altRight"><b>$_HOST<?php echo htmlspecialchars($customObjectVariable->getVarName());?>$:</b> <?php echo htmlspecialchars($customObjectVariable->getVarValue());?></td>
 								</tr>
 								<?php
 								
@@ -1812,7 +1812,7 @@ print_header("Host Template Editor");
 									}
 									?>
 									<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-									<td height="20" class="altRight"><b><?php echo $inherited_list[$counter]->getName();?>:</b> <?php echo $inherited_list[$counter]->getAlias();?></td>
+									<td height="20" class="altRight"><b><?php echo htmlspecialchars($inherited_list[$counter]->getName());?>:</b> <?php echo htmlspecialchars($inherited_list[$counter]->getAlias());?></td>
 									</tr>
 									<?php
 								}
@@ -1840,7 +1840,7 @@ print_header("Host Template Editor");
 								}
 								?>
 								<td height="20" width="80" nowrap="nowrap" class="altLeft"> <a class="btn btn-danger btn-xs" href="host_template.php?id=<?php echo $_GET['id'];?>&section=contacts&request=delete&contact_id=<?php echo $contacts_list[$counter]->getNagiosContact()->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-								<td height="20" class="altRight"><b><?php echo $contacts_list[$counter]->getNagiosContact()->getName();?>:</b> <?php echo $contacts_list[$counter]->getNagiosContact()->getAlias();?></td>
+								<td height="20" class="altRight"><b><?php echo htmlspecialchars($contacts_list[$counter]->getNagiosContact()->getName());?>:</b> <?php echo htmlspecialchars($contacts_list[$counter]->getNagiosContact()->getAlias());?></td>
 								</tr>
 								<?php
 							}
@@ -1928,7 +1928,7 @@ print_header("Host Template Editor");
 								}
 								?>
 								<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="host_template.php?id=<?php echo $_GET['id'];?>&section=contacts&request=delete&contactgroup_id=<?php echo $contactgroups_list[$counter]->getNagiosContactgroup()->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-								<td height="20" class="altRight"><b><?php echo $contactgroups_list[$counter]->getNagiosContactgroup()->getName();?>:</b> <?php echo $contactgroups_list[$counter]->getNagiosContactgroup()->getAlias();?></td>
+								<td height="20" class="altRight"><b><?php echo htmlspecialchars($contactgroups_list[$counter]->getNagiosContactgroup()->getName());?>:</b> <?php echo htmlspecialchars($contactgroups_list[$counter]->getNagiosContactgroup()->getAlias());?></td>
 								</tr>
 								<?php
 							}
@@ -1992,7 +1992,7 @@ print_header("Host Template Editor");
 										}
 										?>
 										<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-										<td height="20" class="altRight"><b><?php echo $dependency->getName();?> - Inherited from <?php echo $dependency->getNagiosHostTemplate()->getName();?></td>
+										<td height="20" class="altRight"><b><?php echo htmlspecialchars($dependency->getName());?> - Inherited from <?php echo htmlspecialchars($dependency->getNagiosHostTemplate()->getName());?></td>
 										</tr>
 										<?php
 										$counter++;
@@ -2024,7 +2024,7 @@ print_header("Host Template Editor");
 									}
 									?>
 									<td height="20" width="80" nowrap="nowrap" class="altLeft"> <a class="btn btn-danger btn-xs" href="host_template.php?id=<?php echo $_GET['id'];?>&section=dependencies&request=delete&dependency_id=<?php echo $dependency->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-									<td height="20" class="altRight"><b><a href="dependency.php?id=<?php echo $dependency->getId();?>"><?php echo $dependency->getName();?></a></b></td>
+									<td height="20" class="altRight"><b><a href="dependency.php?id=<?php echo $dependency->getId();?>"><?php echo htmlspecialchars($dependency->getName());?></a></b></td>
 									</tr>
 									<?php
 									$counter++;
@@ -2076,7 +2076,7 @@ print_header("Host Template Editor");
 										}
 										?>
 										<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-										<td height="20" class="altRight"><b><a href="escalation.php?id=<?php echo $escalation->getId();?>"><?php echo $escalation->getDescription();?></a> - Inherited From <?php echo $escalation->getNagiosHostTemplate()->getName();?></b></td>
+										<td height="20" class="altRight"><b><a href="escalation.php?id=<?php echo $escalation->getId();?>"><?php echo htmlspecialchars($escalation->getDescription());?></a> - Inherited From <?php echo $escalation->getNagiosHostTemplate()->getName();?></b></td>
 										</tr>
 										<?php
 										$counter++;
@@ -2108,7 +2108,7 @@ print_header("Host Template Editor");
 									}
 									?>
 									<td height="20" width="80" nowrap="nowrap" class="altLeft"> <a class="btn btn-danger btn-xs" href="host_template.php?id=<?php echo $_GET['id'];?>&section=escalations&request=delete&escalation_id=<?php echo $escalation->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-									<td height="20" class="altRight"><b><a href="escalation.php?id=<?php echo $escalation->getId();?>"><?php echo $escalation->getDescription();?></a></b></td>
+									<td height="20" class="altRight"><b><a href="escalation.php?id=<?php echo $escalation->getId();?>"><?php echo htmlspecialchars($escalation->getDescription());?></a></b></td>
 									</tr>
 									<?php
 									$counter++;
@@ -2179,7 +2179,7 @@ print_header("Host Template Editor");
 						foreach($inherited_list as $filter) {
 							?>
 							<div class="shaded">
-							<em>Inherited From: </em><?php echo $filter->getNagiosHostTemplate()->getName();?>
+							<em>Inherited From: </em><?php echo htmlspecialchars($filter->getNagiosHostTemplate()->getName());?>
 							<p>
 							<strong>Port: </strong><?php echo strtoupper($filter->getProtocol()); ?>/<?php echo $filter->getPort();?>
 							</p>
@@ -2187,35 +2187,35 @@ print_header("Host Template Editor");
 							if($filter->getName() != '') {
 								?>
 								<p>
-								<strong>Name: </strong><?php echo $filter->getName(); ?>
+								<strong>Name: </strong><?php echo htmlspecialchars($filter->getName()); ?>
 								</p>
 								<?php
 							}
 							if($filter->getName() != '') {
 								?>
 								<p>
-								<strong>Port: </strong><?php echo $filter->getProtocol(); ?>
+								<strong>Port: </strong><?php echo htmlspecialchars($filter->getProtocol()); ?>
 								</p>
 								<?php
 							}
 							if($filter->getName() != '') {
 								?>
 								<p>
-								<strong>Product: </strong><?php echo $filter->getProduct(); ?>
+								<strong>Product: </strong><?php echo htmlspecialchars($filter->getProduct()); ?>
 								</p>
 								<?php
 							}
 							if($filter->getName() != '') {
 								?>
 								<p>
-								<strong>Version: </strong><?php echo $filter->getVersion(); ?>
+								<strong>Version: </strong><?php echo htmlspecialchars($filter->getVersion()); ?>
 								</p>
 								<?php
 							}
 							if($filter->getName() != '') {
 								?>
 								<p>
-								<strong>Extra Information: </strong><?php echo $filter->getExtraInformation(); ?>
+								<strong>Extra Information: </strong><?php echo htmlspecialchars($filter->getExtraInformation()); ?>
 								</p>
 								<?php
 							}
@@ -2245,35 +2245,35 @@ print_header("Host Template Editor");
 							if($filter->getName() != '') {
 								?>
 								<p>
-								<strong>Name: </strong><?php echo $filter->getName(); ?>
+								<strong>Name: </strong><?php echo htmlspecialchars($filter->getName()); ?>
 								</p>
 								<?php
 							}
 							if($filter->getName() != '') {
 								?>
 								<p>
-								<strong>Port: </strong><?php echo $filter->getProtocol(); ?>
+								<strong>Port: </strong><?php echo htmlspecialchars($filter->getProtocol()); ?>
 								</p>
 								<?php
 							}
 							if($filter->getName() != '') {
 								?>
 								<p>
-								<strong>Product: </strong><?php echo $filter->getProduct(); ?>
+								<strong>Product: </strong><?php echo htmlspecialchars($filter->getProduct()); ?>
 								</p>
 								<?php
 							}
 							if($filter->getName() != '') {
 								?>
 								<p>
-								<strong>Version: </strong><?php echo $filter->getVersion(); ?>
+								<strong>Version: </strong><?php echo htmlspecialchars($filter->getVersion()); ?>
 								</p>
 								<?php
 							}
 							if($filter->getName() != '') {
 								?>
 								<p>
-								<strong>Extra Information: </strong><?php echo $filter->getExtraInformation(); ?>
+								<strong>Extra Information: </strong><?php echo htmlspecialchars($filter->getExtraInformation()); ?>
 								</p>
 								<?php
 							}

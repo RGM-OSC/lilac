@@ -56,7 +56,6 @@ else if(isset($_GET['hostgroup_id'])) {
 	}
 	$type = "hostgroup";
 	$title = "Hostgroup";
-
 }
 else if(isset($_GET['service_template_id'])) {
 	$tempSource = NagiosServiceTemplatePeer::retrieveByPK($_GET['service_template_id']);
@@ -107,21 +106,25 @@ if(isset($_POST['request']) && $_POST['request'] == 'add_escalation') {
 	}	
 }
 
-if($type == "service") {
-	$textTitle = $tempSource->getNagiosHost()->getName() . " : " . $tempSource->getDescription();
-}
-else {
-	$textTitle = $tempSource->getName();
+if ($type == "service") {
+	if ($tempSource->getNagiosHost() !== null) {
+		$textTitle = $tempSource->getNagiosHost()->getName() . " : " . $tempSource->getDescription();
+	}
+	else if ($tempSource->getNagiosHostGroup() !== null) {
+		$textTitle = $tempSource->getNagiosHostGroup()->getName() . " : " . $tempSource->getDescription();
+	} else {
+        $textTitle = $tempSource->getDescription();
+    }
 }
 
-print_header("Add Escalation To " . $title . " " . $textTitle);
+print_header("Add Escalation To " . htmlspecialchars($title) . " " . htmlspecialchars($textTitle));
 
 print_window_header("Add A Escalation", "100%");
 
 
 
 ?>
-<a class="btn btn-default" href="<?php echo $link;?>?id=<?php echo $tempSource->getId();?>">Return To <?php echo $title;?> <?php echo $textTitle;?></a>
+<a class="btn btn-default" href="<?php echo $link;?>?id=<?php echo $tempSource->getId();?>">Return To <?php echo htmlspecialchars($title);?> <?php echo htmlspecialchars($textTitle);?></a>
 <?php
 	if(isset($errorMsg)) {
 		?>

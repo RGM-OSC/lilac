@@ -1392,7 +1392,7 @@ print_header("Main Configuration File Editor", "main");
 					}
 					?>
 					<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger" href="main.php?section=broker&request=delete&module_id=<?php echo $module->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-					<td height="20" class="altRight"><b><?php echo $module->getLine();?></b></td>
+					<td height="20" class="altRight"><b><?php echo htmlspecialchars($module->getLine());?></b></td>
 					</tr>
 					<?php
 					$counter++;

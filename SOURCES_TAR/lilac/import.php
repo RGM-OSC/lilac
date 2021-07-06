@@ -250,8 +250,6 @@ float: none;
 .checks p {
 padding: 2px;
 }
-
-}
 </style>
 <?php
 if(isset($status_msg)) {
@@ -279,10 +277,10 @@ if(!isset($importJob))	{
 		foreach($importJobs as $job) {
 			?>
 			<tr>
-				<td><?php echo $job->getName();?></td>
-				<td><?php echo $job->getDescription();?></td>
-				<td><?php echo $job->getStartTime();?></td>
-				<td><?php echo $job->getStatus();?></td>
+				<td><?php echo htmlspecialchars($job->getName());?></td>
+				<td><?php echo htmlspecialchars($job->getDescription());?></td>
+				<td><?php echo htmlspecialchars($job->getStartTime());?></td>
+				<td><?php echo htmlspecialchars($job->getStatus());?></td>
 				<td><a href="import.php?id=<?php echo $job->getId();?>">View Job</a></td>
 				<td><a href="import.php?id=<?php echo $job->getId();?>&action=restart">Restart</a></td>
 			</tr>
@@ -365,7 +363,7 @@ else {
 	?>
 	<strong>Job Name:</strong> <?php echo $importJob->getName();?><br />
 	<strong>Job Id:</strong> <?php echo $importJob->getId();?><br />
-	<?php echo $importJob->getDescription();?>
+	<?php echo htmlspecialchars($importJob->getDescription());?>
 	<br />
 	<br />
 	<strong>Start Time:</strong> <?php echo $importJob->getStartTime();?><br />

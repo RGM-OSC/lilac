@@ -3804,8 +3804,9 @@ abstract class BaseNagiosServicePeer {
 	 */
 	public static function retrieveByPK($pk, PropelPDO $con = null)
 	{
-
+        // error_log("#### retrieveByPK pk=" . $pk);
 		if (null !== ($obj = NagiosServicePeer::getInstanceFromPool((string) $pk))) {
+            // error_log("#### retrieveByPK obj=" . print_r($obj, true));
 			return $obj;
 		}
 
@@ -3817,6 +3818,7 @@ abstract class BaseNagiosServicePeer {
 		$criteria->add(NagiosServicePeer::ID, $pk);
 
 		$v = NagiosServicePeer::doSelect($criteria, $con);
+        // error_log("#### retrieveByPK v=" . print_r($v, true));
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}

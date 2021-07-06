@@ -27,7 +27,7 @@ print_window_header("About Eonweb Configurator", "100%");
 ?>
 <p>
 <h2>Eonweb Configurator <?php echo LILAC_VERSION;?></h2>
-The community site is available at <a href="http://www.rgm-cloud.io">www.rgm-cloud.io</a>.  
+The community site is available at <a href="https://www.rgm-cloud.io">www.rgm-cloud.io</a>.  
 </p>
 <p>
 <h2>Statistics</h2>

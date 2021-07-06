@@ -16,7 +16,7 @@ session_start();
 		else {
 			echo "<select name='hostmanage[template_add][template_id]'>";
 			foreach($templateList as $template) {
-				echo "<option value='".$template->getId()."'>".$template->getName()."</option>";
+				echo "<option value='".$template->getId()."'>".htmlspecialchars($template->getName())."</option>";
 			}
 			echo "</select>&nbsp;";
 			echo "<input class='btn btn-primary' type='button' onCLick='javascript:getID()'' value='Add Template'><br /><br />";
@@ -43,7 +43,7 @@ session_start();
 					if ($i%2) echo "<tr class='altRow1'>";
 		        	else echo "<tr class='altRow2'>";
 		        	echo "<td height='20' width='80' nowrap='nowrap' class='altLeft'><a class=\"btn btn-danger btn-xs\" onClick='javascript:appel(".$temp->getId().",\"delete\");'>Delete</a></td>";
-		        	echo "<td height='20' class='altRight'><b>".$temp->getName()."</b></td></tr>";
+		        	echo "<td height='20' class='altRight'><b>".htmlspecialchars($temp->getName())."</b></td></tr>";
 		        	$i++;
 		        	break;
 	        	}
@@ -61,7 +61,7 @@ session_start();
 	        		else echo "<tr class='altRow2'>";
 	        		$_SESSION['templates'][count($_SESSION['templates'])] = $template->getId() ;
 	        		echo "<td height='20' width='80' nowrap='nowrap' class='altLeft'><a class=\"btn btn-danger btn-xs\" onClick='javascript:appel(".$template->getId().",\"delete\");'>Delete</a></td>";
-	        		echo "<td height='20' class='altRight'><b>".$template->getName()."</b></td></tr>";
+	        		echo "<td height='20' class='altRight'><b>".htmlspecialchars($template->getName())."</b></td></tr>";
 	        		break;
 				}
 	        }
@@ -76,7 +76,7 @@ session_start();
 			echo "<select name='hostmanage[template_add][template_id]'>";
 			foreach($templateList as $template) {
 				if(in_array($template->getId(), $_SESSION['templates']))	continue;
-					echo "<option value='".$template->getId()."'>".$template->getName()."</option>";
+					echo "<option value='".$template->getId()."'>".htmlspecialchars($template->getName())."</option>";
 				}
 			echo "</select>";
 			echo "<input type='button' onCLick='javascript:getID()'' value='Add Template'><br /><br />";

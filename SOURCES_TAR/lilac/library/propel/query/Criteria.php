@@ -1258,7 +1258,7 @@ class Criteria implements IteratorAggregate
 	/**
 	 * Get select modifiers.
 	 *
-	 * @return     An array with the select modifiers.
+	 * @return     Array An array with the select modifiers.
 	 */
 	public function getSelectModifiers()
 	{
