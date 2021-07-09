@@ -104,7 +104,7 @@ class PropelXMLParser extends PropelParser
 				if (function_exists('iconv') && strcasecmp($charset, 'utf-8') !== 0 && strcasecmp($charset, 'utf8') !== 0) {
 					$value = iconv($charset, 'UTF-8', $value);
 				}
-				$value = htmlspecialchars($value, ENT_COMPAT, 'UTF-8');
+				$value = rgm_esc($value, ENT_COMPAT, 'UTF-8');
 				$child = $element->ownerDocument->createCDATASection($value);
 				$element->appendChild($child);
 			} else {

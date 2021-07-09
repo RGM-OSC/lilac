@@ -845,11 +845,11 @@ print_header("Service Template Editor");
 					<input type="hidden" name="request" value="service_template_modify_general" />
 					<input type="hidden" name="service_template_id" value="<?php echo $_GET['id'];?>">
 					<b>Template Name:</b><br />
-					<input type="text" size="40" name="service_manage[template_name]" value="<?php echo htmlspecialchars($serviceTemplate->getName());?>">
+					<input type="text" size="40" name="service_manage[template_name]" value="<?php echo rgm_esc($serviceTemplate->getName());?>">
 					<?php echo $lilac->element_desc("template_name", "nagios_service_template_desc"); ?><br />
 					<br />		
 					<b>Description:</b><br />
-					<input type="text" size="80" name="service_manage[template_description]" value="<?php echo htmlspecialchars($serviceTemplate->getDescription());?>">
+					<input type="text" size="80" name="service_manage[template_description]" value="<?php echo rgm_esc($serviceTemplate->getDescription());?>">
 					<?php echo $lilac->element_desc("template_description", "nagios_service_template_desc"); ?><br />
 					<br />
 					<br />
@@ -858,8 +858,8 @@ print_header("Service Template Editor");
 				}
 				else {
 					?>
-					<b>Template Name:</b> <?php echo htmlspecialchars($serviceTemplate->getName());?><br />
-					<b>Description:</b> <?php echo htmlspecialchars($serviceTemplate->getDescription());?><br />
+					<b>Template Name:</b> <?php echo rgm_esc($serviceTemplate->getName());?><br />
+					<b>Description:</b> <?php echo rgm_esc($serviceTemplate->getDescription());?><br />
 					<br />
 					<a class="btn btn-primary" href="service_template.php?id=<?php echo $_GET['id'];?>&section=general&edit=1">Edit</a>
 					<?php
@@ -914,7 +914,7 @@ print_header("Service Template Editor");
 						<td height="20" width="80" class="altLeft"><?php if($numOfTemplates > 1 && $counter > 0) { ?><a class="btn btn-primary btn-xs" href="service_template.php?id=<?php echo $_GET['id'];?>&section=inheritance&request=moveup&template_id=<?php echo $templateInheritances[$counter]->getId();?>">Move Up</a><?php }?></td>
 						<td height="20" width="100" class="altLeft"><?php if($numOfTemplates > 1 && $counter < ($numOfTemplates -1)) { ?><a class="btn btn-primary btn-xs" href="service_template.php?id=<?php echo $_GET['id'];?>&section=inheritance&request=movedown&template_id=<?php echo $templateInheritances[$counter]->getId();?>">Move Down</a><?php }?></td>
 						<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="service_template.php?id=<?php echo $_GET['id'];?>&section=inheritance&request=delete&template_id=<?php echo $templateInheritances[$counter]->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-						<td height="20" class="altRight"><b><?php echo htmlspecialchars($templateInheritances[$counter]->getName());?></b></td>
+						<td height="20" class="altRight"><b><?php echo rgm_esc($templateInheritances[$counter]->getName());?></b></td>
 						</tr>
 						<?php
 					}
@@ -1060,7 +1060,7 @@ print_header("Service Template Editor");
 						if($templateValues['flap_detection_on_critical']['value']) $values[] = "Critical";
 						if(count($values)) {
 							print("<b>Flap Detection On:</b> ". implode(",", $values));
-							print("<b> - Inherited From: </b><i>".htmlspecialchars($templateValues['flap_detection_on_ok']['source']['name'])."</i>");
+							print("<b> - Inherited From: </b><i>".rgm_esc($templateValues['flap_detection_on_ok']['source']['name'])."</i>");
 							print("<br />");
 						}
 	
@@ -1202,7 +1202,7 @@ print_header("Service Template Editor");
                             if($templateValues['notification_on_scheduled_downtime']['value']) $values[] = "Scheduled Downtime";
                             print(implode(",", $values));
    						}
-						print("<b> - Inherited From: </b><i>".htmlspecialchars($templateValues['notification_on_warning']['source']['name'])."</i>");
+						print("<b> - Inherited From: </b><i>".rgm_esc($templateValues['notification_on_warning']['source']['name'])."</i>");
 						print("<br />");
 					}
 					if($serviceTemplate->getStalkingOnOk() !== null) {
@@ -1261,7 +1261,7 @@ print_header("Service Template Editor");
 						else {
 							print("None");
 						}
-						print("<b> - Inherited From: </b><i>".htmlspecialchars($templateValues['stalking_on_ok']['source']['name'])."</i>");
+						print("<b> - Inherited From: </b><i>".rgm_esc($templateValues['stalking_on_ok']['source']['name'])."</i>");
 						print("<br />");
 					}					
 					?>
@@ -1311,7 +1311,7 @@ print_header("Service Template Editor");
 								}
 								?>
 								<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-								<td height="20" class="altRight"><b>$ARG<?php echo ++$parameterCounter;?>$:</b> <?php echo htmlspecialchars($parameter->getParameter());?></td>
+								<td height="20" class="altRight"><b>$ARG<?php echo ++$parameterCounter;?>$:</b> <?php echo rgm_esc($parameter->getParameter());?></td>
 								</tr>
 								<?php
 							}
@@ -1345,7 +1345,7 @@ print_header("Service Template Editor");
                     <td height="20" class="altRight"><b>$ARG<?php echo $parameterCounter;?>$:</b><input type="text" <?php
              					echo 'name="param"';
              					echo ' style="width:300px;"';
-             					echo ' value=\''.htmlspecialchars($checkCommandParameters[$counter]->getParameter()).'\'';
+             					echo ' value=\''.rgm_esc($checkCommandParameters[$counter]->getParameter()).'\'';
 						?>
                     >
                                 <input class="nicebutton" type="submit" value="Update" />
@@ -1464,7 +1464,7 @@ print_header("Service Template Editor");
 									}
 									?>
 									<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-									<td height="20" class="altRight"><b><?php echo htmlspecialchars($inherited_list[$counter]->getName());?>:</b> <?php echo htmlspecialchars($inherited_list[$counter]->getAlias());?></td>
+									<td height="20" class="altRight"><b><?php echo rgm_esc($inherited_list[$counter]->getName());?>:</b> <?php echo rgm_esc($inherited_list[$counter]->getAlias());?></td>
 									</tr>
 									<?php
 								}
@@ -1492,7 +1492,7 @@ print_header("Service Template Editor");
 								}
 								?>
 								<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="service_template.php?id=<?php echo $_GET['id'];?>&section=contacts&request=delete&contact_id=<?php echo $contacts_list[$counter]->getNagiosContact()->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-								<td height="20" class="altRight"><b><?php echo htmlspecialchars($contacts_list[$counter]->getNagiosContact()->getName());?>:</b> <?php echo htmlspecialchars($contacts_list[$counter]->getNagiosContact()->getAlias());?></td>
+								<td height="20" class="altRight"><b><?php echo rgm_esc($contacts_list[$counter]->getNagiosContact()->getName());?>:</b> <?php echo rgm_esc($contacts_list[$counter]->getNagiosContact()->getAlias());?></td>
 								</tr>
 								<?php
 							}
@@ -1553,7 +1553,7 @@ print_header("Service Template Editor");
 									}
 									?>
 									<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-									<td height="20" class="altRight"><b><?php echo htmlspecialchars($inherited_list[$counter]->getName());?>:</b> <?php echo htmlspecialchars($inherited_list[$counter]->getAlias());?></td>
+									<td height="20" class="altRight"><b><?php echo rgm_esc($inherited_list[$counter]->getName());?>:</b> <?php echo rgm_esc($inherited_list[$counter]->getAlias());?></td>
 									</tr>
 									<?php
 								}
@@ -1581,7 +1581,7 @@ print_header("Service Template Editor");
 								}
 								?>
 								<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="service_template.php?id=<?php echo $_GET['id'];?>&section=contacts&request=delete&contactgroup_id=<?php echo $contactgroups_list[$counter]->getNagiosContactgroup()->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-								<td height="20" class="altRight"><b><?php echo htmlspecialchars($contactgroups_list[$counter]->getNagiosContactgroup()->getName());?>:</b> <?php echo htmlspecialchars($contactgroups_list[$counter]->getNagiosContactgroup()->getAlias());?></td>
+								<td height="20" class="altRight"><b><?php echo rgm_esc($contactgroups_list[$counter]->getNagiosContactgroup()->getName());?>:</b> <?php echo rgm_esc($contactgroups_list[$counter]->getNagiosContactgroup()->getAlias());?></td>
 								</tr>
 								<?php
 							}
@@ -1644,7 +1644,7 @@ print_header("Service Template Editor");
 										}
 										?>
 										<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-										<td height="20" class="altRight"><b><?php echo htmlspecialchars($servicegroup->getName());?>:</b> <?php echo htmlspecialchars($servicegroup->getAlias());?></td>
+										<td height="20" class="altRight"><b><?php echo rgm_esc($servicegroup->getName());?>:</b> <?php echo rgm_esc($servicegroup->getAlias());?></td>
 										</tr>
 										<?php
 										$counter++;
@@ -1674,7 +1674,7 @@ print_header("Service Template Editor");
 								}
 								?>
 								<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="service_template.php?id=<?php echo $_GET['id'];?>&section=servicegroups&request=delete&servicegroup_id=<?php echo $servicegroups_list[$counter]->getNagiosServiceGroup()->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-								<td height="20" class="altRight"><b><?php echo htmlspecialchars($servicegroups_list[$counter]->getNagiosServiceGroup()->getName());?>:</b> <?php echo htmlspecialchars($servicegroups_list[$counter]->getNagiosServiceGroup()->getAlias());?></td>
+								<td height="20" class="altRight"><b><?php echo rgm_esc($servicegroups_list[$counter]->getNagiosServiceGroup()->getName());?>:</b> <?php echo rgm_esc($servicegroups_list[$counter]->getNagiosServiceGroup()->getAlias());?></td>
 								</tr>
 								<?php
 							}
@@ -1737,7 +1737,7 @@ print_header("Service Template Editor");
 										}
 										?>
 										<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-										<td height="20" class="altRight"><b><?php echo htmlspecialchars($dependency->getName());?></td>
+										<td height="20" class="altRight"><b><?php echo rgm_esc($dependency->getName());?></td>
 										</tr>
 										<?php
 										$counter++;
@@ -1769,7 +1769,7 @@ print_header("Service Template Editor");
 									}
 									?>
 									<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="service_template.php?id=<?php echo $_GET['id'];?>&section=dependencies&request=delete&dependency_id=<?php echo $dependency->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-									<td height="20" class="altRight"><b><a href="dependency.php?id=<?php echo $dependency->getId();?>"><?php echo htmlspecialchars($dependency->getName());?></a></b></td>
+									<td height="20" class="altRight"><b><a href="dependency.php?id=<?php echo $dependency->getId();?>"><?php echo rgm_esc($dependency->getName());?></a></b></td>
 									</tr>
 									<?php
 									$counter++;
@@ -1819,7 +1819,7 @@ print_header("Service Template Editor");
 												}
 												?>
 												<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-												<td height="20" class="altRight"><b>$_SERVICE<?php echo htmlspecialchars($customObjectVariable->getVarName());?>$:</b> <?php echo htmlspecialchars($customObjectVariable->getVarValue());?> from <strong>(service template) <?php echo htmlspecialchars($customObjectVariable->getNagiosServiceTemplate()->getName()); ?></strong></td>
+												<td height="20" class="altRight"><b>$_SERVICE<?php echo rgm_esc($customObjectVariable->getVarName());?>$:</b> <?php echo rgm_esc($customObjectVariable->getVarValue());?> from <strong>(service template) <?php echo rgm_esc($customObjectVariable->getNagiosServiceTemplate()->getName()); ?></strong></td>
 												</tr>
 												<?php
 												
@@ -1851,7 +1851,7 @@ print_header("Service Template Editor");
 										}
 										?>
 										<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="service_template.php?id=<?php echo $_GET['id'];?>&section=customobjectvars&request=delete&customobjectvariable_id=<?php echo $customObjectVariable->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-										<td height="20" class="altRight"><b>$_SERVICE<?php echo htmlspecialchars($customObjectVariable->getVarName());?>$:</b> <?php echo htmlspecialchars($customObjectVariable->getVarValue());?></td>
+										<td height="20" class="altRight"><b>$_SERVICE<?php echo rgm_esc($customObjectVariable->getVarName());?>$:</b> <?php echo rgm_esc($customObjectVariable->getVarValue());?></td>
 										</tr>
 										<?php
 										
@@ -1908,7 +1908,7 @@ print_header("Service Template Editor");
 										}
 										?>
 										<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-										<td height="20" class="altRight"><b><a href="escalation.php?id=<?php echo $escalation->getId();?>"><?php echo htmlspecialchars($escalation->getDescription());?></a></b></td>
+										<td height="20" class="altRight"><b><a href="escalation.php?id=<?php echo $escalation->getId();?>"><?php echo rgm_esc($escalation->getDescription());?></a></b></td>
 										</tr>
 										<?php
 										$counter++;
@@ -1940,7 +1940,7 @@ print_header("Service Template Editor");
 									}
 									?>
 									<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="service_template.php?id=<?php echo $_GET['id'];?>&section=escalations&request=delete&escalation_id=<?php echo $escalation->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-									<td height="20" class="altRight"><b><a href="escalation.php?escalation_id=<?php echo $escalation->getId();?>"><?php echo htmlspecialchars($escalation->getDescription());?></a></b></td>
+									<td height="20" class="altRight"><b><a href="escalation.php?escalation_id=<?php echo $escalation->getId();?>"><?php echo rgm_esc($escalation->getDescription());?></a></b></td>
 									</tr>
 									<?php
 									$counter++;

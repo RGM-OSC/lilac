@@ -168,11 +168,11 @@ print_header("Host Group Editor");
 					?>
 					<form name="command_form" method="post" action="hostgroups.php?id=<?php echo $_GET['id'];?>&section=general&edit=1">
 						<input type="hidden" name="request" value="modify_hostgroup" />
-						<b>Host Group Name:</b> <input type="text" name="hostgroup_name" value="<?php echo htmlspecialchars($hostgroup->getName());?>">
+						<b>Host Group Name:</b> <input type="text" name="hostgroup_name" value="<?php echo rgm_esc($hostgroup->getName());?>">
 						<?php echo $lilac->element_desc("hostgroup_name", "nagios_hostgroups_desc"); ?><br />
 						<br />
 						<b>Description:</b><br />
-						<input type="text" size="80" name="alias" value="<?php echo htmlspecialchars($hostgroup->getAlias());?>">
+						<input type="text" size="80" name="alias" value="<?php echo rgm_esc($hostgroup->getAlias());?>">
 						<?php echo $lilac->element_desc("alias", "nagios_hostgroups_desc"); ?><br />
 						<br />
 						<br />
@@ -182,8 +182,8 @@ print_header("Host Group Editor");
 				}
 				else {
 					?>
-					<b>Host Group Name:</b> <?php echo htmlspecialchars($hostgroup->getName());?><br />
-					<b>Description:</b> <?php echo htmlspecialchars($hostgroup->getAlias());?><br />
+					<b>Host Group Name:</b> <?php echo rgm_esc($hostgroup->getName());?><br />
+					<b>Description:</b> <?php echo rgm_esc($hostgroup->getAlias());?><br />
 					<br />
 					<a class="btn btn-primary" href="hostgroups.php?id=<?php echo $_GET['id'];?>&section=general&edit=1">Edit</a>
 					<?php
@@ -224,7 +224,7 @@ print_header("Host Group Editor");
 							<?php
 					}
 					?>
-					<td height="20" class="altRight"><b><a href="hosts.php?id=<?php echo $host->getId();?>"><?php echo htmlspecialchars($host->getName());?></a></b></td>
+					<td height="20" class="altRight"><b><a href="hosts.php?id=<?php echo $host->getId();?>"><?php echo rgm_esc($host->getName());?></a></b></td>
 						</tr>
 						<?php
 						$counter++;
@@ -250,13 +250,13 @@ print_header("Host Group Editor");
 					?>
 					<form name="command_form" method="post" action="hostgroups.php?id=<?php echo $_GET['id'];?>&section=extended&edit=1">
 						<input type="hidden" name="request" value="modify_hostgroup_extended" />
-						<b>Notes:</b> <input type="text" name="notes" value="<?php echo htmlspecialchars($hostgroup->getNotes());?>">
+						<b>Notes:</b> <input type="text" name="notes" value="<?php echo rgm_esc($hostgroup->getNotes());?>">
 						<?php echo $lilac->element_desc("notes", "nagios_hostgroups_desc"); ?><br />
 						<br />
-						<b>Notes URL:</b> <input type="text" name="notes_url" value="<?php echo htmlspecialchars($hostgroup->getNotesUrl());?>">
+						<b>Notes URL:</b> <input type="text" name="notes_url" value="<?php echo rgm_esc($hostgroup->getNotesUrl());?>">
 						<?php echo $lilac->element_desc("notes", "nagios_hostgroups_desc"); ?><br />
 						<br />
-						<b>Action URL:</b> <input type="text" name="action_url" value="<?php echo htmlspecialchars($hostgroup->getActionUrl());?>">
+						<b>Action URL:</b> <input type="text" name="action_url" value="<?php echo rgm_esc($hostgroup->getActionUrl());?>">
 						<?php echo $lilac->element_desc("notes", "nagios_hostgroups_desc"); ?><br />
 						<br />
 						<br />
@@ -267,17 +267,17 @@ print_header("Host Group Editor");
 				else {
 					if($hostgroup->getNotes() != '') {
 						?>
-						<b>Notes:</b> <?php echo htmlspecialchars($hostgroup->getNotes());?><br />
+						<b>Notes:</b> <?php echo rgm_esc($hostgroup->getNotes());?><br />
 						<?php
 					}
 					if($hostgroup->getNotesUrl() != '') {
 						?>
-							<b>Notes URL:</b> <?php echo htmlspecialchars($hostgroup->getNotesUrl());?><br />
+							<b>Notes URL:</b> <?php echo rgm_esc($hostgroup->getNotesUrl());?><br />
 						<?php
 					}
 					if($hostgroup->getActionUrl() != '') {
 						?>
-						<b>Action URL:</b> <?php echo htmlspecialchars($hostgroup->getActionUrl());?><br />
+						<b>Action URL:</b> <?php echo rgm_esc($hostgroup->getActionUrl());?><br />
 						<?php
 					}
 					?>
@@ -323,7 +323,7 @@ print_header("Host Group Editor");
 					}
 					?>
 						<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="hostgroups.php?id=<?php echo $_GET['id'];?>&section=dependencies&request=delete&dependency_id=<?php echo $dependency->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-						<td height="20" class="altRight"><b><a href="dependency.php?id=<?php echo $dependency->getId();?>"><?php echo htmlspecialchars($dependency->getName());?></a></b></td>
+						<td height="20" class="altRight"><b><a href="dependency.php?id=<?php echo $dependency->getId();?>"><?php echo rgm_esc($dependency->getName());?></a></b></td>
 						</tr>
 						<?php
 						$counter++;
@@ -372,7 +372,7 @@ print_header("Host Group Editor");
 						}
 						?>
 						<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="hostgroups.php?id=<?php echo $_GET['id'];?>&section=services&request=delete&service_id=<?php echo $hostgroupServiceList[$counter]->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-						<td height="20" class="altRight"><b><a href="service.php?id=<?php echo $hostgroupServiceList[$counter]->getId();?>"><?php echo htmlspecialchars($hostgroupServiceList[$counter]->getDescription());?></a></b></td>
+						<td height="20" class="altRight"><b><a href="service.php?id=<?php echo $hostgroupServiceList[$counter]->getId();?>"><?php echo rgm_esc($hostgroupServiceList[$counter]->getDescription());?></a></b></td>
 						</tr>
 						<?php
 					}
@@ -417,7 +417,7 @@ print_header("Host Group Editor");
 					}
 					?>
 						<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="hostgroups.php?id=<?php echo $_GET['id'];?>&section=escalations&request=delete&escalation_id=<?php echo $escalation->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-						<td height="20" class="altRight"><b><a href="escalation.php?id=<?php echo $escalation->getId();?>"><?php echo htmlspecialchars($escalation->getDescription());?></a></b></td>
+						<td height="20" class="altRight"><b><a href="escalation.php?id=<?php echo $escalation->getId();?>"><?php echo rgm_esc($escalation->getDescription());?></a></b></td>
 						</tr>
 						<?php
 						$counter++;
@@ -466,9 +466,9 @@ print_header("Host Group Editor");
 					<?php
 				}
 				?>
-				<td height="20" class="altLeft" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');">&nbsp;<a href="hostgroups.php?id=<?php echo $hostgroups_list[$counter]->getId();?>"><?php echo htmlspecialchars($hostgroups_list[$counter]->getName());?></a></td>
-				<td height="20" class="altRight" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');"><?php echo htmlspecialchars($hostgroups_list[$counter]->getAlias());?></td>
-				<td align="center"><input type="checkbox" id="check<?php echo $counter?>" class="checkbox" name="EoN_Actions_Checks_Hostgroup[]" value="<?php echo htmlspecialchars($hostgroups_list[$counter]->getId());?>" onclick="checkBox('line<?php echo $counter?>','check<?php echo $counter?>');"></td>
+				<td height="20" class="altLeft" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');">&nbsp;<a href="hostgroups.php?id=<?php echo $hostgroups_list[$counter]->getId();?>"><?php echo rgm_esc($hostgroups_list[$counter]->getName());?></a></td>
+				<td height="20" class="altRight" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');"><?php echo rgm_esc($hostgroups_list[$counter]->getAlias());?></td>
+				<td align="center"><input type="checkbox" id="check<?php echo $counter?>" class="checkbox" name="EoN_Actions_Checks_Hostgroup[]" value="<?php echo rgm_esc($hostgroups_list[$counter]->getId());?>" onclick="checkBox('line<?php echo $counter?>','check<?php echo $counter?>');"></td>
 				</tr>
 				<?php
 			}

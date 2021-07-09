@@ -117,14 +117,14 @@ if ($type == "service") {
     }
 }
 
-print_header("Add Escalation To " . htmlspecialchars($title) . " " . htmlspecialchars($textTitle));
+print_header("Add Escalation To " . rgm_esc($title) . " " . rgm_esc($textTitle));
 
 print_window_header("Add A Escalation", "100%");
 
 
 
 ?>
-<a class="btn btn-default" href="<?php echo $link;?>?id=<?php echo $tempSource->getId();?>">Return To <?php echo htmlspecialchars($title);?> <?php echo htmlspecialchars($textTitle);?></a>
+<a class="btn btn-default" href="<?php echo $link;?>?id=<?php echo $tempSource->getId();?>">Return To <?php echo rgm_esc($title);?> <?php echo rgm_esc($textTitle);?></a>
 <?php
 	if(isset($errorMsg)) {
 		?>

@@ -97,11 +97,11 @@ print_header("Time Period Editor");
 				}
 			?>
 			<b>Time Period Name:</b><br />
-			<input type="text" name="timeperiod_manage[timeperiod_name]" value="<?php echo isset($timeperiod) ? htmlspecialchars($timeperiod->getName()) : '';?>">
+			<input type="text" name="timeperiod_manage[timeperiod_name]" value="<?php echo isset($timeperiod) ? rgm_esc($timeperiod->getName()) : '';?>">
 			<?php echo $lilac->element_desc("timeperiod_name", "nagios_timeperiods_desc"); ?><br />
 			<br />
 			<b>Description:</b><br />
-			<input type="text" size="80" name="timeperiod_manage[alias]" value="<?php echo isset($timeperiod) ? htmlspecialchars($timeperiod->getAlias()) : '';?>">
+			<input type="text" size="80" name="timeperiod_manage[alias]" value="<?php echo isset($timeperiod) ? rgm_esc($timeperiod->getAlias()) : '';?>">
 			<?php echo $lilac->element_desc("alias", "nagios_timeperiods_desc"); ?><br />
 			<br />
 			<?php 
@@ -149,8 +149,8 @@ print_header("Time Period Editor");
 					<?php
 				}
 				?>
-				<td height="20" class="altLeft" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');">&nbsp;<a href="timeperiod.php?timeperiod_id=<?php echo $period_list[$counter]->getId();?>"><?php echo htmlspecialchars($period_list[$counter]->getName());?></a></td>
-				<td height="20" class="altRight" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');"><?php echo htmlspecialchars($period_list[$counter]->getAlias());?></td>
+				<td height="20" class="altLeft" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');">&nbsp;<a href="timeperiod.php?timeperiod_id=<?php echo $period_list[$counter]->getId();?>"><?php echo rgm_esc($period_list[$counter]->getName());?></a></td>
+				<td height="20" class="altRight" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');"><?php echo rgm_esc($period_list[$counter]->getAlias());?></td>
 				<td align="center"><input type="checkbox" id="check<?php echo $counter?>" class="checkbox" name="EoN_Actions_Checks_Timeperiod[]" value="<?php echo $period_list[$counter]->getId();?>" onclick="checkBox('line<?php echo $counter?>','check<?php echo $counter?>');"></td>
 				</tr>
 				<?php

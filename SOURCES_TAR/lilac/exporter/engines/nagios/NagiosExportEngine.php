@@ -93,7 +93,7 @@ class NagiosExportEngine extends ExportEngine {
 			<legend>Path Locations</legend>
 			<p>
 			<label for="nagios_path">Nagios Sanity-Check Command (Required if Doing Sanity Check)</label>
-			<input type="text" size="100" maxlength="255" id="nagios_path" name="nagios_path" value="/srv/rgm/nagios/bin/nagios -v /tmp/lilac-export-<?php echo htmlspecialchars($jobID); ?>/nagios.cfg" />
+			<input type="text" size="100" maxlength="255" id="nagios_path" name="nagios_path" value="/srv/rgm/nagios/bin/nagios -v /tmp/lilac-export-<?php echo rgm_esc($jobID); ?>/nagios.cfg" />
 			</p>
 
 			<p>

@@ -163,7 +163,7 @@ class Log_display extends Log
         /* Convert the message to an HTML-friendly represention unless raw 
          * text has been requested. */
         if ($this->_rawText === false) {
-            $message = nl2br(htmlspecialchars($message));
+            $message = nl2br(rgm_esc($message));
         }
 
         /* Build and output the complete log line. */

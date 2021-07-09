@@ -286,10 +286,10 @@ if(!isset($exportJob))	{
 		foreach($exportJobs as $job) {
 			?>
 			<tr>
-				<td><?php echo htmlspecialchars($job->getName());?></td>
-				<td><?php echo htmlspecialchars($job->getDescription());?></td>
-				<td><?php echo htmlspecialchars($job->getStartTime());?></td>
-				<td><?php echo htmlspecialchars($job->getStatus());?></td>
+				<td><?php echo rgm_esc($job->getName());?></td>
+				<td><?php echo rgm_esc($job->getDescription());?></td>
+				<td><?php echo rgm_esc($job->getStartTime());?></td>
+				<td><?php echo rgm_esc($job->getStatus());?></td>
 				<td><a class="btn btn-info" href="export.php?id=<?php echo $job->getId();?>">View Job</td>
 				<td><a class="btn btn-primary" href="export.php?id=<?php echo $job->getId();?>&action=restart">Restart</a></td>
 				<?php
@@ -319,7 +319,7 @@ else {
 	?>
 	<strong>Job Name:</strong> <?php echo $exportJob->getName();?><br />
 	<strong>Job Id:</strong> <?php echo $exportJob->getId();?><br />
-	<?php echo htmlspecialchars($exportJob->getDescription());?>
+	<?php echo rgm_esc($exportJob->getDescription());?>
 	<br />
 	<strong>Start Time:</strong> <?php echo $exportJob->getStartTime();?><br />
 	<br />

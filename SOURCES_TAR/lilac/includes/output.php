@@ -58,7 +58,7 @@ function double_pane_select_form_element_with_enabler($backgroundColor, $form_na
 	?>
 	<tr>
 		<td class="formcell">
-		<b><?php echo htmlspecialchars($element_title);?>:</b> <?php print_select($element_name, $selectList, $select_value_field, $select_desc_field, $selected, ($_POST[$form_name.'_enablers'][$enabler_name]));?><br />
+		<b><?php echo rgm_esc($element_title);?>:</b> <?php print_select($element_name, $selectList, $select_value_field, $select_desc_field, $selected, ($_POST[$form_name.'_enablers'][$enabler_name]));?><br />
 		</td>
 		<td align="right" class="formcell">
 		<input type="hidden" name="<?php echo $form_name;?>_enablers[<?php echo $enabler_name;?>]" value="<?php if($_POST[$form_name.'_enablers'][$enabler_name]) print("1"); else print("0");?>" />
@@ -67,7 +67,7 @@ function double_pane_select_form_element_with_enabler($backgroundColor, $form_na
 	</tr>
 	<tr>
 		<td colspan="2" class="formcell">
-		<?php echo htmlspecialchars($element_description);?><br />
+		<?php echo rgm_esc($element_description);?><br />
 		</td>
 	</tr>
 	<?php
@@ -80,31 +80,28 @@ function double_pane_text_form_element_with_enabler($backgroundColor, $form_name
 	?>
 	<div class="formwrapper">
 		<div class="formcontent">
-		<b><?php echo htmlspecialchars($element_title);?>:</b> <input type="text" size="<?php echo $size;?>" maxlength="<?php echo $maxlength;?>" name="<?php echo $element_name;?>" value="<?php echo $value;?>" <?php if($_POST[$form_name.'_enablers'][$enabler_name] == 0) print("DISABLED");?>><br />
+		<b><?php echo rgm_esc($element_title);?>:</b> <input type="text" size="<?php echo $size;?>" maxlength="<?php echo $maxlength;?>" name="<?php echo $element_name;?>" value="<?php echo $value;?>" <?php if($_POST[$form_name.'_enablers'][$enabler_name] == 0) print("DISABLED");?>><br />
 		</div>
 		<div class="formtogglefield">
 		<input type="hidden" name="<?php $form_name;?>_enablers[<?php echo $enabler_name;?>]" value="<?php if($_POST[$form_name.'_enablers'][$enabler_name]) print("1"); else print("0");?>" />
 		<input type="checkbox" name="<?php echo $form_name;?>_checkboxes[<?php echo $enabler_name;?>]" value="1" id="<?php echo $form_name;?>_checkboxes[<?php echo $enabler_name;?>]" <?php if($_POST[$form_name.'_enablers'][$enabler_name]) print("CHECKED");?> onclick="form_element_switch(document.<?php echo $form_name;?>.elements['<?php echo $element_name;?>'], document.<?php echo $form_name;?>.elements['<?php echo $form_name;?>_checkboxes[<?php echo $enabler_name;?>]']); enabler_switch(document.<?php echo $form_name;?>.elements['<?php echo $form_name;?>_enablers[<?php echo $enabler_name;?>]']);" /><label for="<?php echo $form_name;?>_checkboxes[<?php echo $enabler_name;?>]"><b><?php echo $checkbox_description;?></b></label>
 		</div>
-		<?php echo htmlspecialchars($element_description); ?>
+		<?php echo rgm_esc($element_description); ?>
 	</div>
 	<?php
 }
 
 function double_pane_text_form_element($backgroundColor, $form_name, $element_name, $element_title, $element_description, $size, $maxlength, $value) {
-	if(!isset($_POST[$form_name.'_enablers'][$enabler_name])) {
-		$_POST[$form_name.'_enablers'][$enabler_name] = false;
-	}
 	?>
 	<div id="formwrapper">
 	<tr bgcolor="<?php echo $backgroundColor;?>">
 		<td colspan="2" class="formcell">
-		<b><?php echo htmlspecialchars($element_title);?>:</b> <input type="text" size="<?php echo $size;?>" maxlength="<?php echo $maxlength;?>" name="<?php echo $element_name;?>" value="<?php echo htmlspecialchars($value);?>"><br />
+		<b><?php echo rgm_esc($element_title);?>:</b> <input type="text" size="<?php echo $size;?>" maxlength="<?php echo $maxlength;?>" name="<?php echo $element_name;?>" value="<?php echo rgm_esc($value);?>"><br />
 		</td>
 	</tr>
 	<tr bgcolor="<?php echo $backgroundColor;?>">
 		<td colspan="2" class="formcell">
-		<?php echo htmlspecialchars($element_description); ?><br />
+		<?php echo rgm_esc($element_description); ?><br />
 		</td>
 	</tr>
 	</div>
@@ -147,7 +144,7 @@ function double_pane_checkbox_group_form_element_with_enabler($backgroundColor, 
 			?>
 			</td>
 			<td class="formcell">
-			<?php echo htmlspecialchars($element_description); ?><br />
+			<?php echo rgm_esc($element_description); ?><br />
 			</td>
 			</tr>
 			</table>
@@ -160,11 +157,10 @@ function double_pane_textarea_form_element_with_enabler($backgroundColor, $form_
 	if(!isset($_POST[$form_name.'_enablers'][$enabler_name])) {
 		$_POST[$form_name.'_enablers'][$enabler_name] = false;
 	}
-	$numOfElements = count($checkboxes);
 	?>
 	<tr bgcolor="<?php echo $backgroundColor;?>">
 		<td width="50%" class="formcell">
-		<b><?php echo htmlspecialchars($element_title);?>:</b>
+		<b><?php echo rgm_esc($element_title);?>:</b>
 		</td>
 		<td align="right" class="formcell">
 		<input type="hidden" name="<?php echo $form_name;?>_enablers[<?php echo $enabler_name;?>]" value="<?php if($_POST[$form_name.'_enablers'][$enabler_name]) print("1"); else print("0");?>" />
@@ -175,7 +171,7 @@ function double_pane_textarea_form_element_with_enabler($backgroundColor, $form_
 	<tr bgcolor="<?php echo $backgroundColor;?>">
 		<td colspan="2" class="formcell">
 			<textarea name="<?php echo $element_name;?>" rows="<?php echo $rows;?>" cols="<?php echo $cols;?>" <?php if($_POST[$form_name.'_enablers'][$enabler_name] == 0) print("DISABLED");?>><?php echo $value;?></textarea><br />	
-			<?php echo htmlspecialchars($element_description); ?><br />
+			<?php echo rgm_esc($element_description); ?><br />
 
 		</td>
 	</tr>
@@ -264,10 +260,6 @@ function print_window_footer() {
 
 // Used if frames not used
 function print_header($title = null) {
-	global $output_config;
-	global $path_config;
-	global $sys_config;
-	
 	global $success;
 	global $error;
 	global $warning;
@@ -282,88 +274,91 @@ function print_header($title = null) {
 		<title><?php echo LILAC_NAME . " "; echo LILAC_VERSION;?><?php if($title) print(" - " . $title);?></title>
     	<link rel="stylesheet" type="text/css" href="style/reset.css">	    
     	<link rel="stylesheet" type="text/css" href="style/lilac.css">
-    	<link rel="stylesheet" type="text/css" href="style/flexigrid.css">
+        <!--
     	<link rel="stylesheet" type="text/css" href="style/jquery.tooltip.css">
 		<link rel="stylesheet" type="text/css" href="style/jquery.autocomplete.css">
+        -->
 		<link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
 	 	<link rel="stylesheet" type="text/css" href="/bower_components/font-awesome/css/font-awesome.min.css">
-	 	<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
-	 	<script type="text/javascript" src="js/jquery.tooltip.min.js"></script>
-	 	<script type="text/javascript" src="js/jquery.timers.js"></script>
-	 	<script type="text/javascript" src="js/flexigrid.js"></script>
-		<script type="text/javascript" src="js/jquery.autocomplete.js"></script>
+        <link rel="stylesheet" type="text/css" href="js/jquery/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="js/jquery/jquery-ui.structure.css">
+        <link rel="stylesheet" type="text/css" href="js/jquery/jquery-ui.theme.css">
+        <link rel="stylesheet" type="text/css" href="js/flexigrid/flexigrid.css">
+        <!--
+        <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+        <script type="text/javascript" src="js/jquery.tooltip.min.js"></script>
+        <script type="text/javascript" src="js/jquery.timers.js"></script>
+        <script type="text/javascript" src="js/flexigrid.js"></script>
+        <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
+        -->
+        <script type="text/javascript" src="js/jquery/external/jquery/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/jquery.timers.js"></script>
+        <script type="text/javascript" src="js/flexigrid/flexigrid.js"></script>
 	</head>	    
 	
 	
 	<body onload="$('form[name=\'EoN_Actions_Form\'] input').removeAttr('checked');">
-	<script language="javascript">
+	<script>
+        function form_element_switch(element, checkbox) {
+            if(checkbox.checked) {
+                element.readOnly = false;
+                element.disabled = false;
+            } else {
+                element.readOnly = true;
+                element.disabled = true;
+            }
+        }
 
-	function form_element_switch(element, checkbox) {
-		if(checkbox.checked) {
-			element.readOnly = false;
-			element.disabled = false;
-		}
-		else {
-			element.readOnly = true;
-			element.disabled = true;
-		}
-	}
-		
-	function confirmDelete() {
-		return confirm("Are you sure?");
-  	}
+        function confirmDelete() {
+            return confirm("Are you sure?");
+        }
 
-	function checkLine(lineid,checkid) {
-		lineid=document.getElementById(lineid);
-		checkid=document.getElementById(checkid);
-		if(checkid.checked == false) {
-			checkid.checked=true;
-			lineid.style.backgroundColor = '#ffffc0';
-		}
-		else {
-			checkid.checked=false;
-			lineid.style.backgroundColor = '';
-		}
-	}
-	
-	function checkBox(lineid,checkid) {
-		lineid=document.getElementById(lineid);
-		checkid=document.getElementById(checkid);
-		if(checkid.checked == true) {
-			checkid.checked=true;
-			lineid.style.backgroundColor = '#ffffc0';
-		}
-		else {
-			checkid.checked=false;
-			lineid.style.backgroundColor = '';
-		}
-	}
-	
-	function checkUncheckAll(name) {
-		if(name=='EoN_Actions_Checks_ServiceTemplate') {
-			line='Sline';
-		}
-		else {
-			line='line';
-		}
-	    	if($("input[name='"+name+"[]']").is(':checked')) {
-			$("input[name='"+name+"[]']").removeAttr("checked");
-			for (var i = 0; i < $("input[name='"+name+"[]']").length; i++) {
-				lineid=document.getElementById(line+i);
-				lineid.style.backgroundColor = '';
-			}
-        		return false;
-	    	}
-        	else {
-			$("input[name='"+name+"[]']").attr("checked","checked");
-			for (var i = 0; i < $("input[name='"+name+"[]']").length; i++) {
-				lineid=document.getElementById(line+i);
-				lineid.style.backgroundColor = '#ffffc0';
-			}
-           		return false;
-        	}
-	}
+        function checkLine(lineid,checkid) {
+            lineid = document.getElementById(lineid);
+            checkid = document.getElementById(checkid);
+            if (checkid.checked == false) {
+                checkid.checked = true;
+                lineid.style.backgroundColor = '#ffffc0';
+            } else {
+                checkid.checked = false;
+                lineid.style.backgroundColor = '';
+            }
+        }
 
+        function checkBox(lineid,checkid) {
+            lineid = document.getElementById(lineid);
+            checkid = document.getElementById(checkid);
+            if (checkid.checked == true) {
+                checkid.checked = true;
+                lineid.style.backgroundColor = '#ffffc0';
+            } else {
+                checkid.checked = false;
+                lineid.style.backgroundColor = '';
+            }
+        }
+
+        function checkUncheckAll(name) {
+            if (name == 'EoN_Actions_Checks_ServiceTemplate') {
+                line = 'Sline';
+            } else {
+                line = 'line';
+            }
+            if ($("input[name='" + name + "[]']").is(':checked')) {
+                $("input[name='" + name + "[]']").removeAttr("checked");
+                for (var i = 0; i < $("input[name='" + name + "[]']").length; i++) {
+                    lineid = document.getElementById(line + i);
+                    lineid.style.backgroundColor = '';
+                }
+            } else {
+                $("input[name='" + name + "[]']").attr("checked","checked");
+                for (var i = 0; i < $("input[name='" + name + "[]']").length; i++) {
+                    lineid = document.getElementById(line + i);
+                    lineid.style.backgroundColor = '#ffffc0';
+                }
+            }
+            return false;
+        }
 	</script>
 
 	<div id="header">
@@ -451,7 +446,7 @@ function print_select($name, $list, $index, $index_desc, $selected = NULL, $enab
 		<?php
 		for($counter = 0; $counter < $numOfElements; $counter++) {
 			?>
-			<option <?php if($selected == $list[$counter][$index]) print("SELECTED");?> value="<?php echo htmlspecialchars($list[$counter][$index]);?>"><?php echo htmlspecialchars($list[$counter][$index_desc]);?></option>
+			<option <?php if($selected == $list[$counter][$index]) print("SELECTED");?> value="<?php echo rgm_esc($list[$counter][$index]);?>"><?php echo rgm_esc($list[$counter][$index_desc]);?></option>
 			<?php
 		}
 		?>
@@ -469,7 +464,7 @@ function print_object_select($name, $list, $indexFunc, $descFunc, $selected = NU
 				continue;
 			}
 			?>
-			<option <?php if($selected == $list[$counter]->$indexFunc()) print("SELECTED");?> value="<?php echo htmlspecialchars($list[$counter]->$indexFunc());?>"><?php echo htmlspecialchars($list[$counter]->$descFunc());?></option>
+			<option <?php if($selected == $list[$counter]->$indexFunc()) print("SELECTED");?> value="<?php echo rgm_esc($list[$counter]->$indexFunc());?>"><?php echo rgm_esc($list[$counter]->$descFunc());?></option>
 			<?php
 		}
 		?>
@@ -495,7 +490,7 @@ function print_list($listItems, $listKeys, $sortBy, $width = "100%") {
 			<?php
 		}
 		?>
-		<td><?php echo htmlspecialchars($listItems[$counter][$listKeys[0]['key_name']])?></td>
+		<td><?php echo rgm_esc($listItems[$counter][$listKeys[0]['key_name']])?></td>
 		</tr>
 		<?php
 	}
@@ -511,7 +506,7 @@ function print_command( $check_command) {
 	else {
 		print $check_command[0];
 		for( $i=1;$i<$count;$i++) {
-			print "<span class=\"bang\" style=\"font-weight: bold; font-size: 16px;\">!</span>" . htmlspecialchars($check_command[$i]);
+			print "<span class=\"bang\" style=\"font-weight: bold; font-size: 16px;\">!</span>" . rgm_esc($check_command[$i]);
 		}
 	}
 }
@@ -519,10 +514,10 @@ function print_command( $check_command) {
 function print_host_command_display_field($label, $values, $field, $sourceID = null) {
 	global $lilac;
 	if(isset($values[$field])) {
-		print("<strong>" . htmlspecialchars($label) . "</strong>: ");
+		print("<strong>" . rgm_esc($label) . "</strong>: ");
 		print_command($lilac->return_host_command($sourceID));
 		if($values[$field]['inherited']) {
-			?><strong> - Inherited From <em><?php echo htmlspecialchars($values[$field]['source']['name']);?></em></strong><?php
+			?><strong> - Inherited From <em><?php echo rgm_esc($values[$field]['source']['name']);?></em></strong><?php
 		}
 		print("<br />");
 	}
@@ -531,10 +526,10 @@ function print_host_command_display_field($label, $values, $field, $sourceID = n
 function print_host_template_command_display_field($label, $values, $field, $sourceID = null) {
 	global $lilac;
 	if(isset($values[$field])) {
-		print("<strong>" . htmlspecialchars($label) . "</strong>: ");
+		print("<strong>" . rgm_esc($label) . "</strong>: ");
 		print_command($lilac->return_host_template_command($sourceID));
 		if($values[$field]['inherited']) {
-			?><strong> - Inherited From <em><?php echo htmlspecialchars($values[$field]['source']['name']);?></em></strong><?php
+			?><strong> - Inherited From <em><?php echo rgm_esc($values[$field]['source']['name']);?></em></strong><?php
 		}
 		print("<br />");
 	}
@@ -544,20 +539,20 @@ function print_host_template_command_display_field($label, $values, $field, $sou
 function print_cmd_obj_display_field($label, $cmdObj) {
 	static $cmdTooltipCounter = 0;
 	if(!empty($cmdObj['command'])) {
-		print("<strong>" . htmlspecialchars($label) . "</strong>: ");
+		print("<strong>" . rgm_esc($label) . "</strong>: ");
 		?><script type="text/javascript">
 			$(document).ready(function() {
 				$("#cmdobjparam-<?php echo $cmdTooltipCounter;?>").tooltip();
 			});
 		</script><span title="<?php
 		if($cmdObj['command']['inherited'] == true) { ?>
-			Inherited from Template <?php echo htmlspecialchars($cmdObj['command']['source']->getName());?>
+			Inherited from Template <?php echo rgm_esc($cmdObj['command']['source']->getName());?>
 		<?php
 		}
 		else {
 			?>Defined In This Object<?php
 		}
-		?>" id="cmdobjparam-<?php echo $cmdTooltipCounter;?>"><?php echo htmlspecialchars($cmdObj['command']['command']->getName());?></span><?php		
+		?>" id="cmdobjparam-<?php echo $cmdTooltipCounter;?>"><?php echo rgm_esc($cmdObj['command']['command']->getName());?></span><?php		
 		$cmdTooltipCounter++;
 		foreach($cmdObj['parameters'] as $parameterArray) {
 				?><script type="text/javascript">
@@ -566,13 +561,13 @@ function print_cmd_obj_display_field($label, $cmdObj) {
 					});
 				</script>!<span title="<?php
 			if($parameterArray['inherited'] == true) { ?>
-				Inherited from Template <?php echo htmlspecialchars($parameterArray['source']->getName());?>
+				Inherited from Template <?php echo rgm_esc($parameterArray['source']->getName());?>
 			<?php
 			}
 			else {
 				?>Defined In This Object<?php
 			}
-			?>" id="cmdobjparam-<?php echo $cmdTooltipCounter;?>"><?php echo htmlspecialchars($parameterArray['parameter']->getParameter());?></span><?php
+			?>" id="cmdobjparam-<?php echo $cmdTooltipCounter;?>"><?php echo rgm_esc($parameterArray['parameter']->getParameter());?></span><?php
 			$cmdTooltipCounter++;
 		}
 		print("<br />");	
@@ -583,10 +578,10 @@ function print_cmd_obj_display_field($label, $cmdObj) {
 function print_service_template_command_display_field($label, $values, $field, $sourceID = null) {
 	global $lilac;
 	if(isset($values[$field])) {
-		print("<strong>" . htmlspecialchars($label) . "</strong>: ");
+		print("<strong>" . rgm_esc($label) . "</strong>: ");
 		print_command($lilac->return_service_template_command($sourceID));
 		if($values[$field]['inherited']) {
-			?><strong> - Inherited From <em><?php echo htmlspecialchars($values[$field]['source']['name']);?></em></strong><?php
+			?><strong> - Inherited From <em><?php echo rgm_esc($values[$field]['source']['name']);?></em></strong><?php
 		}
 		print("<br />");
 	}
@@ -595,10 +590,10 @@ function print_service_template_command_display_field($label, $values, $field, $
 function print_service_command_display_field($label, $values, $field, $sourceID = null) {
 	global $lilac;
 	if(isset($values[$field])) {
-		print("<strong>" . htmlspecialchars($label) . "</strong>: ");
+		print("<strong>" . rgm_esc($label) . "</strong>: ");
 		print_command($lilac->return_service_command($sourceID));
 		if($values[$field]['inherited']) {
-			?><strong> - Inherited From <em><?php echo htmlspecialchars($values[$field]['source']['name']);?></em></strong><?php
+			?><strong> - Inherited From <em><?php echo rgm_esc($values[$field]['source']['name']);?></em></strong><?php
 		}
 		print("<br />");
 	}
@@ -608,10 +603,10 @@ function print_timeperiod_display_field($label, $values, $field, $sourceID = nul
 	if(isset($values[$field])) {
 		$timeperiod = NagiosTimeperiodPeer::retrieveByPK($values[$field]['value']);
 		if($timeperiod) {
-			print("<strong>" . htmlspecialchars($label) . "</strong>: ");
-			print(htmlspecialchars($timeperiod->getName()));
+			print("<strong>" . rgm_esc($label) . "</strong>: ");
+			print(rgm_esc($timeperiod->getName()));
 			if($values[$field]['inherited']) {
-				?><strong> - Inherited From <em><?php echo htmlspecialchars($values[$field]['source']['name']);?></em></strong><?php
+				?><strong> - Inherited From <em><?php echo rgm_esc($values[$field]['source']['name']);?></em></strong><?php
 			}
 			print("<br />");
 		}
@@ -622,10 +617,10 @@ function print_command_display_field($label, $values, $field, $sourceID = null) 
 	if(isset($values[$field])) {
 		$command = NagiosCommandPeer::retrieveByPK($values[$field]['value']);
 		if($command) {
-			print("<strong>" . htmlspecialchars($label) . "</strong>: ");
-			print(htmlspecialchars($command->getName()));
+			print("<strong>" . rgm_esc($label) . "</strong>: ");
+			print(rgm_esc($command->getName()));
 			if($values[$field]['inherited']) {
-				?><strong> - Inherited From <em><?php echo htmlspecialchars($values[$field]['source']['name']);?></em></strong><?php
+				?><strong> - Inherited From <em><?php echo rgm_esc($values[$field]['source']['name']);?></em></strong><?php
 			}
 			print("<br />");
 		}
@@ -634,10 +629,10 @@ function print_command_display_field($label, $values, $field, $sourceID = null) 
 
 function print_display_field($label, $values, $field, $sourceID = null) {
 	if(isset($values[$field])) {
-		print("<strong>" . htmlspecialchars($label) . "</strong>: ");
-		print(htmlspecialchars($values[$field]['value']));
+		print("<strong>" . rgm_esc($label) . "</strong>: ");
+		print(rgm_esc($values[$field]['value']));
 		if($values[$field]['inherited']) {
-			?><strong> - Inherited From <em><?php echo htmlspecialchars($values[$field]['source']['name']);?></em></strong><?php
+			?><strong> - Inherited From <em><?php echo rgm_esc($values[$field]['source']['name']);?></em></strong><?php
 		}
 		print("<br />");
 	}
@@ -645,7 +640,7 @@ function print_display_field($label, $values, $field, $sourceID = null) {
 
 function print_service_initialstate_display_field($label, $values, $field, $sourceID) {
 	if(isset($values[$field])) {
-		print("<strong>" . htmlspecialchars($label) . "</strong>: ");
+		print("<strong>" . rgm_esc($label) . "</strong>: ");
 		switch($values[$field]['value']) {
 			case 'u':
 				print("Unknown");
@@ -661,7 +656,7 @@ function print_service_initialstate_display_field($label, $values, $field, $sour
 				break;
 		}
 		if($values[$field]['inherited']) {
-			?><strong> - Inherited From <em><?php echo htmlspecialchars($values[$field]['source']['name']);?></em></strong><?php
+			?><strong> - Inherited From <em><?php echo rgm_esc($values[$field]['source']['name']);?></em></strong><?php
 		}
 		print("<br />");
 	}
@@ -669,7 +664,7 @@ function print_service_initialstate_display_field($label, $values, $field, $sour
 
 function print_initialstate_display_field($label, $values, $field, $sourceID) {
 	if(isset($values[$field])) {
-		print("<strong>" . htmlspecialchars($label) . "</strong>: ");
+		print("<strong>" . rgm_esc($label) . "</strong>: ");
 		switch($values[$field]['value']) {
 			case 'u':
 				print("Unreachable");
@@ -682,7 +677,7 @@ function print_initialstate_display_field($label, $values, $field, $sourceID) {
 				break;
 		}
 		if($values[$field]['inherited']) {
-			?><strong> - Inherited From <em><?php echo htmlspecialchars($values[$field]['source']['name']);?></em></strong><?php
+			?><strong> - Inherited From <em><?php echo rgm_esc($values[$field]['source']['name']);?></em></strong><?php
 		}
 		print("<br />");
 	}
@@ -690,7 +685,7 @@ function print_initialstate_display_field($label, $values, $field, $sourceID) {
 
 function print_enabled_display_field($label, $values, $field, $sourceID, $enabledLabel = "Enabled", $disabledLabel = "Disabled") {
 	if(isset($values[$field])) {
-		print("<strong>" . htmlspecialchars($label) . "</strong>: ");
+		print("<strong>" . rgm_esc($label) . "</strong>: ");
 		if($values[$field]['value'] == 1) {
 			print($enabledLabel);
 		}
@@ -698,7 +693,7 @@ function print_enabled_display_field($label, $values, $field, $sourceID, $enable
 			print($disabledLabel);
 		}
 		if($values[$field]['inherited']) {
-			?><strong> - Inherited From <em><?php echo htmlspecialchars($values[$field]['source']['name']);?></em></strong><?php
+			?><strong> - Inherited From <em><?php echo rgm_esc($values[$field]['source']['name']);?></em></strong><?php
 		}
 		print("<br />");
 	}
@@ -721,7 +716,7 @@ function form_select_element_with_enabler($selectList, $selectValues, $selectLab
 	<div class="formbox">
 		<div class="formelement">
 			<div class="formcontent toggle">
-			<strong><?php echo htmlspecialchars($label);?>:</strong> <?php print_select($formName . "[" .$fieldName ."]", $selectList, $selectValues, $selectLabels, $value, $enabled);?>
+			<strong><?php echo rgm_esc($label);?>:</strong> <?php print_select($formName . "[" .$fieldName ."]", $selectList, $selectValues, $selectLabels, $value, $enabled);?>
 			<?php echo $description;?>
 			</div>
 		</div>
@@ -751,7 +746,7 @@ function form_text_element_with_enabler($size, $maxLength, $formName, $fieldName
 	<div class="formbox">
 		<div class="formelement">
 			<div class="formcontent toggle">
-			<strong><?php echo htmlspecialchars($label);?>:</strong> <input type="text" size="<?php echo $size;?>" maxlength="<?php echo $maxLength;?>" name="<?php echo $formName . "[" . $fieldName . "]";?>" value="<?php echo htmlspecialchars($value);?>" <?php if(!$enabled) print("DISABLED");?> />
+			<strong><?php echo rgm_esc($label);?>:</strong> <input type="text" size="<?php echo $size;?>" maxlength="<?php echo $maxLength;?>" name="<?php echo $formName . "[" . $fieldName . "]";?>" value="<?php echo rgm_esc($value);?>" <?php if(!$enabled) print("DISABLED");?> />
 			<?php echo $description;?>
 			</div>
 		</div>
@@ -785,7 +780,7 @@ function form_checkbox_group_with_enabler($checkboxGroup, $formName, $fieldName,
 	<div class="formbox">
 		<div class="formelement">
 			<div class="formcontent toggle">
-			<b><?php echo htmlspecialchars($label);?>:</b><br />
+			<b><?php echo rgm_esc($label);?>:</b><br />
 			<?php
 			for($counter = 0; $counter < $numOfElements; $counter++) {
 				?>

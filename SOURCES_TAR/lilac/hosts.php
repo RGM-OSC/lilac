@@ -29,23 +29,27 @@ EoN_Actions_Process("Host");
 
 // AJAX behavior
 if(isset($_GET['request']) && $_GET['request'] == "search") {
+    $criteria = $_GET['term'];
+    if (!$criteria) {
+        $criteria = $_GET['q'];
+    }
 	$results = array();
 	switch($_GET['type']) {
 		case 'host':
 			$c = new Criteria();
-			$c->add(NagiosHostPeer::NAME, $_GET['q']."%", Criteria::LIKE);
+			$c->add(NagiosHostPeer::NAME, '%'.$criteria."%", Criteria::LIKE);
 			$c->setIgnoreCase(true);
 			$results = NagiosHostPeer::doSelect($c);
 			break;
 		case 'hostgroup':
 			$c = new Criteria();
-			$c->add(NagiosHostgroupPeer::NAME, $_GET['q']."%", Criteria::LIKE);
+			$c->add(NagiosHostgroupPeer::NAME, '%'.$criteria."%", Criteria::LIKE);
 			$c->setIgnoreCase(true);
 			$results = NagiosHostgroupPeer::doSelect($c);
             break;
 		case 'hosttemplate':
             $c = new Criteria();
-            $c->add(NagiosHostTemplatePeer::NAME, $_GET['q']."%", Criteria::LIKE);
+            $c->add(NagiosHostTemplatePeer::NAME, '%'.$criteria."%", Criteria::LIKE);
             $c->setIgnoreCase(true);
             $results = NagiosHostTemplatePeer::doSelect($c);
             break;
@@ -82,9 +86,12 @@ if(isset($_GET['request']) && $_GET['request'] == "search") {
 			}
 	}
 
-	foreach($results as $result) {
-		print(htmlspecialchars($result->getName()) . "\n");
-	}	
+    $list = array();
+    foreach($results as $result) {
+        $list[] = $result->getName();
+    }
+    print(json_encode($list));
+
 	exit();
 }
 
@@ -97,7 +104,7 @@ function build_navbar($host_id, &$navbar) {
 	$tempNavBar = '';
 	while($tempID <> 0) {	// If anything other than the network object
 		$host = NagiosHostPeer::retrieveByPK($tempID);
-		$tempNavBar = "<a href=\"hosts.php?id=".$tempID."\">".htmlspecialchars($host->getName()) ."</a> > " . $tempNavBar;
+		$tempNavBar = "<a href=\"hosts.php?id=".$tempID."\">".rgm_esc($host->getName()) ."</a> > " . $tempNavBar;
 		$tempID = $host->getParentHost();
 	}
 	$tempNavBar = $tempNavBar;
@@ -960,18 +967,18 @@ if(isset($host)) {
 				<input type="hidden" name="request" value="host_modify_general" />
 				<input type="hidden" name="host_id" value="<?php echo $_GET['id'];?>">
 				<b>Host Name:</b><br />
-				<input type="text" size="40" name="host_manage[host_name]" value="<?php echo htmlspecialchars($host->getName());?>">
+				<input type="text" size="40" name="host_manage[host_name]" value="<?php echo rgm_esc($host->getName());?>">
 				<?php echo $lilac->element_desc("host_name", "nagios_hosts_desc"); ?><br />
 				<br />
 				<b>Address:</b><br />
-				<input type="text" size="40" name="host_manage[address]" value="<?php echo htmlspecialchars($host->getAddress());?>">
+				<input type="text" size="40" name="host_manage[address]" value="<?php echo rgm_esc($host->getAddress());?>">
 				<?php echo $lilac->element_desc("address", "nagios_hosts_desc"); ?><br />
 				<br />
 				<b>Description:</b><br />
-				<input type="text" size="80" name="host_manage[alias]" value="<?php echo htmlspecialchars($host->getAlias());?>"><br />
+				<input type="text" size="80" name="host_manage[alias]" value="<?php echo rgm_esc($host->getAlias());?>"><br />
 				<br />
 				<b>Display Name (Optional):</b><br />
-				<input type="text" size="80" name="host_manage[display_name]" value="<?php echo htmlspecialchars($host->getDisplayName());?>">
+				<input type="text" size="80" name="host_manage[display_name]" value="<?php echo rgm_esc($host->getDisplayName());?>">
 			<?php echo $lilac->element_desc("display_name", "nagios_hosts_desc"); ?><br />
 				<br />
 				<input class="btn btn-primary" type="submit" value="Update General" /> <a class="btn btn-default" href="hosts.php?id=<?php echo $_GET['id'];?>&section=general">Cancel</a>
@@ -979,19 +986,19 @@ if(isset($host)) {
 			}
 			else {
 				?>
-				<b>Host Name:</b> <?php echo htmlspecialchars($host->getName());?><br />
-				<b>Address:</b> <?php echo htmlspecialchars($host->getAddress());?><br />
-				<b>Description:</b> <?php echo htmlspecialchars($host->getAlias());?><br />
+				<b>Host Name:</b> <?php echo rgm_esc($host->getName());?><br />
+				<b>Address:</b> <?php echo rgm_esc($host->getAddress());?><br />
+				<b>Description:</b> <?php echo rgm_esc($host->getAlias());?><br />
 				<?php
 				$displayName = $host->getDisplayName();
 				if(!empty($displayName)) {
 					?>
-					<b>Display Name:</b> <?php echo htmlspecialchars($host->getDisplayName());?><br />
+					<b>Display Name:</b> <?php echo rgm_esc($host->getDisplayName());?><br />
 					<?php
 				}
 				if(isset($host->tempHostInfo['use_template_id'])) {
 					?>
-					<b>Inherits From:</b> <?php echo htmlspecialchars($lilac->return_host_template_name($host->getTemplate()));?><br />
+					<b>Inherits From:</b> <?php echo rgm_esc($lilac->return_host_template_name($host->getTemplate()));?><br />
 					<?php
 				}
 				?>
@@ -1049,7 +1056,7 @@ if(isset($host)) {
 					<td height="20" width="80" class="altLeft"><?php if($numOfTemplates > 1 && $counter > 0) { ?><a class="btn btn-primary btn-xs" href="hosts.php?id=<?php echo $_GET['id'];?>&section=inheritance&request=moveup&template_id=<?php echo $templateInheritances[$counter]->getId();?>">Move Up</a><?php }?></td>
 					<td height="20" width="100" class="altLeft"><?php if($numOfTemplates > 1 && $counter < ($numOfTemplates -1)) { ?><a class="btn btn-primary btn-xs" href="hosts.php?id=<?php echo $_GET['id'];?>&section=inheritance&request=movedown&template_id=<?php echo $templateInheritances[$counter]->getId();?>">Move Down</a><?php }?></td>
 					<td height="20" width="80" nowrap="nowrap" class="altLeft"> <a class="btn btn-danger btn-xs" href="hosts.php?id=<?php echo $_GET['id'];?>&section=inheritance&request=delete&template_id=<?php echo $templateInheritances[$counter]->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-					<td height="20" class="altRight"><a href="host_template.php?id=<?php echo $templateInheritances[$counter]->getId();?>"><b><?php echo htmlspecialchars($templateInheritances[$counter]->getName());?></b></a></td>
+					<td height="20" class="altRight"><a href="host_template.php?id=<?php echo $templateInheritances[$counter]->getId();?>"><b><?php echo rgm_esc($templateInheritances[$counter]->getName());?></b></a></td>
 					</tr>
 					<?php
 				}
@@ -1470,7 +1477,7 @@ if(isset($host)) {
 						}
 						?>
 						<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-						<td height="20" class="altRight"><a href="hostgroups.php?id=<?php echo $inherited_list[$counter]->getId();?>"><b><?php echo htmlspecialchars($inherited_list[$counter]->getName());?>:</b></a> <?php echo htmlspecialchars($inherited_list[$counter]->getAlias());?></td>
+						<td height="20" class="altRight"><a href="hostgroups.php?id=<?php echo $inherited_list[$counter]->getId();?>"><b><?php echo rgm_esc($inherited_list[$counter]->getName());?>:</b></a> <?php echo rgm_esc($inherited_list[$counter]->getAlias());?></td>
 						</tr>
 						<?php
 					}
@@ -1498,7 +1505,7 @@ if(isset($host)) {
 					}
 					?>
 					<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="hosts.php?id=<?php echo $_GET['id'];?>&section=groups&request=delete&hostgroup_id=<?php echo $group_list[$counter]->getNagiosHostgroup()->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-					<td height="20" class="altRight"><a href="hostgroups.php?id=<?php echo $group_list[$counter]->getNagiosHostgroup()->getId();?>"><b><?php echo htmlspecialchars($group_list[$counter]->getNagiosHostgroup()->getName());?>:</b></a> <?php echo htmlspecialchars($group_list[$counter]->getNagiosHostgroup()->getAlias());?></td>
+					<td height="20" class="altRight"><a href="hostgroups.php?id=<?php echo $group_list[$counter]->getNagiosHostgroup()->getId();?>"><b><?php echo rgm_esc($group_list[$counter]->getNagiosHostgroup()->getName());?>:</b></a> <?php echo rgm_esc($group_list[$counter]->getNagiosHostgroup()->getAlias());?></td>
 					</tr>
 					<?php
 				}
@@ -1562,7 +1569,7 @@ if(isset($host)) {
 							}
 							?>
 							<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-							<td height="20" class="altRight"><b><a href="service.php?id=<?php echo $service->getId();?>"><?php echo htmlspecialchars($service->getDescription());?></a></b> from <b><?php echo htmlspecialchars($service->getNagiosHostTemplate()->getName());?></b></td>
+							<td height="20" class="altRight"><b><a href="service.php?id=<?php echo $service->getId();?>"><?php echo rgm_esc($service->getDescription());?></a></b> from <b><?php echo rgm_esc($service->getNagiosHostTemplate()->getName());?></b></td>
 							</tr>
 							<?php
 							$counter++;
@@ -1593,7 +1600,7 @@ if(isset($host)) {
 					}
 					?>
 					<td height="20" width="120" nowrap="nowrap" class="altLeft"><a class="btn btn-primary btn-xs" href="hosts.php?id=<?php echo $_GET['id'];?>&section=services&request=duplicate&service_id=<?php echo $hostServiceList[$counter]->getId();?>" onClick="javascript:return confirmDelete();">Duplicate</a> <a class="btn btn-danger btn-xs" href="hosts.php?id=<?php echo $_GET['id'];?>&section=services&request=delete&service_id=<?php echo $hostServiceList[$counter]->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-					<td height="20" class="altRight"><b><a href="service.php?id=<?php echo $hostServiceList[$counter]->getId();?>"><?php echo htmlspecialchars($hostServiceList[$counter]->getDescription());?></a></b></td>
+					<td height="20" class="altRight"><b><a href="service.php?id=<?php echo $hostServiceList[$counter]->getId();?>"><?php echo rgm_esc($hostServiceList[$counter]->getDescription());?></a></b></td>
 					</tr>
 					<?php
 				}
@@ -1645,7 +1652,7 @@ if(isset($host)) {
 							}
 							?>
 							<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-							<td height="20" class="altRight"><b>$ARG<?php echo ++$parameterCounter;?>$:</b> <?php echo htmlspecialchars($parameter->getParameter());?></td>
+							<td height="20" class="altRight"><b>$ARG<?php echo ++$parameterCounter;?>$:</b> <?php echo rgm_esc($parameter->getParameter());?></td>
 							</tr>
 							<?php
 						}
@@ -1678,7 +1685,7 @@ if(isset($host)) {
                     <td height="20" class="altRight"><b>$ARG<?php echo $parameterCounter;?>$:</b><input type="text" <?php
              					echo 'name="param"';
              					echo ' style="width:300px;"';
-             					echo ' value=\''.htmlspecialchars($checkCommandParameters[$counter]->getParameter()).'\'';
+             					echo ' value=\''.rgm_esc($checkCommandParameters[$counter]->getParameter()).'\'';
              					?>
                     >
                                 <input class="nicebutton" type="submit" value="Update" />
@@ -1734,7 +1741,7 @@ if(isset($host)) {
 								}
 								?>
 								<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-								<td height="20" class="altRight"><b>$_HOST<?php echo htmlspecialchars($customObjectVariable->getVarName());?>$:</b> <?php echo htmlspecialchars($customObjectVariable->getVarValue());?> from <strong>(host template) <?php echo htmlspecialchars($customObjectVariable->getNagiosHostTemplate()->getName()); ?></strong></td>
+								<td height="20" class="altRight"><b>$_HOST<?php echo rgm_esc($customObjectVariable->getVarName());?>$:</b> <?php echo rgm_esc($customObjectVariable->getVarValue());?> from <strong>(host template) <?php echo rgm_esc($customObjectVariable->getNagiosHostTemplate()->getName()); ?></strong></td>
 								</tr>
 								<?php
 								
@@ -1766,7 +1773,7 @@ if(isset($host)) {
 						}
 						?>
 						<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="hosts.php?id=<?php echo $_GET['id'];?>&section=customobjectvars&request=delete&customobjectvariable_id=<?php echo $customObjectVariable->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-						<td height="20" class="altRight"><b>$_HOST<?php echo htmlspecialchars($customObjectVariable->getVarName());?>$:</b> <?php echo htmlspecialchars($customObjectVariable->getVarValue());?></td>
+						<td height="20" class="altRight"><b>$_HOST<?php echo rgm_esc($customObjectVariable->getVarName());?>$:</b> <?php echo rgm_esc($customObjectVariable->getVarValue());?></td>
 						</tr>
 						<?php
 						
@@ -1893,7 +1900,7 @@ if(isset($host)) {
 					}
 					?>
 						<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-						<td height="20" class="altRight"><b><?php echo htmlspecialchars($inherited_list[$counter]->getName());?>:</b> <?php echo htmlspecialchars($inherited_list[$counter]->getAlias());?></td>
+						<td height="20" class="altRight"><b><?php echo rgm_esc($inherited_list[$counter]->getName());?>:</b> <?php echo rgm_esc($inherited_list[$counter]->getAlias());?></td>
 						</tr>
 						<?php
 				}
@@ -1921,7 +1928,7 @@ if(isset($host)) {
 				}
 				?>
 					<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="hosts.php?id=<?php echo $_GET['id'];?>&section=contacts&request=delete&contact_id=<?php echo $contacts_list[$counter]->getNagiosContact()->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-					<td height="20" class="altRight"><b><?php echo htmlspecialchars($contacts_list[$counter]->getNagiosContact()->getName());?>:</b> <?php echo htmlspecialchars($contacts_list[$counter]->getNagiosContact()->getAlias());?></td>
+					<td height="20" class="altRight"><b><?php echo rgm_esc($contacts_list[$counter]->getNagiosContact()->getName());?>:</b> <?php echo rgm_esc($contacts_list[$counter]->getNagiosContact()->getAlias());?></td>
 					</tr>
 					<?php
 			}
@@ -2017,7 +2024,7 @@ if(isset($host)) {
 							}
 							?>
 							<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="hosts.php?id=<?php echo $_GET['id'];?>&section=contacts&request=delete&contactgroup_id=<?php echo $contactgroups_list[$counter]->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-							<td height="20" class="altRight"><b><?php echo htmlspecialchars($contactgroups_list[$counter]->getNagiosContactgroup()->getName());?>:</b> <?php echo htmlspecialchars($contactgroups_list[$counter]->getNagiosContactgroup()->getAlias());?></td>
+							<td height="20" class="altRight"><b><?php echo rgm_esc($contactgroups_list[$counter]->getNagiosContactgroup()->getName());?>:</b> <?php echo rgm_esc($contactgroups_list[$counter]->getNagiosContactgroup()->getAlias());?></td>
 							</tr>
 							<?php
 						}
@@ -2087,7 +2094,7 @@ if(isset($host)) {
 									}
 									?>
 									<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-									<td height="20" class="altRight"><b><?php echo htmlspecialchars($dependency->getName());?></td>
+									<td height="20" class="altRight"><b><?php echo rgm_esc($dependency->getName());?></td>
 									</tr>
 									<?php
 									$counter++;
@@ -2119,7 +2126,7 @@ if(isset($host)) {
 								}
 								?>
 								<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="hosts.php?id=<?php echo $_GET['id'];?>&section=dependencies&request=delete&dependency_id=<?php echo $dependency->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-								<td height="20" class="altRight"><b><a href="dependency.php?id=<?php echo $dependency->getId();?>"><?php echo htmlspecialchars($dependency->getName());?></a></b></td>
+								<td height="20" class="altRight"><b><a href="dependency.php?id=<?php echo $dependency->getId();?>"><?php echo rgm_esc($dependency->getName());?></a></b></td>
 								</tr>
 								<?php
 								$counter++;
@@ -2171,7 +2178,7 @@ if(isset($host)) {
 									}
 									?>
 									<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;</td>
-									<td height="20" class="altRight"><b><a href="escalation.php?id=<?php echo $escalation->getId();?>"><?php echo htmlspecialchars($escalation->getDescription());?></a></b></td>
+									<td height="20" class="altRight"><b><a href="escalation.php?id=<?php echo $escalation->getId();?>"><?php echo rgm_esc($escalation->getDescription());?></a></b></td>
 									</tr>
 									<?php
 									$counter++;
@@ -2203,7 +2210,7 @@ if(isset($host)) {
 								}
 								?>
 								<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="hosts.php?id=<?php echo $_GET['id'];?>&section=escalations&request=delete&escalation_id=<?php echo $escalation->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-								<td height="20" class="altRight"><b><a href="escalation.php?id=<?php echo $escalation->getId();?>"><?php echo htmlspecialchars($escalation->getDescription());?></a></b></td>
+								<td height="20" class="altRight"><b><a href="escalation.php?id=<?php echo $escalation->getId();?>"><?php echo rgm_esc($escalation->getDescription());?></a></b></td>
 								</tr>
 								<?php
 								$counter++;
@@ -2250,7 +2257,7 @@ if(isset($host)) {
 								}
 								?>
 								<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="hosts.php?id=<?php echo $_GET['id'];?>&section=parents&request=delete&parent_id=<?php echo $parent->getNagiosHostRelatedByParentHost()->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-								<td height="20" class="altRight"><b><?php echo htmlspecialchars($parent->getNagiosHostRelatedByParentHost()->getName());?></b></td>
+								<td height="20" class="altRight"><b><?php echo rgm_esc($parent->getNagiosHostRelatedByParentHost()->getName());?></b></td>
 								</tr>
 								<?php
 								$counter++;
@@ -2267,8 +2274,8 @@ if(isset($host)) {
 					</form>
 					<script type="text/javascript">
 					$(function() {
-					  $("#targetname").autocomplete("hosts.php?request=search&type=host");
-					  });
+					    $("#targetname").autocomplete({source:"hosts.php?request=search&type=host"});
+					});
 					</script>
 							</td>
 		</tr>
@@ -2332,10 +2339,10 @@ if($numOfChildren) {
 			<?php
 		}
 		?>
-		<td height="20" class="altLeft" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');">&nbsp;<a href="hosts.php?id=<?php echo $children_list[$counter]->getId();?>"><?php echo htmlspecialchars($children_list[$counter]->getName());?></a> <?php $numOfSubChildren = $children_list[$counter]->getNumberOfChildren(); if($numOfSubChildren) print("(".$numOfSubChildren.")");?></td>
-		<td height="20" class="altRight" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');"><?php echo htmlspecialchars($children_list[$counter]->getAddress());?></td>
-		<td height="20" class="altRight" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');"><?php echo htmlspecialchars($children_list[$counter]->getAlias());?></td>
-		<td align="center"><input type="checkbox" id="check<?php echo $counter?>" class="checkbox" name="EoN_Actions_Checks_Host[]" value="<?php echo htmlspecialchars($children_list[$counter]->getId());?>" onclick="checkBox('line<?php echo $counter?>','check<?php echo $counter?>');"></td>
+		<td height="20" class="altLeft" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');">&nbsp;<a href="hosts.php?id=<?php echo $children_list[$counter]->getId();?>"><?php echo rgm_esc($children_list[$counter]->getName());?></a> <?php $numOfSubChildren = $children_list[$counter]->getNumberOfChildren(); if($numOfSubChildren) print("(".$numOfSubChildren.")");?></td>
+		<td height="20" class="altRight" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');"><?php echo rgm_esc($children_list[$counter]->getAddress());?></td>
+		<td height="20" class="altRight" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');"><?php echo rgm_esc($children_list[$counter]->getAlias());?></td>
+		<td align="center"><input type="checkbox" id="check<?php echo $counter?>" class="checkbox" name="EoN_Actions_Checks_Host[]" value="<?php echo rgm_esc($children_list[$counter]->getId());?>" onclick="checkBox('line<?php echo $counter?>','check<?php echo $counter?>');"></td>
 		</tr>
 		<?php
 	}

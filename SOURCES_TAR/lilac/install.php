@@ -651,25 +651,25 @@ else if($stage == 2 && empty($success)) {
 	<fieldset id="mysqladminform" style="display: none;">
 		<legend>MySQL Administrator Credentials</legend>
 		<p>
-			<label for="mysqlRootUsername">Admin Username:</label> <input type="text" id="mysqlRootUsername" name="mysqlRootUsername" value="<?php echo htmlspecialchars($mysqlRootUsername);?>" />
+			<label for="mysqlRootUsername">Admin Username:</label> <input type="text" id="mysqlRootUsername" name="mysqlRootUsername" value="<?php echo rgm_esc($mysqlRootUsername);?>" />
 		</p>
 		<p>
-			<label for="mysqlRootPassword">Admin Password:</label> <input type="password" id="mysqlRootPassword" name="mysqlRootPassword" value="<?php echo htmlspecialchars($mysqlRootPassword);?>" />
+			<label for="mysqlRootPassword">Admin Password:</label> <input type="password" id="mysqlRootPassword" name="mysqlRootPassword" value="<?php echo rgm_esc($mysqlRootPassword);?>" />
 		</p>
 	</fieldset>
 	<fieldset id="mysqlform">
 		<legend>MySQL Connection Information</legend>
 		<p>
-			<label for="mysqlHostname">Host: </label><input type="text" id="mysqlHostname" name="mysqlHostname" value="<?php echo htmlspecialchars($mysqlHostname);?>" />
+			<label for="mysqlHostname">Host: </label><input type="text" id="mysqlHostname" name="mysqlHostname" value="<?php echo rgm_esc($mysqlHostname);?>" />
 		</p>
 		<p>
-			<label for="mysqlUsername">Username: </label><input type="text" id="mysqlUsername" name="mysqlUsername" value="<?php echo htmlspecialchars($mysqlUsername);?>" />
+			<label for="mysqlUsername">Username: </label><input type="text" id="mysqlUsername" name="mysqlUsername" value="<?php echo rgm_esc($mysqlUsername);?>" />
 		</p>
 		<p>
-			<label for="mysqlPassword">Password: </label><input type="password" id="mysqlPassword" name="mysqlPassword" value="<?php echo htmlspecialchars($mysqlPassword);?>" />
+			<label for="mysqlPassword">Password: </label><input type="password" id="mysqlPassword" name="mysqlPassword" value="<?php echo rgm_esc($mysqlPassword);?>" />
 		</p>
 		<p>
-			<label for="mysqlDatabase">Database: </label><input type="text" id="mysqlDatabase" name="mysqlDatabase" value="<?php echo htmlspecialchars($mysqlDatabase);?>" />
+			<label for="mysqlDatabase">Database: </label><input type="text" id="mysqlDatabase" name="mysqlDatabase" value="<?php echo rgm_esc($mysqlDatabase);?>" />
 		</p>
 	</fieldset>
 		<p>
@@ -1025,7 +1025,7 @@ function print_window_header($title = null, $type = "top") {
 	      <?php
 	      if(!empty($title)) {
 	      	?>
-	      	<h2><?php echo htmlspecialchars($title);?></h2>
+	      	<h2><?php echo rgm_esc($title);?></h2>
 	      	<?php
 	      }
 	      ?>

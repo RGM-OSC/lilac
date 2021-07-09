@@ -19,7 +19,7 @@ session_start();
 		else {
 			echo "<select name='servmanage[serv_add][serv_id]'>";
 			foreach($serviceList as $service) {
-				echo "<option value='".$service->getId()."'>".htmlspecialchars($service->getName())."</option>";
+				echo "<option value='".$service->getId()."'>".rgm_esc($service->getName())."</option>";
 			}
 			echo "</select>&nbsp;";
 			echo "<input class='btn btn-primary' type='button' onClick='javascript:getID()'' value='Add Template'><br /><br />;;;;";
@@ -45,7 +45,7 @@ session_start();
 					if ($i%2) echo "<tr class='altRow1'>";
 		        	else echo "<tr class='altRow2'>";
 		        	echo "<td height='20' width='80' nowrap='nowrap' class='altLeft'><a class=\"btn btn-danger btn-xs\" onClick='javascript:appel(".$serv->getId().",\"delete\",\"null\");'>Delete</a></td>";
-		        	echo "<td height='20' class='altRight'><b>".htmlspecialchars($serv->getName())."</b></td></tr>";
+		        	echo "<td height='20' class='altRight'><b>".rgm_esc($serv->getName())."</b></td></tr>";
 		        	break;
 	        	}
         	}
@@ -63,7 +63,7 @@ session_start();
 	        		$_SESSION['services'][count($_SESSION['services'])] = $service->getId() ;
 	        		$_SESSION['command'][count($_SESSION['command'])] = $service->getCheckCommand() ;
 	        		echo "<td height='20' width='80' nowrap='nowrap' class='altLeft'><a class=\"btn btn-danger btn-xs\" onClick='javascript:appel(".$service->getId().",\"delete\");'>Delete</a></td>";
-	        		echo "<td height='20' class='altRight'><b>".htmlspecialchars($service->getName())."</b></td></tr>";
+	        		echo "<td height='20' class='altRight'><b>".rgm_esc($service->getName())."</b></td></tr>";
 	        		break;
 				}
 	        }
@@ -78,7 +78,7 @@ session_start();
 			echo "<select name='servmanage[serv_add][serv_id]'>";
 			foreach($serviceList as $service) {
 				if(in_array($service->getId(), $_SESSION['services']))	continue;
-					echo "<option value='".$service->getId()."'>".htmlspecialchars($service->getName())."</option>";
+					echo "<option value='".$service->getId()."'>".rgm_esc($service->getName())."</option>";
 				}
 			echo "</select>";
 			echo "<input type='button' onCLick='javascript:getID()'' value='Add Template'><br /><br />;;";
@@ -103,7 +103,7 @@ session_start();
 					if ($i%2) echo "<tr class='altRow1'>";
 		        	else echo "<tr class='altRow2'>";
 		        	echo "<td height='20' width='80' nowrap='nowrap' class='altLeft'> <a class=\"btn btn-danger btn-xs\" onClick='javascript:appel(".$serv->getId().",\"delete\",\"null\");'>Delete</a></td>";
-		        	echo "<td height='20' class='altRight'><b>".htmlspecialchars($serv->getName())."</b></td></tr>";
+		        	echo "<td height='20' class='altRight'><b>".rgm_esc($serv->getName())."</b></td></tr>";
 		        	break;
 	        	}
         	}
@@ -118,7 +118,7 @@ session_start();
 			echo "<select name='servmanage[serv_add][serv_id]'>";
 			foreach($serviceList as $service) {
 				if(in_array($service->getId(), $_SESSION['services']))	continue;
-					echo "<option value='".$service->getId()."'>".htmlspecialchars($service->getName())."</option>";
+					echo "<option value='".$service->getId()."'>".rgm_esc($service->getName())."</option>";
 				}
 			echo "</select>";
 			echo "<input type='button' onCLick='javascript:getID()'' value='Add Template'><br /><br />;;;;";
@@ -144,8 +144,8 @@ session_start();
 	foreach($_SESSION['params'] as $i=>$command) {
 		if($i % 2) echo '<tr class="altRow1">';
 		else echo '<tr class="altRow2">';
-		echo "<td height='20' width='80' nowrap='nowrap' class='altLeft'><a class=\"btn btn-danger btn-xs\" onClick='javascript:appel(\"undefined\",\"null\",\"delete\",\"". htmlspecialchars($command, ENT_QUOTES) . "\");'>Delete</a></td>
-        <td height='20' class='altRight'><b>\$ARG".($_SESSION['num_cmd']+$i+1)."\$: " . htmlspecialchars($command) . "</b>
+		echo "<td height='20' width='80' nowrap='nowrap' class='altLeft'><a class=\"btn btn-danger btn-xs\" onClick='javascript:appel(\"undefined\",\"null\",\"delete\",\"". rgm_esc($command, ENT_QUOTES) . "\");'>Delete</a></td>
+        <td height='20' class='altRight'><b>\$ARG".($_SESSION['num_cmd']+$i+1)."\$: " . rgm_esc($command) . "</b>
         </td></tr>";
         $count++;
 	}

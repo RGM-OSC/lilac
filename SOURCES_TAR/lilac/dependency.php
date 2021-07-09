@@ -32,17 +32,21 @@ include_once('includes/config.inc');
 
 // AJAX behavior
 if(isset($_GET['request']) && $_GET['request'] == "search") {
+    $criteria = $_GET['term'];
+    if (!$criteria) {
+        $criteria = $_GET['q'];
+    }
 	$results = array();
 	switch($_GET['type']) {
 		case 'host':
 			$c = new Criteria();
-			$c->add(NagiosHostPeer::NAME, $_GET['q']."%", Criteria::LIKE);
+			$c->add(NagiosHostPeer::NAME, '%'.$criteria."%", Criteria::LIKE);
 			$c->setIgnoreCase(true);
 			$results = NagiosHostPeer::doSelect($c);
 			break;
 		case 'hostgroup':
 			$c = new Criteria();
-			$c->add(NagiosHostgroupPeer::NAME, $_GET['q']."%", Criteria::LIKE);
+			$c->add(NagiosHostgroupPeer::NAME, '%'.$criteria."%", Criteria::LIKE);
 			$c->setIgnoreCase(true);
 			$results = NagiosHostgroupPeer::doSelect($c);
             break;
@@ -81,9 +85,12 @@ if(isset($_GET['request']) && $_GET['request'] == "search") {
 
 	}
 
-	foreach($results as $result) {
-		print(htmlspecialchars($result->getName()) . "\n");
-	}	
+    $list = array();
+    foreach($results as $result) {
+        $list[] = $result->getName();
+    }
+    print(json_encode($list));
+
 	exit();
 }
 
@@ -256,7 +263,7 @@ if(isset($_POST['request'])) {
 				$c->setIgnoreCase(true);
 				$tempHost = NagiosHostPeer::doSelectOne($c);
 				if(!$tempHost) {
-					$error = "The host specified by name " . htmlspecialchars($_POST['name']) . " was not found.";
+					$error = "The host specified by name " . rgm_esc($_POST['name']) . " was not found.";
 				}
 				else {
 					// Check for target existence
@@ -284,7 +291,7 @@ if(isset($_POST['request'])) {
 				$c->setIgnoreCase(true);
 				$tempHostgroup = NagiosHostgroupPeer::doSelectOne($c);
 				if(!$tempHostgroup) {
-					$error = "The hostgroup specified by name " . htmlspecialchars($_POST['name']) . " was not found.";
+					$error = "The hostgroup specified by name " . rgm_esc($_POST['name']) . " was not found.";
 				}
 				else {
 					// Check for target existence
@@ -313,7 +320,7 @@ if(isset($_POST['request'])) {
 			$c->setIgnoreCase(true);
 			$host = NagiosHostPeer::doSelectOne($c);
 			if(!$host) {
-				$error = "The host specified by name " . htmlspecialchars($_POST['hostname']) . " was not found.";
+				$error = "The host specified by name " . rgm_esc($_POST['hostname']) . " was not found.";
 			}
 			else {
 				// Okay, let's find the service
@@ -389,37 +396,37 @@ $title = '';
 if($dependency->getNagiosService() || $dependency->getNagiosServiceTemplate()) {
 	$title .= "Service ";
 	if($dependency->getNagiosServiceTemplate()) {
-		$title .= "Template <i>" . htmlspecialchars($dependency->getNagiosServiceTemplate()->getName()) . "</i>";
+		$title .= "Template <i>" . rgm_esc($dependency->getNagiosServiceTemplate()->getName()) . "</i>";
 		$sublink = "service_template.php?id=" . $dependency->getNagiosServiceTemplate()->getId();
-		$subText = "Return To Service Template " . htmlspecialchars($dependency->getNagiosServiceTemplate()->getName());
+		$subText = "Return To Service Template " . rgm_esc($dependency->getNagiosServiceTemplate()->getName());
 	}
 	else {
-		$title .= "<i>" . htmlspecialchars($dependency->getNagiosService()->getDescription()) . "</i> On ";
+		$title .= "<i>" . rgm_esc($dependency->getNagiosService()->getDescription()) . "</i> On ";
 		if($dependency->getNagiosService()->getNagiosHostTemplate()) {
-			$title .= " Host Template <i>" . htmlspecialchars($dependency->getNagiosService()->getNagiosHostTemplate()->getName()) . "</i>";
+			$title .= " Host Template <i>" . rgm_esc($dependency->getNagiosService()->getNagiosHostTemplate()->getName()) . "</i>";
 		}
 		else if($dependency->getNagiosService()->getNagiosHost()) {
-			$title .= "Host " . "<i>" . htmlspecialchars($dependency->getNagiosService()->getNagiosHost()->getName()) . "</i>";
+			$title .= "Host " . "<i>" . rgm_esc($dependency->getNagiosService()->getNagiosHost()->getName()) . "</i>";
 		}
 		$sublink = "service.php?id=" . $dependency->getNagiosService()->getId();
-		$subText = "Return To Service " . htmlspecialchars($dependency->getNagiosService()->getDescription());
+		$subText = "Return To Service " . rgm_esc($dependency->getNagiosService()->getDescription());
 	}
 }
 else {	
 	if($dependency->getNagiosHostTemplate()) {
-		$title .= "Host Template <i>" . htmlspecialchars($dependency->getNagiosHostTemplate()->getName()) . "</i>";
+		$title .= "Host Template <i>" . rgm_esc($dependency->getNagiosHostTemplate()->getName()) . "</i>";
 		$sublink = "host_template.php?id=" . $dependency->getNagiosHostTemplate()->getId();
-		$subText = "Return To Host Template " . htmlspecialchars($dependency->getNagiosHostTemplate()->getName());
+		$subText = "Return To Host Template " . rgm_esc($dependency->getNagiosHostTemplate()->getName());
 	}
 	else if($dependency->getNagiosHost()) {
-		$title .= "Host <i>" . htmlspecialchars($dependency->getNagiosHost()->getName()) . "</i>";
+		$title .= "Host <i>" . rgm_esc($dependency->getNagiosHost()->getName()) . "</i>";
 		$sublink = "hosts.php?id=" . $dependency->getNagiosHost()->getId();
-		$subText = "Return To Host " . htmlspecialchars($dependency->getNagiosHost()->getName());
+		$subText = "Return To Host " . rgm_esc($dependency->getNagiosHost()->getName());
 	}
 	else if($dependency->getNagiosHostgroup()) {
-		$title .= "Hostgroup <i>" . htmlspecialchars($dependency->getNagiosHostgroup()->getName()) . "</i>";
+		$title .= "Hostgroup <i>" . rgm_esc($dependency->getNagiosHostgroup()->getName()) . "</i>";
 		$sublink = "hostgroups.php?id=" . $dependency->getNagiosHostgroup()->getId();
-		$subText = "Return To Hostgroup " . htmlspecialchars($dependency->getNagiosHostgroup()->getName());
+		$subText = "Return To Hostgroup " . rgm_esc($dependency->getNagiosHostgroup()->getName());
 	}
 }
 
@@ -682,7 +689,7 @@ function enabler_switch(enabler) {
 						print("<b>Dependency Period:</b> Always Active");
 					}
 					else {
-						print("<b>Dependency Period:</b> " . htmlspecialchars($dependency->getNagiosTimeperiod()->getName()));
+						print("<b>Dependency Period:</b> " . rgm_esc($dependency->getNagiosTimeperiod()->getName()));
 					}	
 					?>
 					<br />
@@ -730,13 +737,13 @@ function enabler_switch(enabler) {
 						<td height="20" class="altRight"><?php
 					   		switch($target->getType()) {
 								case 'host':
-									print("<strong>Host:</strong> " . htmlspecialchars($target->getNagiosHost()->getName()));	
+									print("<strong>Host:</strong> " . rgm_esc($target->getNagiosHost()->getName()));	
 									break;
 								case 'hostgroup':
-									print("<strong>Hostgroup:</strong> " . htmlspecialchars($target->getNagiosHostgroup()->getName()));
+									print("<strong>Hostgroup:</strong> " . rgm_esc($target->getNagiosHostgroup()->getName()));
 									break;
 								case 'service':
-									print("<strong>Service:</strong> " . htmlspecialchars($target->getNagiosHost()->getName()) . " - " . htmlspecialchars($target->getNagiosService()->getDescription()));
+									print("<strong>Service:</strong> " . rgm_esc($target->getNagiosHost()->getName()) . " - " . rgm_esc($target->getNagiosService()->getDescription()));
 									break;
 							
 							};?>						
@@ -810,47 +817,47 @@ function enabler_switch(enabler) {
 				</tr>
 				</table>
 				<br />
-				<script type="text/javascript">
-					<?php
-					if(in_array($type, array("host", "hosttemplate", "hostgroup"))) {
-					?>
-                        $(function() {
-                            $("#targetname").autocomplete("dependency.php?request=search&type=host");
-                            $("#typeselect").change(function(event) {
-                                $("#targetname").autocomplete("dependency.php?request=search&type=" + $("#typeselect").get(0).value);	
+                <script type="text/javascript">
+                    <?php
+                    if(in_array($type, array("host", "hosttemplate", "hostgroup"))) {
+                    ?>
+                        $(document).ready(function() {
+                            $(function() {
+                                $("#targetname").autocomplete({source:"dependency.php?request=search&type=host"});
+                                $("#typeselect").change(function(event) {
+                                    $("#targetname").autocomplete({source:"dependency.php?request=search&type=" + $("#typeselect").get(0).value});   
+                                });
                             });
                         });
-					<?php
-					} else {
-					?>
-						$(function() {
-							$("#hostname").autocomplete("dependency.php?request=search&type=host");
-
-							function updateservicelist(event) {
-								$.getJSON("dependency.php?request=search&type=service&host=" + $("#hostname").get(0).value, function(data) {
-                                    if(data['error'] != undefined) {
-                                        $("#service_select").html("<option>" + encodeURIComponent(data['error']) + "</option");	
-                                        $("#targetsubmit").attr("disabled", true);
-                                        $("#service_select").attr("disabled", true);
-                                    } else {
-                                        html = '';
-                                        for(counter = 0; counter < data['services'].length; counter++) {
-                                            html += "<option value='" + encodeURIComponent(data['services'][counter]) + "'>" + encodeURIComponent(data['services'][counter]) + "</option>";
+                    <?php
+                    } else {
+                    ?>
+                        $(document).ready(function() {
+                                $("#hostname").autocomplete({source:"dependency.php?request=search&type=host"});
+                                function updateservicelist(event) {
+                                    $.getJSON("dependency.php?request=search&type=service&host=" + $("#hostname").get(0).value, function(data) {
+                                        if(data['error'] != undefined) {
+                                            $("#service_select").html("<option>" + encodeURIComponent(data['error']) + "</option"); 
+                                            $("#targetsubmit").attr("disabled", true);
+                                            $("#service_select").attr("disabled", true);
+                                        } else {
+                                            html = '';
+                                            for(counter = 0; counter < data['services'].length; counter++) {
+                                                html += "<option value='" + encodeURIComponent(data['services'][counter]) + "'>" + encodeURIComponent(data['services'][counter]) + "</option>";
+                                            }
+                                            $("#service_select").html(html);
+                                            $("#service_select").attr("disabled", false);
+                                            $("#targetsubmit").attr("disabled", false);
                                         }
-                                        $("#service_select").html(html);
-                                        $("#service_select").attr("disabled", false);
-                                        $("#targetsubmit").attr("disabled", false);
-                                    }
-                                });
-							}
+                                    });
+                                }
 
-							$("#hostname").bind("keyup result change", updateservicelist);
-
-						  });
-					<?php	
-					}
-					?>
-				</script>
+                                $("#hostname").bind("keyup result change", updateservicelist);
+                            });
+                    <?php   
+                    }
+                    ?>
+                </script>
 				<?php
 		}
 		?>

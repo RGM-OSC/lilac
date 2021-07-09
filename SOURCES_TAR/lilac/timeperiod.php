@@ -178,11 +178,11 @@ print_header("Time Period Editor");
 			<input type="hidden" name="request" value="modify_period" />
 			<input type="hidden" name="timeperiod_manage[timeperiod_id]" value="<?php echo $timeperiod->getId();?>">
 			<b>Time Period Name:</b><br />
-			<input type="text" name="timeperiod_manage[timeperiod_name]" value="<?php echo isset($timeperiod) ? htmlspecialchars($timeperiod->getName()) : '';?>">
+			<input type="text" name="timeperiod_manage[timeperiod_name]" value="<?php echo isset($timeperiod) ? rgm_esc($timeperiod->getName()) : '';?>">
 			<?php echo $lilac->element_desc("timeperiod_name", "nagios_timeperiods_desc"); ?><br />
 			<br />
 			<b>Description:</b><br />
-			<input type="text" size="80" name="timeperiod_manage[alias]" value="<?php echo isset($timeperiod) ? htmlspecialchars($timeperiod->getAlias()) : '';?>">
+			<input type="text" size="80" name="timeperiod_manage[alias]" value="<?php echo isset($timeperiod) ? rgm_esc($timeperiod->getAlias()) : '';?>">
 			<?php echo $lilac->element_desc("alias", "nagios_timeperiods_desc"); ?><br />
 			<br />
 			<?php 
@@ -250,10 +250,10 @@ print_header("Time Period Editor");
 		<b>Add A New Entry:</b><br />
 		<form name="timeperiod_form" method="post" action="timeperiod.php?timeperiod_id=<?php echo $timeperiod->getId();?>&section=entries">
 			<input type="hidden" name="request" value="add_entry" />		
-		<b>Weekday / Exception: </b><input name="entry" value="<?php echo htmlspecialchars($entry);?>" type="text" size="50" maxlength="255" />
+		<b>Weekday / Exception: </b><input name="entry" value="<?php echo rgm_esc($entry);?>" type="text" size="50" maxlength="255" />
 		<?php echo $lilac->element_desc("timeperiod_weekday_exception", "nagios_timeperiods_desc"); ?><br />
 		<br />
-		<b>Value: </b><input type="text" name="value" value="<?php echo htmlspecialchars($value);?>" size="50" maxlength="255" />
+		<b>Value: </b><input type="text" name="value" value="<?php echo rgm_esc($value);?>" size="50" maxlength="255" />
 		<?php echo $lilac->element_desc("timeperiod_value", "nagios_timeperiods_desc"); ?><br /><br />
 		<input class="btn btn-primary" type="submit" value="Add Entry" />
 		</div>
@@ -290,7 +290,7 @@ print_header("Time Period Editor");
 					}
 					?>
 					<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="timeperiod.php?timeperiod_id=<?php echo $_GET['timeperiod_id'];?>&section=exclusions&request=delete&exclude_id=<?php echo $exclusions[$counter]->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-					<td height="20" class="altRight"><b><?php echo htmlspecialchars($excludedTimeperiod->getName());?>:</b> <?php echo htmlspecialchars($excludedTimeperiod->getAlias());?></td>
+					<td height="20" class="altRight"><b><?php echo rgm_esc($excludedTimeperiod->getName());?>:</b> <?php echo rgm_esc($excludedTimeperiod->getAlias());?></td>
 					</tr>
 					<?php
 				}

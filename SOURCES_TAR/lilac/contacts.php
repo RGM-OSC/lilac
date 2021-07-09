@@ -336,11 +336,11 @@ print_header("Contact Editor");
 								<?php
 							}
 						?>
-						<b>Contact Name:</b> <input type="text" name="contact_manage[contact_name]" value="<?php echo htmlspecialchars($tempContactInfo->getName());?>">
+						<b>Contact Name:</b> <input type="text" name="contact_manage[contact_name]" value="<?php echo rgm_esc($tempContactInfo->getName());?>">
 						<?php echo $lilac->element_desc("contact_name", "nagios_contacts_desc"); ?><br />
 						<br />
 						<b>Description:</b><br />
-						<input type="text" size="80" name="contact_manage[alias]" value="<?php echo htmlspecialchars($tempContactInfo->getAlias());?>">
+						<input type="text" size="80" name="contact_manage[alias]" value="<?php echo rgm_esc($tempContactInfo->getAlias());?>">
 						<?php echo $lilac->element_desc("alias", "nagios_contacts_desc"); ?><br />
 						<br />
 						<input type="checkbox" name="contact_manage[can_submit_commands]" <?php echo  (($tempContactInfo->getCanSubmitCommands() == 1) ? "CHECKED" : '');?>><b>Can Submit Commands</b><br />
@@ -354,10 +354,10 @@ print_header("Contact Editor");
 						<br />
 						<input type="checkbox" name="contact_manage[service_notifications_enabled]" <?php echo  (($tempContactInfo->getServiceNotificationsEnabled() == 1) ? "CHECKED" : '');?>><b>Service Notifications Enabled</b><br />
 						<br />
-						<b>Host Notification Period:</b> <?php print_select("contact_manage[host_notification_period]", $period_list, "timeperiod_id", "timeperiod_name",($tempContactInfo->getHostNotificationPeriod() != null) ? htmlspecialchars($tempContactInfo->getHostNotificationPeriod()) : '');?>
+						<b>Host Notification Period:</b> <?php print_select("contact_manage[host_notification_period]", $period_list, "timeperiod_id", "timeperiod_name",($tempContactInfo->getHostNotificationPeriod() != null) ? rgm_esc($tempContactInfo->getHostNotificationPeriod()) : '');?>
 						<?php echo $lilac->element_desc("host_notification_period", "nagios_contacts_desc"); ?><br />
 						<br />
-						<b>Service Notification Period:</b> <?php print_select("contact_manage[service_notification_period]", $period_list, "timeperiod_id", "timeperiod_name",($tempContactInfo->getHostNotificationPeriod() != null) ? htmlspecialchars($tempContactInfo->getServiceNotificationPeriod()) : '');?>
+						<b>Service Notification Period:</b> <?php print_select("contact_manage[service_notification_period]", $period_list, "timeperiod_id", "timeperiod_name",($tempContactInfo->getHostNotificationPeriod() != null) ? rgm_esc($tempContactInfo->getServiceNotificationPeriod()) : '');?>
 						<?php echo $lilac->element_desc("service_notification_period", "nagios_contacts_desc"); ?><br />
 						<br />
 						<b>Host Notification Options:</b>
@@ -390,21 +390,21 @@ print_header("Contact Editor");
 						<br />
 			
 						<b>Email:</b><br />
-						<input type="text" size="80" name="contact_manage[email]" value="<?php echo htmlspecialchars($tempContactInfo->getEmail());?>">
+						<input type="text" size="80" name="contact_manage[email]" value="<?php echo rgm_esc($tempContactInfo->getEmail());?>">
 						<?php echo $lilac->element_desc("email", "nagios_contacts_desc"); ?><br />
 						<br />
 						<b>Pager:</b><br />
-						<input type="text" size="80" name="contact_manage[pager]" value="<?php echo htmlspecialchars($tempContactInfo->getPager());?>"><br /><br />
+						<input type="text" size="80" name="contact_manage[pager]" value="<?php echo rgm_esc($tempContactInfo->getPager());?>"><br /><br />
 						<input class="btn btn-primary" type="submit" value="Modify Contact" /> <a class="btn btn-default" href="contacts.php?contact_id=<?php echo $_GET['contact_id'];?>">Cancel</a>
 						</form>
 					<?php
 				}
 				else {
 					?>				
-					<b>Contact Name:</b> <?php echo htmlspecialchars($tempContactInfo->getName());?><br />
-					<b>Description:</b> <?php echo htmlspecialchars($tempContactInfo->getAlias());?><br />
-					<b>Email:</b> <?php echo htmlspecialchars($tempContactInfo->getEmail());?><br />
-					<b>Pager:</b> <?php echo htmlspecialchars($tempContactInfo->getPager());?><br />
+					<b>Contact Name:</b> <?php echo rgm_esc($tempContactInfo->getName());?><br />
+					<b>Description:</b> <?php echo rgm_esc($tempContactInfo->getAlias());?><br />
+					<b>Email:</b> <?php echo rgm_esc($tempContactInfo->getEmail());?><br />
+					<b>Pager:</b> <?php echo rgm_esc($tempContactInfo->getPager());?><br />
 					<br />
 					<b>Can Submit Commands:</b><?php echo ($tempContactInfo->getCanSubmitCommands()) ? "Yes" : "No";?><br />
 					<b>Retain Status Information:</b><?php echo ($tempContactInfo->getRetainStatusInformation()) ? "Yes" : "No";?><br />
@@ -413,8 +413,8 @@ print_header("Contact Editor");
 					<b>Host Notifications Enabled:</b><?php echo ($tempContactInfo->getHostNotificationsEnabled()) ? "Yes" : "No";?><br />
 					<b>Service Notifications Enabled:</b><?php echo ($tempContactInfo->getServiceNotificationsEnabled()) ? "Yes" : "No";?><br />
 					<br />
-					<b>Host Notification Period:</b> <?php echo htmlspecialchars($lilac->return_period_name($tempContactInfo->getHostNotificationPeriod()));?><br />
-					<b>Service Notification Period:</b> <?php echo htmlspecialchars($lilac->return_period_name($tempContactInfo->getServiceNotificationPeriod()));?><br />
+					<b>Host Notification Period:</b> <?php echo rgm_esc($lilac->return_period_name($tempContactInfo->getHostNotificationPeriod()));?><br />
+					<b>Service Notification Period:</b> <?php echo rgm_esc($lilac->return_period_name($tempContactInfo->getServiceNotificationPeriod()));?><br />
 					<b>Host Notification On:</b>
 						<?php
 						if(!$tempContactInfo->getHostNotificationOnDown() && !$tempContactInfo->getHostNotificationOnUnreachable() && !$tempContactInfo->getHostNotificationOnRecovery() && !$tempContactInfo->getHostNotificationOnFlapping() && !$tempContactInfo->getHostNotificationOnScheduledDowntime()) {
@@ -529,7 +529,7 @@ print_header("Contact Editor");
 						}
 						?>
 						<td height="20" width="80" nowrap="nowrap" class="altLeft">&nbsp;<a class="btn btn-danger" href="contacts.php?contact_id=<?php echo $_GET['contact_id'];?>&section=notification&request=delete&contact_notification_command_id=<?php echo $contactNotificationCommands['host'][$counter]->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-						<td height="20" class="altRight"><b><?php echo htmlspecialchars($contactNotificationCommands['host'][$counter]->getNagiosCommand()->getName());?></b></td>
+						<td height="20" class="altRight"><b><?php echo rgm_esc($contactNotificationCommands['host'][$counter]->getNagiosCommand()->getName());?></b></td>
 						</tr>
 						<?php
 					}
@@ -539,7 +539,7 @@ print_header("Contact Editor");
 				<br />
 				<form name="notification_add" method="post" action="contacts.php?contact_id=<?php echo $_GET['contact_id'];?>&section=notification">
 				<input type="hidden" name="request" value="add_notification_command" />
-				<input type="hidden" name="contact_manage[notification_add][contact_id]" value="<?php echo htmlspecialchars($_GET['contact_id']);?>" />
+				<input type="hidden" name="contact_manage[notification_add][contact_id]" value="<?php echo rgm_esc($_GET['contact_id']);?>" />
 				<input type="hidden" name="contact_manage[notification_add][notification_type]" value="host" />
 				<b>Add New Host Notification Command:</b> <?php
 				if(!count($command_list)) {
@@ -571,7 +571,7 @@ print_header("Contact Editor");
 						}
 						?>
 						<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger" href="contacts.php?contact_id=<?php echo $_GET['contact_id'];?>&section=notification&request=delete&contact_notification_command_id=<?php echo $contactNotificationCommands['service'][$counter]->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-						<td height="20" class="altRight"><b><?php echo htmlspecialchars($contactNotificationCommands['service'][$counter]->getNagiosCommand()->getName());?></b></td>
+						<td height="20" class="altRight"><b><?php echo rgm_esc($contactNotificationCommands['service'][$counter]->getNagiosCommand()->getName());?></b></td>
 						</tr>
 						<?php
 					}
@@ -634,7 +634,7 @@ print_header("Contact Editor");
 						}
 						?>
 						<td height="20" width="80" nowrap="nowrap" class="altLeft"> <a class="btn btn-danger btn-xs" href="contacts.php?contact_id=<?php echo $_GET['contact_id'];?>&section=groups&request=delete&contactgroup_id=<?php echo $group_list[$counter]->getNagiosContactGroup()->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-						<td height="20" class="altRight"><b><?php echo htmlspecialchars($group_list[$counter]->getNagiosContactGroup()->getName());?>:</b> <?php echo htmlspecialchars($group_list[$counter]->getNagiosContactGroup()->getAlias());?></td>
+						<td height="20" class="altRight"><b><?php echo rgm_esc($group_list[$counter]->getNagiosContactGroup()->getName());?>:</b> <?php echo rgm_esc($group_list[$counter]->getNagiosContactGroup()->getAlias());?></td>
 						</tr>
 						<?php
 					}
@@ -691,7 +691,7 @@ print_header("Contact Editor");
 							}
 							?>
 							<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="contacts.php?contact_id=<?php echo $_GET['contact_id'];?>&section=addresses&request=delete&contactaddress_id=<?php echo $contactAddresses[$counter]->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-							<td height="20" class="altRight"><b>$CONTACTADDRESS<?php echo ($counter+1);?>$:</b> <?php echo htmlspecialchars($contactAddresses[$counter]->getAddress());?></td>
+							<td height="20" class="altRight"><b>$CONTACTADDRESS<?php echo ($counter+1);?>$:</b> <?php echo rgm_esc($contactAddresses[$counter]->getAddress());?></td>
 							</tr>
 							<?php
 						}
@@ -746,7 +746,7 @@ print_header("Contact Editor");
 								}
 								?>
 								<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger btn-xs" href="contacts.php?contact_id=<?php echo $_GET['contact_id'];?>&section=customobjectvars&request=delete&customobjectvariable_id=<?php echo $customObjectVariable->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-								<td height="20" class="altRight"><b>$_CONTACT<?php echo htmlspecialchars($customObjectVariable->getVarName());?>$:</b> <?php echo htmlspecialchars($customObjectVariable->getVarValue());?></td>
+								<td height="20" class="altRight"><b>$_CONTACT<?php echo rgm_esc($customObjectVariable->getVarName());?>$:</b> <?php echo rgm_esc($customObjectVariable->getVarValue());?></td>
 								</tr>
 								<?php
 								
@@ -803,9 +803,9 @@ print_header("Contact Editor");
 					<?php
 				}
 				?>
-				<td height="20" class="altLeft" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');">&nbsp;<a href="contacts.php?contact_id=<?php echo $contact_list[$counter]->getId();?>"><?php echo htmlspecialchars($contact_list[$counter]->getName());?></a></td>
-				<td height="20" class="altRight" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');"><?php echo htmlspecialchars($contact_list[$counter]->getAlias());?></td>
-				<td align="center"><input type="checkbox" id="check<?php echo $counter?>" class="checkbox" name="EoN_Actions_Checks_Contact[]" value="<?php echo htmlspecialchars($contact_list[$counter]->getId());?>" onclick="checkBox('line<?php echo $counter?>','check<?php echo $counter?>');"></td>
+				<td height="20" class="altLeft" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');">&nbsp;<a href="contacts.php?contact_id=<?php echo $contact_list[$counter]->getId();?>"><?php echo rgm_esc($contact_list[$counter]->getName());?></a></td>
+				<td height="20" class="altRight" onclick="checkLine('line<?php echo $counter?>','check<?php echo $counter?>');"><?php echo rgm_esc($contact_list[$counter]->getAlias());?></td>
+				<td align="center"><input type="checkbox" id="check<?php echo $counter?>" class="checkbox" name="EoN_Actions_Checks_Contact[]" value="<?php echo rgm_esc($contact_list[$counter]->getId());?>" onclick="checkBox('line<?php echo $counter?>','check<?php echo $counter?>');"></td>
 				</tr>
 				<?php
 			}

@@ -406,14 +406,14 @@ function validateForm() {
 				?>
                                 <form name="EoN_Actions_Form" method="post">
 			        <?php echo EoN_Actions($OBJECTS[$group])?>
-				<input type="hidden" name="query" value="<?php echo htmlspecialchars($_GET["query"])?>">
+				<input type="hidden" name="query" value="<?php echo rgm_esc($_GET["query"])?>">
 				<table width="95%" border="0" align="center" cellspacing="0" cellpadding="0">
 				<tr>
 				<?php
 								if(count($this->searchTemplate[$group])) {
 									foreach( $this->searchTemplate[$group] as $key=>$value) {
 										if( $key != "type" && $key != "url") {
-											print "\t<td style=\"padding: 2px; border-bottom: 1px solid #aaaaaa;\"><b>" . htmlspecialchars($value) . "</b></td>\n";
+											print "\t<td style=\"padding: 2px; border-bottom: 1px solid #aaaaaa;\"><b>" . rgm_esc($value) . "</b></td>\n";
 										}
 									}
 								}
@@ -447,7 +447,7 @@ function validateForm() {
 									if( strlen( $result->$key()) == 0) {
 										$temp = "&nbsp;";
 									} else {
-										$temp = "<a href=\"" . str_replace( "@1@", $id, $url) . "\">" . htmlspecialchars($result->$key()) . "</a>";
+										$temp = "<a href=\"" . str_replace( "@1@", $id, $url) . "\">" . rgm_esc($result->$key()) . "</a>";
 									}
 									
 									print $temp . "</td>\n";

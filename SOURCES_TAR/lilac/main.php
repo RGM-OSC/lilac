@@ -994,7 +994,7 @@ print_header("Main Configuration File Editor", "main");
 		?>
 		<div class="formbox">
 			<b>Configuration Directory</b><br />
-			<input type="text" size="80" maxlength="255" name="main_config[config_dir]" value="<?php echo htmlspecialchars($mainConfig->getConfigDir());?>">
+			<input type="text" size="80" maxlength="255" name="main_config[config_dir]" value="<?php echo rgm_esc($mainConfig->getConfigDir());?>">
 			<?php echo $lilac->element_desc("config_dir", "nagios_main_desc"); ?><br />
 		</div>
 			<?php
@@ -1392,7 +1392,7 @@ print_header("Main Configuration File Editor", "main");
 					}
 					?>
 					<td height="20" width="80" nowrap="nowrap" class="altLeft"><a class="btn btn-danger" href="main.php?section=broker&request=delete&module_id=<?php echo $module->getId();?>" onClick="javascript:return confirmDelete();">Delete</a></td>
-					<td height="20" class="altRight"><b><?php echo htmlspecialchars($module->getLine());?></b></td>
+					<td height="20" class="altRight"><b><?php echo rgm_esc($module->getLine());?></b></td>
 					</tr>
 					<?php
 					$counter++;
