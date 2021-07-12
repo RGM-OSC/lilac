@@ -279,7 +279,7 @@ class Net_Traceroute
     * @param  mixed $error    a PEAR error or a string with the error message
     * @return bool            false
     * @access private
-    * @author Kai Schröder <k.schroeder@php.net>
+    * @author Kai SchroÃ«der <k.schroeder@php.net>
     */
     function raiseError($error)
     {
