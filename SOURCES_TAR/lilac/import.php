@@ -119,7 +119,7 @@ if(isset($_GET['request']) && $_GET['request'] == 'fetch') {
 	foreach($entries as $entry) {
 		$results['rows'][] = array('id' => $entry->getId(), 'cell' => array( $entry->getTime(),
 									  $entry->getReadableType($entry->getType()),
-									  $entry->getText()));
+									  rgm_esc($entry->getText())));
 	}
 	$c = new Criteria();
 	$c->add(ImportLogEntryPeer::JOB, $importJob->getId());
