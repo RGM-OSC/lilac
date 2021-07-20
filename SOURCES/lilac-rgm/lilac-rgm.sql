@@ -1,6 +1,6 @@
 -- RGM Lilac database dump
--- Generated with lilac_lilac_dumper.sh on mar. déc.  8 14:41:10 CET 2020 from rgm4lilac server
--- cmdline: lilac_lilac_dumper.sh -c -r -d /root/lilac_dump_8122020v4.sql
+-- Generated with lilac_dumper.sh on mar. juil. 20 17:58:29 CEST 2021 from rgm4lilacdb.dca.scc server
+-- cmdline: lilac_dumper.sh -c -r -d /root/lilac_dump_20210720.sql
 --
 -- Copyright SCC 2019
 
@@ -104,7 +104,7 @@ CREATE TABLE `export_job` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Export Job Information';
 /*!40101 SET character_set_client = @saved_cs_client */;
-INSERT INTO `export_job` VALUES (1,'Nagios Export','Generates Nagios 3 compatible configuration files (full export)','O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:5:{s:15:\"backup_existing\";b:1;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:60:\"/srv/rgm/nagios/bin/nagios -v /tmp/lilac-export-1/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}','2020-12-08 14:40:57','2020-12-08 14:40:59','Complete',4,'2020-12-08 14:40:59','O:11:\"ImportStats\":2:{s:18:\"\0ImportStats\0stats\";a:0:{}s:16:\"\0ImportStats\0job\";N;}','start');
+INSERT INTO `export_job` VALUES (1,'Nagios Export','Generates Nagios 3 compatible configuration files (full export)','O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:5:{s:15:\"backup_existing\";b:1;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:60:\"/srv/rgm/nagios/bin/nagios -v /tmp/lilac-export-1/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}','2021-07-20 08:16:13','2021-07-20 08:16:15','Complete',4,'2021-07-20 08:16:15','O:11:\"ImportStats\":2:{s:18:\"\0ImportStats\0stats\";a:0:{}s:16:\"\0ImportStats\0job\";N;}','start');
 INSERT INTO `export_job` VALUES (2,'Incremental Nagios Export','Generates Nagios 3/4 compatible configuration files (incremental export)','O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:9:{s:12:\"export_debug\";b:0;s:11:\"export_diff\";b:1;s:10:\"export_dep\";b:1;s:10:\"export_esc\";b:0;s:15:\"backup_existing\";b:1;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:60:\"/srv/rgm/nagios/bin/nagios -v /tmp/lilac-export-2/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}','2020-07-10 14:49:03','2020-07-10 14:49:06','Complete',4,'2020-07-10 14:49:06','O:11:\"ImportStats\":2:{s:18:\"\0ImportStats\0stats\";a:0:{}s:16:\"\0ImportStats\0job\";N;}','start');
 DROP TABLE IF EXISTS `export_job_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -497,6 +497,10 @@ CREATE TABLE `lilac_configuration` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Lilac Configuration';
 /*!40101 SET character_set_client = @saved_cs_client */;
 INSERT INTO `lilac_configuration` VALUES ('db_build','61');
+INSERT INTO `lilac_configuration` VALUES ('rgm_base_release','2021072001');
+INSERT INTO `lilac_configuration` VALUES ('rgm_user_default_group_id','3');
+INSERT INTO `lilac_configuration` VALUES ('rgm_user_default_notify_host_command','11');
+INSERT INTO `lilac_configuration` VALUES ('rgm_user_default_notify_service_command','12');
 DROP TABLE IF EXISTS `nagios_broker_module`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -563,8 +567,8 @@ CREATE TABLE `nagios_command` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 INSERT INTO `nagios_command` VALUES (1,'event-browser-host','srv/rgm/ged/scripts/ged-nagios-host \"$HOSTNAME$\" \"PING\" \"$HOSTSTATE$\" \"$HOSTOUTPUT$\" \"$HOSTADDRESS$\" \"$HOSTALIAS$\" \"$HOSTGROUPNAMES$\"','event browser command for hosts');
 INSERT INTO `nagios_command` VALUES (2,'event-browser-service','/srv/rgm/ged/scripts/ged-nagios-service \"$HOSTNAME$\" \"$SERVICEDESC$\" \"$SERVICESTATE$\" \"$SERVICEOUTPUT$\" \"$HOSTADDRESS$\" \"$HOSTALIAS$\" \"$HOSTGROUPNAMES$\" \"$SERVICEGROUPNAMES$\"','event browser command for services');
-INSERT INTO `nagios_command` VALUES (3,'nagflux_host-perfdata_processor','mv /srv/rgm/nagflux/var/spool-nagios/service-perfdata /srv/rgm/nagflux/var/spool/service-perfdata-$(date +%s.%N)','generate host perfdata for Nagflux');
-INSERT INTO `nagios_command` VALUES (4,'nagflux_service-perfdata_processor','mv /srv/rgm/nagflux/var/spool-nagios/host-perfdata /srv/rgm/nagflux/var/spool/host-perfdata-$(date +%s.%N)','generate service perfdata for NagFlux');
+INSERT INTO `nagios_command` VALUES (3,'nagflux_host-perfdata_processor','mv /srv/rgm/nagflux/var/spool-nagios/host-perfdata /srv/rgm/nagflux/var/spool/host-perfdata-$(date +%s.%N)','generate host perfdata for Nagflux');
+INSERT INTO `nagios_command` VALUES (4,'nagflux_service-perfdata_processor','mv /srv/rgm/nagflux/var/spool-nagios/service-perfdata /srv/rgm/nagflux/var/spool/service-perfdata-$(date +%s.%N)','generate service perfdata for NagFlux');
 INSERT INTO `nagios_command` VALUES (5,'nagios_true','/bin/true','Nagios command that always return true');
 INSERT INTO `nagios_command` VALUES (6,'nagios_false','/bin/false','Nagios command that always return false');
 INSERT INTO `nagios_command` VALUES (11,'rgm_host_notifier','$USER17$/notifier/bin/notifier.pl -t host -c $USER17$/notifier/etc/notifier.cfg -r $USER17$/notifier/etc/notifier.rules -T \"$LONGDATETIME$\" -h \"$HOSTNAME$\" -e \"$HOSTSTATE$\" -i \"$HOSTADDRESS$\" -n \"$NOTIFICATIONTYPE$\" -C \"$CONTACTNAME$\" -M \"$CONTACTEMAIL$\" -O \"$HOSTOUTPUT$\" -A \"$HOSTGROUPNAMES$\" -G \"$CONTACTGROUPNAMES$\" -X \"$TIME$\" -Y \"$HOSTNOTIFICATIONNUMBER$\" -N \"$CONTACTPAGER$\"','RGM notification broker for host');
@@ -617,7 +621,7 @@ INSERT INTO `nagios_command` VALUES (64,'virt_vmware_esx','$USER1$/rgm/virtu/che
 INSERT INTO `nagios_command` VALUES (65,'sys_tcp_connect','$USER1$/check_tcp -H $HOSTADDRESS$ -p $ARG1$ -w $ARG1$ -c $ARG2$','ARG1: port TCP');
 INSERT INTO `nagios_command` VALUES (66,'apache_status','bash $USER1$/rgm/apache/check_apache2.sh -H $HOSTADDRESS$ $ARG1$ $ARG2$','Apache Status Pages. ARG1 and ARG2 are available.');
 INSERT INTO `nagios_command` VALUES (67,'gedevent','$USER1$/rgm/nagios/check_gedevents.pl -t $ARG1$ -s $ARG2$  -u $USER12$ -p \"$USER13$\" -H $HOSTADDRESS$ $ARG3$ $ARG4$ -Pe $SERVICEDISPLAYNAME$','ARG1 host(groups), service(groups) ; ARG2 sting (Ex : Cam%) ; ARG3 -we/-ce ev nb, -Wo/-Co occ nb ; ARG4 -Sc complement in sql');
-INSERT INTO `nagios_command` VALUES (68,'net_interface_elastic','$USER17$/python-rgm/bin/python3 $USER1$/rgm/network/check_el_nwc.py -H \'$HOSTADDRESS$\' -n \'$SERVICEDISPLAYNAME$\'','Verification de l\'état de l\'interface via elasticsearch');
+INSERT INTO `nagios_command` VALUES (68,'net_interface_elastic','$USER17$/python-rgm/bin/python3 $USER1$/rgm/network/check_el_nwc.py -H \'$HOSTADDRESS$\' -n \'$SERVICEDISPLAYNAME$\'','Verification de l\'Ã©tat de l\'interface via elasticsearch');
 INSERT INTO `nagios_command` VALUES (69,'hw_ilo4_snmp','$USER1$/rgm/hardware/check_hp -H $HOSTADDRESS$ -C $USER2$','Configure SNMP Community on USER2');
 INSERT INTO `nagios_command` VALUES (70,'wmi_Processor-Queue','$USER1$/rgm/windows/wmi/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER5$/$USER6$ -p $USER7$ -m checkcpuq $ARG1$ $ARG2$','Check  Processor Queue Lenght of Windows Server ARG1 and ARG2 avail for custom applying');
 INSERT INTO `nagios_command` VALUES (71,'wmi_Network_outQueue_vmxnet3','$USER1$/rgm/windows/wmi/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER5$/$USER6$ -p $USER7$ -m  checknetwork -a vmxnet3 -w OutputQueueLength=$ARG1$ -c OutputQueueLength=$ARG2$','Check Network Out Queue lenght of Windows Server VM. ARG1warning size,  ARG2 critical');
@@ -652,7 +656,7 @@ INSERT INTO `nagios_command` VALUES (100,'elastic_windows_cpu_queue','$USER17$/p
 INSERT INTO `nagios_command` VALUES (101,'elastic_disk_queue','$USER17$/python-rgm/bin/python3 $USER1$/rgm/metricbeat/disk_queue.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$ -t 5 $ARG3$ ','ElasticSearch/MetricBeat metrics - disk queue size - ARG1: warning, ARG2: critical, ARG3: optional args (-t -E)');
 INSERT INTO `nagios_command` VALUES (102,'elastic_windows_disk_queue','$USER17$/python-rgm/bin/python3 $USER1$/rgm/metricbeat/win_disk_queue.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$ -t 5 $ARG3$ ','ElasticSearch/MetricBeat metrics - disk queue size - ARG1: warning, ARG2: critical, ARG3: optional args (-t -E)');
 INSERT INTO `nagios_command` VALUES (103,'elastic_windows_network_queue','$USER17$/python-rgm/bin/python3 $USER1$/rgm/metricbeat/win_network_queue.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$ -t 5 $ARG3$ ','ElasticSearch/MetricBeat metrics - network queue size - ARG1: warning, ARG2: critical, ARG3: optional args (-t -E)');
-INSERT INTO `nagios_command` VALUES (104,'es_index_status','$USER17$/python-rgm/bin/python3 $USER1$/rgm/nagios/check_es_index.py','VÃ©rification de l\'Ã©tat des index elastic locaux Ã  RGM. ');
+INSERT INTO `nagios_command` VALUES (104,'es_index_status','$USER17$/python-rgm/bin/python3 $USER1$/rgm/nagios/check_es_index.py','VÃƒÂ©rification de l\'ÃƒÂ©tat des index elastic locaux ÃƒÂ  RGM. ');
 DROP TABLE IF EXISTS `nagios_contact`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -925,7 +929,7 @@ CREATE TABLE `nagios_host` (
   KEY `nagios_host_FI_4` (`notification_period`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Nagios Host';
 /*!40101 SET character_set_client = @saved_cs_client */;
-INSERT INTO `nagios_host` VALUES (1,'rgm4lilac','RGM host itself','RGM_HOST',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'rgm.png',NULL,'rgm.png','rgm.png',NULL,NULL);
+INSERT INTO `nagios_host` VALUES (1,'rgm4lilacdb','RGM host itself','RGM_HOST',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'rgm.png',NULL,'rgm.png','rgm.png',NULL,NULL);
 INSERT INTO `nagios_host` VALUES (2,'bp_apps_gold','BP application with Gold contract service placeholder',NULL,NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host` VALUES (3,'bp_apps_silver','BP application with Silver contract service placeholder',NULL,NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host` VALUES (4,'bp_apps_bronze','BP application with Bronze contract service placeholder',NULL,NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
