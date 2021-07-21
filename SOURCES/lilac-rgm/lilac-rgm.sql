@@ -1,6 +1,6 @@
 -- RGM Lilac database dump
--- Generated with lilac_dumper.sh on mar. juil. 20 17:58:29 CEST 2021 from rgm4lilacdb.dca.scc server
--- cmdline: lilac_dumper.sh -c -r -d /root/lilac_dump_20210720.sql
+-- Generated with lilac_dumper.sh on mer. juil. 21 11:26:36 CEST 2021 from rgm4lilacdb.dca.scc server
+-- cmdline: lilac_dumper.sh -c -r -d /root/lilac_dump_20210721.sql
 --
 -- Copyright SCC 2019
 
@@ -497,7 +497,7 @@ CREATE TABLE `lilac_configuration` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Lilac Configuration';
 /*!40101 SET character_set_client = @saved_cs_client */;
 INSERT INTO `lilac_configuration` VALUES ('db_build','61');
-INSERT INTO `lilac_configuration` VALUES ('rgm_base_release','2021072001');
+INSERT INTO `lilac_configuration` VALUES ('rgm_base_release','2021072101');
 INSERT INTO `lilac_configuration` VALUES ('rgm_user_default_group_id','3');
 INSERT INTO `lilac_configuration` VALUES ('rgm_user_default_notify_host_command','11');
 INSERT INTO `lilac_configuration` VALUES ('rgm_user_default_notify_service_command','12');
@@ -602,7 +602,7 @@ INSERT INTO `nagios_command` VALUES (45,'wmi_PhysFreeMemory','$USER1$/rgm/window
 INSERT INTO `nagios_command` VALUES (46,'wmi_windows_uptime','$USER1$/rgm/windows/wmi/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER5$/$USER6$ -p $USER7$ -m $ARG1$ -t 300','check_wmi_plus_windows_template');
 INSERT INTO `nagios_command` VALUES (47,'wmi_Network','$USER1$/rgm/windows/wmi/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER5$/$USER6$ -p $USER7$ -m  checknetwork -a $ARG1$','Check Network state of Windows Server ');
 INSERT INTO `nagios_command` VALUES (48,'elastic_process','$USER17$/python-rgm/bin/python3 $USER1$/rgm/metricbeat/process_nb.py -H $HOSTNAME$ -P $ARG1$ -w $ARG2$ -c $ARG3$ $ARG4$ $ARG5$ -t 5','ElasticSearch/MetricBeat metrics - PROCESS - ARG1: Process name, ARG2: warning, ARG3: critical, ARG4-5: optional args (-t -Timeout)');
-INSERT INTO `nagios_command` VALUES (49,'elastic_windows_service','$USER17$/python-rgm/bin/python3 $USER1$/rgm/metricbeat/service_windows.py -H $HOSTNAME$ -S $ARG1$ -c $ARG2$ $ARG3$ $AR4$ -t 5','ElasticSearch/MetricBeat metrics - SERVICES WINDOWS - ARG1: Service name (short name), ARG2: critical, ARG3-4 and warning: optional args (-t -Timeout)');
+INSERT INTO `nagios_command` VALUES (49,'elastic_windows_service','$USER17$/python-rgm/bin/python3 $USER1$/rgm/metricbeat/service_windows.py -H $HOSTNAME$ -S $ARG1$ -c $ARG2$ $ARG3$ $ARG4$ -t 5','ElasticSearch/MetricBeat metrics - SERVICES WINDOWS - ARG1: Service name (short name), ARG2: critical, ARG3-4 and warning: optional args (-t -Timeout)');
 INSERT INTO `nagios_command` VALUES (50,'db_mysql_simple_connect','$USER1$/rgm/database/check_mysql.pl -H $HOSTADDRESS$ -u $ARG1$ -p $ARG2$','Check mysql simple connection');
 INSERT INTO `nagios_command` VALUES (51,'db_postgres_health','$USER1$/rgm/database/check_postgres.pl --host=$HOSTADDRESS$ --dbname=$HOSTNAME$ --dbuser=$USER23$ --dbpass=$USER24$ --action=$SERVICEDESC$ $ARG2$ $ARG3$','ARG1: DB Name, ARG2: warning, ARG3: critical');
 INSERT INTO `nagios_command` VALUES (52,'sys_ldap_connect','$USER1$/check_ldap -H $HOSTADDRESS$ -b $ARG1$ -P $ARG2$ -D \"$ARG3$\"','ARG1: base DN (DC=XXXX,DC=XXXX), ARG2: password, ARG3: binddn (CN=XXXXX,OU=XXXXX,,DC=XXXXXX,DC=XXXX)');
