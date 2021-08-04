@@ -1108,8 +1108,8 @@ print_header("Main Configuration File Editor", "main");
 		<?php
 		double_pane_form_window_start();
 		form_select_element_with_enabler($enable_list, "values", "text", "main_config", "check_external_commands", "Check External Commands", $lilac->element_desc("check_external_commands", "nagios_main_desc"), $mainValues, null);
-		form_text_element_with_enabler(3, 40, "main_config", "command_check_interval", "Command Check Interval <span style='color: red;'>(Deprecated in Nagios 4)</span>", $lilac->element_desc("command_check_interval", "nagios_main_desc"), $mainValues, null);
-		form_text_element_with_enabler(5, 40, "main_config", "external_command_buffer_slots", "External Command Buffer Slots <span style='color: red;'>(Deprecated in Nagios 4)</span>", $lilac->element_desc("external_command_buffer_slots", "nagios_main_desc"), $mainValues, null);
+		form_text_element_with_enabler(3, 40, "main_config", "command_check_interval", "Command Check Interval <span style='color: red;'>(Deprecated in Nagios 4)</span>", $lilac->element_desc("command_check_interval", "nagios_main_desc"), $mainValues, null, false);
+		form_text_element_with_enabler(5, 40, "main_config", "external_command_buffer_slots", "External Command Buffer Slots <span style='color: red;'>(Deprecated in Nagios 4)</span>", $lilac->element_desc("external_command_buffer_slots", "nagios_main_desc"), $mainValues, null, false);
 		double_pane_form_window_finish();
 		?>
 		<div class="formbox">
@@ -1168,7 +1168,7 @@ print_header("Main Configuration File Editor", "main");
 		<input type="hidden" name="request" value="main_modify_intervals" />
 		<?php
 		double_pane_form_window_start();
-		form_text_element_with_enabler(6, 6, "main_config", "sleep_time", "Sleep Time <span style='color: red;'>(Deprecated in Nagios 4)</span>", $lilac->element_desc("sleep_time", "nagios_main_desc"), $mainValues, null);
+		form_text_element_with_enabler(6, 6, "main_config", "sleep_time", "Sleep Time <span style='color: red;'>(Deprecated in Nagios 4)</span>", $lilac->element_desc("sleep_time", "nagios_main_desc"), $mainValues, null, false);
 		form_text_element_with_enabler(6, 6, "main_config", "service_inter_check_delay_method", "Service Inter Check Delay Method", $lilac->element_desc("service_inter_check_delay_method", "nagios_main_desc"), $mainValues, null);
 		form_text_element_with_enabler(6, 6, "main_config", "max_service_check_spread", "Max Service Check Spread", $lilac->element_desc("max_service_check_spread", "nagios_main_desc"), $mainValues, null);
 		form_text_element_with_enabler(6, 6, "main_config", "host_inter_check_delay_method", "Host Inter Check Delay Method", $lilac->element_desc("host_inter_check_delay_method", "nagios_main_desc"), $mainValues, null);
@@ -1313,7 +1313,7 @@ print_header("Main Configuration File Editor", "main");
 		double_pane_form_window_start();
 		form_select_element_with_enabler($enable_list, "values", "text", "main_config", "use_large_installation_tweaks", "Use Large Installation Tweaks", $lilac->element_desc("use_large_installation_tweaks", "nagios_main_desc"), $mainValues, null);
 		form_select_element_with_enabler($enable_list, "values", "text", "main_config", "free_child_process_memory", "Free Child Process Memory", $lilac->element_desc("free_child_process_memory", "nagios_main_desc"), $mainValues, null);
-		form_select_element_with_enabler($enable_list, "values", "text", "main_config", "child_processes_fork_twice", "Child Processes Fork Twice <span style='color: red;'>(Deprecated in Nagios 4)</span>", $lilac->element_desc("child_processes_fork_twice", "nagios_main_desc"), $mainValues, null);
+		form_select_element_with_enabler($enable_list, "values", "text", "main_config", "child_processes_fork_twice", "Child Processes Fork Twice <span style='color: red;'>(Deprecated in Nagios 4)</span>", $lilac->element_desc("child_processes_fork_twice", "nagios_main_desc"), $mainValues, null, false);
 		form_select_element_with_enabler($enable_list, "values", "text", "main_config", "enable_environment_macros", "Enable Environment Macros", $lilac->element_desc("enable_environment_macros", "nagios_main_desc"), $mainValues, null);
 		form_select_element_with_enabler($enable_list, "values", "text", "main_config", "process_performance_data", "Process Performance Data", $lilac->element_desc("Process Performance Data", "nagios_main_desc"), $mainValues, null);
 		form_select_element_with_enabler($command_list, "command_id", "command_name", "main_config", "host_perfdata_command", "Host Performance Data Command", $lilac->element_desc("host_perfdata_command", "nagios_main_desc"), $mainValues, null);

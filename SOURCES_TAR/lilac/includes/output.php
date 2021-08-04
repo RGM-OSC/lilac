@@ -700,7 +700,7 @@ function print_enabled_display_field($label, $values, $field, $sourceID, $enable
 }
 
 
-function form_select_element_with_enabler($selectList, $selectValues, $selectLabels, $formName, $fieldName, $label, $description, $values, $selfID = null) {
+function form_select_element_with_enabler($selectList, $selectValues, $selectLabels, $formName, $fieldName, $label, $description, $values, $selfID = null, $escapeLabel = true) {
 	$enabled = false;
 	$value = null;
 	$checkBoxText = "Provide Value";
@@ -716,7 +716,13 @@ function form_select_element_with_enabler($selectList, $selectValues, $selectLab
 	<div class="formbox">
 		<div class="formelement">
 			<div class="formcontent toggle">
-			<strong><?php echo rgm_esc($label);?>:</strong> <?php print_select($formName . "[" .$fieldName ."]", $selectList, $selectValues, $selectLabels, $value, $enabled);?>
+			<strong>
+                <?php if ($escapeLabel) {
+                    echo rgm_esc($label);
+                } else {
+                    echo $label;
+                }
+                ?>:</strong> <?php print_select($formName . "[" .$fieldName ."]", $selectList, $selectValues, $selectLabels, $value, $enabled);?>
 			<?php echo $description;?>
 			</div>
 		</div>
@@ -730,7 +736,7 @@ function form_select_element_with_enabler($selectList, $selectValues, $selectLab
 	
 }
 
-function form_text_element_with_enabler($size, $maxLength, $formName, $fieldName, $label, $description, $values, $selfID = null) {
+function form_text_element_with_enabler($size, $maxLength, $formName, $fieldName, $label, $description, $values, $selfID = null, $escapeLabel = true) {
 	$enabled = false;
 	$value = null;
 	$checkBoxText = "Provide Value";
@@ -746,7 +752,13 @@ function form_text_element_with_enabler($size, $maxLength, $formName, $fieldName
 	<div class="formbox">
 		<div class="formelement">
 			<div class="formcontent toggle">
-			<strong><?php echo rgm_esc($label);?>:</strong> <input type="text" size="<?php echo $size;?>" maxlength="<?php echo $maxLength;?>" name="<?php echo $formName . "[" . $fieldName . "]";?>" value="<?php echo rgm_esc($value);?>" <?php if(!$enabled) print("DISABLED");?> />
+			<strong>
+                <?php if ($escapeLabel) {
+                    echo rgm_esc($label);
+                } else {
+                    echo $label;
+                }
+                ?>:</strong> <input type="text" size="<?php echo $size;?>" maxlength="<?php echo $maxLength;?>" name="<?php echo $formName . "[" . $fieldName . "]";?>" value="<?php echo rgm_esc($value);?>" <?php if(!$enabled) print("DISABLED");?> />
 			<?php echo $description;?>
 			</div>
 		</div>
