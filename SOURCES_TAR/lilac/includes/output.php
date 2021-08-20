@@ -344,19 +344,17 @@ function print_header($title = null) {
             } else {
                 line = 'line';
             }
-            if ($("input[name='" + name + "[]']").is(':checked')) {
-                $("input[name='" + name + "[]']").removeAttr("checked");
-                for (var i = 0; i < $("input[name='" + name + "[]']").length; i++) {
-                    lineid = document.getElementById(line + i);
-                    lineid.style.backgroundColor = '';
+            $("input[name^='" + name + "[]']").each(
+                function(index) {
+                    if (this.checked) {
+                        this.checked = false;
+                        this.style.backgroundColor = '';
+                    } else {
+                        this.checked = true;
+                        this.style.backgroundColor = '#ffffc0';
+                    }
                 }
-            } else {
-                $("input[name='" + name + "[]']").attr("checked","checked");
-                for (var i = 0; i < $("input[name='" + name + "[]']").length; i++) {
-                    lineid = document.getElementById(line + i);
-                    lineid.style.backgroundColor = '#ffffc0';
-                }
-            }
+            );
             return false;
         }
 	</script>

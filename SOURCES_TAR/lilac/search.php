@@ -418,7 +418,7 @@ function validateForm() {
 									}
 								}
 				?>
-				  <td align="center" style="padding: 2px; border-bottom: 1px solid #aaaaaa;"><a href="#" onClick="checkUncheckAll('EoN_Actions_Checks_<?php echo $OBJECTS[$group]?>');">ALL</a></td>
+				  <td align="center" style="padding: 2px; border-bottom: 1px solid #aaaaaa;"><a href="#" onClick="return checkUncheckAll('EoN_Actions_Checks_<?php echo $OBJECTS[$group]?>');">ALL</a></td>
 				</tr>
 				<?php
 				$count = 0;
