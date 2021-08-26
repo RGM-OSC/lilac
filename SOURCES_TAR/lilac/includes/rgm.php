@@ -28,7 +28,7 @@ include_once(LILAC_FS_ROOT . 'classes/EoN_Job_Exporter.php');
 // EoN Actions Selection
 function EoN_Actions($type)
 {
-    echo '<div align="left">';
+    echo '<div align="left" style="width: 95%"><span>';
 
     if ($type == 'Host') {
         echo 'Object to 
@@ -42,7 +42,8 @@ function EoN_Actions($type)
                         <option value="hosttemplate">Template</option>
                 </select>';
 
-        echo ' <input id="targetname" name="EoN_Association_Value" type="text"/> <input class="btn btn-primary btn-xs" type="submit" name="EoN_Association" value="Do it!"> |
+        echo ' <input id="targetname" name="EoN_Association_Value" type="text"/> <input class="btn btn-primary btn-xs" type="submit" name="EoN_Association" value="Do it!">
+            </span>
                 <script type="text/javascript">
                         function RefreshAutoComplete() {
                             $("#targetname").val("");
@@ -57,13 +58,14 @@ function EoN_Actions($type)
     }
 
     echo 'Actions :
+        <span style="float: right">
                 <select id="EoN_Actions_Select_' . $type . '" name="EoN_Actions_Select_' . $type . '">
                     <option value="EoN_Actions_Delete_' . $type . '">Delete</option>
                     <option value="EoN_Actions_Duplicate_' . $type . '">Duplicate</option>
                     <option value="EoN_Actions_Export_' . $type . '">Export</option>
                 </select>
                 <input class="btn btn-primary btn-xs" type="submit" name="EoN_Actions" value="Submit" onClick="javascript:return confirmDelete();">';
-
+    echo "</span>";
     echo '</div><br/><br/>';
 }
 
