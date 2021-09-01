@@ -270,27 +270,17 @@ function print_header($title = null) {
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 	<meta http-equiv="X-UA-Compatible" content="IE=10">
-
 		<title><?php echo LILAC_NAME . " "; echo LILAC_VERSION;?><?php if($title) print(" - " . $title);?></title>
     	<link rel="stylesheet" type="text/css" href="style/reset.css">	    
     	<link rel="stylesheet" type="text/css" href="style/lilac.css">
-        <!--
-    	<link rel="stylesheet" type="text/css" href="style/jquery.tooltip.css">
-		<link rel="stylesheet" type="text/css" href="style/jquery.autocomplete.css">
-        -->
 		<link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
 	 	<link rel="stylesheet" type="text/css" href="/bower_components/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="js/jquery/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="js/jquery/jquery-ui.structure.css">
         <link rel="stylesheet" type="text/css" href="js/jquery/jquery-ui.theme.css">
         <link rel="stylesheet" type="text/css" href="js/flexigrid/flexigrid.css">
-        <!--
-        <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
-        <script type="text/javascript" src="js/jquery.tooltip.min.js"></script>
-        <script type="text/javascript" src="js/jquery.timers.js"></script>
-        <script type="text/javascript" src="js/flexigrid.js"></script>
-        <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
-        -->
+        <link rel="stylesheet" type="text/css" href="style/rgm.css">
+
         <script type="text/javascript" src="js/jquery/external/jquery/jquery.js"></script>
         <script type="text/javascript" src="js/jquery/jquery-ui.js"></script>
         <script type="text/javascript" src="js/jquery.timers.js"></script>

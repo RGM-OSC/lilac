@@ -788,7 +788,7 @@ print_header("Contact Editor");
 			<tr class="altTop">
 			<td>Contact Name</td>
 			<td>Description</td>
-			<td align="center"><a href="#" onClick="checkUncheckAll('EoN_Actions_Checks_Contact');">ALL</a></td>
+			<td align="center"><a href="#" class="btn btn-primary btn-xs" onClick="checkUncheckAll('EoN_Actions_Checks_Contact');">ALL</a></td>
 			</tr>
 			<?php
 			for($counter = 0; $counter < $numOfContacts; $counter++) {

@@ -57,15 +57,15 @@ function EoN_Actions($type)
                 </script>';
     }
 
-    echo 'Actions :
-        <span style="float: right">
-                <select id="EoN_Actions_Select_' . $type . '" name="EoN_Actions_Select_' . $type . '">
-                    <option value="EoN_Actions_Delete_' . $type . '">Delete</option>
-                    <option value="EoN_Actions_Duplicate_' . $type . '">Duplicate</option>
-                    <option value="EoN_Actions_Export_' . $type . '">Export</option>
-                </select>
-                <input class="btn btn-primary btn-xs" type="submit" name="EoN_Actions" value="Submit" onClick="javascript:return confirmDelete();">';
-    echo "</span>";
+    echo '<span style="float: right">
+            Actions :
+            <select id="EoN_Actions_Select_' . $type . '" name="EoN_Actions_Select_' . $type . '">
+                <option value="EoN_Actions_Delete_' . $type . '">Delete</option>
+                <option value="EoN_Actions_Duplicate_' . $type . '">Duplicate</option>
+                <option value="EoN_Actions_Export_' . $type . '">Export</option>
+            </select>
+            <input class="btn btn-primary btn-xs" type="submit" name="EoN_Actions" value="Submit" onClick="javascript:return confirmDelete();">';
+    echo '</span>';
     echo '</div><br/><br/>';
 }
 

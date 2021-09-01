@@ -263,7 +263,7 @@ print_header("Contact Group Editor");
 			<tr class="altTop">
 			<td>Group Name</td>
 			<td>Description</td>
-			<td align="center"><a href="#" onClick="checkUncheckAll('EoN_Actions_Checks_ContactGroup');">ALL</a></td>
+			<td align="center"><a href="#" class="btn btn-primary btn-xs" onClick="checkUncheckAll('EoN_Actions_Checks_ContactGroup');">ALL</a></td>
 			</tr>
 			<?php
 			for($counter = 0; $counter < $numOfContactGroups; $counter++) {

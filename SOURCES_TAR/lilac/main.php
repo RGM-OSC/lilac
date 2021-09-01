@@ -993,7 +993,7 @@ print_header("Main Configuration File Editor", "main");
 		double_pane_form_window_start();
 		?>
 		<div class="formbox">
-			<b>Configuration Directory</b><br />
+			<b>Configuration Directory</b>
 			<input type="text" size="80" maxlength="255" name="main_config[config_dir]" value="<?php echo rgm_esc($mainConfig->getConfigDir());?>">
 			<?php echo $lilac->element_desc("config_dir", "nagios_main_desc"); ?><br />
 		</div>

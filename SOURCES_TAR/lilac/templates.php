@@ -51,7 +51,7 @@ print_header("Template Listings");
 			<tr class="altTop">
 			<td>Host Template Name</td>
 			<td>Description</td>
-		        <td align="center"><a href="#" onClick="checkUncheckAll('EoN_Actions_Checks_HostTemplate');">ALL</a></td>
+		        <td align="center"><a href="#" class="btn btn-primary btn-xs" onClick="checkUncheckAll('EoN_Actions_Checks_HostTemplate');">ALL</a></td>
 			</tr>
 		<?php
 		for($counter = 0; $counter < $numOfHostTemplates; $counter++) {
@@ -96,7 +96,7 @@ print_header("Template Listings");
 			<tr class="altTop">
 			<td>Service Template Name</td>
 			<td>Description</td>
-			<td align="center"><a href="#" onClick="checkUncheckAll('EoN_Actions_Checks_ServiceTemplate');">ALL</a></td>	
+			<td align="center"><a href="#" class="btn btn-primary btn-xs" onClick="checkUncheckAll('EoN_Actions_Checks_ServiceTemplate');">ALL</a></td>	
 			</tr>
 		<?php
 		for($counter = 0; $counter < $numOfServiceTemplates; $counter++) {

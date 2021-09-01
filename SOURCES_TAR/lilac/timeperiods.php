@@ -134,7 +134,7 @@ print_header("Time Period Editor");
 			<tr class="altTop">
 			<td>Period Name</td>
 			<td>Period Description</td>
-			<td align="center"><a href="#" onClick="checkUncheckAll('EoN_Actions_Checks_Timeperiod');">ALL</a></td>
+			<td align="center"><a href="#" class="btn btn-primary btn-xs" onClick="checkUncheckAll('EoN_Actions_Checks_Timeperiod');">ALL</a></td>
 			</tr>
 			<?php
 			for($counter = 0; $counter < $numOfPeriods; $counter++) {
