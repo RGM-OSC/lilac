@@ -125,7 +125,7 @@ session_start();
 		}
 	}
 
-	echo '<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0"><tr class="altTop"><td colspan="2">Check Command Parameters:</td></tr>';
+	echo '<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0"><tr><td colspan="2">Check Command Parameters:</td></tr>';
 	if ($_POST['option2'] == "delete"){
 		foreach($_SESSION['params'] as $i=>$command){
 			if ($command == $_POST['cmd']){

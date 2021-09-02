@@ -1402,7 +1402,7 @@ print_header("Host Template Editor");
 				?>
 				
 				<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0">
-					<tr class="altTop">
+					<tr>
 					<td colspan="2">Host Group Membership:</td>
 					</tr>
 					<?php
@@ -1536,7 +1536,7 @@ print_header("Host Template Editor");
 			$numOfCheckCommandParameters = count($checkCommandParameters);
 			$parameterCounter = 0;
 			?>
-			<table width="90%" align="center" border="0">
+			<table width="100%" align="center" border="0">
 			<tr>
 			<td>
 				<?php
@@ -1574,7 +1574,7 @@ print_header("Host Template Editor");
 				}
 				?>
 				<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0">
-					<tr class="altTop">
+					<tr>
 					<td colspan="2">Check Command Parameters:</td>
 					</tr>
 					<?php
@@ -1626,7 +1626,7 @@ print_header("Host Template Editor");
 		
 			$parameterCounter = 0;
 			?>
-					<table width="90%" align="center" border="0">
+					<table width="100%" align="center" border="0">
 					<tr>
 					<td>
 						<?php
@@ -1666,7 +1666,7 @@ print_header("Host Template Editor");
 						}
 						?>
 						<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0">
-							<tr class="altTop">
+							<tr>
 							<td colspan="2">Custom Object Variables:</td>
 							</tr>
 							<?php
@@ -1823,7 +1823,7 @@ print_header("Host Template Editor");
 						}
 						?>
 						<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0">
-							<tr class="altTop">
+							<tr>
 							<td colspan="2">Contacts Explicitly Linked to This Host Template:</td>
 							</tr>
 							<?php
@@ -1911,7 +1911,7 @@ print_header("Host Template Editor");
 						}
 						?>
 						<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0">
-							<tr class="altTop">
+							<tr>
 							<td colspan="2">Contact Groups Explicitly Linked to This Host Template:</td>
 							</tr>
 							<?php
@@ -2005,8 +2005,8 @@ print_header("Host Template Editor");
 						}
 						?>
 						<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0">
-							<tr class="altTop">
-							<td colspan="2">Depdendencies Explicitly Linked to This Host Template:</td>
+							<tr>
+							<td colspan="2">Dependencies Explicitly Linked to This Host Template:</td>
 							</tr>
 							<?php
 							$counter = 0;
@@ -2089,7 +2089,7 @@ print_header("Host Template Editor");
 						}
 						?>
 						<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0">
-							<tr class="altTop">
+							<tr>
 							<td colspan="2">Escalations Explicitly Linked to This Host Template</td>
 							</tr>
 							<?php

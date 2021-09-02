@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0
-Release: 30.rgm
+Release: 31.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -71,6 +71,8 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Sep 02 2021 Alexandre Rocher <arocher@fr.scc.com> - 3.0-31.rgm
+- CSS harmonization
 
 * Mon Jul 26 2021 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-30.rgm
 - fix typos on core SQL schema

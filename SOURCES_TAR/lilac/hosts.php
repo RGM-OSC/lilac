@@ -1488,7 +1488,7 @@ if(isset($host)) {
 			}
 			?>
 			<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0">
-				<tr class="altTop">
+				<tr>
 				<td colspan="2">Host Group Membership:</td>
 				</tr>
 				<?php
@@ -1626,7 +1626,7 @@ if(isset($host)) {
 		
 		$parameterCounter = 0;
 		?>
-		<table width="90%" align="center" border="0">
+		<table width="100%" align="center" border="0">
 		<tr>
 		<td>
 			<?php
@@ -1664,7 +1664,7 @@ if(isset($host)) {
 			}
 			?>
 			<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0">
-				<tr class="altTop">
+				<tr>
 				<td colspan="2">Check Command Parameters:</td>
 				</tr>
 				<?php
@@ -1715,7 +1715,7 @@ if(isset($host)) {
 	
 		$parameterCounter = 0;
 		?>
-			<table width="90%" align="center" border="0">
+			<table width="100%" align="center" border="0">
 			<tr>
 			<td>
 				<?php
@@ -1755,7 +1755,7 @@ if(isset($host)) {
 				}
 				?>
 				<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0">
-					<tr class="altTop">
+					<tr>
 					<td colspan="2">Custom Object Variables:</td>
 					</tr>
 					<?php
@@ -1911,7 +1911,7 @@ if(isset($host)) {
 			}
 		?>
 			<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0">
-			<tr class="altTop">
+			<tr>
 			<td colspan="2">Contacts Explicitly Linked to This Host:</td>
 			</tr>
 			<?php
@@ -2007,7 +2007,7 @@ if(isset($host)) {
 					}
 					?>
 					<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0">
-						<tr class="altTop">
+						<tr>
 						<td colspan="2">Contact Groups Explicitly Linked to This Host:</td>
 						</tr>
 						<?php
@@ -2107,8 +2107,8 @@ if(isset($host)) {
 					}
 					?>
 					<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0">
-						<tr class="altTop">
-						<td colspan="2">Depdendencies Explicitly Linked to This Host:</td>
+						<tr>
+						<td colspan="2">Dedendencies Explicitly Linked to This Host:</td>
 						</tr>
 						<?php
 						$counter = 0;
@@ -2191,7 +2191,7 @@ if(isset($host)) {
 					}
 					?>
 					<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0">
-						<tr class="altTop">
+						<tr>
 						<td colspan="2">Escalations Explicitly Linked to This Host:</td>
 						</tr>
 						<?php
@@ -2238,7 +2238,7 @@ if(isset($host)) {
 			</td>
 			<td valign="top">
 					<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0">
-						<tr class="altTop">
+						<tr>
 						<td colspan="2">Parents For This Host:</td>
 						</tr>
 						<?php

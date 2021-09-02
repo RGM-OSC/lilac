@@ -724,11 +724,11 @@ print_header("Contact Editor");
 		
 			$parameterCounter = 0;
 			?>
-					<table width="90%" align="center" border="0">
+					<table width="100%" align="center" border="0">
 					<tr>
 					<td>
 						<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0">
-							<tr class="altTop">
+							<tr>
 							<td colspan="2">Custom Object Variables:</td>
 							</tr>
 							<?php

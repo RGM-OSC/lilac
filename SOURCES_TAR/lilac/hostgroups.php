@@ -304,8 +304,8 @@ print_header("Host Group Editor");
 				</td>
 				<td valign="top">
 				<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0">
-				<tr class="altTop">
-				<td colspan="2">Depdendencies Explicitly Linked to This Hostgroup:</td>
+				<tr>
+				<td colspan="2">Dependencies Explicitly Linked to This Hostgroup:</td>
 				</tr>
 				<?php
 				$counter = 0;
@@ -398,7 +398,7 @@ print_header("Host Group Editor");
 				</td>
 				<td valign="top">
 				<table width="100%" align="center" cellspacing="0" cellpadding="2" border="0">
-				<tr class="altTop">
+				<tr>
 				<td colspan="2">Escalations Explicitly Linked to This Hostgroup:</td>
 				</tr>
 				<?php
