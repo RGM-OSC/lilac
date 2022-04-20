@@ -173,7 +173,7 @@ class ExportStats {
 	
 	public function save() {
 		if(isset($job)) {
-			$job->setStats(serialize($his));
+			$job->setStats(serialize($this));
 			$this->job->save();
 		}
 	}
