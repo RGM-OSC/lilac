@@ -1,6 +1,6 @@
 -- RGM Lilac database dump
--- Generated with rgm-lilac-dumper on mer. sept. 15 14:05:16 CEST 2021 from rgm4lilacdb.dca.scc server
--- cmdline: rgm-lilac-dumper -c -r -d /root/lilac_dump_20210915.sql
+-- Generated with lilac_dumper.sh on mer. juil.  6 10:42:52 CEST 2022 from RGM server
+-- cmdline: lilac_dumper.sh -c -r -d /root/lilacdump06072022.sql
 --
 -- Copyright SCC 2019
 
@@ -104,7 +104,7 @@ CREATE TABLE `export_job` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Export Job Information';
 /*!40101 SET character_set_client = @saved_cs_client */;
-INSERT INTO `export_job` VALUES (1,'Nagios Export','Generates Nagios 3 compatible configuration files (full export)','O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:5:{s:15:\"backup_existing\";b:1;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:60:\"/srv/rgm/nagios/bin/nagios -v /tmp/lilac-export-1/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}','2021-07-20 08:16:13','2021-07-20 08:16:15','Complete',4,'2021-07-20 08:16:15','O:11:\"ImportStats\":2:{s:18:\"\0ImportStats\0stats\";a:0:{}s:16:\"\0ImportStats\0job\";N;}','start');
+INSERT INTO `export_job` VALUES (1,'Nagios Export','Generates Nagios 3 compatible configuration files (full export)','O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:5:{s:15:\"backup_existing\";b:1;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:60:\"/srv/rgm/nagios/bin/nagios -v /tmp/lilac-export-1/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}','2022-05-13 16:59:29','2022-05-13 16:59:30','Complete',4,'2022-05-13 16:59:30','O:11:\"ImportStats\":2:{s:18:\"\0ImportStats\0stats\";a:0:{}s:16:\"\0ImportStats\0job\";N;}','start');
 INSERT INTO `export_job` VALUES (2,'Incremental Nagios Export','Generates Nagios 3/4 compatible configuration files (incremental export)','O:12:\"ExportConfig\":2:{s:24:\"\0ExportConfig\0configVars\";a:9:{s:12:\"export_debug\";b:0;s:11:\"export_diff\";b:1;s:10:\"export_dep\";b:1;s:10:\"export_esc\";b:0;s:15:\"backup_existing\";b:1;s:15:\"preflight_check\";b:1;s:14:\"restart_nagios\";b:1;s:11:\"nagios_path\";s:60:\"/srv/rgm/nagios/bin/nagios -v /tmp/lilac-export-2/nagios.cfg\";s:15:\"restart_command\";s:43:\"/usr/bin/sudo /bin/systemctl restart nagios\";}s:25:\"\0ExportConfig\0engineClass\";s:18:\"NagiosExportEngine\";}','2020-07-10 14:49:03','2020-07-10 14:49:06','Complete',4,'2020-07-10 14:49:06','O:11:\"ImportStats\":2:{s:18:\"\0ImportStats\0stats\";a:0:{}s:16:\"\0ImportStats\0job\";N;}','start');
 DROP TABLE IF EXISTS `export_job_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -621,7 +621,7 @@ INSERT INTO `nagios_command` VALUES (64,'virt_vmware_esx','$USER1$/rgm/virtu/che
 INSERT INTO `nagios_command` VALUES (65,'sys_tcp_connect','$USER1$/check_tcp -H $HOSTADDRESS$ -p $ARG1$ -w $ARG1$ -c $ARG2$','ARG1: port TCP');
 INSERT INTO `nagios_command` VALUES (66,'apache_status','bash $USER1$/rgm/apache/check_apache2.sh -H $HOSTADDRESS$ $ARG1$ $ARG2$','Apache Status Pages. ARG1 and ARG2 are available.');
 INSERT INTO `nagios_command` VALUES (67,'gedevent','$USER1$/rgm/nagios/check_gedevents.pl -t $ARG1$ -s $ARG2$  -u $USER12$ -p \"$USER13$\" -H $HOSTADDRESS$ $ARG3$ $ARG4$ -Pe $SERVICEDISPLAYNAME$','ARG1 host(groups), service(groups) ; ARG2 sting (Ex : Cam%) ; ARG3 -we/-ce ev nb, -Wo/-Co occ nb ; ARG4 -Sc complement in sql');
-INSERT INTO `nagios_command` VALUES (68,'net_interface_elastic','$USER17$/python-rgm/bin/python3 $USER1$/rgm/network/check_el_nwc.py -H \'$HOSTADDRESS$\' -n \'$SERVICEDISPLAYNAME$\'','Verification de l\'Ã©tat de l\'interface via elasticsearch');
+INSERT INTO `nagios_command` VALUES (68,'net_interface_elastic','$USER17$/python-rgm/bin/python3 $USER1$/rgm/network/check_el_nwc.py -H \'$HOSTADDRESS$\' -n \'$SERVICEDISPLAYNAME$\'','Verification de l\'ÃƒÂ©tat de l\'interface via elasticsearch');
 INSERT INTO `nagios_command` VALUES (69,'hw_ilo4_snmp','$USER1$/rgm/hardware/check_hp -H $HOSTADDRESS$ -C $USER2$','Configure SNMP Community on USER2');
 INSERT INTO `nagios_command` VALUES (70,'wmi_Processor-Queue','$USER1$/rgm/windows/wmi/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER5$/$USER6$ -p $USER7$ -m checkcpuq $ARG1$ $ARG2$','Check  Processor Queue Lenght of Windows Server ARG1 and ARG2 avail for custom applying');
 INSERT INTO `nagios_command` VALUES (71,'wmi_Network_outQueue_vmxnet3','$USER1$/rgm/windows/wmi/check_wmi_plus.pl -H $HOSTADDRESS$ -u $USER5$/$USER6$ -p $USER7$ -m  checknetwork -a vmxnet3 -w OutputQueueLength=$ARG1$ -c OutputQueueLength=$ARG2$','Check Network Out Queue lenght of Windows Server VM. ARG1warning size,  ARG2 critical');
@@ -656,9 +656,11 @@ INSERT INTO `nagios_command` VALUES (100,'elastic_windows_cpu_queue','$USER17$/p
 INSERT INTO `nagios_command` VALUES (101,'elastic_disk_queue','$USER17$/python-rgm/bin/python3 $USER1$/rgm/metricbeat/disk_queue.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$ -t 5 $ARG3$ ','ElasticSearch/MetricBeat metrics - disk queue size - ARG1: warning, ARG2: critical, ARG3: optional args (-t -E)');
 INSERT INTO `nagios_command` VALUES (102,'elastic_windows_disk_queue','$USER17$/python-rgm/bin/python3 $USER1$/rgm/metricbeat/win_disk_queue.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$ -t 5 $ARG3$ ','ElasticSearch/MetricBeat metrics - disk queue size - ARG1: warning, ARG2: critical, ARG3: optional args (-t -E)');
 INSERT INTO `nagios_command` VALUES (103,'elastic_windows_network_queue','$USER17$/python-rgm/bin/python3 $USER1$/rgm/metricbeat/win_network_queue.py -H $HOSTNAME$ -w $ARG1$ -c $ARG2$ -t 5 $ARG3$ ','ElasticSearch/MetricBeat metrics - network queue size - ARG1: warning, ARG2: critical, ARG3: optional args (-t -E)');
-INSERT INTO `nagios_command` VALUES (104,'es_index_status','$USER17$/python-rgm/bin/python3 $USER1$/rgm/nagios/check_es_index.py','VÃƒÂ©rification de l\'ÃƒÂ©tat des index elastic locaux ÃƒÂ  RGM. ');
+INSERT INTO `nagios_command` VALUES (104,'es_index_status','$USER17$/python-rgm/bin/python3 $USER1$/rgm/nagios/check_es_index.py','VÃƒÆ’Ã‚Â©rification de l\'ÃƒÆ’Ã‚Â©tat des index elastic locaux ÃƒÆ’Ã‚Â  RGM. ');
 INSERT INTO `nagios_command` VALUES (105,'sys_rgm_consumer_cert','$USER17$/python-rgm/bin/python3 $USER1$/rgm/business/check_rgm_consumer_cert.py','check du status du certificat client RGM Business');
 INSERT INTO `nagios_command` VALUES (106,'sys_teleport','$USER17$/python-rgm/bin/python3 $USER1$/rgm/business/check_teleport.py -m $ARG1$','check du service Teleport (https://goteleport.com)');
+INSERT INTO `nagios_command` VALUES (107,'cloud_azure_appservice','$USER17$/python-rgm/bin/python3 $USER1$/rgm/azure/check_api_azure_appservice_status.py -i \'$USER11$\' -s \'$USER12$\' -d \'$USER13$\' -S \'$USER14$\' -r \'$ARG1$\' -a \'$ARG2$\'','check azure appservice with args (tenant id, secret, resource group,...) -a AppService -r ResourceGroup');
+INSERT INTO `nagios_command` VALUES (108,'cloud_azure_vm_status','$USER17$/python-rgm/bin/python3 $USER1$/rgm/azure/check_api_azure_vm_status.py -i \'$USER11$\' -s \'$USER12$\' -d \'$USER13$\' -S \'$USER14$\' -r \'$ARG1$\' -v \'$ARG2$\'','check azure vm status with args (tenant id, secret, resource group,...) -v VMname -r ResourceGroup');
 DROP TABLE IF EXISTS `nagios_contact`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -931,7 +933,7 @@ CREATE TABLE `nagios_host` (
   KEY `nagios_host_FI_4` (`notification_period`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Nagios Host';
 /*!40101 SET character_set_client = @saved_cs_client */;
-INSERT INTO `nagios_host` VALUES (1,'rgm4lilacdb','RGM host itself','RGM_HOST',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'rgm.png',NULL,'rgm.png','rgm.png',NULL,NULL);
+INSERT INTO `nagios_host` VALUES (1,'RGM','RGM host itself','RGM_HOST',NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'rgm.png',NULL,'rgm.png','rgm.png',NULL,NULL);
 INSERT INTO `nagios_host` VALUES (2,'bp_apps_gold','BP application with Gold contract service placeholder',NULL,NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host` VALUES (3,'bp_apps_silver','BP application with Silver contract service placeholder',NULL,NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host` VALUES (4,'bp_apps_bronze','BP application with Bronze contract service placeholder',NULL,NULL,'127.0.0.1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
@@ -1114,6 +1116,7 @@ INSERT INTO `nagios_host_template` VALUES (33,'RGM_VEEAM','Template to Monitor V
 INSERT INTO `nagios_host_template` VALUES (34,'RGM_LINUX_ES_ADVANCED','Template monitor using Metricbeat including queue metrics <a href=\'/module/admin_distrib/index.php?&action=display&id=2\' target=\'_blank\'> Deploy Metricbeat Agent</a>',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'linux.png',NULL,'linux.png','linux.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host_template` VALUES (35,'RGM_WINDOWS_ES_ADVANCED','Template monitor using Metricbeat including queue metrics <a href=\'/module/admin_distrib/index.php?&action=display&id=1\' target=\'_blank\'> Deploy Metricbeat Agent </a>',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'windows2012.png',NULL,'windows2012.png','windows2012.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host_template` VALUES (36,'RGM_BUSINESS','RGM Business Edition',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_host_template` VALUES (37,'RGM_AZURE_API','Template to monitor Azure Cloud',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'azure.png',NULL,'azure.png','azure.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 DROP TABLE IF EXISTS `nagios_host_template_autodiscovery_service`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1181,6 +1184,7 @@ INSERT INTO `nagios_host_template_inheritance` VALUES (42,NULL,32,2,0);
 INSERT INTO `nagios_host_template_inheritance` VALUES (43,NULL,33,4,0);
 INSERT INTO `nagios_host_template_inheritance` VALUES (46,NULL,34,3,0);
 INSERT INTO `nagios_host_template_inheritance` VALUES (47,NULL,35,4,0);
+INSERT INTO `nagios_host_template_inheritance` VALUES (48,NULL,37,2,0);
 DROP TABLE IF EXISTS `nagios_hostgroup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1716,6 +1720,8 @@ INSERT INTO `nagios_service` VALUES (290,'elasticsearch_index_status','elasticse
 INSERT INTO `nagios_service` VALUES (291,'rgm_consumer_cert','RGM Business Consumer certificate',NULL,36,NULL,NULL,NULL,105,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_service` VALUES (292,'rgm-teleport-status','Teleport status',NULL,36,NULL,NULL,NULL,106,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_service` VALUES (293,'teleport-noc-trusted-cluster','Teleport link to NOC trusted cluster',NULL,36,NULL,NULL,NULL,106,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (294,'azure_vm_status','azure_vm_status',NULL,37,NULL,NULL,NULL,108,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (295,'azure_appservice','azure_appservice',NULL,37,NULL,NULL,NULL,107,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 DROP TABLE IF EXISTS `nagios_service_check_command_parameter`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -2097,6 +2103,10 @@ INSERT INTO `nagios_service_check_command_parameter` VALUES (518,289,NULL,'5');
 INSERT INTO `nagios_service_check_command_parameter` VALUES (519,289,NULL,'10');
 INSERT INTO `nagios_service_check_command_parameter` VALUES (520,292,NULL,'status');
 INSERT INTO `nagios_service_check_command_parameter` VALUES (521,293,NULL,'trusted_cluster');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (522,294,NULL,'resource_group');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (523,294,NULL,'vm_name');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (524,295,NULL,'resource_group');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (525,295,NULL,'appservice_name');
 DROP TABLE IF EXISTS `nagios_service_contact_group_member`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -2467,6 +2477,8 @@ INSERT INTO `nagios_service_template_inheritance` VALUES (318,290,NULL,1,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (319,291,NULL,1,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (320,292,NULL,1,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (321,293,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (322,294,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (323,295,NULL,1,0);
 DROP TABLE IF EXISTS `nagios_timeperiod`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;

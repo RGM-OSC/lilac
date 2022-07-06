@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0
-Release: 33.rgm
+Release: 34.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -71,6 +71,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Jul 06 2022 Christophe Cassan <ccassan@fr.scc.com> - 3.0-34.rgm
+- Add azure command and template in lilac db
+
 * Wed Apr 20 2022 Alexandre Rocher <arocher@fr.scc.com> - 3.0-33.rgm
 - Fix typo in source ($this)
 
