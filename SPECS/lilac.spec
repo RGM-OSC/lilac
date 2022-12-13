@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0
-Release: 34.rgm
+Release: 36.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -71,6 +71,18 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Jan 6 2023 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-36.rgm
+- add BP & standard service contracts
+- update prometheus commands and templates
+- add TLS checks
+- add OpenShift commands & host template 
+- add prometheus node_exporter commands & host template
+- add MS Azure commands
+- add Citrix Cloud command
+
+* Tue Dec 13 2022 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-35.rgm
+- update ES commands, create SERVICE and HOST ES templates
+
 * Wed Jul 06 2022 Christophe Cassan <ccassan@fr.scc.com> - 3.0-34.rgm
 - Add azure command and template in lilac db
 
