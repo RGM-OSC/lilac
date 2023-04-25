@@ -8,7 +8,7 @@ URL: http://www.lilacplatform.com/
 
 Source0: %{name}.tar.gz
 
-Requires: rgm-base, mariadb, httpd, mariadb-libs, php, php-mysql, php-pear, php-process, php-xml, nagios >= 3.0
+Requires: rgm-base, mariadb, httpd, php, php-mysqlnd, php-pear, php-process, php-xml, nagios >= 3.0
 BuildRequires: rpm-macros-rgm
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -76,6 +76,8 @@ rm -rf %{buildroot}
 
 * Tue May 30 2023 Alex Rocher <arocher@fr.scc.com> - 3.0-37.rgm
 - Fix nagios export
+- remove dependency to mariadb-libs
+- fix dependency php-mysql to php-mysqlnd
 
 * Fri Jan 6 2023 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-36.rgm
 - add BP & standard service contracts
