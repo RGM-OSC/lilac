@@ -146,41 +146,41 @@ if(isset($_GET['request']) && $_GET['request'] == 'fetch') {
 	exit();
 }
 
-if(isset($_POST['request'])) {
-	if(!strlen(trim($_POST['job_name']))) {
-		$status_msg = "Job name must be provided.";
-	}
-	else {
-		// Instantiate an engine
-		$engineClass = $_POST['job_engine'];
-		$engine = new $engineClass(null); // Wonky, I know.
-		$error = $engine->validateConfig();
-	}
-	if(empty($error)) {
-		// All is good.  Let's create our job.
-		$config = new ExportConfig($engineClass);		
-		$engine->buildConfig($config);
-		$exportJob = new ExportJob();
-		$exportJob->setName($_POST['job_name']);
-		$exportJob->setDescription($_POST['job_description']);
-		$exportJob->setCmd(ExportJob::CMD_START);
-		$exportJob->setConfig(serialize($config));
-		$exportJob->setStartTime(time());
-		$exportJob->setStatus("Starting...");
-		$exportJob->setStatusCode(ExportJob::STATUS_STARTING);
-		$exportJob->save();
-		
-		// Attempt to execute the external exporter script, fork it, and love it.
-		exec("pkill -f 'php exporter/export.php ".$exportJob->getId()."' > /dev/null");
-		exec("php exporter/export.php " . $exportJob->getId() . " > /dev/null", $tempOutput, $retVal);
-		if($retVal != 42) {
-			$error = "Failed to run external exporter script. Return value: " . $retVal . "<br /> Error:";
-			foreach($tempOutput as $output) {
-				$error .= $output . "<br />";
-			}
-		}	
-	}
-}
+//if(isset($_POST['request'])) {
+//	if(!strlen(trim($_POST['job_name']))) {
+//		$status_msg = "Job name must be provided.";
+//	}
+//	else {
+//		// Instantiate an engine
+//		$engineClass = $_POST['job_engine'];
+//		$engine = new $engineClass(null); // Wonky, I know.
+//		$error = $engine->validateConfig();
+//	}
+//	if(empty($error)) {
+//		// All is good.  Let's create our job.
+//		$config = new ExportConfig($engineClass);		
+//		$engine->buildConfig($config);
+//		$exportJob = new ExportJob();
+//		$exportJob->setName($_POST['job_name']);
+//		$exportJob->setDescription($_POST['job_description']);
+//		$exportJob->setCmd(ExportJob::CMD_START);
+//		$exportJob->setConfig(serialize($config));
+//		$exportJob->setStartTime(time());
+//		$exportJob->setStatus("Starting...");
+//		$exportJob->setStatusCode(ExportJob::STATUS_STARTING);
+//		$exportJob->save();
+//		
+//		// Attempt to execute the external exporter script, fork it, and love it.
+//		exec("pkill -f 'php exporter/export.php ".$exportJob->getId()."' > /dev/null");
+//		exec("php exporter/export.php " . $exportJob->getId() . " > /dev/null", $tempOutput, $retVal);
+//		if($retVal != 42) {
+//			$error = "Failed to run external exporter script. Return value: " . $retVal . "<br /> Error:";
+//			foreach($tempOutput as $output) {
+//				$error .= $output . "<br />";
+//			}
+//		}	
+//	}
+//}
 
 
 print_header("Exporter");
