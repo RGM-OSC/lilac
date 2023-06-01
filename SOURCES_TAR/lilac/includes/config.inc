@@ -35,7 +35,8 @@ if ( ! defined( "PATH_SEPARATOR" ) ) {
 
 require_once('propel/Propel.php');
 Propel::init(LILAC_FS_ROOT . "includes/lilac-conf.php");
-include_once(LILAC_FS_ROOT . 'importer/classes.inc.php');
+// Disable include of removed importer class
+/*include_once(LILAC_FS_ROOT . 'importer/classes.inc.php');*/
 include_once(LILAC_FS_ROOT . 'exporter/classes.inc.php');
 include_once(LILAC_FS_ROOT . 'includes/output.php');
 include_once(LILAC_FS_ROOT . 'includes/lilac.inc');
@@ -72,6 +73,6 @@ if($logosPath)
 	$sys_config['logos_path'] = $logosPath . "/images/logos/";
 
 // Root of lilac-reloaded images directory
-$path_config['image_root'] = dirname($_SERVER['SCRIPT_NAME']) . '/images/';		
+$path_config['image_root'] = dirname($_SERVER['SCRIPT_NAME']) . '/images/';
 
 ?>

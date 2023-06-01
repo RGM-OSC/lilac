@@ -14,7 +14,7 @@
  * @package    propel.generator.
  */
 class ExportJob extends BaseExportJob {
-	
+
 	const CMD_START = "start";
 	const CMD_STOP = "stop";
 
@@ -23,11 +23,13 @@ class ExportJob extends BaseExportJob {
 	const STATUS_RUNNING = 3;
 	const STATUS_FINISHED = 4;
 	const STATUS_FAILED = 50;
-	
-	public function __construct() {
+
+// Disable loading of ImportStats module was part of remove importer classes
+/*	public function __construct() {
 		$this->setStats(serialize(new ImportStats()));
 	}
-	
+*/
+
 	public function addLogEntry($text, $type = 3) {
 		if(!ExportLogEntry::isValidType($type)) {
 			return false;
@@ -45,21 +47,21 @@ class ExportJob extends BaseExportJob {
 		parent::setStatus($v);
 		$this->setStatusChangeTime(time());
 	}
-	
+
 	public function clearLog() {
 		$c = new Criteria();
 		$c->add(ExportLogEntryPeer::JOB, $this->getId());
 		ExportLogEntryPeer::doDelete($c);
 	}
-	
+
 	public function addError($text) {
 		$this->addLogEntry($text, ImportLogEntry::TYPE_ERROR);
 	}
-	
+
 	public function addWarning($text) {
 		$this->addLogEntry($text, ImportLogEntry::TYPE_WARNING);
 	}
-	
+
 	public function addNotice($text, $verbose=false) {
 		$config = unserialize($this->getConfig());
 		if($config->getVar("export_debug") or $verbose==true)

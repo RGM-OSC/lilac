@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0
-Release: 37.rgm
+Release: 38.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -21,7 +21,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 
 %description
-The Lilac Platform is a collection of tools to enhance existing open source monitoring applications, written by Lilac Networks. 
+The Lilac Platform is a collection of tools to enhance existing open source monitoring applications, written by Lilac Networks.
 Currently the focus is on the Lilac Configurator, a configuration tool written to configure Nagios, a popular Network monitoring application which features:
 
 * Enhanced Nagios 3 timeperiod support
@@ -71,6 +71,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Jun 1 2023 Vincent Fricou <vfricou@fr.scc.com> - 3.0-38.rgm
+- Fix lilac export jobs page
+
 * Tue May 30 2023 Alex Rocher <arocher@fr.scc.com> - 3.0-37.rgm
 - Fix nagios export
 
@@ -78,7 +81,7 @@ rm -rf %{buildroot}
 - add BP & standard service contracts
 - update prometheus commands and templates
 - add TLS checks
-- add OpenShift commands & host template 
+- add OpenShift commands & host template
 - add prometheus node_exporter commands & host template
 - add MS Azure commands
 - add Citrix Cloud command
@@ -103,7 +106,7 @@ rm -rf %{buildroot}
 
 * Mon Jul 12 2021 Alex Rocher <arocher@fr.scc.com> - 3.0-29.rgm
 - Fix: Change JS frameworks to avoid XSS
-- Fix: More escaping in HTML tags to avoid XSS 
+- Fix: More escaping in HTML tags to avoid XSS
 
 * Wed Jul 07 2021 Alex Rocher <arocher@fr.scc.com> - 3.0-28.rgm
 - Fix: Escape values for all variables used in HTML tags
@@ -117,12 +120,12 @@ rm -rf %{buildroot}
 - move httpd lilac config file as example file in /usr/share/doc/rgm/httpd/
 
 * Tue Dec 08 2020 Lucas Fueyo <lfueyo@fr.scc.com> - 3.0-25.rgm
-- Modify more commands and templates 
-- Add metricbeat queue commands and templates 
-- Add elastic index check 
+- Modify more commands and templates
+- Add metricbeat queue commands and templates
+- Add elastic index check
 
 * Tue Oct 27 2020 Samuel Ronciaux <sronciaux@fr.scc.com> - 3.0-24.rgm
-- Modify XML export Name to RGM_export_xxxx 
+- Modify XML export Name to RGM_export_xxxx
 
 * Thu Oct 22 2020 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-23.rgm
 - add support for:
@@ -130,13 +133,13 @@ rm -rf %{buildroot}
   - AirWave
 
 * Mon Jun 03 2020 Lucas FUEYO <lfueyo@fr.scc.com> - 3.0-22.rgm
-- Add RGM_CONTAINER Host Template 
+- Add RGM_CONTAINER Host Template
 
 * Mon Jun 02 2020 Lucas FUEYO <lfueyo@fr.scc.com> - 3.0-21.rgm
 - edit WMI Windows Host Template
 
 * Mon May 11 2020 Samuel RONCIAUX <sronciaux@fr.scc.com> - 3.0-20.rgm
-- add HPE ILO Template 
+- add HPE ILO Template
 
 * Thu Feb 13 2020 Eric Belhomme <ebelhomme@fr.scc.com> - 3.0-19.rgm
 - add/update commands & templates for:
@@ -245,7 +248,7 @@ rm -rf %{buildroot}
 * Wed Jun 19 2013 Jean-Philippe Levy <jeanphilippe.levy@gmail.com> - 2.4-0.eon
 - packaged for EyesOfNetwork appliance 4.0
 - add_host with templates
-- add_service with templates, commands and arguments 
+- add_service with templates, commands and arguments
 
 * Tue Jan 22 2013 Jean-Philippe Levy <jeanphilippe.levy@gmail.com> - 2.3-6.eon
 - performance templates max size 500
@@ -299,7 +302,7 @@ rm -rf %{buildroot}
 * Sun Nov 07 2010 Jean-Philippe Levy <jeanphilippe.levy@gmail.com> - 2.0-3.eon
 - command description in service parameters added
 - service template add contact fix
-- host add contactgroup fix 
+- host add contactgroup fix
 
 * Thu Oct 21 2010 Jean-Philippe Levy <jeanphilippe.levy@gmail.com> - 2.0-2.eon
 - nagios importer fix
@@ -316,7 +319,7 @@ rm -rf %{buildroot}
 - fruity & nagios importers fix
 
 * Tue Feb 23 2010 Jean-Philippe Levy <jeanphilippe.levy@gmail.com> - 1.0.3-1.eon
-- nagios_only export job 
+- nagios_only export job
 - fruity importer hostgroups fix
 - hosts.php fix
 - command name null fix
