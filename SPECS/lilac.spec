@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0
-Release: 38.rgm
+Release: 39.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -71,6 +71,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Jun 14 2023 Vincent Fricou <vfricou@fr.scc.com> - 3.0-39.rgm
+- Fix binary absolute path
+
 * Thu Jun 1 2023 Vincent Fricou <vfricou@fr.scc.com> - 3.0-38.rgm
 - Fix lilac export jobs page
 
