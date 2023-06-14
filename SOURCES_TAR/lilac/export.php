@@ -53,14 +53,14 @@ if(isset($_GET['id'])) {
 	if(!$exportJob) {
 		unset($exportJob);
 	}
-	
+
 	if(isset($_GET['action']) && $_GET['action'] == "restart") {
 		$exportJob->setStatusCode(ExportJob::STATUS_STARTING);
 		$exportJob->setStartTime(time());
 		$exportJob->setStatus("Starting...");
 		$exportJob->save();
-		exec("pkill -f 'php exporter/export.php' > /dev/null");
-		exec("php exporter/export.php " . $exportJob->getId() . " > /dev/null", $tempOutput, $retVal);
+		exec("/usr/bin/pkill -f '/usr/bin/php exporter/export.php' > /dev/null");
+		exec("/usr/bin/php exporter/export.php " . $exportJob->getId() . " > /dev/null", $tempOutput, $retVal);
 		if($retVal != 42) {
 			$error = "Failed to run external exporter script. Return value: " . $retVal . "<br /> Error:";
 			foreach($tempOutput as $output) {
@@ -78,7 +78,7 @@ if(isset($_GET['id'])) {
 			$exportJob->setStatus("Stopped");
 			$exportJob->addWarning("Stopped Export Job");
 			$exportJob->save();
-			exec("pkill -f 'php exporter/export.php' > /dev/null");
+			exec("/usr/bin/pkill -f '/usr/bin/php exporter/export.php' > /dev/null");
 			$success = "Stopped Export Job";
 		}
 	}
@@ -98,7 +98,7 @@ if(isset($_GET['request']) && $_GET['request'] == 'status') {
 	$result['status_code'] = $exportJob->getStatusCode();
 	$result['status_text'] = $exportJob->getStatus();
 	$result['status_change_time'] = $exportJob->getStatusChangeTime();
-	
+
 	// Build elapsed time
 	if(!in_array($exportJob->getStatusCode(), array(ExportJob::STATUS_FAILED, ExportJob::STATUS_FINISHED))) {
 		$target = time();
@@ -112,7 +112,7 @@ if(isset($_GET['request']) && $_GET['request'] == 'status') {
 	$total = $total % 3600;
 	$minutes = (int)($total / 60);
 	$seconds = $total % 60;
-	
+
 	$result['elapsed_time'] = $hours . " Hours " . $minutes . " Minutes " . $seconds . " Seconds";
 
 	print(json_encode($result));
@@ -141,7 +141,7 @@ if(isset($_GET['request']) && $_GET['request'] == 'fetch') {
 
 	<?php
 	print(json_encode($results));
-	
+
 
 	exit();
 }
@@ -158,7 +158,7 @@ if(isset($_GET['request']) && $_GET['request'] == 'fetch') {
 //	}
 //	if(empty($error)) {
 //		// All is good.  Let's create our job.
-//		$config = new ExportConfig($engineClass);		
+//		$config = new ExportConfig($engineClass);
 //		$engine->buildConfig($config);
 //		$exportJob = new ExportJob();
 //		$exportJob->setName($_POST['job_name']);
@@ -169,16 +169,16 @@ if(isset($_GET['request']) && $_GET['request'] == 'fetch') {
 //		$exportJob->setStatus("Starting...");
 //		$exportJob->setStatusCode(ExportJob::STATUS_STARTING);
 //		$exportJob->save();
-//		
+//
 //		// Attempt to execute the external exporter script, fork it, and love it.
-//		exec("pkill -f 'php exporter/export.php ".$exportJob->getId()."' > /dev/null");
-//		exec("php exporter/export.php " . $exportJob->getId() . " > /dev/null", $tempOutput, $retVal);
+//		exec("/usr/bin/pkill -f '/usr/bin/php exporter/export.php ".$exportJob->getId()."' > /dev/null");
+//		exec("/usr/bin/php exporter/export.php " . $exportJob->getId() . " > /dev/null", $tempOutput, $retVal);
 //		if($retVal != 42) {
 //			$error = "Failed to run external exporter script. Return value: " . $retVal . "<br /> Error:";
 //			foreach($tempOutput as $output) {
 //				$error .= $output . "<br />";
 //			}
-//		}	
+//		}
 //	}
 //}
 
@@ -188,7 +188,7 @@ print_header("Exporter");
 
 if(isset($exportJob)) {
 	?>
-    <script type="text/javascript">    
+    <script type="text/javascript">
 		$(document).ready(function() {
     	$("#joblog").flexigrid({
     		url: 'export.php?id=<?php echo $exportJob->getId();?>&request=fetch',
@@ -200,7 +200,7 @@ if(isset($exportJob)) {
     		{display: 'Text', name: 'text', width: 1000, sortable: true, align: 'left'}
     			],
     		resizable: false, //resizable table
-    		sortname: "time", 
+    		sortname: "time",
     		sortorder: 'asc',
     		usepager: true,
     		procmsg: 'Grabbing Log Entries, please wait ...',
@@ -220,7 +220,7 @@ if(isset($exportJob)) {
 				$.getJSON("export.php?id=<?php echo $exportJob->getId();?>&request=status&tok=" + Math.random() , function(data) {
 					$("#jobstatus").html(data.status_text);
 					$("#elapsedtime").html(data.elapsed_time);
-					
+
 					if(data.status_code == <?php echo ExportJob::STATUS_FINISHED;?> || data.status_code == <?php echo ExportJob::STATUS_FAILED;?>) {
 						if(data.status_code == <?php echo ExportJob::STATUS_FINISHED;?>) {
 							$("#completemsg").show("slow").fadeIn("slow");
@@ -272,7 +272,7 @@ if(!isset($exportJob))	{
 	if($exportJobs) {
 		print_window_header("Existing Export Jobs", "100%");
 		?>
-		There appears to be existing export jobs.  There should only be one running.  If there are multiple showing as running, you should cancel them or purge them.  Click on a job to 
+		There appears to be existing export jobs.  There should only be one running.  If there are multiple showing as running, you should cancel them or purge them.  Click on a job to
 		view it's progress and it's log.
 		<table class="jobs">
 		<tr>
@@ -305,7 +305,7 @@ if(!isset($exportJob))	{
 		?>
 		</table>
 		<?php
-		print_window_footer();	
+		print_window_footer();
 	}
 }
 else {
@@ -314,7 +314,7 @@ else {
 	if($stats) {
 		$stats = unserialize($stats);
 	}
-	
+
 	print_window_header("Job Details", "100%");
 	?>
 	<strong>Job Name:</strong> <?php echo $exportJob->getName();?><br />
@@ -382,11 +382,11 @@ else {
 	print_window_header("Job Log");
 	?>
 		<div id="joblog">
-		
+
 		</div>
 	<?php
 	print_window_footer();
-	
+
 }
 
 print_footer();

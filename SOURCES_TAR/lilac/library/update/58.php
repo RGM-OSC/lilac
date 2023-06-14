@@ -30,50 +30,50 @@ require_once "base_class.php";
 class updateLilac extends updateBase
 {
 	private $ut_version = 58;
-	
+
 	public function __construct()
 	{
 		parent::__construct();
 	}
-	
+
 	public function getInfo()
 	{
 		return "updateLilac-class for updating lilac-reloaded to version " . $ut_version;
 	}
-	
+
 	public function getUpdates()
 	{
 		$updates = array();
-	
+
 		$updates[] = "Adding new configuration options for CGI Configuration Page";
-	
+
 		return $updates;
 	}
-	
+
 	public function executeUpdate()
 	{
 		$result = $this->updateLilacDB();
 		if($result)
 			return $result;
-		
+
 		return;
 	}
-	
+
 	private function updateLilacDB()
 	{
 		if(!file_exists($this->rootdir . "/includes/lilac-conf.php"))
 			return "Configuration file lilac-conf.php does not exist, is your installation in a sane state?";
-		
+
 		$dbConfig = $this->getConfig();
-		
+
 		if($dbConfig === false)
 			return "Could not fetch configuration state, is your installation in a sane state??";
-		
-		exec("mysql -h " . $dbConfig["db_host"] . " -u " . $dbConfig["db_username"] . " -p'" . $dbConfig["db_password"] . "' " . $dbConfig["db_name"] . " < " . $this->rootdir . "/sqldata/update/" . $this->ut_version . ".sql", $output, $retVal);
+
+		exec("/usr/bin/mysql -h " . $dbConfig["db_host"] . " -u " . $dbConfig["db_username"] . " -p'" . $dbConfig["db_password"] . "' " . $dbConfig["db_name"] . " < " . $this->rootdir . "/sqldata/update/" . $this->ut_version . ".sql", $output, $retVal);
 		if($retVal != 0) {
 			return "Failed to import database update-schema. Error message: " . $output[0];
 		}
-		
+
 		$dbConn = mysql_connect($dbConfig["db_host"] . ":" . $dbConfig["db_port"], $dbConfig["db_username"], $dbConfig["db_password"]);
 		if(mysql_select_db($dbConfig["db_name"], $dbConn)) {
 			mysql_query("UPDATE `lilac_configuration` SET `value`='" . $this->ut_version . "' WHERE `key`='db_build';", $dbConn);
@@ -81,9 +81,9 @@ class updateLilac extends updateBase
 		{
 			return "Failed to write database update on updateLilacDB()";
 		}
-		
+
 		return;
 	}
-} 
+}
 
 ?>

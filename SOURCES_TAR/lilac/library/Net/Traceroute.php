@@ -187,7 +187,7 @@ class Net_Traceroute
         if ("windows" == $sysname) {
             return "tracert";
         } else {
-            $traceroute_path = exec("which traceroute", $output, $status);
+            $traceroute_path = exec("/usr/bin/which traceroute", $output, $status);
             if ($status != 0) {
                 foreach(array('/usr/sbin', '/sbin', '/usr/bin', '/bin', '/usr/local/bin') as $test) {
                     if ($status != 0) {
@@ -196,8 +196,8 @@ class Net_Traceroute
                             $status = 0;
                         }
                     }
-                }                
-            }  
+                }
+            }
             if ($status != 0) {
                 return NET_TRACEROUTE_CANT_LOCATE_TRACEROUTE_BINARY;
             } else {
@@ -433,12 +433,12 @@ class Net_Traceroute_Result
         while (empty($this->_raw_data[$dataRow]) && ($dataRow<$raw_data_len)) {
           $dataRow++;
         }
-        
+
         $tempparts        = explode(' ', $this->_raw_data[$dataRow]);
         $this->_target_ip = trim($tempparts[3], ' (),');
         $this->_ttl       = (int) $tempparts[4];
         $dataRow++;
-        
+
         while (empty($this->_raw_data[$dataRow]) && ($dataRow<$raw_data_len)) {
           $dataRow++;
         }
@@ -447,7 +447,7 @@ class Net_Traceroute_Result
         while (($dataRow < $raw_data_len) && !empty($this->_raw_data[$dataRow])) {
             $hop = array();
             $parts = explode('  ', substr($this->_raw_data[$dataRow], 4));
-            
+
             /* if we can find a next hop it's name/ip will be here */
             if (count($parts) > 0) {
                 /* get machine/ip */
@@ -487,11 +487,11 @@ class Net_Traceroute_Result
     {
         $raw_data_len = count($this->_raw_data);
         $dataRow = 0;
-        
+
         while (empty($this->_raw_data[$dataRow]) && ($dataRow<$raw_data_len)) {
           $dataRow++;
         }
-        
+
         $tempparts = explode(' ', $this->_raw_data[$dataRow]);
         $searchIdx = 0;
         while (($searchIdx < count($tempparts)) && (substr($tempparts[$searchIdx], 0, 1) != '[')) {
@@ -526,7 +526,7 @@ class Net_Traceroute_Result
         /* loop from second elment to the fifths last */
         while (($dataRow < $raw_data_len) && !empty($this->_raw_data[$dataRow])) {
             $hop=array();
-            
+
             $responsetimes = array();
             for($timeidx = 0; $timeidx < 3; $timeidx++) {
                 $temppart=trim(str_replace(' ms','',substr($this->_raw_data[$dataRow], 3+($timeidx*9), 9)));
