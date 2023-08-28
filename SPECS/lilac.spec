@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0
-Release: 39.rgm
+Release: 40.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -64,13 +64,16 @@ rm -rf %{buildroot}
 %files
 %doc %{rgm_docdir}/httpd/httpd-lilac.example.conf
 %defattr(-, nagios, %{rgm_group}, 0755)
-%config %{datadir}/includes/lilac-conf.php
+%attr(0660,-,-) %config %{datadir}/includes/lilac-conf.php
 %{datadir}
 %defattr(-, root, %{rgm_group}, 0644)
 %{rgmlibdir}
 
 
 %changelog
+* Mon Aug 28 2023 Vincent Fricou <vfricou@fr.scc.com> - 3.0-40.rgm
+- Update rgm_service_notifier command
+
 * Wed Jun 14 2023 Vincent Fricou <vfricou@fr.scc.com> - 3.0-39.rgm
 - Fix binary absolute path
 
