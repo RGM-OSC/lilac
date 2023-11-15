@@ -1,0 +1,18 @@
+INSERT INTO `nagios_command` VALUES (129,'scc_check_scality_rings_state','$USER1$/rgm/storage/check_scality_rings_state.sh -H $HOSTADDRESS$ -u $_HOSTAPIUSERNAME$ -p $_HOSTAPIPASSWORD$ -w $ARG1$ -c $ARG2$','Scality RING monitoring through supervisor API. Custom object variables : _HOSTAPIUSERNAME, _HOSTAPIPASSWORD. Arguments : Warning -> ARG1, Critical -> ARG2');
+INSERT INTO `nagios_command` VALUES (130,'scc_check_scality_cluster_state','$USER1$/rgm/storage/check_scality_cluster_state.sh -H $HOSTADDRESS$ -u $_HOSTAPIUSERNAME$ -p $_HOSTAPIPASSWORD$','Scality cluster status through supervisor API. Custom object variables : _HOSTAPIUSERNAME, _HOSTAPIPASSWORD.');
+INSERT INTO `nagios_command` VALUES (131,'scc_check_scality_servers_state','$USER1$/rgm/storage/check_scality_servers_state.sh -H $HOSTADDRESS$ -u $_HOSTAPIUSERNAME$ -p $_HOSTAPIPASSWORD$','Scality servers status through supervisor API. Custom object variables : _HOSTAPIUSERNAME, _HOSTAPIPASSWORD.');
+INSERT INTO `nagios_command` VALUES (132,'scc_check_scality_disks_state','$USER1$/rgm/storage/check_scality_cluster_state.sh -H $HOSTADDRESS$ -u $_HOSTAPIUSERNAME$ -p $_HOSTAPIPASSWORD$ -w $ARG1$ -c $ARG2$','Scality disks status through supervisor API. Custom object variables : _HOSTAPIUSERNAME, _HOSTAPIPASSWORD. Arguments : Warning -> ARG1, Critical -> ARG2');
+INSERT INTO `nagios_host_template` VALUES (45,'RGM_SCALITY_SUPERVISOR','Scality cluster host template',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'scality.png',NULL,'scality.png','scality.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_host_template_inheritance` VALUES (57,NULL,45,2,0);
+INSERT INTO `nagios_service` VALUES (333,'ring_state','Cluster RING state',NULL,45,NULL,NULL,NULL,129,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service_check_command_parameter` VALUES (552,333,NULL,200);
+INSERT INTO `nagios_service_check_command_parameter` VALUES (553,333,NULL,100);
+INSERT INTO `nagios_service_template_inheritance` VALUES (370,333,NULL,2,0);
+INSERT INTO `nagios_service` VALUES (334,'cluster_state','Cluster state',NULL,45,NULL,NULL,NULL,130,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service_template_inheritance` VALUES (371,334,NULL,1,0);
+INSERT INTO `nagios_service` VALUES (335,'servers_state','Cluster servers state',NULL,45,NULL,NULL,NULL,131,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service_template_inheritance` VALUES (372,335,NULL,1,0);
+INSERT INTO `nagios_service` VALUES (336,'disks_state','Disks state',NULL,45,NULL,NULL,NULL,132,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service_check_command_parameter` VALUES (554,336,NULL,200);
+INSERT INTO `nagios_service_check_command_parameter` VALUES (555,336,NULL,100);
+INSERT INTO `nagios_service_template_inheritance` VALUES (373,336,NULL,2,0);
