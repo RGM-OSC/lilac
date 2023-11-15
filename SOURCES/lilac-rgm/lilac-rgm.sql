@@ -496,7 +496,7 @@ CREATE TABLE `lilac_configuration` (
   PRIMARY KEY (`key`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Lilac Configuration';
 /*!40101 SET character_set_client = @saved_cs_client */;
-INSERT INTO `lilac_configuration` VALUES ('db_build','61');
+INSERT INTO `lilac_configuration` VALUES ('db_build','63');
 INSERT INTO `lilac_configuration` VALUES ('rgm_base_release','2023020101');
 INSERT INTO `lilac_configuration` VALUES ('rgm_user_default_group_id','3');
 INSERT INTO `lilac_configuration` VALUES ('rgm_user_default_notify_host_command','11');
@@ -682,6 +682,11 @@ INSERT INTO `nagios_command` VALUES (125,'bed-certificate-check','/usr/lib/bed/n
 INSERT INTO `nagios_command` VALUES (126,'bed-metro-consumer','$USER17$/python-rgm/bin/python3 /usr/lib/bed/nagios/bed-metro-consumer.py -f $HOSTALIAS$ -w $ARG1$ -c $ARG2$','Get metro data from RGM client for RGM central in order to give informations about quality network');
 INSERT INTO `nagios_command` VALUES (127,'bed-event-host','$USER17$/ged/scripts/bed-nagios-host \"$HOSTNAME$\" \"PING\" \"$HOSTSTATE$\" \"$HOSTOUTPUT$\" \"$HOSTADDRESS$\" \"$HOSTALIAS$\" \"$HOSTGROUPNAMES$\"','BED event command for hosts');
 INSERT INTO `nagios_command` VALUES (128,'bed-event-service','$USER17$/ged/scripts/bed-nagios-service \"$HOSTNAME$\" \"$SERVICEDESC$\" \"$SERVICESTATE$\" \"$SERVICEOUTPUT$\" \"$HOSTADDRESS$\" \"$HOSTALIAS$\" \"$HOSTGROUPNAMES$\" \"$SERVICEGROUPNAMES$\"','BED event command for services');
+INSERT INTO `nagios_command` VALUES (129,'scc_check_scality_rings_state','$USER1$/rgm/storage/check_scality_rings_state.sh -H $HOSTADDRESS$ -u $_HOSTAPIUSERNAME$ -p $_HOSTAPIPASSWORD$ -w $ARG1$ -c $ARG2$','Scality RING monitoring through supervisor API. Custom object variables : _HOSTAPIUSERNAME, _HOSTAPIPASSWORD. Arguments : Warning -> ARG1, Critical -> ARG2');
+INSERT INTO `nagios_command` VALUES (130,'scc_check_scality_cluster_state','$USER1$/rgm/storage/check_scality_cluster_state.sh -H $HOSTADDRESS$ -u $_HOSTAPIUSERNAME$ -p $_HOSTAPIPASSWORD$','Scality cluster status through supervisor API. Custom object variables : _HOSTAPIUSERNAME, _HOSTAPIPASSWORD.');
+INSERT INTO `nagios_command` VALUES (131,'scc_check_scality_servers_state','$USER1$/rgm/storage/check_scality_servers_state.sh -H $HOSTADDRESS$ -u $_HOSTAPIUSERNAME$ -p $_HOSTAPIPASSWORD$','Scality servers status through supervisor API. Custom object variables : _HOSTAPIUSERNAME, _HOSTAPIPASSWORD.');
+INSERT INTO `nagios_command` VALUES (132,'scc_check_scality_disks_state','$USER1$/rgm/storage/check_scality_cluster_state.sh -H $HOSTADDRESS$ -u $_HOSTAPIUSERNAME$ -p $_HOSTAPIPASSWORD$ -w $ARG1$ -c $ARG2$','Scality disks status through supervisor API. Custom object variables : _HOSTAPIUSERNAME, _HOSTAPIPASSWORD. Arguments : Warning -> ARG1, Critical -> ARG2');
+
 DROP TABLE IF EXISTS `nagios_contact`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1147,6 +1152,8 @@ INSERT INTO `nagios_host_template` VALUES (41,'RGM_BP_SERVICE_CONTRACT_GOLD','RG
 INSERT INTO `nagios_host_template` VALUES (42,'RGM_BP_SERVICE_CONTRACT_SILVER','RGM Business Process Silver service contract',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host_template` VALUES (43,'RGM_BP_SERVICE_CONTRACT_BRONZE','RGM Business Process Bronze service contract',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_host_template` VALUES (44,'RGM_OPENSHIFT','Kubernetes OpenShift Host template',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'openshift.svg',NULL,'openshift.svg','openshift.svg',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_host_template` VALUES (45,'RGM_SCALITY_SUPERVISOR','Scality cluster host template',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'scality.png',NULL,'scality.png','scality.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+
 DROP TABLE IF EXISTS `nagios_host_template_autodiscovery_service`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1223,6 +1230,7 @@ INSERT INTO `nagios_host_template_inheritance` VALUES (53,4,NULL,41,1);
 INSERT INTO `nagios_host_template_inheritance` VALUES (54,5,NULL,42,1);
 INSERT INTO `nagios_host_template_inheritance` VALUES (55,6,NULL,43,1);
 INSERT INTO `nagios_host_template_inheritance` VALUES (56,NULL,44,2,0);
+INSERT INTO `nagios_host_template_inheritance` VALUES (57,NULL,45,2,0);
 DROP TABLE IF EXISTS `nagios_hostgroup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1807,6 +1815,11 @@ INSERT INTO `nagios_service` VALUES (329,'openshift-samples',NULL,NULL,44,NULL,N
 INSERT INTO `nagios_service` VALUES (330,'openshift-apiserver',NULL,NULL,44,NULL,NULL,NULL,117,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_service` VALUES (331,'operator-lifecycle-manager-catalog',NULL,NULL,44,NULL,NULL,NULL,117,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 INSERT INTO `nagios_service` VALUES (332,'operator-lifecycle-manager',NULL,NULL,44,NULL,NULL,NULL,117,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (333,'ring_state','Cluster RING state',NULL,45,NULL,NULL,NULL,129,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (334,'cluster_state','Cluster state',NULL,45,NULL,NULL,NULL,130,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (335,'servers_state','Cluster servers state',NULL,45,NULL,NULL,NULL,131,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (336,'disks_state','Disks state',NULL,45,NULL,NULL,NULL,132,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+
 DROP TABLE IF EXISTS `nagios_service_check_command_parameter`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -2214,6 +2227,10 @@ INSERT INTO `nagios_service_check_command_parameter` VALUES (548,297,NULL,'--agg
 INSERT INTO `nagios_service_check_command_parameter` VALUES (549,298,NULL,'300');
 INSERT INTO `nagios_service_check_command_parameter` VALUES (550,298,NULL,'60');
 INSERT INTO `nagios_service_check_command_parameter` VALUES (551,298,NULL,'--aggregate avg');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (552,333,NULL,200);
+INSERT INTO `nagios_service_check_command_parameter` VALUES (553,333,NULL,100);
+INSERT INTO `nagios_service_check_command_parameter` VALUES (554,336,NULL,200);
+INSERT INTO `nagios_service_check_command_parameter` VALUES (555,336,NULL,100);
 DROP TABLE IF EXISTS `nagios_service_contact_group_member`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -2656,6 +2673,10 @@ INSERT INTO `nagios_service_template_inheritance` VALUES (366,330,NULL,1,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (367,331,NULL,1,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (368,332,NULL,1,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (369,NULL, 20, 1, 0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (370,333,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (371,334,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (372,335,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (373,336,NULL,2,0);
 DROP TABLE IF EXISTS `nagios_timeperiod`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;

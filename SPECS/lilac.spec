@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0
-Release: 40.rgm
+Release: 41.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -71,6 +71,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Nov 15 2023 Vincent Fricou <vfricou@fr.scc.com> - 3.0-41.rgm
+- Add scality commands
+- Add scality supervisor template
+
 * Mon Aug 28 2023 Vincent Fricou <vfricou@fr.scc.com> - 3.0-40.rgm
 - Update rgm_service_notifier command
 
