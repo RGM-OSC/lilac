@@ -38,7 +38,7 @@ class updateLilac extends updateBase
 	
 	public function getInfo()
 	{
-		return "updateLilac-class for updating lilac-reloaded to version " . $ut_version;
+		return "updateLilac-class for updating lilac-reloaded to version " . $this->ut_version;
 	}
 	
 	public function getUpdates()
@@ -102,9 +102,9 @@ class updateLilac extends updateBase
 		if($dbConfig === false)
 			return "Could not fetch configuration state, is your installation in a sane state??";
 		
-		$dbConn = mysql_connect($dbConfig["db_host"] . ":" . $dbConfig["db_port"], $dbConfig["db_username"], $dbConfig["db_password"]);
-		if(mysql_select_db($dbConfig["db_name"], $dbConn)) {
-			mysql_query("UPDATE `lilac_configuration` SET `value`='" . $this->ut_version . "' WHERE `key`='db_build';", $dbConn);
+		$dbConn = mysqli_connect($dbConfig["db_host"] . ":" . $dbConfig["db_port"], $dbConfig["db_username"], $dbConfig["db_password"], $dbConfig["db_name"]);
+		if($dbConn) {
+			mysqli_query($dbConn, "UPDATE `lilac_configuration` SET `value`='" . $this->ut_version . "' WHERE `key`='db_build'");
 		} else
 		{
 			return "Failed to write database update on updateLilacDB()";

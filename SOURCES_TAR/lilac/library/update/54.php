@@ -38,7 +38,7 @@ class updateLilac extends updateBase
 
 	public function getInfo()
 	{
-		return "updateLilac-class for updating lilac-reloaded to version " . $ut_version;
+		return "updateLilac-class for updating lilac-reloaded to version " . $this->ut_version;
 	}
 
 	public function getUpdates()
@@ -105,15 +105,16 @@ class updateLilac extends updateBase
 			return "Failed to import database update-schema. Error message: " . $output[0];
 		}
 
-		$dbConn = mysql_connect($dbConfig["db_host"], $dbConfig["db_username"], $dbConfig["db_password"]);
-		if(mysql_select_db($dbConfig["db_name"], $dbConn)) {
-			mysql_query("ALTER TABLE `nagios_main_configuration` ADD `temp_path` VARCHAR( 255 ) NOT NULL;", $dbConn);
-			mysql_query("ALTER TABLE `nagios_main_configuration` ADD `check_for_updates` TINYINT( 4 ) NOT NULL;", $dbConn);
-			mysql_query("ALTER TABLE `nagios_main_configuration` ADD `check_for_orphaned_hosts` TINYINT( 4 ) NOT NULL;", $dbConn);
-			mysql_query("ALTER TABLE `nagios_main_configuration` ADD `bare_update_check` TINYINT( 4 ) NOT NULL;", $dbConn);
+        $dbConn = mysqli_connect($dbConfig["db_host"] . ":" . $dbConfig["db_port"], $dbConfig["db_username"], $dbConfig["db_password"], $dbConfig["db_name"]);
+        if($dbConn) {
+            mysqli_query($dbConn, "UPDATE `lilac_configuration` SET `value`='" . $this->ut_version . "' WHERE `key`='db_build'");
+			mysqli_query($dbConn, "ALTER TABLE `nagios_main_configuration` ADD `temp_path` VARCHAR( 255 ) NOT NULL");
+			mysqli_query($dbConn, "ALTER TABLE `nagios_main_configuration` ADD `check_for_updates` TINYINT( 4 ) NOT NULL");
+			mysqli_query($dbConn, "ALTER TABLE `nagios_main_configuration` ADD `check_for_orphaned_hosts` TINYINT( 4 ) NOT NULL");
+			mysqli_query($dbConn, "ALTER TABLE `nagios_main_configuration` ADD `bare_update_check` TINYINT( 4 ) NOT NULL");
 
 			// We add a default value for temp_path
-			mysql_query("UPDATE `nagios_main_configuration` SET `temp_path`='/tmp';", $dbConn);
+			mysqli_query($dbConn, "UPDATE `nagios_main_configuration` SET `temp_path`='/tmp'");
 		} else
 		{
 			return "Failed to write database update on updateLilacDB()";

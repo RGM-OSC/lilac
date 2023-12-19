@@ -31,11 +31,10 @@ include_once('ExportLogEntry.php');
 
 // Get Next Job Id
 include("/srv/rgm/rgmweb/include/config.php");
-$link = mysql_connect( $database_host, $database_username, $database_password );
-mysql_select_db( $database_lilac );
-$query = mysql_query( "SHOW TABLE STATUS LIKE 'export_job';" );
-$resultID = mysql_fetch_object( $query );
-mysql_close( $link );
+$link = mysqli_connect($database_host, $database_username, $database_password, $database_lilac);
+$query = mysqli_query($link, "SHOW TABLE STATUS LIKE 'export_job';" );
+$resultID = mysqli_fetch_object( $query );
+mysqli_close( $link );
 
 // Better to load our engines!
 $availableEngines = ExportEngine::getAvailableEngines();
