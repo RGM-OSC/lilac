@@ -348,7 +348,7 @@ if(isset($_POST['request'])) {
 		}
 		else {
 			// Field Error Checking
-			if(count($host)) {
+			if(is_countable($host)) {
 				foreach($host as $tempVariable)
 					$tempVariable = trim($tempVariable);
 			}
