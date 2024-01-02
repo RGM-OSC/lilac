@@ -430,10 +430,20 @@ class NagiosServiceTemplate extends BaseNagiosServiceTemplate {
 				return false;
 			}
 		}
+		$c = new Criteria();
+		$c->add(NagiosServiceTemplateInheritancePeer::SOURCE_TEMPLATE, $this->getId());
+		$c->addAscendingOrderByColumn(NagiosServiceTemplateInheritancePeer::ORDER);
+		$inheritanceList = NagiosServiceTemplateInheritancePeer::doSelect($c);
+		$order = 0;
+		$cnt = count($inheritanceList);
+		if ($cnt > 0) {
+			$order = $inheritanceList[$cnt - 1]->getOrder() + 1;
+		}
 		// Okay, create new one
 		$relationship = new NagiosServiceTemplateInheritance();
 		$relationship->setNagiosServiceTemplateRelatedBySourceTemplate($this);
 		$relationship->setNagiosServiceTemplateRelatedByTargetTemplate($template);
+		$relationship->setOrder($order);
 		$relationship->save();
 		return true;
 	}

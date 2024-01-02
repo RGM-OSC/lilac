@@ -616,10 +616,20 @@ class NagiosHostTemplate extends BaseNagiosHostTemplate {
 				return false;
 			}
 		}
+		$c = new Criteria();
+		$c->add(NagiosHostTemplateInheritancePeer::SOURCE_TEMPLATE, $this->getId());
+		$c->addAscendingOrderByColumn(NagiosHostTemplateInheritancePeer::ORDER);
+		$inheritanceList = NagiosHostTemplateInheritancePeer::doSelect($c);
+		$order = 0;
+		$cnt = count($inheritanceList);
+		if ($cnt > 0) {
+			$order = $inheritanceList[$cnt - 1]->getOrder() + 1;
+		}
 		// Okay, create new one
 		$relationship = new NagiosHostTemplateInheritance();
 		$relationship->setNagiosHostTemplateRelatedBySourceTemplate($this);
 		$relationship->setNagiosHostTemplateRelatedByTargetTemplate($template);
+		$relationship->setOrder($order);
 		$relationship->save();
 		return true;
 	}
