@@ -79,6 +79,9 @@ class NagiosServiceTemplateInheritance extends BaseNagiosServiceTemplateInherita
 			throw new Exception("Adding that inheritance would create a circular chain.");
 		}
 		else {
+			if ($this->getOrder() == null) {
+				$this->setOrder(0);
+			}
 			$JobExport=new EoN_Job_Exporter();
 			if($con == null || $con == ""){
 				if($this->getSourceService() == null) {
