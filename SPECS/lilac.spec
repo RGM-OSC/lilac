@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0
-Release: 42.rgm
+Release: 43.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -71,6 +71,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Jan 01 2024 Alex Rocher <arocher@fr.scc.com> - 3.0-43.rgm
+- Fix default value on order inheritance
+
 * Wed Dec 27 2023 Vincent Fricou <vfricou@fr.scc.com> - 3.0-42.rgm
 - Fix php 8.0 compatibility
 
