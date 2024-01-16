@@ -1,7 +1,7 @@
 Summary: Web configuration tool for nagios
 Name: lilac
 Version:3.0
-Release: 43.rgm
+Release: 44.rgm
 License: GPL
 Group: Applications/System
 URL: http://www.lilacplatform.com/
@@ -71,6 +71,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Jan 16 2024 Vincent Fricou <vfricou@fr.scc.com> - 3.0-44.rgm
+- Add airwave commands
+- Add airwave monitoring templates
+
 * Tue Jan 01 2024 Alex Rocher <arocher@fr.scc.com> - 3.0-43.rgm
 - Fix default value on order inheritance
 
