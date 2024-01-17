@@ -1,0 +1,19 @@
+-- Nagios service
+INSERT INTO `nagios_service` VALUES (430,'https_target',NULL,NULL,46,NULL,NULL,NULL,55,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (431,'www_ssl_expiration',NULL,NULL,46,NULL,NULL,NULL,113,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `nagios_service` VALUES (432,'ssh_port',NULL,NULL,46,NULL,NULL,NULL,65,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+
+-- Nagios service template inheritance
+INSERT INTO `nagios_service_template_inheritance` VALUES (467,430,NULL,2,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (468,431,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (469,432,NULL,1,0);
+
+-- Nagios service check command parameter
+INSERT INTO `nagios_service_check_command_parameter` VALUES (556,430,NULL,'443 -S');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (557,430,NULL,'1');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (558,430,NULL,'2');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (559,431,NULL,'14');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (560,431,NULL,'30');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (561,431,NULL,'--ssl');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (562,432,NULL,'22');
+INSERT INTO `nagios_service_check_command_parameter` VALUES (563,432,NULL,'3');
