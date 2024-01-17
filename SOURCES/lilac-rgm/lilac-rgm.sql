@@ -496,7 +496,7 @@ CREATE TABLE `lilac_configuration` (
   PRIMARY KEY (`key`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Lilac Configuration';
 /*!40101 SET character_set_client = @saved_cs_client */;
-INSERT INTO `lilac_configuration` VALUES ('db_build','63');
+INSERT INTO `lilac_configuration` VALUES ('db_build','65');
 INSERT INTO `lilac_configuration` VALUES ('rgm_base_release','2023020101');
 INSERT INTO `lilac_configuration` VALUES ('rgm_user_default_group_id','3');
 INSERT INTO `lilac_configuration` VALUES ('rgm_user_default_notify_host_command','11');
