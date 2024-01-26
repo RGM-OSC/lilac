@@ -3172,7 +3172,7 @@ INSERT INTO `nagios_service_template_inheritance` VALUES (465,428,NULL,2,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (466,429,NULL,2,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (467,430,NULL,2,0);
 INSERT INTO `nagios_service_template_inheritance` VALUES (468,431,NULL,1,0);
-INSERT INTO `nagios_service_template_inheritance` VALUES (469,431,NULL,1,0);
+INSERT INTO `nagios_service_template_inheritance` VALUES (469,432,NULL,1,0);
 DROP TABLE IF EXISTS `nagios_timeperiod`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
